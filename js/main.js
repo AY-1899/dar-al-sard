@@ -30,17 +30,17 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!book) return;
 
         const isSingle = book.frontCoverSide === 'single';
-        const frontPos = isSingle ? '50% 50%' : (book.frontCoverSide === 'left' ? '0% 50%' : '100% 50%');
-        const backPos  = isSingle ? '50% 50%' : (book.frontCoverSide === 'left' ? '100% 50%' : '0% 50%');
+        const frontClass = `cover-${book.frontCoverSide}`;
+        const backClass  = isSingle ? '' : (book.frontCoverSide === 'left' ? 'cover-right' : 'cover-left');
 
         const frontImg = document.getElementById('modal-front-img');
         const backImg  = document.getElementById('modal-back-img');
         const backCover = backImg.closest('.modal-cover');
 
         frontImg.src = book.image;
-        frontImg.style.objectPosition = frontPos;
+        frontImg.className = frontClass;
         backImg.src  = book.image;
-        backImg.style.objectPosition = backPos;
+        backImg.className = backClass;
         backCover.style.display = isSingle ? 'none' : '';
 
         document.getElementById('modal-title').textContent     = book.title;

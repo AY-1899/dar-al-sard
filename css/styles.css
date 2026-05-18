@@ -275,15 +275,31 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .card-img-wrapper img {
-    width: 100%;
+    position: absolute;
     height: 100%;
     object-fit: cover;
     transition: transform 0.5s ease;
 }
 
-.card-img-wrapper img.cover-left   { object-position: 0% 50%; }
-.card-img-wrapper img.cover-right  { object-position: 100% 50%; }
-.card-img-wrapper img.cover-single { object-position: 50% 50%; }
+.card-img-wrapper img.cover-left {
+    width: 200%;
+    left: 0;
+    object-position: 0% 50%;
+    transform-origin: left center;
+}
+
+.card-img-wrapper img.cover-right {
+    width: 200%;
+    right: 0;
+    object-position: 100% 50%;
+    transform-origin: right center;
+}
+
+.card-img-wrapper img.cover-single {
+    width: 100%;
+    left: 0;
+    object-position: center;
+}
 
 .book-card:hover .card-img-wrapper img {
     transform: scale(1.05);
@@ -550,12 +566,37 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
 }
 
-.modal-cover img {
+.modal-img-wrapper {
+    position: relative;
     width: 155px;
     height: 235px;
-    object-fit: cover;
+    overflow: hidden;
     border-radius: var(--radius-sm);
     box-shadow: var(--shadow-md);
+}
+
+.modal-img-wrapper img {
+    position: absolute;
+    height: 100%;
+    object-fit: cover;
+}
+
+.modal-img-wrapper img.cover-left {
+    width: 200%;
+    left: 0;
+    object-position: 0% 50%;
+}
+
+.modal-img-wrapper img.cover-right {
+    width: 200%;
+    right: 0;
+    object-position: 100% 50%;
+}
+
+.modal-img-wrapper img.cover-single {
+    width: 100%;
+    left: 0;
+    object-position: center;
 }
 
 .modal-info {
@@ -652,7 +693,7 @@ h1, h2, h3, h4, h5, h6 {
         justify-content: center;
     }
 
-    .modal-cover img {
+    .modal-img-wrapper {
         width: 130px;
         height: 195px;
     }
