@@ -81,6 +81,27 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Escape') closeModal();
     });
 
+    // Search functionality
+    const searchInput = document.getElementById('search-input');
+    const noResults   = document.getElementById('no-results');
+    const allCards    = Array.from(booksContainer.querySelectorAll('.book-card'));
+
+    searchInput.addEventListener('input', () => {
+        const query = searchInput.value.trim().toLowerCase();
+        let visible = 0;
+
+        allCards.forEach((card, i) => {
+            const book = booksData[i];
+            const match = !query ||
+                book.title.toLowerCase().includes(query) ||
+                book.author.toLowerCase().includes(query);
+            card.style.display = match ? '' : 'none';
+            if (match) visible++;
+        });
+
+        noResults.hidden = visible > 0;
+    });
+
     // Smooth scrolling for navigation
     const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
 

@@ -49,6 +49,17 @@
     <section id="books" class="books-section">
         <div class="container">
             <h2 class="section-title">أحدث الإصدارات</h2>
+            <div class="search-wrapper">
+                <input
+                    type="text"
+                    id="search-input"
+                    class="search-input"
+                    placeholder="ابحث عن كتاب أو مؤلف..."
+                    autocomplete="off"
+                >
+                <span class="search-icon">🔍</span>
+            </div>
+            <p id="no-results" class="no-results" hidden>لا توجد نتائج مطابقة.</p>
             <div id="books-container" class="book-grid">
                 <!-- Books will be injected dynamically via JS -->
             </div>
