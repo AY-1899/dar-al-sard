@@ -53,20 +53,56 @@ while (attempts < 30) {
 // ── Download export ───────────────────────────────────────────────────────────
 console.log('Downloading export...');
 const raw = await gcFetch('GET', `/export/${exportId}/download`);
-console.log(`Downloaded ${raw.length} bytes. First 300 chars: ${raw.slice(0, 300)}`);
+console.log(`Downloaded ${raw.length} bytes. First 500 chars:\n${raw.slice(0, 500)}`);
 
-// ── Parse NDJSON ──────────────────────────────────────────────────────────────
-const lines = raw.trim().split('\n').filter(l => l.trim() && !l.startsWith('#'));
-console.log(`Total lines: ${lines.length}`);
+// ── Parse CSV ────────────────────────────────────────────────────────────────
+// GoatCounter export is CSV: first line = headers, rest = data rows.
+// Values may be quoted and may contain commas inside quotes.
+function parseCSVLine(line) {
+    const cols = [];
+    let cur = '', inQ = false;
+    for (let i = 0; i < line.length; i++) {
+        const ch = line[i];
+        if (ch === '"') { inQ = !inQ; }
+        else if (ch === ',' && !inQ) { cols.push(cur); cur = ''; }
+        else { cur += ch; }
+    }
+    cols.push(cur);
+    return cols.map(c => c.trim());
+}
+
+const allLines = raw.trim().split('\n').filter(l => l.trim() && !l.startsWith('#'));
+console.log(`Total lines (including header): ${allLines.length}`);
+console.log(`First line (headers): ${allLines[0]}`);
+
+const rawHeaders = parseCSVLine(allLines[0] || '');
+// Normalize header names to lowercase with underscores
+const headers = rawHeaders.map(h => h.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, ''));
+console.log('Parsed headers:', headers.join(', '));
 
 const hits = [];
 let lastId = startFrom;
-for (const line of lines) {
+for (const line of allLines.slice(1)) {
     try {
-        const h = JSON.parse(line);
-        if (h.bot || h.event) continue;
-        hits.push(h);
-        if (h.id && h.id > lastId) lastId = h.id;
+        const cols = parseCSVLine(line);
+        const row = {};
+        headers.forEach((h, i) => { row[h] = cols[i] !== undefined ? cols[i] : ''; });
+
+        // Normalize to expected field names regardless of GoatCounter version
+        const hit = {
+            id:         parseInt(row.hit_id || row.id || '0') || 0,
+            path:       row.path       || '',
+            location:   row.location   || '',
+            ua:         row.useragent  || row.user_agent || row.ua || row.browser || '',
+            ref:        row.ref        || row.referrer   || '',
+            created_at: row.created_at || row.createdat  || '',
+            bot:        row.bot === '1' || row.bot === 'true'  || row.bot === 't',
+            event:      row.event === '1' || row.event === 'true' || row.event === 't',
+        };
+
+        if (hit.bot || hit.event) continue;
+        hits.push(hit);
+        if (hit.id > lastId) lastId = hit.id;
     } catch (e) {
         // skip unparseable lines
     }
