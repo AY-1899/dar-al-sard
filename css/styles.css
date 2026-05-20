@@ -387,6 +387,16 @@ h1, h2, h3, h4, h5, h6 {
 .price-action {
     border-top: 1px solid rgba(0,0,0,0.05);
     padding-top: 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.book-price {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary-color);
 }
 
 .btn-buy {
@@ -399,6 +409,7 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
     cursor: pointer;
     transition: var(--transition);
+    flex-shrink: 0;
 }
 
 .btn-buy:hover {

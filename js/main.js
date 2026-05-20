@@ -43,6 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <h3 class="book-title">${book.title}</h3>
                 <p class="book-author">${book.author}</p>
                 <div class="price-action">
+                    <span class="book-price">${book.price} د.ع</span>
                     <button class="btn-buy" data-id="${book.id}">متابعة</button>
                 </div>
             </div>
@@ -71,6 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('modal-title').textContent     = book.title;
         document.getElementById('modal-author').textContent    = `المؤلف: ${book.author}`;
         document.getElementById('modal-year').textContent      = `سنة النشر: ${book.year}`;
+        document.getElementById('modal-price').textContent     = `السعر: ${book.price} د.ع`;
         document.getElementById('modal-desc-text').textContent = book.description;
 
         const pdfBtn = document.getElementById('modal-pdf-btn');
