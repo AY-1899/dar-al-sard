@@ -143,12 +143,37 @@ const countries  = parseCountries(locData);
 const regions    = parseRegions(locData);
 const totalHits  = countries.reduce((s, c) => s + c.count, 0);
 
-// Keep existing hits (top pages) from previous run if available — GoatCounter
-// has no top-pages stats API endpoint; we preserve whatever was stored before.
+// Keep existing hits + monthly history from previous run
 const CACHE = 'js/analytics.json';
-let prevHits = [];
+let prevHits = [], monthly = [];
 if (existsSync(CACHE)) {
-    try { prevHits = JSON.parse(readFileSync(CACHE,'utf8')).hits || []; } catch {}
+    try {
+        const prev = JSON.parse(readFileSync(CACHE,'utf8'));
+        prevHits = prev.hits    || [];
+        monthly  = prev.monthly || [];
+    } catch {}
+}
+
+// ── Accumulate monthly history ────────────────────────────────────────────────
+const now      = new Date();
+const prevYear = now.getMonth() === 0 ? now.getFullYear() - 1 : now.getFullYear();
+const prevMon  = now.getMonth() === 0 ? 12 : now.getMonth(); // 1-based
+const prevKey  = `${prevYear}-${String(prevMon).padStart(2,'0')}`;
+
+if (!monthly.find(m => m.month === prevKey)) {
+    const mStart = `${prevYear}-${String(prevMon).padStart(2,'0')}-01`;
+    const mEnd   = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-01`;
+    try {
+        const mLoc  = await gcFetch(`/stats/locations?start=${mStart}&end=${mEnd}&limit=50`);
+        const mHits = (mLoc?.stats || []).reduce((s,r) => s + (r.count||0), 0);
+        if (mHits > 0) {
+            monthly.push({ month: prevKey, hits: mHits });
+            monthly.sort((a,b) => a.month.localeCompare(b.month));
+            console.log(`  📅 Added month ${prevKey}: ${mHits} hits`);
+        }
+    } catch (e) {
+        console.warn(`  ⚠️  Could not fetch monthly data for ${prevKey}:`, e.message);
+    }
 }
 
 // Languages
@@ -173,6 +198,7 @@ const analytics = {
     systems:   parseSystems(systemsData),
     refs:      parseRefs(refData, campData),
     languages: parseLangs(langData),
+    monthly,
 };
 
 writeFileSync(CACHE, JSON.stringify(analytics, null, 2), 'utf8');
