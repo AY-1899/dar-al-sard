@@ -34,7 +34,7 @@ if (existsSync(CACHE)) {
 console.log(`Starting export from hit ID: ${startFrom}`);
 
 // ── Start async export job ────────────────────────────────────────────────────
-const jobText = await gcFetch('POST', '/export', { start_from_hit_id: startFrom });
+const jobText = await gcFetch('POST', '/export', { start_from_hit_id: startFrom, format: 'csv' });
 const job = JSON.parse(jobText);
 console.log(`Export job created. ID: ${job.id}`);
 
