@@ -48,10 +48,11 @@ const me = await gcFetch('/me');
 console.log('✅ Token valid. User:', me.user?.email || '(ok)');
 
 // ── Fetch stats sequentially to avoid rate limiting ───────────────────────────
-const browsersData  = await fetchStat('browsers');  await sleep(600);
-const systemsData   = await fetchStat('systems');   await sleep(600);
-const locData       = await fetchStat('locations'); await sleep(600);
-const refData       = await fetchStat('refs');       await sleep(600);
+const browsersData  = await fetchStat('browsers');   await sleep(600);
+const systemsData   = await fetchStat('systems');    await sleep(600);
+const locData       = await fetchStat('locations');  await sleep(600);
+const refData       = await fetchStat('toprefs');    await sleep(600);
+const campData      = await fetchStat('campaigns');  await sleep(600);
 const langData      = await fetchStat('languages');
 
 // ── Arabic name maps ──────────────────────────────────────────────────────────
@@ -110,12 +111,18 @@ function parseSystems(data) {
     })).sort((a,b) => b.count - a.count).slice(0, 10);
 }
 
-function parseRefs(data) {
-    if (!data) return [];
-    return (data.stats || []).map(r => ({
-        name:  r.name || r.ref || 'مباشر',
-        count: r.count || 0,
-    })).sort((a,b) => b.count - a.count).slice(0, 10);
+function parseRefs(topData, campData) {
+    const merge = {};
+    for (const src of [topData, campData]) {
+        (src?.stats || []).forEach(r => {
+            const name = r.name || r.ref || '—';
+            merge[name] = (merge[name] || 0) + (r.count || 0);
+        });
+    }
+    return Object.entries(merge)
+        .map(([name, count]) => ({ name, count }))
+        .sort((a, b) => b.count - a.count)
+        .slice(0, 10);
 }
 
 // ── Build output ──────────────────────────────────────────────────────────────
@@ -151,7 +158,7 @@ const analytics = {
     regions,
     browsers:  parseBrowsers(browsersData),
     systems:   parseSystems(systemsData),
-    refs:      parseRefs(refData),
+    refs:      parseRefs(refData, campData),
     languages: parseLangs(langData),
 };
 
