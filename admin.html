@@ -389,16 +389,18 @@
                     </select>
                 </div>
                 <div class="form-row">
-                    <label>صورة الخبر <span id="news-img-hint">*</span></label>
+                    <label>صور الخبر <span id="news-img-hint">*</span></label>
+                    <!-- existing images (edit mode) -->
                     <div id="news-img-current" class="current-file" style="display:none">
-                        الصورة الحالية: <span id="news-img-current-name"></span>
-                        — اختر صورة جديدة فقط إذا أردت تغييرها
+                        <span>الصور الحالية (انقر ✕ لحذف صورة):</span>
+                        <div id="news-img-current-list" style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem"></div>
                     </div>
+                    <!-- new images to upload -->
+                    <div id="news-img-new-list" style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.5rem"></div>
                     <div class="file-upload" id="news-img-drop" onclick="document.getElementById('nf-img').click()">
-                        <p>📷 <strong>انقر هنا</strong> لاختيار صورة</p>
-                        <p>أو اسحب الصورة وأفلتها هنا</p>
-                        <input type="file" id="nf-img" accept="image/*" onchange="previewFile(this,'news-img-preview')">
-                        <div class="file-preview" id="news-img-preview"></div>
+                        <p>📷 <strong>انقر هنا</strong> لإضافة صورة أو أكثر</p>
+                        <p>يمكنك اختيار عدة صور في المرة الواحدة</p>
+                        <input type="file" id="nf-img" accept="image/*" multiple onchange="addNewsImages(this)">
                     </div>
                 </div>
                 <div class="form-row">
@@ -617,7 +619,7 @@ window.addEventListener('load', () => {
     document.getElementById('token-input').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
     setupDrop('img-drop',       'img-input', 'img-preview');
     setupDrop('pdf-drop',       'pdf-input', 'pdf-preview');
-    setupDrop('news-img-drop',  'nf-img',    'news-img-preview');
+    // news images use multi-select; drag-drop opens file picker via onclick
 });
 
 // ── TABS ─────────────────────────────────────────
@@ -940,9 +942,56 @@ function parseNews(js) {
 function serializeNews(news) {
     const entries = news.map(n => {
         const esc = s => String(s).replace(/\\/g,'\\\\').replace(/"/g,'\\"').replace(/\n/g,'\\n');
-        return `    {\n        id: ${n.id},\n        title: "${esc(n.title)}",\n        date: "${esc(n.date)}",\n        category: "${esc(n.category||'')}",\n        image: "${esc(n.image||'')}",\n        body: "${esc(n.body||'')}"\n    }`;
+        // normalise: support both old `image` and new `images`
+        const imgs = Array.isArray(n.images) ? n.images : (n.image ? [n.image] : []);
+        const imgsStr = imgs.map(i => `"${esc(i)}"`).join(', ');
+        return `    {\n        id: ${n.id},\n        title: "${esc(n.title)}",\n        date: "${esc(n.date)}",\n        category: "${esc(n.category||'')}",\n        images: [${imgsStr}],\n        body: "${esc(n.body||'')}"\n    }`;
     });
     return `const newsData = [\n${entries.join(',\n')}\n];\n`;
+}
+
+// ── Multi-image state for news form ──────────────────────────────────────────
+let newsNewFiles     = [];   // File objects chosen by user (not yet uploaded)
+let newsKeepImages   = [];   // paths already in GitHub that user kept (edit mode)
+
+function addNewsImages(input) {
+    const files = Array.from(input.files);
+    files.forEach(f => newsNewFiles.push(f));
+    input.value = '';   // reset so same file can be re-added if needed
+    renderNewsNewPreviews();
+}
+
+function renderNewsNewPreviews() {
+    const wrap = document.getElementById('news-img-new-list');
+    wrap.innerHTML = newsNewFiles.map((f,i) => {
+        const url = URL.createObjectURL(f);
+        return `<div style="position:relative;display:inline-block">
+            <img src="${url}" style="height:70px;border-radius:6px;object-fit:cover">
+            <button onclick="removeNewsNewImg(${i})" style="position:absolute;top:-6px;right:-6px;background:#c0392b;color:#fff;border:none;border-radius:50%;width:20px;height:20px;cursor:pointer;font-size:.75rem;line-height:1">✕</button>
+        </div>`;
+    }).join('');
+}
+
+function removeNewsNewImg(i) {
+    newsNewFiles.splice(i, 1);
+    renderNewsNewPreviews();
+}
+
+function renderNewsKeepPreviews() {
+    const wrap = document.getElementById('news-img-current-list');
+    if (!wrap) return;
+    wrap.innerHTML = newsKeepImages.map((path,i) =>
+        `<div style="position:relative;display:inline-block">
+            <img src="${path}" style="height:70px;border-radius:6px;object-fit:cover">
+            <button onclick="removeNewsKeepImg(${i})" style="position:absolute;top:-6px;right:-6px;background:#c0392b;color:#fff;border:none;border-radius:50%;width:20px;height:20px;cursor:pointer;font-size:.75rem;line-height:1">✕</button>
+        </div>`
+    ).join('');
+    document.getElementById('news-img-current').style.display = newsKeepImages.length ? 'block' : 'none';
+}
+
+function removeNewsKeepImg(i) {
+    newsKeepImages.splice(i, 1);
+    renderNewsKeepPreviews();
 }
 
 async function submitNews() {
@@ -952,12 +1001,12 @@ async function submitNews() {
     const date   = document.getElementById('nf-date').value;
     const cat    = document.getElementById('nf-cat').value;
     const body   = document.getElementById('nf-body').value.trim();
-    const imgFile = document.getElementById('nf-img').files[0];
 
     if (!title) return showStatus('news-form-status','⚠️ الرجاء إدخال عنوان الخبر.','error');
     if (!date)  return showStatus('news-form-status','⚠️ الرجاء اختيار تاريخ.','error');
     if (!body)  return showStatus('news-form-status','⚠️ الرجاء كتابة تفاصيل الخبر.','error');
-    if (!isEdit && !imgFile) return showStatus('news-form-status','⚠️ الرجاء اختيار صورة للخبر.','error');
+    if (!isEdit && !newsNewFiles.length && !newsKeepImages.length)
+        return showStatus('news-form-status','⚠️ الرجاء إضافة صورة واحدة على الأقل.','error');
 
     const btn = document.getElementById('news-submit-btn');
     btn.disabled = true;
@@ -971,29 +1020,30 @@ async function submitNews() {
         allNews = parseNews(js);
         setProgress('news-progress-fill', 20);
 
-        let imgPath;
-        if (imgFile) {
-            const ext  = imgFile.name.split('.').pop().toLowerCase();
-            imgPath = `assets/news-${Date.now()}.${ext}`;
-            const imgB64 = await fileToBase64(imgFile);
-            setProgress('news-progress-fill', 45);
-            let existSha; try { existSha = (await ghGet(imgPath)).sha; } catch {}
-            await ghPut(encodeURIComponent(imgPath), imgB64, `صورة خبر: ${title}`, existSha);
-            setProgress('news-progress-fill', 65);
-        } else if (isEdit) {
-            imgPath = allNews.find(n => n.id === parseInt(editId))?.image || '';
-        } else {
-            imgPath = '';
+        // Upload new images one by one
+        const uploadedPaths = [];
+        for (let i = 0; i < newsNewFiles.length; i++) {
+            const f   = newsNewFiles[i];
+            const ext = f.name.split('.').pop().toLowerCase();
+            const path = `assets/news-${Date.now()}-${i}.${ext}`;
+            const b64  = await fileToBase64(f);
+            let existSha; try { existSha = (await ghGet(path)).sha; } catch {}
+            await ghPut(encodeURIComponent(path), b64, `صورة خبر: ${title}`, existSha);
+            uploadedPaths.push(path);
+            setProgress('news-progress-fill', 20 + Math.round(50 * (i + 1) / newsNewFiles.length));
         }
 
-        const newsData = { title, date, category: cat, image: imgPath, body };
+        // Final images = kept existing + newly uploaded
+        const finalImages = [...newsKeepImages, ...uploadedPaths];
+
+        const newsEntry = { title, date, category: cat, images: finalImages, body };
         if (isEdit) {
             const idx = allNews.findIndex(n => n.id === parseInt(editId));
             if (idx === -1) throw new Error('لم يُعثر على الخبر.');
-            allNews[idx] = { ...allNews[idx], ...newsData };
+            allNews[idx] = { ...allNews[idx], ...newsEntry };
         } else {
             const maxId = Math.max(0, ...allNews.map(n => n.id));
-            allNews.push({ id: maxId + 1, ...newsData });
+            allNews.push({ id: maxId + 1, ...newsEntry });
         }
         setProgress('news-progress-fill', 80);
 
@@ -1021,13 +1071,16 @@ function resetNewsForm() {
     document.getElementById('nf-date').value = '';
     document.getElementById('nf-cat').value  = 'مؤتمر';
     document.getElementById('nf-img').value  = '';
-    document.getElementById('news-img-preview').innerHTML = '';
+    newsNewFiles   = [];
+    newsKeepImages = [];
+    document.getElementById('news-img-new-list').innerHTML    = '';
+    document.getElementById('news-img-current-list').innerHTML = '';
     document.getElementById('news-img-current').style.display = 'none';
-    document.getElementById('news-img-hint').textContent = '*';
-    document.getElementById('news-form-title').textContent = '📰 إضافة خبر أو فعالية';
-    document.getElementById('news-submit-btn').textContent = '✅ نشر الخبر';
-    document.getElementById('news-cancel-btn').style.display = 'none';
-    document.getElementById('news-form-status').className = 'status';
+    document.getElementById('news-img-hint').textContent      = '*';
+    document.getElementById('news-form-title').textContent    = '📰 إضافة خبر أو فعالية';
+    document.getElementById('news-submit-btn').textContent    = '✅ نشر الخبر';
+    document.getElementById('news-cancel-btn').style.display  = 'none';
+    document.getElementById('news-form-status').className     = 'status';
 }
 function cancelNewsEdit() { resetNewsForm(); }
 
@@ -1040,9 +1093,10 @@ function editNews(id) {
     document.getElementById('nf-date').value      = n.date  || '';
     document.getElementById('nf-cat').value       = n.category || 'مؤتمر';
     document.getElementById('nf-body').value      = (n.body || '').replace(/\\n/g, '\n');
-    if (n.image) {
-        document.getElementById('news-img-current-name').textContent = n.image;
-        document.getElementById('news-img-current').style.display = 'block';
+    // load existing images so user can keep or remove them individually
+    newsKeepImages = Array.isArray(n.images) ? [...n.images] : (n.image ? [n.image] : []);
+    renderNewsKeepPreviews();
+    if (newsKeepImages.length) {
         document.getElementById('news-img-hint').textContent = '(اختياري عند التعديل)';
     }
     document.getElementById('news-form-title').textContent = `✏️ تعديل: ${n.title}`;
