@@ -6,8 +6,6 @@
     <title>لوحة التحكم — دار السرد</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Cairo', sans-serif; background: #f0f4f8; color: #222; }
@@ -344,26 +342,7 @@
         }
         .btn-close-preview:hover { background: #1a438e; }
 
-        /* ── IRAQ MAP (Leaflet) ── */
-        .iraq-map-section { display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:start; }
-        .iraq-map-wrap { position:relative; }
-        .map-legend {
-            display: flex; align-items: center; gap: .5rem;
-            font-size: .75rem; color: #999; margin-top: .5rem;
-            justify-content: center;
-        }
-        .legend-grad {
-            width: 90px; height: 9px; border-radius: 5px;
-            background: linear-gradient(to right, #dce7f5, #002366);
-        }
-        .leaflet-iraq-tip {
-            background: rgba(10,18,50,.88) !important;
-            border: none !important; border-radius: 10px !important;
-            color: #fff !important; box-shadow: 0 4px 16px rgba(0,0,0,.3) !important;
-        }
-        .leaflet-iraq-tip::before { display:none !important; }
         @media (max-width:620px) {
-            .iraq-map-section { grid-template-columns:1fr !important; }
             #stats-content > div { grid-template-columns:1fr !important; }
         }
     </style>
@@ -684,25 +663,10 @@
 
                         <div id="vs-updated" style="text-align:left;font-size:.8rem;color:#bbb;margin-bottom:1rem"></div>
 
-                        <!-- Iraq Map — full width -->
+                        <!-- Governorates list -->
                         <div class="card" style="margin-bottom:1.5rem">
-                            <h2 class="card-title">🗺️ المحافظات العراقية</h2>
-                            <div class="iraq-map-section">
-                                <!-- Leaflet Map -->
-                                <div class="iraq-map-wrap">
-                                    <div id="iraq-map-container" style="height:420px;border-radius:12px;overflow:hidden;background:#eef2f8"></div>
-                                    <div class="map-legend">
-                                        <span>أقل</span>
-                                        <div class="legend-grad"></div>
-                                        <span>أكثر</span>
-                                    </div>
-                                </div>
-                                <!-- Top 5 bar chart -->
-                                <div>
-                                    <p style="font-size:.85rem;color:#888;margin-bottom:1rem">أعلى 5 محافظات — نسبة من زيارات العراق</p>
-                                    <div id="vs-regions"></div>
-                                </div>
-                            </div>
+                            <h2 class="card-title">🇮🇶 المحافظات العراقية</h2>
+                            <div id="vs-regions"></div>
                         </div>
 
                         <!-- Countries + Referrers row -->
@@ -1625,87 +1589,12 @@ function vsList(items, key, color, emptyMsg, { limit = 10, showPct = false, tota
     return shown.map(i => vsBar(i.name || i.id || '—', i[key] || 0, grand, barMax, color, showPct)).join('');
 }
 
-// ── Iraq map (Leaflet + real GeoJSON) ────────────────────────────────────────
-const AR_NAMES = {
-    'IQ-AN':'الأنبار','IQ-BA':'البصرة', 'IQ-MU':'المثنى',
-    'IQ-QA':'القادسية','IQ-NA':'النجف', 'IQ-SD':'صلاح الدين',
-    'IQ-TS':'ذي قار', 'IQ-WA':'واسط',  'IQ-AR':'أربيل',
-    'IQ-BB':'بابل',   'IQ-BG':'بغداد', 'IQ-DA':'دهوك',
-    'IQ-DI':'ديالى',  'IQ-KA':'كربلاء','IQ-KI':'كركوك',
-    'IQ-MA':'ميسان',  'IQ-NI':'نينوى', 'IQ-SU':'السليمانية',
-};
-const CODE_BY_AR = Object.fromEntries(Object.entries(AR_NAMES).map(([k,v])=>[v,k]));
-
-function govColor(count, max) {
-    if (!count || !max) return '#dce7f5';
-    const t = Math.min(Math.sqrt(count / max), 1);
-    return `rgb(${Math.round(220*(1-t))},${Math.round(231-196*t)},${Math.round(245-143*t)})`;
-}
-
-let _leafletMap = null;
-
-async function renderIraqMap(regions, totalIq) {
-    const el = document.getElementById('iraq-map-container');
-    if (!el) return;
-
-    // Destroy previous instance
-    if (_leafletMap) { _leafletMap.remove(); _leafletMap = null; }
-
-    // Build count lookup: ISO code → count
-    const govData = {};
-    (regions || []).forEach(r => {
-        const code = CODE_BY_AR[r.name] || r.id;
-        if (code) govData[code] = r.count;
-    });
-    const maxCount = Math.max(...Object.values(govData), 1);
-
-    // Create map — no tiles, just vector layer
-    _leafletMap = L.map(el, {
-        zoomControl: false, dragging: false, touchZoom: false,
-        scrollWheelZoom: false, doubleClickZoom: false,
-        attributionControl: false, keyboard: false,
-    });
-
-    try {
-        // Load Iraq ADM1 GeoJSON from geoBoundaries (CORS-friendly)
-        const resp = await fetch('https://raw.githubusercontent.com/wmgeolab/geoBoundaries/main/releaseData/gbOpen/IRQ/ADM1/geoBoundaries-IRQ-ADM1.geojson');
-        const geojson = await resp.json();
-
-        const layer = L.geoJSON(geojson, {
-            style: f => {
-                const iso   = f.properties.shapeISO || '';
-                const count = govData[iso] || 0;
-                return {
-                    fillColor:   govColor(count, maxCount),
-                    fillOpacity: 0.9,
-                    color:       '#fff',
-                    weight:      1.5,
-                };
-            },
-            onEachFeature: (f, lyr) => {
-                const iso   = f.properties.shapeISO || '';
-                const name  = AR_NAMES[iso] || f.properties.shapeName || iso;
-                const count = govData[iso] || 0;
-                const pct   = totalIq && count ? Math.round(count / totalIq * 100) : 0;
-
-                lyr.bindTooltip(
-                    `<div style="direction:rtl;font-family:Cairo,sans-serif;font-size:13px;line-height:1.6">
-                        <strong>${name}</strong><br>
-                        ${count ? count + ' زيارة — ' + pct + '%' : 'لا توجد بيانات'}
-                    </div>`,
-                    { sticky: true, opacity: 0.95, className: 'leaflet-iraq-tip' }
-                );
-                lyr.on('mouseover', () => lyr.setStyle({ weight: 2.5, color: '#002366' }));
-                lyr.on('mouseout',  () => layer.resetStyle(lyr));
-            }
-        }).addTo(_leafletMap);
-
-        _leafletMap.fitBounds(layer.getBounds());
-    } catch (e) {
-        console.warn('Iraq map load failed:', e.message);
-        el.innerHTML = '<p style="text-align:center;color:#aaa;padding:2rem">تعذّر تحميل الخريطة.</p>';
-    }
-}
+// ── Iraqi governorate names (all 18) ─────────────────────────────────────────
+const ALL_GOVS = [
+    'بغداد','البصرة','نينوى','أربيل','السليمانية','كركوك',
+    'الأنبار','ديالى','بابل','كربلاء','النجف','واسط',
+    'ميسان','المثنى','ذي قار','القادسية','صلاح الدين','دهوك',
+];
 
 async function loadVisitorStats() {
     document.getElementById('visitor-stats-loading').style.display = 'block';
@@ -1760,11 +1649,18 @@ async function loadVisitorStats() {
         document.getElementById('vs-systems').innerHTML =
             vsList(data.systems,   'count', '#6f42c1', 'لا توجد بيانات بعد.');
 
-        // Show content first so Leaflet can measure the container
-        document.getElementById('visitor-stats-content').style.display = 'block';
+        // Governorates — merge API data with full 18-governorate list
+        const govMap = {};
+        (data.regions || []).forEach(r => { govMap[r.name] = r.count; });
+        const govItems = ALL_GOVS.map(name => ({ name, count: govMap[name] || 0 }))
+            .sort((a, b) => b.count - a.count);
+        const govMax   = govItems[0]?.count || 0;
+        const govTotal = totalIq || govItems.reduce((s, g) => s + g.count, 0);
+        document.getElementById('vs-regions').innerHTML = govMax
+            ? govItems.map(g => vsBar(g.name, g.count, govTotal, govMax, '#002366', true)).join('')
+            : `<p class="gc-empty">ستظهر بيانات المحافظات بعد تفعيل Google Analytics.</p>`;
 
-        // Iraq map — must run after container is visible
-        await renderIraqMap(data.regions, totalIq || totalVisits);
+        document.getElementById('visitor-stats-content').style.display = 'block';
 
     } catch (err) {
         document.getElementById('visitor-stats-loading').innerHTML =
