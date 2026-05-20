@@ -51,7 +51,7 @@ console.log('✅ Token valid. User:', me.user?.email || '(ok)');
 const browsersData  = await fetchStat('browsers');  await sleep(600);
 const systemsData   = await fetchStat('systems');   await sleep(600);
 const locData       = await fetchStat('locations'); await sleep(600);
-const refData       = await fetchStat('toprefs');   await sleep(600);
+const refData       = await fetchStat('refs');       await sleep(600);
 const langData      = await fetchStat('languages');
 
 // ── Arabic name maps ──────────────────────────────────────────────────────────
