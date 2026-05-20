@@ -21,7 +21,7 @@ async function gcFetch(path) {
 
 // Fetch one stat type, with retry on 429
 async function fetchStat(type, extra = '') {
-    const end   = new Date();
+    const end   = new Date(Date.now() + 24 * 60 * 60 * 1000); // tomorrow — end is exclusive in GoatCounter
     const start = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
     const fmt   = d => d.toISOString().split('T')[0];
     const url   = `/stats/${type}?start=${fmt(start)}&end=${fmt(end)}&limit=20${extra}`;
