@@ -2,7 +2,11 @@ import { writeFileSync, existsSync, readFileSync } from 'fs';
 
 const GC_BASE = 'https://daralsard.goatcounter.com/api/v0';
 const TOKEN   = process.env.GC_TOKEN;
-const HEADERS = { Authorization: `Bearer ${TOKEN}`, 'Content-Type': 'application/json' };
+const HEADERS = {
+    Authorization: `Bearer ${TOKEN}`,
+    'Content-Type': 'application/json',
+    'Accept-Encoding': 'identity',   // prevent gzip — Node fetch doesn't auto-decompress
+};
 
 if (!TOKEN) { console.error('GC_TOKEN not set'); process.exit(1); }
 
@@ -41,13 +45,19 @@ console.log(`Export job created. ID: ${job.id}`);
 // ── Poll until finished ───────────────────────────────────────────────────────
 let exportId = job.id;
 let attempts = 0;
+let finalStatus = null;
 while (attempts < 30) {
     await sleep(3000);
     const statusText = await gcFetch('GET', `/export/${exportId}`);
-    const status = JSON.parse(statusText);
-    console.log(`Attempt ${attempts + 1}: finished_at=${status.finished_at}, rows=${status.num_rows}`);
-    if (status.finished_at) break;
+    finalStatus = JSON.parse(statusText);
+    console.log(`Attempt ${attempts + 1}: finished_at=${finalStatus.finished_at}, rows=${finalStatus.num_rows}`);
+    if (finalStatus.finished_at) break;
     attempts++;
+}
+
+if (!finalStatus || finalStatus.num_rows === 0) {
+    console.log('Export has 0 rows — no new hits since last run. Keeping existing analytics.json unchanged.');
+    process.exit(0);
 }
 
 // ── Download export ───────────────────────────────────────────────────────────
