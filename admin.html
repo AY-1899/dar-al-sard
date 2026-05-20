@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم — دار السرد</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Cairo', sans-serif; background: #f0f4f8; color: #222; }
+
+        /* ── LOGIN ── */
+        #login-screen {
+            min-height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .login-box {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            width: 380px;
+            box-shadow: 0 8px 32px rgba(0,35,102,.12);
+            text-align: center;
+        }
+        .login-box h1 { font-size: 1.6rem; color: #002366; margin-bottom: .4rem; }
+        .login-box p  { color: #666; font-size: .95rem; margin-bottom: 1.8rem; }
+        .login-box input {
+            width: 100%; padding: .85rem 1rem; border: 2px solid #dde3f0;
+            border-radius: 10px; font-family: inherit; font-size: 1rem;
+            margin-bottom: 1rem; direction: ltr; text-align: center;
+        }
+        .login-box input:focus { outline: none; border-color: #002366; }
+        .btn-primary {
+            width: 100%; padding: .85rem; background: #002366; color: white;
+            border: none; border-radius: 10px; font-family: inherit;
+            font-size: 1rem; font-weight: 700; cursor: pointer;
+        }
+        .btn-primary:hover { background: #1a438e; }
+        .error-msg { color: #c0392b; font-size: .9rem; margin-top: .6rem; display: none; }
+
+        /* ── MAIN LAYOUT ── */
+        #app { display: none; min-height: 100vh; }
+        .topbar {
+            background: #002366; color: white;
+            padding: 1rem 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .topbar h1 { font-size: 1.3rem; }
+        .topbar button {
+            background: rgba(255,255,255,.15); border: none; color: white;
+            padding: .5rem 1.2rem; border-radius: 8px; cursor: pointer;
+            font-family: inherit; font-size: .9rem;
+        }
+        .topbar button:hover { background: rgba(255,255,255,.25); }
+
+        .main { max-width: 900px; margin: 2rem auto; padding: 0 1.5rem; }
+
+        /* ── TABS ── */
+        .tabs { display: flex; gap: .5rem; margin-bottom: 1.5rem; }
+        .tab {
+            padding: .65rem 1.5rem; border-radius: 10px; cursor: pointer;
+            font-family: inherit; font-size: 1rem; font-weight: 600;
+            border: 2px solid transparent;
+            background: white; color: #555;
+        }
+        .tab.active { background: #002366; color: white; }
+
+        /* ── CARDS ── */
+        .card {
+            background: white; border-radius: 16px;
+            padding: 2rem; box-shadow: 0 4px 16px rgba(0,35,102,.07);
+            margin-bottom: 1.5rem;
+        }
+        .card h2 { font-size: 1.2rem; color: #002366; margin-bottom: 1.5rem; }
+
+        /* ── FORM ── */
+        .form-row { margin-bottom: 1.2rem; }
+        label { display: block; font-weight: 600; margin-bottom: .4rem; color: #333; }
+        label span { font-weight: 400; color: #888; font-size: .85rem; }
+        input[type=text], input[type=number], textarea, select {
+            width: 100%; padding: .8rem 1rem; border: 2px solid #dde3f0;
+            border-radius: 10px; font-family: inherit; font-size: 1rem;
+        }
+        input:focus, textarea:focus, select:focus {
+            outline: none; border-color: #002366;
+        }
+        textarea { resize: vertical; min-height: 100px; }
+
+        .radio-group { display: flex; gap: 1rem; margin-top: .4rem; flex-wrap: wrap; }
+        .radio-option {
+            display: flex; align-items: center; gap: .4rem;
+            cursor: pointer; font-weight: 600;
+            background: #f0f4f8; padding: .6rem 1rem; border-radius: 8px;
+            border: 2px solid transparent;
+        }
+        .radio-option input { width: auto; }
+        .radio-option:has(input:checked) { border-color: #002366; background: #e8eef8; }
+
+        .file-upload {
+            border: 2px dashed #c0cce0; border-radius: 10px;
+            padding: 1.5rem; text-align: center; cursor: pointer;
+            transition: border-color .2s;
+        }
+        .file-upload:hover, .file-upload.dragover { border-color: #002366; }
+        .file-upload p { color: #777; font-size: .95rem; }
+        .file-upload strong { color: #002366; }
+        .file-upload input[type=file] { display: none; }
+        .file-preview { margin-top: .8rem; font-size: .9rem; color: #333; }
+        .file-preview img { max-height: 80px; border-radius: 6px; margin-top: .4rem; }
+
+        .submit-btn {
+            width: 100%; padding: 1rem; background: #002366; color: white;
+            border: none; border-radius: 12px; font-family: inherit;
+            font-size: 1.1rem; font-weight: 700; cursor: pointer; margin-top: .5rem;
+        }
+        .submit-btn:disabled { background: #8899bb; cursor: not-allowed; }
+        .submit-btn:hover:not(:disabled) { background: #1a438e; }
+
+        /* ── STATUS ── */
+        .status {
+            padding: 1rem 1.5rem; border-radius: 10px;
+            font-weight: 600; margin-top: 1rem; display: none;
+        }
+        .status.success { background: #d4edda; color: #155724; display: block; }
+        .status.error   { background: #f8d7da; color: #721c24; display: block; }
+        .status.loading { background: #d1ecf1; color: #0c5460; display: block; }
+
+        /* ── BOOK LIST ── */
+        .book-list-item {
+            display: flex; align-items: center; gap: 1rem;
+            padding: .8rem; border-radius: 10px; border: 1px solid #eee;
+            margin-bottom: .6rem;
+        }
+        .book-list-item:hover { background: #f8f9fa; }
+        .book-list-item .bnum {
+            font-size: .8rem; color: #999; min-width: 28px; text-align: center;
+        }
+        .book-list-item .binfo { flex: 1; }
+        .book-list-item .btitle { font-weight: 700; font-size: .95rem; }
+        .book-list-item .bauthor { font-size: .85rem; color: #666; }
+        .book-list-item .bpdf {
+            font-size: .75rem; background: #d4edda; color: #155724;
+            padding: .2rem .5rem; border-radius: 5px;
+        }
+        .book-list-item .bno-pdf {
+            font-size: .75rem; background: #f8d7da; color: #721c24;
+            padding: .2rem .5rem; border-radius: 5px;
+        }
+
+        .progress-bar {
+            height: 6px; background: #dde3f0; border-radius: 3px; overflow: hidden;
+            margin-top: .8rem;
+        }
+        .progress-fill {
+            height: 100%; background: #002366; width: 0%;
+            transition: width .3s; border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ════════════════════ LOGIN ════════════════════ -->
+<div id="login-screen">
+    <div class="login-box">
+        <h1>🔐 دار السرد</h1>
+        <p>أدخل كلمة المرور للدخول إلى لوحة التحكم</p>
+        <input type="password" id="token-input" placeholder="كلمة المرور">
+        <button class="btn-primary" onclick="login()">دخول</button>
+        <p class="error-msg" id="login-error">كلمة المرور غير صحيحة. حاول مرة أخرى.</p>
+    </div>
+</div>
+
+<!-- ════════════════════ APP ════════════════════ -->
+<div id="app">
+    <div class="topbar">
+        <h1>🏛️ لوحة تحكم دار السرد</h1>
+        <button onclick="logout()">خروج</button>
+    </div>
+
+    <div class="main">
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('add')">➕ إضافة كتاب جديد</button>
+            <button class="tab" onclick="showTab('list')">📚 قائمة الكتب</button>
+        </div>
+
+        <!-- ── ADD BOOK ── -->
+        <div id="tab-add">
+            <div class="card">
+                <h2>➕ إضافة كتاب جديد</h2>
+
+                <div class="form-row">
+                    <label>عنوان الكتاب <span>*</span></label>
+                    <input type="text" id="f-title" placeholder="مثال: زهور الدمن">
+                </div>
+
+                <div class="form-row">
+                    <label>اسم المؤلف <span>*</span></label>
+                    <input type="text" id="f-author" placeholder="مثال: ضاري الغضبان">
+                </div>
+
+                <div class="form-row">
+                    <label>سنة النشر</label>
+                    <input type="text" id="f-year" placeholder="مثال: 2026" value="2026">
+                </div>
+
+                <div class="form-row">
+                    <label>السعر</label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="price" value="4000" id="price-4000">
+                            4000 د.ع
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="price" value="5000" id="price-5000" checked>
+                            5000 د.ع
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <label>جهة الغلاف الأمامي <span>(في الصورة)</span></label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="cover" value="left" checked>
+                            يسار (الأكثر شيوعاً)
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="cover" value="right">
+                            يمين
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="cover" value="single">
+                            صورة واحدة فقط
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <label>صورة الغلاف <span>* (JPG أو JPEG)</span></label>
+                    <div class="file-upload" id="img-drop" onclick="document.getElementById('img-input').click()">
+                        <p>📷 <strong>انقر هنا</strong> لاختيار صورة الغلاف</p>
+                        <p>أو اسحب الصورة وأفلتها هنا</p>
+                        <input type="file" id="img-input" accept="image/*" onchange="previewImage(this)">
+                        <div class="file-preview" id="img-preview"></div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <label>ملف PDF <span>(اختياري)</span></label>
+                    <div class="file-upload" id="pdf-drop" onclick="document.getElementById('pdf-input').click()">
+                        <p>📄 <strong>انقر هنا</strong> لاختيار ملف PDF</p>
+                        <p>أو اسحب الملف وأفلته هنا</p>
+                        <input type="file" id="pdf-input" accept=".pdf" onchange="previewPDF(this)">
+                        <div class="file-preview" id="pdf-preview"></div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <label>وصف الكتاب <span>(النص الموجود على الغلاف الخلفي)</span></label>
+                    <textarea id="f-desc" placeholder="اكتب وصف الكتاب هنا..."></textarea>
+                </div>
+
+                <button class="submit-btn" id="submit-btn" onclick="submitBook()">
+                    ✅ إضافة الكتاب إلى الموقع
+                </button>
+                <div class="progress-bar" id="progress-bar" style="display:none">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <div class="status" id="add-status"></div>
+            </div>
+        </div>
+
+        <!-- ── BOOK LIST ── -->
+        <div id="tab-list" style="display:none">
+            <div class="card">
+                <h2>📚 قائمة الكتب المنشورة</h2>
+                <div id="book-list-loading" style="text-align:center;color:#666;padding:2rem">
+                    ⏳ جارٍ تحميل القائمة...
+                </div>
+                <div id="book-list-content"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// ════════════════════════════════════════════════
+//  CONFIG — change these to match the repo
+// ════════════════════════════════════════════════
+const REPO  = 'AY-1899/dar-al-sard';
+const BRANCH = 'main';
+
+// ════════════════════════════════════════════════
+//  AUTH
+// ════════════════════════════════════════════════
+let TOKEN = '';
+
+function login() {
+    const val = document.getElementById('token-input').value.trim();
+    if (!val) return;
+    TOKEN = val;
+    // Quick test: fetch repo info
+    fetch(`https://api.github.com/repos/${REPO}`, {
+        headers: { Authorization: `token ${TOKEN}` }
+    }).then(r => {
+        if (r.ok) {
+            sessionStorage.setItem('dar_token', TOKEN);
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('app').style.display = 'block';
+        } else {
+            document.getElementById('login-error').style.display = 'block';
+            TOKEN = '';
+        }
+    }).catch(() => {
+        document.getElementById('login-error').style.display = 'block';
+        TOKEN = '';
+    });
+}
+
+function logout() {
+    sessionStorage.removeItem('dar_token');
+    TOKEN = '';
+    document.getElementById('login-screen').style.display = 'flex';
+    document.getElementById('app').style.display = 'none';
+    document.getElementById('token-input').value = '';
+}
+
+// Auto-login from session
+window.addEventListener('load', () => {
+    const saved = sessionStorage.getItem('dar_token');
+    if (saved) {
+        TOKEN = saved;
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('app').style.display = 'block';
+    }
+    // Allow Enter key on login
+    document.getElementById('token-input').addEventListener('keydown', e => {
+        if (e.key === 'Enter') login();
+    });
+    // Drag-and-drop for image
+    setupDrop('img-drop', 'img-input', previewImage);
+    setupDrop('pdf-drop', 'pdf-input', previewPDF);
+});
+
+// ════════════════════════════════════════════════
+//  TABS
+// ════════════════════════════════════════════════
+function showTab(name) {
+    document.getElementById('tab-add').style.display  = name === 'add'  ? '' : 'none';
+    document.getElementById('tab-list').style.display = name === 'list' ? '' : 'none';
+    document.querySelectorAll('.tab').forEach((t, i) => {
+        t.classList.toggle('active', (i === 0 && name === 'add') || (i === 1 && name === 'list'));
+    });
+    if (name === 'list') loadBookList();
+}
+
+// ════════════════════════════════════════════════
+//  FILE PREVIEWS
+// ════════════════════════════════════════════════
+function previewImage(input) {
+    const preview = document.getElementById('img-preview');
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = e => {
+            preview.innerHTML = `<p>✅ ${input.files[0].name}</p><img src="${e.target.result}">`;
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+function previewPDF(input) {
+    const preview = document.getElementById('pdf-preview');
+    if (input.files && input.files[0]) {
+        preview.innerHTML = `<p>✅ ${input.files[0].name}</p>`;
+    }
+}
+
+function setupDrop(zoneId, inputId, handler) {
+    const zone = document.getElementById(zoneId);
+    const input = document.getElementById(inputId);
+    zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
+    zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
+    zone.addEventListener('drop', e => {
+        e.preventDefault();
+        zone.classList.remove('dragover');
+        const files = e.dataTransfer.files;
+        if (files.length) {
+            const dt = new DataTransfer();
+            dt.items.add(files[0]);
+            input.files = dt.files;
+            handler(input);
+        }
+    });
+}
+
+// ════════════════════════════════════════════════
+//  GITHUB API HELPERS
+// ════════════════════════════════════════════════
+async function ghGet(path) {
+    const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}?ref=${BRANCH}`, {
+        headers: { Authorization: `token ${TOKEN}` }
+    });
+    if (!r.ok) throw new Error(`فشل تحميل: ${path}`);
+    return r.json();
+}
+
+async function ghPut(path, content_b64, message, sha) {
+    const body = { message, content: content_b64, branch: BRANCH };
+    if (sha) body.sha = sha;
+    const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`, {
+        method: 'PUT',
+        headers: {
+            Authorization: `token ${TOKEN}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+    });
+    if (!r.ok) {
+        const err = await r.json();
+        throw new Error(err.message || 'فشل الرفع');
+    }
+    return r.json();
+}
+
+function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = e => {
+            const base64 = e.target.result.split(',')[1];
+            resolve(base64);
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+    });
+}
+
+function setProgress(pct) {
+    document.getElementById('progress-fill').style.width = pct + '%';
+}
+
+function showStatus(msg, type) {
+    const el = document.getElementById('add-status');
+    el.textContent = msg;
+    el.className = `status ${type}`;
+}
+
+// ════════════════════════════════════════════════
+//  SUBMIT BOOK
+// ════════════════════════════════════════════════
+async function submitBook() {
+    const title  = document.getElementById('f-title').value.trim();
+    const author = document.getElementById('f-author').value.trim();
+    const year   = document.getElementById('f-year').value.trim() || '2026';
+    const price  = document.querySelector('input[name=price]:checked')?.value || '5000';
+    const cover  = document.querySelector('input[name=cover]:checked')?.value || 'left';
+    const desc   = document.getElementById('f-desc').value.trim();
+    const imgFile = document.getElementById('img-input').files[0];
+    const pdfFile = document.getElementById('pdf-input').files[0];
+
+    if (!title)   return showStatus('⚠️ الرجاء إدخال عنوان الكتاب.', 'error');
+    if (!author)  return showStatus('⚠️ الرجاء إدخال اسم المؤلف.', 'error');
+    if (!imgFile) return showStatus('⚠️ الرجاء اختيار صورة الغلاف.', 'error');
+
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    document.getElementById('progress-bar').style.display = 'block';
+    setProgress(5);
+    showStatus('⏳ جارٍ رفع الملفات...', 'loading');
+
+    try {
+        // 1. Upload image
+        const imgExt  = imgFile.name.split('.').pop().toLowerCase();
+        const imgName = `${title} - ${author}.${imgExt}`;
+        const imgB64  = await fileToBase64(imgFile);
+        setProgress(25);
+
+        let existingSha;
+        try {
+            const existing = await ghGet(`assets/${imgName}`);
+            existingSha = existing.sha;
+        } catch {}
+        await ghPut(`assets/${encodeURIComponent(imgName)}`, imgB64,
+            `إضافة صورة غلاف: ${title}`, existingSha);
+        setProgress(50);
+
+        // 2. Upload PDF (optional)
+        let pdfPath = '';
+        if (pdfFile) {
+            showStatus('⏳ جارٍ رفع ملف PDF...', 'loading');
+            const pdfName = `${title}.pdf`;
+            const pdfB64  = await fileToBase64(pdfFile);
+            let pdfSha;
+            try { const ex = await ghGet(`assets/${pdfName}`); pdfSha = ex.sha; } catch {}
+            await ghPut(`assets/${encodeURIComponent(pdfName)}`, pdfB64,
+                `إضافة PDF: ${title}`, pdfSha);
+            pdfPath = `assets/${pdfName}`;
+            setProgress(70);
+        }
+
+        // 3. Read current data.js
+        showStatus('⏳ جارٍ تحديث قاعدة البيانات...', 'loading');
+        const dataFile = await ghGet('js/data.js');
+        const currentJs = atob(dataFile.content.replace(/\n/g, ''));
+
+        // Find max id
+        const ids = [...currentJs.matchAll(/id:\s*(\d+)/g)].map(m => parseInt(m[1]));
+        const newId = Math.max(...ids) + 1;
+        setProgress(85);
+
+        // Build new entry
+        const imgPath = `assets/${imgName}`;
+        const safeDesc = desc.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n');
+        const newEntry = `
+    {
+        id: ${newId},
+        title: "${title}",
+        author: "${author}",
+        year: "${year}",
+        image: "${imgPath}",
+        frontCoverSide: "${cover}",
+        pdf: "${pdfPath}",
+        price: "${price}",
+        description: "${safeDesc}"
+    }`;
+
+        // Insert before closing ];
+        const updatedJs = currentJs.replace(/\s*\];(\s*)$/, `,${newEntry}\n];\n`);
+        const updatedB64 = btoa(unescape(encodeURIComponent(updatedJs)));
+
+        await ghPut('js/data.js', updatedB64,
+            `إضافة كتاب جديد: ${title} — ${author}`, dataFile.sha);
+        setProgress(100);
+
+        showStatus(`✅ تمت إضافة كتاب "${title}" بنجاح! سيظهر على الموقع خلال دقيقة.`, 'success');
+        // Reset form
+        document.getElementById('f-title').value = '';
+        document.getElementById('f-author').value = '';
+        document.getElementById('f-year').value = '2026';
+        document.getElementById('f-desc').value = '';
+        document.getElementById('img-input').value = '';
+        document.getElementById('pdf-input').value = '';
+        document.getElementById('img-preview').innerHTML = '';
+        document.getElementById('pdf-preview').innerHTML = '';
+        document.getElementById('price-5000').checked = true;
+        document.querySelector('input[name=cover][value=left]').checked = true;
+
+    } catch (err) {
+        showStatus(`❌ حدث خطأ: ${err.message}`, 'error');
+        console.error(err);
+    } finally {
+        btn.disabled = false;
+        setTimeout(() => {
+            document.getElementById('progress-bar').style.display = 'none';
+            setProgress(0);
+        }, 2000);
+    }
+}
+
+// ════════════════════════════════════════════════
+//  BOOK LIST
+// ════════════════════════════════════════════════
+async function loadBookList() {
+    document.getElementById('book-list-loading').style.display = 'block';
+    document.getElementById('book-list-content').innerHTML = '';
+    try {
+        const dataFile = await ghGet('js/data.js');
+        const js = atob(dataFile.content.replace(/\n/g, ''));
+
+        // Extract books with a simple regex
+        const books = [];
+        const blockRe = /\{\s*id:\s*(\d+)[\s\S]*?description:[\s\S]*?\n\s*\}/g;
+        let m;
+        while ((m = blockRe.exec(js)) !== null) {
+            const block = m[0];
+            const get = key => {
+                const r = new RegExp(`${key}:\\s*"((?:[^"\\\\]|\\\\.)*)"`)
+                const mm = block.match(r);
+                return mm ? mm[1] : '';
+            };
+            books.push({
+                id:     parseInt(m[1]),
+                title:  get('title'),
+                author: get('author'),
+                pdf:    get('pdf'),
+            });
+        }
+
+        document.getElementById('book-list-loading').style.display = 'none';
+        const html = books.map(b => `
+            <div class="book-list-item">
+                <span class="bnum">${b.id}</span>
+                <div class="binfo">
+                    <div class="btitle">${b.title}</div>
+                    <div class="bauthor">${b.author}</div>
+                </div>
+                ${b.pdf ? '<span class="bpdf">PDF ✓</span>' : '<span class="bno-pdf">بدون PDF</span>'}
+            </div>
+        `).join('');
+        document.getElementById('book-list-content').innerHTML =
+            `<p style="color:#666;margin-bottom:1rem">إجمالي الكتب: <strong>${books.length}</strong></p>` + html;
+
+    } catch(err) {
+        document.getElementById('book-list-loading').innerHTML =
+            `<p style="color:#c0392b">❌ فشل تحميل القائمة: ${err.message}</p>`;
+    }
+}
+</script>
+</body>
+</html>
