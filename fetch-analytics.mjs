@@ -120,7 +120,7 @@ function parseRefs(data) {
 
 // ── Build output ──────────────────────────────────────────────────────────────
 const countries  = parseCountries(locData);
-const regions    = parseRegions(locIqData);
+const regions    = parseRegions(locData);
 const totalHits  = countries.reduce((s, c) => s + c.count, 0);
 
 // Keep existing hits (top pages) from previous run if available — GoatCounter
@@ -148,7 +148,7 @@ const analytics = {
     downloads: 0,   // GoatCounter event API not available; tracked client-side only
     hits:      prevHits,
     locations: countries,
-    regions:   [],  // GoatCounter stats API has no subdivision filter; always empty
+    regions,
     browsers:  parseBrowsers(browsersData),
     systems:   parseSystems(systemsData),
     refs:      parseRefs(refData),
