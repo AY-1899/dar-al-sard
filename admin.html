@@ -563,8 +563,8 @@
                             </div>
                         </div>
 
-                        <!-- Browsers + Systems row -->
-                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
+                        <!-- Browsers + Systems + Languages row -->
+                        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem">
                             <div class="card" style="margin:0">
                                 <h2 class="card-title">🌐 المتصفحات</h2>
                                 <div id="vs-browsers"></div>
@@ -572,6 +572,10 @@
                             <div class="card" style="margin:0">
                                 <h2 class="card-title">📱 أنظمة التشغيل</h2>
                                 <div id="vs-systems"></div>
+                            </div>
+                            <div class="card" style="margin:0">
+                                <h2 class="card-title">🗣️ اللغات</h2>
+                                <div id="vs-languages"></div>
                             </div>
                         </div>
 
@@ -1584,23 +1588,30 @@ async function loadVisitorStats() {
         // Iraq map
         renderIraqMap(data.regions, totalIq || totalVisits);
 
-        // Governorates: top 5 with percentage of IQ visits (or total if no IQ data)
-        const govBase = totalIq || totalVisits;
+        // Governorates: map only (GoatCounter stats API has no subdivision data)
         document.getElementById('vs-regions').innerHTML =
-            vsList(data.regions, 'count', '#c0392b', 'لا توجد بيانات عن المحافظات بعد.',
-                   { limit: 5, showPct: true, total: govBase });
+            `<p class="gc-empty" style="font-size:.82rem">
+                بيانات المحافظات غير متاحة من واجهة GoatCounter البرمجية.
+                الخريطة تعمل وستُلوَّن فور توفّر البيانات.
+             </p>`;
 
         // Countries with % of all visits
         document.getElementById('vs-locations').innerHTML =
             vsList(data.locations, 'count', '#f7b733', 'لا توجد بيانات بعد.',
                    { limit: 10, showPct: true, total: totalVisits });
 
-        document.getElementById('vs-refs').innerHTML =
-            vsList(data.refs,     'count', '#17a2b8', 'لا توجد بيانات بعد.');
+        // Referrers — handle "all direct" case
+        const refsHtml = (data.refs && data.refs.length)
+            ? vsList(data.refs, 'count', '#17a2b8', '')
+            : `<p class="gc-empty">جميع الزيارات مباشرة — لا يوجد مصدر إحالة خارجي.</p>`;
+        document.getElementById('vs-refs').innerHTML = refsHtml;
+
         document.getElementById('vs-browsers').innerHTML =
-            vsList(data.browsers, 'count', '#28a745', 'لا توجد بيانات بعد.');
+            vsList(data.browsers,  'count', '#28a745', 'لا توجد بيانات بعد.');
         document.getElementById('vs-systems').innerHTML =
-            vsList(data.systems,  'count', '#6f42c1', 'لا توجد بيانات بعد.');
+            vsList(data.systems,   'count', '#6f42c1', 'لا توجد بيانات بعد.');
+        document.getElementById('vs-languages').innerHTML =
+            vsList(data.languages, 'count', '#e67e22', 'لا توجد بيانات بعد.');
 
         // Downloads stat card (if present)
         if (typeof data.downloads === 'number') {

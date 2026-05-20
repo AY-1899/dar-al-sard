@@ -48,12 +48,11 @@ const me = await gcFetch('/me');
 console.log('✅ Token valid. User:', me.user?.email || '(ok)');
 
 // ── Fetch stats sequentially to avoid rate limiting ───────────────────────────
-const browsersData  = await fetchStat('browsers');              await sleep(600);
-const systemsData   = await fetchStat('systems');               await sleep(600);
-const locData       = await fetchStat('locations');             await sleep(600);
-const locIqData     = await fetchStat('locations', '&filter=IQ'); await sleep(600);
-const refData       = await fetchStat('toprefs');               await sleep(600);
-const dlData        = await fetchStat('hits',      '&event=true&filter=%2Fpdf-download');
+const browsersData  = await fetchStat('browsers');  await sleep(600);
+const systemsData   = await fetchStat('systems');   await sleep(600);
+const locData       = await fetchStat('locations'); await sleep(600);
+const refData       = await fetchStat('toprefs');   await sleep(600);
+const langData      = await fetchStat('languages');
 
 // ── Arabic name maps ──────────────────────────────────────────────────────────
 const IQ_GOV = {
@@ -132,10 +131,12 @@ if (existsSync(CACHE)) {
     try { prevHits = JSON.parse(readFileSync(CACHE,'utf8')).hits || []; } catch {}
 }
 
-// Downloads: sum event counts for /pdf-download path
-const downloads = (dlData?.hits || dlData?.stats || [])
-    .reduce((s, r) => s + (r.count || 0), 0);
-console.log('Downloads (PDF events):', downloads);
+// Languages
+function parseLangs(data) {
+    if (!data) return [];
+    return (data.stats || []).map(r => ({ name: r.name || r.id || '—', count: r.count || 0 }))
+        .sort((a,b) => b.count - a.count).slice(0, 8);
+}
 
 const analytics = {
     updated:   new Date().toISOString(),
@@ -144,13 +145,14 @@ const analytics = {
         end:   new Date().toISOString().split('T')[0],
     },
     totalHits,
-    downloads,
+    downloads: 0,   // GoatCounter event API not available; tracked client-side only
     hits:      prevHits,
     locations: countries,
-    regions,
+    regions:   [],  // GoatCounter stats API has no subdivision filter; always empty
     browsers:  parseBrowsers(browsersData),
     systems:   parseSystems(systemsData),
     refs:      parseRefs(refData),
+    languages: parseLangs(langData),
 };
 
 writeFileSync(CACHE, JSON.stringify(analytics, null, 2), 'utf8');
