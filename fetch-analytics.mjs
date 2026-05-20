@@ -111,11 +111,24 @@ function parseSystems(data) {
     })).sort((a,b) => b.count - a.count).slice(0, 10);
 }
 
+function normalizeRef(name) {
+    if (!name || name === '—' || name === '(unknown)') return null;
+    // Strip www. prefix
+    name = name.replace(/^www\./, '');
+    // Group all facebook variants
+    if (/^facebook\.com/i.test(name) || /^m\.facebook\.com/i.test(name) || /^l\.facebook\.com/i.test(name)) return 'facebook.com';
+    // Normalize Google variants
+    if (/^google\./i.test(name) || name.toLowerCase() === 'google') return 'Google';
+    return name;
+}
+
 function parseRefs(topData, campData) {
     const merge = {};
     for (const src of [topData, campData]) {
         (src?.stats || []).forEach(r => {
-            const name = r.name || r.ref || '—';
+            const raw  = r.name || r.ref || '';
+            const name = normalizeRef(raw);
+            if (!name) return; // skip unknown/empty
             merge[name] = (merge[name] || 0) + (r.count || 0);
         });
     }

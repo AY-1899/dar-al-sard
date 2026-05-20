@@ -1640,7 +1640,7 @@ async function loadVisitorStats() {
 
         // Referrers — handle "all direct" case
         const refsHtml = (data.refs && data.refs.length)
-            ? vsList(data.refs, 'count', '#17a2b8', '')
+            ? vsList(data.refs, 'count', '#17a2b8', '', { showPct: true, total: totalVisits })
             : `<p class="gc-empty">جميع الزيارات مباشرة — لا يوجد مصدر إحالة خارجي.</p>`;
         document.getElementById('vs-refs').innerHTML = refsHtml;
 
