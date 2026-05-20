@@ -219,6 +219,30 @@
         @media (max-width: 600px) {
             #stats-content > div { grid-template-columns: 1fr !important; }
         }
+
+        /* ── GOATCOUNTER ── */
+        .gc-loading { color: #aaa; font-size: .9rem; padding: 1rem 0; }
+        .gc-error   { color: #c0392b; font-size: .9rem; padding: .5rem 0; }
+        .gc-row {
+            display: flex; align-items: center; gap: .7rem;
+            margin-bottom: .6rem;
+        }
+        .gc-label { font-size: .88rem; color: #333; flex: 1; min-width: 0;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .gc-bar-wrap { flex: 1.2; background: #f0f4f8; border-radius: 5px; height: 14px; overflow: hidden; }
+        .gc-bar-fill { height: 100%; border-radius: 5px; background: #002366; }
+        .gc-bar-fill.gold { background: #f7b733; }
+        .gc-bar-fill.teal { background: #17a2b8; }
+        .gc-bar-fill.green { background: #28a745; }
+        .gc-count { font-size: .8rem; color: #888; min-width: 28px; text-align: left; font-weight: 700; }
+        .gc-total-row {
+            display: flex; justify-content: space-between;
+            background: #f0f4f8; border-radius: 8px;
+            padding: .6rem 1rem; margin-bottom: 1rem;
+            font-size: .88rem; color: #555;
+        }
+        .gc-total-row strong { color: #002366; font-size: 1.1rem; }
+        .gc-empty { color: #aaa; font-size: .88rem; padding: .5rem 0; }
     </style>
 </head>
 <body>
@@ -474,15 +498,26 @@
                     <div id="stats-authors"></div>
                 </div>
 
-                <!-- GoatCounter live dashboard -->
-                <div class="card">
-                    <h2 class="card-title">🌍 إحصائيات الزوار المباشرة <span style="font-size:.8rem;color:#888;font-weight:400">(المحافظات، الدول، الأجهزة، الصفحات)</span></h2>
-                    <iframe
-                        src="https://daralsard.goatcounter.com/"
-                        style="width:100%;height:800px;border:none;border-radius:10px;background:#f8f9fa"
-                        loading="lazy"
-                        title="GoatCounter Analytics">
-                    </iframe>
+                <!-- GoatCounter visitor stats -->
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem">
+                    <div class="card" style="margin:0">
+                        <h2 class="card-title">📄 أكثر الصفحات زيارةً <span style="font-size:.75rem;color:#aaa;font-weight:400">آخر 30 يوم</span></h2>
+                        <div id="gc-pages"><div class="gc-loading">⏳ جارٍ التحميل...</div></div>
+                    </div>
+                    <div class="card" style="margin:0">
+                        <h2 class="card-title">🌍 المحافظات والدول <span style="font-size:.75rem;color:#aaa;font-weight:400">آخر 30 يوم</span></h2>
+                        <div id="gc-locations"><div class="gc-loading">⏳ جارٍ التحميل...</div></div>
+                    </div>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
+                    <div class="card" style="margin:0">
+                        <h2 class="card-title">📱 الأجهزة والمتصفحات <span style="font-size:.75rem;color:#aaa;font-weight:400">آخر 30 يوم</span></h2>
+                        <div id="gc-devices"><div class="gc-loading">⏳ جارٍ التحميل...</div></div>
+                    </div>
+                    <div class="card" style="margin:0">
+                        <h2 class="card-title">🔗 مصادر الزيارات <span style="font-size:.75rem;color:#aaa;font-weight:400">آخر 30 يوم</span></h2>
+                        <div id="gc-refs"><div class="gc-loading">⏳ جارٍ التحميل...</div></div>
+                    </div>
                 </div>
 
             </div>
@@ -1172,6 +1207,106 @@ async function loadEssayList() {
 }
 
 // ════════════════════════════════════════════════
+//  GOATCOUNTER API
+// ════════════════════════════════════════════════
+const GC_TOKEN = '1hb4k8pit7dre128dyxyq430wt1lwdlqj6i61kk1ghujozwlzcel';
+const GC_BASE  = 'https://daralsard.goatcounter.com/api/v0';
+
+function gcDates() {
+    const end   = new Date().toISOString().split('T')[0];
+    const start = new Date(Date.now() - 30*24*60*60*1000).toISOString().split('T')[0];
+    return { start, end };
+}
+async function gcFetch(endpoint, extra = {}) {
+    const { start, end } = gcDates();
+    const params = new URLSearchParams({ start, end, limit: 10, ...extra });
+    const r = await fetch(`${GC_BASE}${endpoint}?${params}`, {
+        headers: { Authorization: `Bearer ${GC_TOKEN}` }
+    });
+    if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
+    return r.json();
+}
+
+function gcBar(label, count, max, colorClass = '') {
+    const pct = max ? Math.round(count / max * 100) : 0;
+    return `<div class="gc-row">
+        <span class="gc-label" title="${escHtml(label)}">${escHtml(label)}</span>
+        <div class="gc-bar-wrap"><div class="gc-bar-fill ${colorClass}" style="width:${pct}%"></div></div>
+        <span class="gc-count">${count}</span>
+    </div>`;
+}
+
+async function loadGcStats() {
+    // Pages
+    try {
+        const data = await gcFetch('/stats/hits');
+        const hits  = (data.hits || []).slice(0, 8);
+        const max   = hits.length ? hits[0].count : 1;
+        const total = hits.reduce((s, h) => s + h.count, 0);
+        const pageNames = { '/': 'الرئيسية', '/news.html': 'الأخبار', '/essays.html': 'المقالات' };
+        document.getElementById('gc-pages').innerHTML =
+            `<div class="gc-total-row"><span>إجمالي المشاهدات</span><strong>${total.toLocaleString('ar')}</strong></div>` +
+            (hits.length
+                ? hits.map(h => gcBar(pageNames[h.path] || h.path, h.count, max)).join('')
+                : '<p class="gc-empty">لا توجد بيانات بعد.</p>');
+    } catch(e) {
+        document.getElementById('gc-pages').innerHTML = `<p class="gc-error">❌ ${e.message}</p>`;
+    }
+
+    // Locations (regions first, fallback to countries)
+    try {
+        let locs = [], label = '';
+        try {
+            const reg = await gcFetch('/stats/locations', { filter: 'IQ' });
+            locs  = (reg.locations || []).filter(l => l.id && l.id !== 'IQ').slice(0, 8);
+            label = 'محافظة';
+        } catch {}
+        if (!locs.length) {
+            const countries = await gcFetch('/stats/locations');
+            locs  = (countries.locations || []).slice(0, 8);
+            label = 'دولة';
+        }
+        const max = locs.length ? locs[0].count : 1;
+        document.getElementById('gc-locations').innerHTML = locs.length
+            ? locs.map(l => gcBar(l.name || l.id, l.count, max, 'gold')).join('')
+            : '<p class="gc-empty">لا توجد بيانات بعد.</p>';
+    } catch(e) {
+        document.getElementById('gc-locations').innerHTML = `<p class="gc-error">❌ ${e.message}</p>`;
+    }
+
+    // Browsers + Systems
+    try {
+        const [brow, sys] = await Promise.all([
+            gcFetch('/stats/browsers'),
+            gcFetch('/stats/systems'),
+        ]);
+        const browsers = (brow.browsers || []).slice(0, 4);
+        const systems  = (sys.systems   || []).slice(0, 4);
+        const maxB = browsers.length ? browsers[0].count : 1;
+        const maxS = systems.length  ? systems[0].count  : 1;
+        document.getElementById('gc-devices').innerHTML =
+            `<p style="font-size:.8rem;font-weight:700;color:#555;margin-bottom:.5rem">المتصفحات</p>` +
+            (browsers.length ? browsers.map(b => gcBar(b.name || b.id, b.count, maxB, 'teal')).join('') : '<p class="gc-empty">لا بيانات.</p>') +
+            `<p style="font-size:.8rem;font-weight:700;color:#555;margin:.8rem 0 .5rem">أنظمة التشغيل</p>` +
+            (systems.length  ? systems.map(s => gcBar(s.name  || s.id, s.count, maxS, 'green')).join('') : '<p class="gc-empty">لا بيانات.</p>');
+    } catch(e) {
+        document.getElementById('gc-devices').innerHTML = `<p class="gc-error">❌ ${e.message}</p>`;
+    }
+
+    // Referrers
+    try {
+        const data = await gcFetch('/stats/toprefs');
+        const refs = (data.refs || []).slice(0, 8);
+        const max  = refs.length ? refs[0].count : 1;
+        document.getElementById('gc-refs').innerHTML = refs.length
+            ? refs.map(r => gcBar(r.name || r.id || 'مباشر', r.count, max)).join('')
+            : '<p class="gc-empty">لا توجد بيانات بعد.</p>';
+    } catch(e) {
+        document.getElementById('gc-refs').innerHTML = `<p class="gc-error">❌ ${e.message}</p>`;
+    }
+}
+
+// ════════════════════════════════════════════════
 //  STATS
 // ════════════════════════════════════════════════
 
@@ -1192,6 +1327,7 @@ async function loadStats() {
         renderStats(books, news, essays);
         document.getElementById('stats-loading').style.display = 'none';
         document.getElementById('stats-content').style.display = 'block';
+        loadGcStats(); // load visitor stats in parallel
     } catch(err) {
         document.getElementById('stats-loading').innerHTML =
             `<p style="color:#c0392b">❌ فشل تحميل الإحصائيات: ${err.message}</p>`;
