@@ -563,8 +563,8 @@
                             </div>
                         </div>
 
-                        <!-- Browsers + Systems + Languages row -->
-                        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem">
+                        <!-- Browsers + Systems row -->
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
                             <div class="card" style="margin:0">
                                 <h2 class="card-title">🌐 المتصفحات</h2>
                                 <div id="vs-browsers"></div>
@@ -572,10 +572,6 @@
                             <div class="card" style="margin:0">
                                 <h2 class="card-title">📱 أنظمة التشغيل</h2>
                                 <div id="vs-systems"></div>
-                            </div>
-                            <div class="card" style="margin:0">
-                                <h2 class="card-title">🗣️ اللغات</h2>
-                                <div id="vs-languages"></div>
                             </div>
                         </div>
 
@@ -1610,8 +1606,6 @@ async function loadVisitorStats() {
             vsList(data.browsers,  'count', '#28a745', 'لا توجد بيانات بعد.');
         document.getElementById('vs-systems').innerHTML =
             vsList(data.systems,   'count', '#6f42c1', 'لا توجد بيانات بعد.');
-        document.getElementById('vs-languages').innerHTML =
-            vsList(data.languages, 'count', '#e67e22', 'لا توجد بيانات بعد.');
 
         // Downloads stat card (if present)
         if (typeof data.downloads === 'number') {
