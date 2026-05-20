@@ -661,7 +661,7 @@
                     <div id="visitor-stats-loading" style="text-align:center;color:#666;padding:2rem">⏳ جارٍ تحميل إحصائيات الزوار...</div>
                     <div id="visitor-stats-content" style="display:none">
 
-                        <div id="vs-updated" style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem"></div>
+                        <div id="vs-updated" style="text-align:left;font-size:.8rem;color:#666;margin-bottom:1rem"></div>
 
                         <!-- Monthly chart — hidden until ≥ 2 months of data -->
                         <div class="card" id="vs-monthly-card" style="display:none;margin-bottom:1.5rem">
@@ -1622,20 +1622,10 @@ async function loadVisitorStats() {
 
         // Updated timestamp
         if (data.updated) {
-            const d       = new Date(data.updated);
-            const fmtDate = d.toLocaleDateString('ar-IQ', { year:'numeric', month:'long', day:'numeric' });
-            const fmtTime = d.toLocaleTimeString('ar-IQ', { hour:'2-digit', minute:'2-digit' });
-            const pStart  = data.period?.start
-                ? new Date(data.period.start).toLocaleDateString('ar-IQ', { month:'long', day:'numeric' })
-                : '';
-            const pEnd    = data.period?.end
-                ? new Date(data.period.end).toLocaleDateString('ar-IQ', { month:'long', day:'numeric' })
-                : '';
-            const chip = (icon, text) =>
-                `<span style="display:inline-flex;align-items:center;gap:.35rem;background:#f0f4f8;border-radius:8px;padding:.35rem .8rem;font-size:.82rem;color:#555">${icon} ${text}</span>`;
-            document.getElementById('vs-updated').innerHTML =
-                chip('🕐', `${fmtDate} — ${fmtTime}`) +
-                chip('📅', `${pStart} — ${pEnd}`);
+            const d   = new Date(data.updated);
+            const fmt = d.toLocaleString('ar-IQ', { dateStyle: 'medium', timeStyle: 'short' });
+            document.getElementById('vs-updated').textContent =
+                `آخر تحديث: ${fmt}  —  الفترة: ${data.period?.start || ''} إلى ${data.period?.end || ''}`;
         }
 
         // Totals for percentage
