@@ -6,6 +6,8 @@
     <title>لوحة التحكم — دار السرد</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Cairo', sans-serif; background: #f0f4f8; color: #222; }
@@ -242,26 +244,9 @@
         .gc-total-row strong { color: #002366; font-size: 1.1rem; }
         .gc-empty { color: #aaa; font-size: .88rem; padding: .5rem 0; }
 
-        /* ── IRAQ SVG MAP ── */
+        /* ── IRAQ MAP (Leaflet) ── */
         .iraq-map-section { display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:start; }
         .iraq-map-wrap { position:relative; }
-        .iraq-map-wrap svg { width:100%; height:auto; display:block; }
-        .iraq-gov {
-            fill: #dce7f5; stroke: #fff; stroke-width: 1.5;
-            cursor: pointer; transition: fill .15s, stroke-width .1s;
-        }
-        .iraq-gov:hover { stroke: #002366; stroke-width: 2.5; filter: brightness(.88); }
-        .iraq-gov-lbl {
-            font-family: 'Cairo', sans-serif; font-size: 8.5px;
-            fill: #334; pointer-events: none; text-anchor: middle;
-        }
-        .map-tooltip {
-            position: fixed; background: rgba(10,18,50,.88); color:#fff;
-            padding: 8px 14px; border-radius: 10px; font-size:.85rem;
-            line-height: 1.7; pointer-events: none; display: none;
-            z-index: 9999; white-space: nowrap; direction: rtl;
-            box-shadow: 0 4px 16px rgba(0,0,0,.3);
-        }
         .map-legend {
             display: flex; align-items: center; gap: .5rem;
             font-size: .75rem; color: #999; margin-top: .5rem;
@@ -271,6 +256,12 @@
             width: 90px; height: 9px; border-radius: 5px;
             background: linear-gradient(to right, #dce7f5, #002366);
         }
+        .leaflet-iraq-tip {
+            background: rgba(10,18,50,.88) !important;
+            border: none !important; border-radius: 10px !important;
+            color: #fff !important; box-shadow: 0 4px 16px rgba(0,0,0,.3) !important;
+        }
+        .leaflet-iraq-tip::before { display:none !important; }
         @media (max-width:620px) {
             .iraq-map-section { grid-template-columns:1fr !important; }
             #stats-content > div { grid-template-columns:1fr !important; }
@@ -543,48 +534,9 @@
                         <div class="card" style="margin-bottom:1.5rem">
                             <h2 class="card-title">🗺️ المحافظات العراقية</h2>
                             <div class="iraq-map-section">
-                                <!-- SVG Map -->
+                                <!-- Leaflet Map -->
                                 <div class="iraq-map-wrap">
-                                    <div id="map-tooltip" class="map-tooltip"></div>
-                                    <svg id="iraq-svg" viewBox="0 0 420 500" xmlns="http://www.w3.org/2000/svg">
-                                      <polygon id="gov-IQ-DA" class="iraq-gov" data-id="IQ-DA" data-name="دهوك"         points="148,4 228,4 230,44 194,58 148,52"/>
-                                      <polygon id="gov-IQ-NI" class="iraq-gov" data-id="IQ-NI" data-name="نينوى"        points="0,14 100,4 148,4 148,52 194,58 230,44 226,128 186,144 104,148 64,108 0,170"/>
-                                      <polygon id="gov-IQ-AR" class="iraq-gov" data-id="IQ-AR" data-name="أربيل"        points="228,4 304,16 300,98 266,118 226,128 230,44"/>
-                                      <polygon id="gov-IQ-SU" class="iraq-gov" data-id="IQ-SU" data-name="السليمانية"   points="304,16 332,40 322,158 286,174 260,154 266,118 300,98"/>
-                                      <polygon id="gov-IQ-KI" class="iraq-gov" data-id="IQ-KI" data-name="كركوك"        points="186,144 226,128 260,154 254,196 214,206 192,182"/>
-                                      <polygon id="gov-IQ-SD" class="iraq-gov" data-id="IQ-SD" data-name="صلاح الدين"   points="104,148 186,144 192,182 214,206 206,226 144,230 100,188"/>
-                                      <polygon id="gov-IQ-AN" class="iraq-gov" data-id="IQ-AN" data-name="الأنبار"      points="0,170 100,188 144,230 140,296 138,380 96,398 0,490"/>
-                                      <polygon id="gov-IQ-DI" class="iraq-gov" data-id="IQ-DI" data-name="ديالى"        points="214,206 254,196 286,174 322,158 316,246 290,276 250,282 218,260"/>
-                                      <polygon id="gov-IQ-BG" class="iraq-gov" data-id="IQ-BG" data-name="بغداد"        points="206,226 214,206 218,260 250,282 244,298 212,298 202,270"/>
-                                      <polygon id="gov-IQ-BB" class="iraq-gov" data-id="IQ-BB" data-name="بابل"         points="202,270 244,298 258,316 234,330 194,328 185,304"/>
-                                      <polygon id="gov-IQ-KA" class="iraq-gov" data-id="IQ-KA" data-name="كربلاء"       points="144,230 206,226 202,270 185,304 155,306 136,268"/>
-                                      <polygon id="gov-IQ-WA" class="iraq-gov" data-id="IQ-WA" data-name="واسط"         points="250,282 290,276 316,246 332,306 315,347 277,354 258,328 244,298"/>
-                                      <polygon id="gov-IQ-QA" class="iraq-gov" data-id="IQ-QA" data-name="القادسية"     points="155,306 194,328 234,330 230,370 195,376 160,354"/>
-                                      <polygon id="gov-IQ-NA" class="iraq-gov" data-id="IQ-NA" data-name="النجف"        points="96,398 138,380 155,306 160,354 195,376 192,442 138,454 88,440"/>
-                                      <polygon id="gov-IQ-TS" class="iraq-gov" data-id="IQ-TS" data-name="ذي قار"       points="195,376 230,370 277,354 315,347 309,420 280,442 225,448 192,418"/>
-                                      <polygon id="gov-IQ-MA" class="iraq-gov" data-id="IQ-MA" data-name="ميسان"        points="277,354 315,347 332,306 366,315 358,405 326,420 280,442"/>
-                                      <polygon id="gov-IQ-MU" class="iraq-gov" data-id="IQ-MU" data-name="المثنى"       points="192,442 225,448 280,442 326,420 318,490 160,490"/>
-                                      <polygon id="gov-IQ-BA" class="iraq-gov" data-id="IQ-BA" data-name="البصرة"       points="280,442 326,420 358,405 396,424 384,490 340,490 318,490"/>
-                                      <!-- Labels -->
-                                      <text class="iraq-gov-lbl" x="188" y="33">دهوك</text>
-                                      <text class="iraq-gov-lbl" x="105" y="100">نينوى</text>
-                                      <text class="iraq-gov-lbl" x="255" y="72">أربيل</text>
-                                      <text class="iraq-gov-lbl" x="300" y="118">السليمانية</text>
-                                      <text class="iraq-gov-lbl" x="228" y="180">كركوك</text>
-                                      <text class="iraq-gov-lbl" x="155" y="200">صلاح الدين</text>
-                                      <text class="iraq-gov-lbl" x="52"  y="330">الأنبار</text>
-                                      <text class="iraq-gov-lbl" x="270" y="238">ديالى</text>
-                                      <text class="iraq-gov-lbl" x="228" y="264">بغداد</text>
-                                      <text class="iraq-gov-lbl" x="220" y="310">بابل</text>
-                                      <text class="iraq-gov-lbl" x="168" y="272">كربلاء</text>
-                                      <text class="iraq-gov-lbl" x="292" y="315">واسط</text>
-                                      <text class="iraq-gov-lbl" x="193" y="347">القادسية</text>
-                                      <text class="iraq-gov-lbl" x="130" y="405">النجف</text>
-                                      <text class="iraq-gov-lbl" x="253" y="408">ذي قار</text>
-                                      <text class="iraq-gov-lbl" x="323" y="388">ميسان</text>
-                                      <text class="iraq-gov-lbl" x="248" y="468">المثنى</text>
-                                      <text class="iraq-gov-lbl" x="342" y="466">البصرة</text>
-                                    </svg>
+                                    <div id="iraq-map-container" style="height:420px;border-radius:12px;overflow:hidden;background:#eef2f8"></div>
                                     <div class="map-legend">
                                         <span>أقل</span>
                                         <div class="legend-grad"></div>
@@ -1517,53 +1469,86 @@ function vsList(items, key, color, emptyMsg, { limit = 10, showPct = false, tota
     return shown.map(i => vsBar(i.name || i.id || '—', i[key] || 0, grand, barMax, color, showPct)).join('');
 }
 
-// ── Iraq map color helper ─────────────────────────────────────────────────────
+// ── Iraq map (Leaflet + real GeoJSON) ────────────────────────────────────────
+const AR_NAMES = {
+    'IQ-AN':'الأنبار','IQ-BA':'البصرة', 'IQ-MU':'المثنى',
+    'IQ-QA':'القادسية','IQ-NA':'النجف', 'IQ-SD':'صلاح الدين',
+    'IQ-TS':'ذي قار', 'IQ-WA':'واسط',  'IQ-AR':'أربيل',
+    'IQ-BB':'بابل',   'IQ-BG':'بغداد', 'IQ-DA':'دهوك',
+    'IQ-DI':'ديالى',  'IQ-KA':'كربلاء','IQ-KI':'كركوك',
+    'IQ-MA':'ميسان',  'IQ-NI':'نينوى', 'IQ-SU':'السليمانية',
+};
+const CODE_BY_AR = Object.fromEntries(Object.entries(AR_NAMES).map(([k,v])=>[v,k]));
+
 function govColor(count, max) {
     if (!count || !max) return '#dce7f5';
-    const t = Math.min(Math.sqrt(count / max), 1);  // sqrt for better contrast
-    const r = Math.round(220 * (1 - t));
-    const g = Math.round(231 - 196 * t);
-    const b = Math.round(245 - 143 * t);
-    return `rgb(${r},${g},${b})`;
+    const t = Math.min(Math.sqrt(count / max), 1);
+    return `rgb(${Math.round(220*(1-t))},${Math.round(231-196*t)},${Math.round(245-143*t)})`;
 }
 
-function renderIraqMap(regions, totalIq) {
-    if (!regions || !regions.length) return;
-    const govMap = {};
-    regions.forEach(r => {
-        // match by Arabic name → IQ-XX code
-        const CODE_BY_NAME = {
-            'دهوك':'IQ-DA','نينوى':'IQ-NI','أربيل':'IQ-AR','السليمانية':'IQ-SU',
-            'كركوك':'IQ-KI','صلاح الدين':'IQ-SD','الأنبار':'IQ-AN','ديالى':'IQ-DI',
-            'بغداد':'IQ-BG','بابل':'IQ-BB','كربلاء':'IQ-KA','واسط':'IQ-WA',
-            'القادسية':'IQ-QA','النجف':'IQ-NA','ذي قار':'IQ-TS','ميسان':'IQ-MA',
-            'المثنى':'IQ-MU','البصرة':'IQ-BA',
-        };
-        const code = CODE_BY_NAME[r.name];
-        if (code) govMap[code] = r.count;
+let _leafletMap = null;
+
+async function renderIraqMap(regions, totalIq) {
+    const el = document.getElementById('iraq-map-container');
+    if (!el) return;
+
+    // Destroy previous instance
+    if (_leafletMap) { _leafletMap.remove(); _leafletMap = null; }
+
+    // Build count lookup: ISO code → count
+    const govData = {};
+    (regions || []).forEach(r => {
+        const code = CODE_BY_AR[r.name] || r.id;
+        if (code) govData[code] = r.count;
+    });
+    const maxCount = Math.max(...Object.values(govData), 1);
+
+    // Create map — no tiles, just vector layer
+    _leafletMap = L.map(el, {
+        zoomControl: false, dragging: false, touchZoom: false,
+        scrollWheelZoom: false, doubleClickZoom: false,
+        attributionControl: false, keyboard: false,
     });
 
-    const maxCount = Math.max(...Object.values(govMap), 1);
-    const tooltip  = document.getElementById('map-tooltip');
+    try {
+        // Load Iraq ADM1 GeoJSON from geoBoundaries (CORS-friendly)
+        const resp = await fetch('https://raw.githubusercontent.com/wmgeolab/geoBoundaries/main/releaseData/gbOpen/IRQ/ADM1/geoBoundaries-IRQ-ADM1_simplified.geojson');
+        const geojson = await resp.json();
 
-    document.querySelectorAll('.iraq-gov').forEach(el => {
-        const id    = el.dataset.id;
-        const name  = el.dataset.name;
-        const count = govMap[id] || 0;
-        const pct   = totalIq ? Math.round(count / totalIq * 100) : 0;
+        const layer = L.geoJSON(geojson, {
+            style: f => {
+                const iso   = f.properties.shapeISO || '';
+                const count = govData[iso] || 0;
+                return {
+                    fillColor:   govColor(count, maxCount),
+                    fillOpacity: 0.9,
+                    color:       '#fff',
+                    weight:      1.5,
+                };
+            },
+            onEachFeature: (f, lyr) => {
+                const iso   = f.properties.shapeISO || '';
+                const name  = AR_NAMES[iso] || f.properties.shapeName || iso;
+                const count = govData[iso] || 0;
+                const pct   = totalIq && count ? Math.round(count / totalIq * 100) : 0;
 
-        el.style.fill = govColor(count, maxCount);
+                lyr.bindTooltip(
+                    `<div style="direction:rtl;font-family:Cairo,sans-serif;font-size:13px;line-height:1.6">
+                        <strong>${name}</strong><br>
+                        ${count ? count + ' زيارة — ' + pct + '%' : 'لا توجد بيانات'}
+                    </div>`,
+                    { sticky: true, opacity: 0.95, className: 'leaflet-iraq-tip' }
+                );
+                lyr.on('mouseover', () => lyr.setStyle({ weight: 2.5, color: '#002366' }));
+                lyr.on('mouseout',  () => layer.resetStyle(lyr));
+            }
+        }).addTo(_leafletMap);
 
-        el.addEventListener('mouseenter', ev => {
-            tooltip.style.display = 'block';
-            tooltip.innerHTML = `<strong>${name}</strong><br>${count ? count + ' زيارة — ' + pct + '%' : 'لا توجد بيانات'}`;
-        });
-        el.addEventListener('mousemove', ev => {
-            tooltip.style.top  = (ev.clientY - 70) + 'px';
-            tooltip.style.left = (ev.clientX - tooltip.offsetWidth / 2) + 'px';
-        });
-        el.addEventListener('mouseleave', () => { tooltip.style.display = 'none'; });
-    });
+        _leafletMap.fitBounds(layer.getBounds());
+    } catch (e) {
+        console.warn('Iraq map load failed:', e.message);
+        el.innerHTML = '<p style="text-align:center;color:#aaa;padding:2rem">تعذّر تحميل الخريطة.</p>';
+    }
 }
 
 async function loadVisitorStats() {
