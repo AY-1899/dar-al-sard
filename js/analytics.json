@@ -1,10 +1,10 @@
 {
-  "updated": "2026-05-20T15:24:17.345Z",
+  "updated": "2026-05-20T15:36:55.378Z",
   "period": {
     "start": "2026-04-20",
     "end": "2026-05-20"
   },
-  "totalHits": 0,
+  "totalHits": 35,
   "hits": [],
   "locations": [
     {
@@ -29,7 +29,37 @@
     }
   ],
   "regions": [],
-  "browsers": [],
-  "systems": [],
+  "browsers": [
+    {
+      "name": "Chrome",
+      "count": 27
+    },
+    {
+      "name": "Safari",
+      "count": 5
+    },
+    {
+      "name": "Firefox",
+      "count": 3
+    }
+  ],
+  "systems": [
+    {
+      "name": "Android",
+      "count": 20
+    },
+    {
+      "name": "Windows",
+      "count": 9
+    },
+    {
+      "name": "iOS",
+      "count": 5
+    },
+    {
+      "name": "macOS",
+      "count": 1
+    }
+  ],
   "refs": []
 }
