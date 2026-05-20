@@ -1,3 +1,28 @@
+// Inject Schema.org Book list for search engines
+(function () {
+    const schema = {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "كتب دار السرد",
+        "itemListElement": booksData.map((book, i) => ({
+            "@type": "ListItem",
+            "position": i + 1,
+            "item": {
+                "@type": "Book",
+                "name": book.title,
+                "author": { "@type": "Person", "name": book.author },
+                "datePublished": book.year,
+                "inLanguage": "ar",
+                "publisher": { "@type": "Organization", "name": "دار السرد" }
+            }
+        }))
+    };
+    const s = document.createElement('script');
+    s.type = 'application/ld+json';
+    s.textContent = JSON.stringify(schema);
+    document.head.appendChild(s);
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
     const booksContainer = document.getElementById('books-container');
     const modal = document.getElementById('book-modal');
