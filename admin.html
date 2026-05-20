@@ -11,10 +11,7 @@
         body { font-family: 'Cairo', sans-serif; background: #f0f4f8; color: #222; }
 
         /* ── LOGIN ── */
-        #login-screen {
-            min-height: 100vh;
-            display: flex; align-items: center; justify-content: center;
-        }
+        #login-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; }
         .login-box {
             background: white; border-radius: 16px; padding: 2.5rem;
             width: 380px; box-shadow: 0 8px 32px rgba(0,35,102,.12); text-align: center;
@@ -50,14 +47,15 @@
         }
         .topbar button:hover { background: rgba(255,255,255,.25); }
 
-        .main { max-width: 920px; margin: 2rem auto; padding: 0 1.5rem 4rem; }
+        .main { max-width: 960px; margin: 2rem auto; padding: 0 1.5rem 4rem; }
 
         /* ── TABS ── */
         .tabs { display: flex; gap: .5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
         .tab {
-            padding: .65rem 1.4rem; border-radius: 10px; cursor: pointer;
-            font-family: inherit; font-size: 1rem; font-weight: 600;
-            border: none; background: white; color: #555; box-shadow: 0 2px 6px rgba(0,0,0,.06);
+            padding: .65rem 1.3rem; border-radius: 10px; cursor: pointer;
+            font-family: inherit; font-size: .95rem; font-weight: 600;
+            border: none; background: white; color: #555;
+            box-shadow: 0 2px 6px rgba(0,0,0,.06);
         }
         .tab.active { background: #002366; color: white; }
         .tab:hover:not(.active) { background: #e8eef8; }
@@ -77,6 +75,7 @@
         .form-row label { display: block; font-weight: 700; margin-bottom: .4rem; color: #333; }
         .form-row label span { font-weight: 400; color: #999; font-size: .85rem; }
         .form-row input[type=text],
+        .form-row input[type=date],
         .form-row textarea,
         .form-row select {
             width: 100%; padding: .8rem 1rem; border: 2px solid #dde3f0;
@@ -89,10 +88,7 @@
 
         .price-wrap { display: flex; align-items: center; gap: .6rem; }
         .price-wrap input { flex: 1; }
-        .price-unit {
-            font-weight: 700; color: #002366; font-size: 1rem;
-            white-space: nowrap; padding: .8rem .4rem;
-        }
+        .price-unit { font-weight: 700; color: #002366; font-size: 1rem; white-space: nowrap; padding: .8rem .4rem; }
 
         .radio-group { display: flex; gap: .8rem; margin-top: .4rem; flex-wrap: wrap; }
         .radio-option {
@@ -144,34 +140,35 @@
         .status.error   { background: #f8d7da; color: #721c24; display: block; }
         .status.loading { background: #d1ecf1; color: #0c5460; display: block; }
 
-        .progress-bar {
-            height: 6px; background: #dde3f0; border-radius: 3px;
-            overflow: hidden; margin-top: .8rem;
-        }
-        .progress-fill {
-            height: 100%; background: #002366; width: 0%;
-            transition: width .4s; border-radius: 3px;
-        }
+        .progress-bar { height: 6px; background: #dde3f0; border-radius: 3px; overflow: hidden; margin-top: .8rem; }
+        .progress-fill { height: 100%; background: #002366; width: 0%; transition: width .4s; border-radius: 3px; }
 
-        /* ── BOOK LIST ── */
-        .book-list-item {
+        /* ── LIST ITEMS ── */
+        .list-item {
             display: flex; align-items: center; gap: .8rem;
             padding: .75rem 1rem; border-radius: 10px; border: 1px solid #eee;
             margin-bottom: .5rem; transition: background .15s;
         }
-        .book-list-item:hover { background: #f8f9fa; }
-        .bnum { font-size: .8rem; color: #bbb; min-width: 32px; text-align: center; font-weight: 700; }
-        .binfo { flex: 1; min-width: 0; }
-        .btitle  { font-weight: 700; font-size: .95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .bauthor { font-size: .83rem; color: #777; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .bpdf    { font-size: .73rem; background: #d4edda; color: #155724; padding: .2rem .5rem; border-radius: 5px; white-space: nowrap; flex-shrink: 0; }
-        .bno-pdf { font-size: .73rem; background: #fff3cd; color: #856404; padding: .2rem .5rem; border-radius: 5px; white-space: nowrap; flex-shrink: 0; }
+        .list-item:hover { background: #f8f9fa; }
+        .lnum { font-size: .8rem; color: #bbb; min-width: 32px; text-align: center; font-weight: 700; }
+        .linfo { flex: 1; min-width: 0; }
+        .ltitle  { font-weight: 700; font-size: .95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .lsub    { font-size: .83rem; color: #777; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .lbadge  { font-size: .73rem; padding: .2rem .5rem; border-radius: 5px; white-space: nowrap; flex-shrink: 0; }
+        .lbadge-green  { background: #d4edda; color: #155724; }
+        .lbadge-yellow { background: #fff3cd; color: #856404; }
         .btn-edit {
             background: #002366; color: white; border: none; border-radius: 7px;
             padding: .4rem .9rem; font-family: inherit; font-size: .85rem;
             font-weight: 600; cursor: pointer; flex-shrink: 0;
         }
         .btn-edit:hover { background: #1a438e; }
+        .btn-delete {
+            background: #c0392b; color: white; border: none; border-radius: 7px;
+            padding: .4rem .9rem; font-family: inherit; font-size: .85rem;
+            font-weight: 600; cursor: pointer; flex-shrink: 0;
+        }
+        .btn-delete:hover { background: #96281b; }
 
         .list-search {
             width: 100%; padding: .7rem 1rem; border: 2px solid #dde3f0;
@@ -179,6 +176,8 @@
             margin-bottom: 1rem;
         }
         .list-search:focus { outline: none; border-color: #002366; }
+        .list-count { color: #888; margin-bottom: 1rem; font-size: .9rem; }
+        .list-count strong { color: #002366; }
     </style>
 </head>
 <body>
@@ -203,32 +202,32 @@
 
     <div class="main">
         <div class="tabs">
-            <button class="tab active" id="tab-btn-add"  onclick="showTab('add')">➕ إضافة كتاب جديد</button>
-            <button class="tab"        id="tab-btn-list" onclick="showTab('list')">📚 قائمة الكتب</button>
+            <button class="tab active" id="tab-btn-add"     onclick="showTab('add')">➕ كتاب جديد</button>
+            <button class="tab"        id="tab-btn-list"    onclick="showTab('list')">📚 قائمة الكتب</button>
+            <button class="tab"        id="tab-btn-news"    onclick="showTab('news')">📰 الأخبار والفعاليات</button>
+            <button class="tab"        id="tab-btn-essays"  onclick="showTab('essays')">📝 مقالات الكتّاب</button>
         </div>
 
-        <!-- ═══ TAB: ADD / EDIT ═══ -->
+        <!-- ══════════════════════════════════════════
+             TAB: ADD / EDIT BOOK
+        ══════════════════════════════════════════ -->
         <div id="tab-add">
             <div class="card">
-                <h2 class="card-title" id="form-title">➕ إضافة كتاب جديد</h2>
-
+                <h2 class="card-title" id="book-form-title">➕ إضافة كتاب جديد</h2>
                 <input type="hidden" id="edit-id" value="">
 
                 <div class="form-row">
                     <label>عنوان الكتاب <span>*</span></label>
                     <input type="text" id="f-title" placeholder="مثال: زهور الدمن">
                 </div>
-
                 <div class="form-row">
                     <label>اسم المؤلف <span>*</span></label>
                     <input type="text" id="f-author" placeholder="مثال: ضاري الغضبان">
                 </div>
-
                 <div class="form-row">
                     <label>سنة النشر</label>
                     <input type="text" id="f-year" placeholder="2026" value="2026">
                 </div>
-
                 <div class="form-row">
                     <label>السعر <span>(بالدينار العراقي)</span></label>
                     <div class="price-wrap">
@@ -236,22 +235,14 @@
                         <span class="price-unit">د.ع</span>
                     </div>
                 </div>
-
                 <div class="form-row">
                     <label>جهة الغلاف الأمامي <span>(في الصورة)</span></label>
                     <div class="radio-group">
-                        <label class="radio-option">
-                            <input type="radio" name="cover" value="left" checked> يسار (الأكثر شيوعاً)
-                        </label>
-                        <label class="radio-option">
-                            <input type="radio" name="cover" value="right"> يمين
-                        </label>
-                        <label class="radio-option">
-                            <input type="radio" name="cover" value="single"> صورة واحدة فقط
-                        </label>
+                        <label class="radio-option"><input type="radio" name="cover" value="left" checked> يسار (الأكثر شيوعاً)</label>
+                        <label class="radio-option"><input type="radio" name="cover" value="right"> يمين</label>
+                        <label class="radio-option"><input type="radio" name="cover" value="single"> صورة واحدة فقط</label>
                     </div>
                 </div>
-
                 <div class="form-row">
                     <label>صورة الغلاف <span id="img-label-hint">*</span></label>
                     <div id="img-current" class="current-file" style="display:none">
@@ -265,7 +256,6 @@
                         <div class="file-preview" id="img-preview"></div>
                     </div>
                 </div>
-
                 <div class="form-row">
                     <label>ملف PDF <span>(اختياري)</span></label>
                     <div id="pdf-current" class="current-file" style="display:none">
@@ -279,50 +269,153 @@
                         <div class="file-preview" id="pdf-preview"></div>
                     </div>
                 </div>
-
                 <div class="form-row">
                     <label>وصف الكتاب <span>(النص الموجود على الغلاف الخلفي)</span></label>
                     <textarea id="f-desc" placeholder="اكتب وصف الكتاب هنا..."></textarea>
                 </div>
 
-                <button class="btn-submit" id="submit-btn" onclick="submitBook()">
-                    ✅ إضافة الكتاب إلى الموقع
-                </button>
-                <button class="btn-cancel" id="cancel-edit-btn" style="display:none" onclick="cancelEdit()">
-                    إلغاء والعودة إلى القائمة
-                </button>
-
-                <div class="progress-bar" id="progress-bar" style="display:none">
-                    <div class="progress-fill" id="progress-fill"></div>
-                </div>
-                <div class="status" id="form-status"></div>
+                <button class="btn-submit" id="submit-btn" onclick="submitBook()">✅ إضافة الكتاب إلى الموقع</button>
+                <button class="btn-cancel" id="cancel-edit-btn" style="display:none" onclick="cancelBookEdit()">إلغاء والعودة إلى القائمة</button>
+                <div class="progress-bar" id="book-progress" style="display:none"><div class="progress-fill" id="book-progress-fill"></div></div>
+                <div class="status" id="book-status"></div>
             </div>
         </div>
 
-        <!-- ═══ TAB: LIST ═══ -->
+        <!-- ══════════════════════════════════════════
+             TAB: BOOK LIST
+        ══════════════════════════════════════════ -->
         <div id="tab-list" style="display:none">
             <div class="card">
                 <h2 class="card-title">📚 قائمة الكتب المنشورة</h2>
-                <input class="list-search" type="text" id="list-search"
-                    placeholder="🔍 ابحث باسم الكتاب أو المؤلف..." oninput="filterList()">
-                <div id="book-list-loading" style="text-align:center;color:#666;padding:2rem">
-                    ⏳ جارٍ تحميل القائمة...
-                </div>
+                <input class="list-search" type="text" id="book-list-search"
+                    placeholder="🔍 ابحث باسم الكتاب أو المؤلف..." oninput="filterBookList()">
+                <div id="book-list-loading" style="text-align:center;color:#666;padding:2rem">⏳ جارٍ تحميل القائمة...</div>
                 <div id="book-list-content"></div>
+                <div class="status" id="book-list-status"></div>
             </div>
         </div>
-    </div>
-</div>
+
+        <!-- ══════════════════════════════════════════
+             TAB: NEWS
+        ══════════════════════════════════════════ -->
+        <div id="tab-news" style="display:none">
+
+            <!-- Add/Edit form -->
+            <div class="card">
+                <h2 class="card-title" id="news-form-title">📰 إضافة خبر أو فعالية</h2>
+                <input type="hidden" id="news-edit-id" value="">
+
+                <div class="form-row">
+                    <label>العنوان <span>*</span></label>
+                    <input type="text" id="nf-title" placeholder="مثال: مؤتمر الأدباء العرب في بغداد">
+                </div>
+                <div class="form-row">
+                    <label>التاريخ <span>*</span></label>
+                    <input type="date" id="nf-date">
+                </div>
+                <div class="form-row">
+                    <label>التصنيف</label>
+                    <select id="nf-cat">
+                        <option value="مؤتمر">مؤتمر</option>
+                        <option value="لقاء">لقاء</option>
+                        <option value="فعالية">فعالية</option>
+                        <option value="أخرى">أخرى</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <label>صورة الخبر <span id="news-img-hint">*</span></label>
+                    <div id="news-img-current" class="current-file" style="display:none">
+                        الصورة الحالية: <span id="news-img-current-name"></span>
+                        — اختر صورة جديدة فقط إذا أردت تغييرها
+                    </div>
+                    <div class="file-upload" id="news-img-drop" onclick="document.getElementById('nf-img').click()">
+                        <p>📷 <strong>انقر هنا</strong> لاختيار صورة</p>
+                        <p>أو اسحب الصورة وأفلتها هنا</p>
+                        <input type="file" id="nf-img" accept="image/*" onchange="previewFile(this,'news-img-preview')">
+                        <div class="file-preview" id="news-img-preview"></div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label>تفاصيل الخبر <span>*</span></label>
+                    <textarea id="nf-body" placeholder="اكتب تفاصيل الخبر أو الفعالية هنا..." style="min-height:150px"></textarea>
+                </div>
+
+                <button class="btn-submit" id="news-submit-btn" onclick="submitNews()">✅ نشر الخبر</button>
+                <button class="btn-cancel" id="news-cancel-btn" style="display:none" onclick="cancelNewsEdit()">إلغاء</button>
+                <div class="progress-bar" id="news-progress" style="display:none"><div class="progress-fill" id="news-progress-fill"></div></div>
+                <div class="status" id="news-form-status"></div>
+            </div>
+
+            <!-- List -->
+            <div class="card">
+                <h2 class="card-title">الأخبار والفعاليات المنشورة</h2>
+                <div id="news-list-loading" style="text-align:center;color:#666;padding:2rem">⏳ جارٍ تحميل القائمة...</div>
+                <div id="news-list-content"></div>
+                <div class="status" id="news-list-status"></div>
+            </div>
+        </div>
+
+        <!-- ══════════════════════════════════════════
+             TAB: ESSAYS
+        ══════════════════════════════════════════ -->
+        <div id="tab-essays" style="display:none">
+
+            <!-- Add/Edit form -->
+            <div class="card">
+                <h2 class="card-title" id="essay-form-title">📝 إضافة مقال</h2>
+                <input type="hidden" id="essay-edit-id" value="">
+
+                <div class="form-row">
+                    <label>عنوان المقال <span>*</span></label>
+                    <input type="text" id="ef-title" placeholder="مثال: في جماليات السرد العربي المعاصر">
+                </div>
+                <div class="form-row">
+                    <label>اسم الكاتب <span>*</span></label>
+                    <input type="text" id="ef-author" placeholder="مثال: د. صالح الطائي">
+                </div>
+                <div class="form-row">
+                    <label>التاريخ <span>*</span></label>
+                    <input type="date" id="ef-date">
+                </div>
+                <div class="form-row">
+                    <label>ملخص قصير <span>(يظهر على البطاقة — اختياري)</span></label>
+                    <textarea id="ef-abstract" placeholder="فقرة موجزة تعرّف بالمقال..." style="min-height:90px"></textarea>
+                </div>
+                <div class="form-row">
+                    <label>نص المقال كاملاً <span>*</span></label>
+                    <textarea id="ef-body" placeholder="الصق نص المقال هنا..." style="min-height:250px"></textarea>
+                </div>
+
+                <button class="btn-submit" id="essay-submit-btn" onclick="submitEssay()">✅ نشر المقال</button>
+                <button class="btn-cancel" id="essay-cancel-btn" style="display:none" onclick="cancelEssayEdit()">إلغاء</button>
+                <div class="progress-bar" id="essay-progress" style="display:none"><div class="progress-fill" id="essay-progress-fill"></div></div>
+                <div class="status" id="essay-form-status"></div>
+            </div>
+
+            <!-- List -->
+            <div class="card">
+                <h2 class="card-title">المقالات المنشورة</h2>
+                <div id="essay-list-loading" style="text-align:center;color:#666;padding:2rem">⏳ جارٍ تحميل القائمة...</div>
+                <div id="essay-list-content"></div>
+                <div class="status" id="essay-list-status"></div>
+            </div>
+        </div>
+
+    </div><!-- /.main -->
+</div><!-- /#app -->
 
 <script>
 // ════════════════════════════════════════════════
 const REPO   = 'AY-1899/dar-al-sard';
 const BRANCH = 'main';
 let TOKEN = '';
-let allBooks = [];   // parsed book objects kept in memory
-let dataFileSha = ''; // sha of data.js for updates
 
-// ── UTF-8 helpers ────────────────────────────────
+// In-memory state
+let allBooks   = [];  let booksSha   = '';
+let allNews    = [];  let newsSha    = '';
+let allEssays  = [];  let essaysSha  = '';
+
+// ── UTF-8 HELPERS ────────────────────────────────
 function b64ToUtf8(b64) {
     const bin = atob(b64.replace(/\n/g, ''));
     const bytes = new Uint8Array(bin.length);
@@ -366,32 +459,37 @@ function logout() {
 }
 window.addEventListener('load', () => {
     const saved = sessionStorage.getItem('dar_token');
-    if (saved) { TOKEN = saved; document.getElementById('login-screen').style.display = 'none'; document.getElementById('app').style.display = 'block'; }
+    if (saved) {
+        TOKEN = saved;
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('app').style.display = 'block';
+    }
     document.getElementById('token-input').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
-    setupDrop('img-drop', 'img-input', 'img-preview');
-    setupDrop('pdf-drop', 'pdf-input', 'pdf-preview');
+    setupDrop('img-drop',       'img-input', 'img-preview');
+    setupDrop('pdf-drop',       'pdf-input', 'pdf-preview');
+    setupDrop('news-img-drop',  'nf-img',    'news-img-preview');
 });
 
 // ── TABS ─────────────────────────────────────────
 function showTab(name) {
-    document.getElementById('tab-add').style.display  = name === 'add'  ? '' : 'none';
-    document.getElementById('tab-list').style.display = name === 'list' ? '' : 'none';
-    document.getElementById('tab-btn-add').classList.toggle('active',  name === 'add');
-    document.getElementById('tab-btn-list').classList.toggle('active', name === 'list');
-    if (name === 'list') loadBookList();
-    if (name === 'add') resetForm();
+    ['add','list','news','essays'].forEach(t => {
+        document.getElementById(`tab-${t}`).style.display      = t === name ? '' : 'none';
+        document.getElementById(`tab-btn-${t}`).classList.toggle('active', t === name);
+    });
+    if (name === 'add')    resetBookForm();
+    if (name === 'list')   loadBookList();
+    if (name === 'news')   { resetNewsForm(); loadNewsList(); }
+    if (name === 'essays') { resetEssayForm(); loadEssayList(); }
 }
 
-// ── FILE UPLOAD ───────────────────────────────────
+// ── FILE HELPERS ──────────────────────────────────
 function previewFile(input, previewId) {
     const preview = document.getElementById(previewId);
     if (!input.files || !input.files[0]) return;
     const file = input.files[0];
     if (file.type.startsWith('image/')) {
         const reader = new FileReader();
-        reader.onload = e => {
-            preview.innerHTML = `<p>✅ ${file.name}</p><img src="${e.target.result}">`;
-        };
+        reader.onload = e => { preview.innerHTML = `<p>✅ ${file.name}</p><img src="${e.target.result}">`; };
         reader.readAsDataURL(file);
     } else {
         preview.innerHTML = `<p>✅ ${file.name}</p>`;
@@ -400,7 +498,7 @@ function previewFile(input, previewId) {
 function setupDrop(zoneId, inputId, previewId) {
     const zone  = document.getElementById(zoneId);
     const input = document.getElementById(inputId);
-    zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
+    zone.addEventListener('dragover',  e => { e.preventDefault(); zone.classList.add('dragover'); });
     zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
     zone.addEventListener('drop', e => {
         e.preventDefault(); zone.classList.remove('dragover');
@@ -410,6 +508,14 @@ function setupDrop(zoneId, inputId, previewId) {
             input.files = dt.files;
             previewFile(input, previewId);
         }
+    });
+}
+function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = e => resolve(e.target.result.split(',')[1]);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
     });
 }
 
@@ -422,17 +528,13 @@ async function ghGet(path) {
     return r.json();
 }
 async function ghGetRaw(path) {
-    const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${encodeURIComponent(path)}?ref=${BRANCH}`, {
-        headers: { Authorization: `token ${TOKEN}` }
-    });
-    if (!r.ok) throw new Error(`فشل تحميل: ${path}`);
-    const j = await r.json();
+    const j = await ghGet(path);
     return { content: b64ToUtf8(j.content), sha: j.sha };
 }
-async function ghPut(path, content_b64, message, sha) {
+async function ghPut(encodedPath, content_b64, message, sha) {
     const body = { message, content: content_b64, branch: BRANCH };
     if (sha) body.sha = sha;
-    const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`, {
+    const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${encodedPath}`, {
         method: 'PUT',
         headers: { Authorization: `token ${TOKEN}`, 'Content-Type': 'application/json' },
         body: JSON.stringify(body)
@@ -440,112 +542,95 @@ async function ghPut(path, content_b64, message, sha) {
     if (!r.ok) { const err = await r.json(); throw new Error(err.message || 'فشل الرفع'); }
     return r.json();
 }
-function fileToBase64(file) {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = e => resolve(e.target.result.split(',')[1]);
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
-    });
+
+// ── PROGRESS / STATUS ─────────────────────────────
+function setProgress(fillId, pct) { document.getElementById(fillId).style.width = pct + '%'; }
+function showStatus(elId, msg, type) {
+    const el = document.getElementById(elId);
+    el.textContent = msg; el.className = `status ${type}`;
 }
 
-// ── PARSE data.js ─────────────────────────────────
+// ── ESCAPE HTML ───────────────────────────────────
+function escHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ════════════════════════════════════════════════
+//  BOOKS
+// ════════════════════════════════════════════════
+
 function parseBooks(js) {
-    // eval the array literal safely
     const match = js.match(/const\s+booksData\s*=\s*(\[[\s\S]*?\]);/);
     if (!match) throw new Error('تعذّر قراءة ملف البيانات.');
-    // eslint-disable-next-line no-eval
-    return eval(match[1]);
+    return eval(match[1]); // eslint-disable-line no-eval
 }
-
-// ── SERIALIZE data.js ─────────────────────────────
 function serializeBooks(books) {
     const entries = books.map(b => {
-        const esc = s => String(s).replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n');
-        return `    {\n        id: ${b.id},\n        title: "${esc(b.title)}",\n        author: "${esc(b.author)}",\n        year: "${esc(b.year)}",\n        image: "${esc(b.image)}",\n        frontCoverSide: "${esc(b.frontCoverSide)}",\n        pdf: "${esc(b.pdf || '')}",\n        price: "${esc(b.price || '')}",\n        description: "${esc(b.description || '')}"\n    }`;
+        const esc = s => String(s).replace(/\\/g,'\\\\').replace(/"/g,'\\"').replace(/\n/g,'\\n');
+        return `    {\n        id: ${b.id},\n        title: "${esc(b.title)}",\n        author: "${esc(b.author)}",\n        year: "${esc(b.year)}",\n        image: "${esc(b.image)}",\n        frontCoverSide: "${esc(b.frontCoverSide)}",\n        pdf: "${esc(b.pdf||'')}",\n        price: "${esc(b.price||'')}",\n        description: "${esc(b.description||'')}"\n    }`;
     });
     return `const booksData = [\n${entries.join(',\n')}\n];\n`;
 }
 
-// ── PROGRESS / STATUS ─────────────────────────────
-function setProgress(pct) { document.getElementById('progress-fill').style.width = pct + '%'; }
-function showStatus(msg, type) {
-    const el = document.getElementById('form-status');
-    el.textContent = msg; el.className = `status ${type}`;
-}
-
-// ── SUBMIT (ADD or SAVE EDIT) ─────────────────────
 async function submitBook() {
     const editId = document.getElementById('edit-id').value;
     const isEdit = editId !== '';
-
-    const title   = document.getElementById('f-title').value.trim();
-    const author  = document.getElementById('f-author').value.trim();
-    const year    = document.getElementById('f-year').value.trim() || '2026';
-    const price   = document.getElementById('f-price').value.trim();
-    const cover   = document.querySelector('input[name=cover]:checked')?.value || 'left';
-    const desc    = document.getElementById('f-desc').value.trim();
+    const title  = document.getElementById('f-title').value.trim();
+    const author = document.getElementById('f-author').value.trim();
+    const year   = document.getElementById('f-year').value.trim() || '2026';
+    const price  = document.getElementById('f-price').value.trim();
+    const cover  = document.querySelector('input[name=cover]:checked')?.value || 'left';
+    const desc   = document.getElementById('f-desc').value.trim();
     const imgFile = document.getElementById('img-input').files[0];
     const pdfFile = document.getElementById('pdf-input').files[0];
 
-    if (!title)              return showStatus('⚠️ الرجاء إدخال عنوان الكتاب.', 'error');
-    if (!author)             return showStatus('⚠️ الرجاء إدخال اسم المؤلف.', 'error');
-    if (!isEdit && !imgFile) return showStatus('⚠️ الرجاء اختيار صورة الغلاف.', 'error');
+    if (!title)              return showStatus('book-status','⚠️ الرجاء إدخال عنوان الكتاب.','error');
+    if (!author)             return showStatus('book-status','⚠️ الرجاء إدخال اسم المؤلف.','error');
+    if (!isEdit && !imgFile) return showStatus('book-status','⚠️ الرجاء اختيار صورة الغلاف.','error');
 
     const btn = document.getElementById('submit-btn');
     btn.disabled = true;
-    document.getElementById('progress-bar').style.display = 'block';
-    setProgress(5);
-    showStatus('⏳ جارٍ رفع الملفات...', 'loading');
+    document.getElementById('book-progress').style.display = 'block';
+    setProgress('book-progress-fill', 5);
+    showStatus('book-status','⏳ جارٍ رفع الملفات...','loading');
 
     try {
-        // ── 1. Reload fresh data.js ──
         const { content: js, sha } = await ghGetRaw('js/data.js');
-        dataFileSha = sha;
+        booksSha = sha;
         allBooks = parseBooks(js);
-        setProgress(15);
+        setProgress('book-progress-fill', 15);
 
-        // ── 2. Image upload (required for new, optional for edit) ──
         let imgPath;
         if (imgFile) {
-            const imgExt  = imgFile.name.split('.').pop().toLowerCase();
-            const imgName = `${title} - ${author}.${imgExt}`;
-            imgPath = `assets/${imgName}`;
-            showStatus('⏳ جارٍ رفع صورة الغلاف...', 'loading');
+            const ext  = imgFile.name.split('.').pop().toLowerCase();
+            const name = `${title} - ${author}.${ext}`;
+            imgPath = `assets/${name}`;
+            showStatus('book-status','⏳ جارٍ رفع صورة الغلاف...','loading');
             const imgB64 = await fileToBase64(imgFile);
-            setProgress(35);
-            let existSha;
-            try { existSha = (await ghGet(imgPath)).sha; } catch {}
+            setProgress('book-progress-fill', 35);
+            let existSha; try { existSha = (await ghGet(imgPath)).sha; } catch {}
             await ghPut(encodeURIComponent(imgPath), imgB64, `غلاف: ${title}`, existSha);
-            setProgress(55);
+            setProgress('book-progress-fill', 55);
         } else if (isEdit) {
-            // keep existing image
-            const existing = allBooks.find(b => b.id === parseInt(editId));
-            imgPath = existing ? existing.image : '';
+            imgPath = allBooks.find(b => b.id === parseInt(editId))?.image || '';
         }
 
-        // ── 3. PDF upload (optional) ──
         let pdfPath;
         if (pdfFile) {
-            const pdfName = `${title}.pdf`;
-            pdfPath = `assets/${pdfName}`;
-            showStatus('⏳ جارٍ رفع ملف PDF...', 'loading');
+            pdfPath = `assets/${title}.pdf`;
+            showStatus('book-status','⏳ جارٍ رفع ملف PDF...','loading');
             const pdfB64 = await fileToBase64(pdfFile);
-            setProgress(70);
-            let pdfSha;
-            try { pdfSha = (await ghGet(pdfPath)).sha; } catch {}
+            setProgress('book-progress-fill', 70);
+            let pdfSha; try { pdfSha = (await ghGet(pdfPath)).sha; } catch {}
             await ghPut(encodeURIComponent(pdfPath), pdfB64, `PDF: ${title}`, pdfSha);
-            setProgress(80);
+            setProgress('book-progress-fill', 80);
         } else if (isEdit) {
-            // keep existing pdf
-            const existing = allBooks.find(b => b.id === parseInt(editId));
-            pdfPath = existing ? (existing.pdf || '') : '';
+            pdfPath = allBooks.find(b => b.id === parseInt(editId))?.pdf || '';
         } else {
             pdfPath = '';
         }
 
-        // ── 4. Update books array ──
-        showStatus('⏳ جارٍ تحديث قاعدة البيانات...', 'loading');
+        showStatus('book-status','⏳ جارٍ تحديث قاعدة البيانات...','loading');
         const bookData = { title, author, year, image: imgPath, frontCoverSide: cover, pdf: pdfPath, price, description: desc };
 
         if (isEdit) {
@@ -556,45 +641,32 @@ async function submitBook() {
             const maxId = Math.max(0, ...allBooks.map(b => b.id));
             allBooks.push({ id: maxId + 1, ...bookData });
         }
-        setProgress(90);
+        setProgress('book-progress-fill', 90);
 
-        // ── 5. Write data.js ──
         const newJs  = serializeBooks(allBooks);
-        const newB64 = utf8ToB64(newJs);
-        await ghPut('js%2Fdata.js', newB64,
-            isEdit ? `تعديل كتاب: ${title}` : `إضافة كتاب: ${title} — ${author}`,
-            dataFileSha);
-        setProgress(100);
+        await ghPut('js%2Fdata.js', utf8ToB64(newJs),
+            isEdit ? `تعديل كتاب: ${title}` : `إضافة كتاب: ${title} — ${author}`, booksSha);
+        setProgress('book-progress-fill', 100);
 
-        showStatus(
-            isEdit
-                ? `✅ تم حفظ التغييرات على كتاب "${title}" بنجاح! سيظهر على الموقع خلال دقيقة.`
-                : `✅ تمت إضافة كتاب "${title}" بنجاح! سيظهر على الموقع خلال دقيقة.`,
-            'success'
-        );
+        showStatus('book-status',
+            isEdit ? `✅ تم حفظ التغييرات على كتاب "${title}" بنجاح!` : `✅ تمت إضافة كتاب "${title}" بنجاح!`,
+            'success');
 
-        resetForm();
-        if (isEdit) {
-            setTimeout(() => showTab('list'), 1500);
-        }
+        resetBookForm();
+        if (isEdit) setTimeout(() => showTab('list'), 1500);
 
     } catch (err) {
-        showStatus(`❌ حدث خطأ: ${err.message}`, 'error');
-        console.error(err);
+        showStatus('book-status', `❌ حدث خطأ: ${err.message}`, 'error');
     } finally {
         btn.disabled = false;
-        setTimeout(() => { document.getElementById('progress-bar').style.display = 'none'; setProgress(0); }, 2000);
+        setTimeout(() => { document.getElementById('book-progress').style.display = 'none'; setProgress('book-progress-fill',0); }, 2000);
     }
 }
 
-// ── FORM HELPERS ──────────────────────────────────
-function resetForm() {
+function resetBookForm() {
     document.getElementById('edit-id').value = '';
-    document.getElementById('f-title').value  = '';
-    document.getElementById('f-author').value = '';
-    document.getElementById('f-year').value   = '2026';
-    document.getElementById('f-price').value  = '';
-    document.getElementById('f-desc').value   = '';
+    ['f-title','f-author','f-price','f-desc'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('f-year').value = '2026';
     document.getElementById('img-input').value = '';
     document.getElementById('pdf-input').value = '';
     document.getElementById('img-preview').innerHTML = '';
@@ -603,100 +675,434 @@ function resetForm() {
     document.getElementById('pdf-current').style.display = 'none';
     document.getElementById('img-label-hint').textContent = '*';
     document.querySelector('input[name=cover][value=left]').checked = true;
-    document.getElementById('form-title').textContent    = '➕ إضافة كتاب جديد';
-    document.getElementById('submit-btn').textContent    = '✅ إضافة الكتاب إلى الموقع';
+    document.getElementById('book-form-title').textContent = '➕ إضافة كتاب جديد';
+    document.getElementById('submit-btn').textContent = '✅ إضافة الكتاب إلى الموقع';
     document.getElementById('cancel-edit-btn').style.display = 'none';
+    document.getElementById('book-status').className = 'status';
 }
 
-function cancelEdit() {
-    resetForm();
-    showTab('list');
-}
+function cancelBookEdit() { resetBookForm(); showTab('list'); }
 
-// ── EDIT BOOK ─────────────────────────────────────
 function editBook(id) {
     const book = allBooks.find(b => b.id === id);
     if (!book) return;
-
-    resetForm();
-    document.getElementById('edit-id').value    = id;
-    document.getElementById('f-title').value    = book.title  || '';
-    document.getElementById('f-author').value   = book.author || '';
-    document.getElementById('f-year').value     = book.year   || '2026';
-    document.getElementById('f-price').value    = book.price  || '';
-    document.getElementById('f-desc').value     = (book.description || '').replace(/\\n/g, '\n');
-
-    // cover side
-    const coverVal = book.frontCoverSide || 'left';
-    const coverEl = document.querySelector(`input[name=cover][value="${coverVal}"]`);
+    resetBookForm();
+    document.getElementById('edit-id').value  = id;
+    document.getElementById('f-title').value  = book.title  || '';
+    document.getElementById('f-author').value = book.author || '';
+    document.getElementById('f-year').value   = book.year   || '2026';
+    document.getElementById('f-price').value  = book.price  || '';
+    document.getElementById('f-desc').value   = (book.description || '').replace(/\\n/g, '\n');
+    const coverEl = document.querySelector(`input[name=cover][value="${book.frontCoverSide||'left'}"]`);
     if (coverEl) coverEl.checked = true;
-
-    // show current image & pdf
     if (book.image) {
-        document.getElementById('img-current-name').textContent = book.image.replace('assets/', '');
+        document.getElementById('img-current-name').textContent = book.image.replace('assets/','');
         document.getElementById('img-current').style.display = 'block';
         document.getElementById('img-label-hint').textContent = '(اختياري عند التعديل)';
     }
     if (book.pdf) {
-        document.getElementById('pdf-current-name').textContent = book.pdf.replace('assets/', '');
+        document.getElementById('pdf-current-name').textContent = book.pdf.replace('assets/','');
         document.getElementById('pdf-current').style.display = 'block';
     }
-
-    document.getElementById('form-title').textContent    = `✏️ تعديل: ${book.title}`;
-    document.getElementById('submit-btn').textContent    = '💾 حفظ التغييرات';
+    document.getElementById('book-form-title').textContent = `✏️ تعديل: ${book.title}`;
+    document.getElementById('submit-btn').textContent = '💾 حفظ التغييرات';
     document.getElementById('cancel-edit-btn').style.display = '';
-
-    showTab('add');
+    // Switch to add tab WITHOUT resetting (bypass showTab's resetBookForm)
+    document.getElementById('tab-add').style.display  = '';
+    document.getElementById('tab-list').style.display = 'none';
+    document.getElementById('tab-news').style.display = 'none';
+    document.getElementById('tab-essays').style.display = 'none';
+    ['add','list','news','essays'].forEach(t =>
+        document.getElementById(`tab-btn-${t}`).classList.toggle('active', t === 'add'));
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// ── BOOK LIST ─────────────────────────────────────
+async function deleteBook(id) {
+    const book = allBooks.find(b => b.id === id);
+    if (!book) return;
+    if (!confirm(`هل أنت متأكد من حذف كتاب "${book.title}"؟\nهذا الإجراء لا يمكن التراجع عنه.`)) return;
+
+    showStatus('book-list-status', '⏳ جارٍ حذف الكتاب...', 'loading');
+    try {
+        const { content: js, sha } = await ghGetRaw('js/data.js');
+        booksSha = sha;
+        allBooks = parseBooks(js).filter(b => b.id !== id);
+        const newJs = serializeBooks(allBooks);
+        await ghPut('js%2Fdata.js', utf8ToB64(newJs), `حذف كتاب: ${book.title}`, booksSha);
+        showStatus('book-list-status', `✅ تم حذف كتاب "${book.title}" بنجاح.`, 'success');
+        renderBookList(allBooks);
+    } catch (err) {
+        showStatus('book-list-status', `❌ فشل الحذف: ${err.message}`, 'error');
+    }
+}
+
 async function loadBookList() {
     document.getElementById('book-list-loading').style.display = 'block';
     document.getElementById('book-list-content').innerHTML = '';
-    document.getElementById('list-search').value = '';
+    document.getElementById('book-list-search').value = '';
+    document.getElementById('book-list-status').className = 'status';
     try {
         const { content: js, sha } = await ghGetRaw('js/data.js');
-        dataFileSha = sha;
+        booksSha = sha;
         allBooks = parseBooks(js);
-        renderList(allBooks);
+        renderBookList(allBooks);
     } catch(err) {
         document.getElementById('book-list-loading').innerHTML =
             `<p style="color:#c0392b">❌ فشل تحميل القائمة: ${err.message}</p>`;
     }
 }
 
-function renderList(books) {
+function renderBookList(books) {
     document.getElementById('book-list-loading').style.display = 'none';
     if (!books.length) {
         document.getElementById('book-list-content').innerHTML = '<p style="color:#999;text-align:center;padding:2rem">لا توجد كتب مطابقة.</p>';
         return;
     }
-    const html = books.map(b => `
-        <div class="book-list-item">
-            <span class="bnum">${b.id}</span>
-            <div class="binfo">
-                <div class="btitle">${escHtml(b.title)}</div>
-                <div class="bauthor">${escHtml(b.author)}</div>
+    const html = `<p class="list-count">إجمالي الكتب: <strong>${allBooks.length}</strong></p>` +
+        books.map(b => `
+        <div class="list-item">
+            <span class="lnum">${b.id}</span>
+            <div class="linfo">
+                <div class="ltitle">${escHtml(b.title)}</div>
+                <div class="lsub">${escHtml(b.author)}</div>
             </div>
-            ${b.pdf ? '<span class="bpdf">PDF ✓</span>' : '<span class="bno-pdf">بدون PDF</span>'}
-            <button class="btn-edit" onclick="editBook(${b.id})">✏️ تعديل</button>
-        </div>
-    `).join('');
-    document.getElementById('book-list-content').innerHTML =
-        `<p style="color:#888;margin-bottom:1rem;font-size:.9rem">إجمالي الكتب: <strong style="color:#002366">${allBooks.length}</strong></p>` + html;
+            ${b.pdf ? '<span class="lbadge lbadge-green">PDF ✓</span>' : '<span class="lbadge lbadge-yellow">بدون PDF</span>'}
+            <button class="btn-edit"   onclick="editBook(${b.id})">✏️ تعديل</button>
+            <button class="btn-delete" onclick="deleteBook(${b.id})">🗑️ حذف</button>
+        </div>`).join('');
+    document.getElementById('book-list-content').innerHTML = html;
 }
 
-function filterList() {
-    const q = document.getElementById('list-search').value.trim().toLowerCase();
-    if (!q) { renderList(allBooks); return; }
-    renderList(allBooks.filter(b =>
-        b.title.toLowerCase().includes(q) || b.author.toLowerCase().includes(q)
-    ));
+function filterBookList() {
+    const q = document.getElementById('book-list-search').value.trim().toLowerCase();
+    renderBookList(q ? allBooks.filter(b =>
+        b.title.toLowerCase().includes(q) || b.author.toLowerCase().includes(q)) : allBooks);
 }
 
-function escHtml(s) {
-    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+// ════════════════════════════════════════════════
+//  NEWS
+// ════════════════════════════════════════════════
+
+function parseNews(js) {
+    const match = js.match(/const\s+newsData\s*=\s*(\[[\s\S]*?\]);/);
+    if (!match) throw new Error('تعذّر قراءة ملف الأخبار.');
+    return eval(match[1]); // eslint-disable-line no-eval
+}
+function serializeNews(news) {
+    const entries = news.map(n => {
+        const esc = s => String(s).replace(/\\/g,'\\\\').replace(/"/g,'\\"').replace(/\n/g,'\\n');
+        return `    {\n        id: ${n.id},\n        title: "${esc(n.title)}",\n        date: "${esc(n.date)}",\n        category: "${esc(n.category||'')}",\n        image: "${esc(n.image||'')}",\n        body: "${esc(n.body||'')}"\n    }`;
+    });
+    return `const newsData = [\n${entries.join(',\n')}\n];\n`;
+}
+
+async function submitNews() {
+    const editId = document.getElementById('news-edit-id').value;
+    const isEdit = editId !== '';
+    const title  = document.getElementById('nf-title').value.trim();
+    const date   = document.getElementById('nf-date').value;
+    const cat    = document.getElementById('nf-cat').value;
+    const body   = document.getElementById('nf-body').value.trim();
+    const imgFile = document.getElementById('nf-img').files[0];
+
+    if (!title) return showStatus('news-form-status','⚠️ الرجاء إدخال عنوان الخبر.','error');
+    if (!date)  return showStatus('news-form-status','⚠️ الرجاء اختيار تاريخ.','error');
+    if (!body)  return showStatus('news-form-status','⚠️ الرجاء كتابة تفاصيل الخبر.','error');
+    if (!isEdit && !imgFile) return showStatus('news-form-status','⚠️ الرجاء اختيار صورة للخبر.','error');
+
+    const btn = document.getElementById('news-submit-btn');
+    btn.disabled = true;
+    document.getElementById('news-progress').style.display = 'block';
+    setProgress('news-progress-fill', 5);
+    showStatus('news-form-status','⏳ جارٍ النشر...','loading');
+
+    try {
+        const { content: js, sha } = await ghGetRaw('js/news.js');
+        newsSha = sha;
+        allNews = parseNews(js);
+        setProgress('news-progress-fill', 20);
+
+        let imgPath;
+        if (imgFile) {
+            const ext  = imgFile.name.split('.').pop().toLowerCase();
+            imgPath = `assets/news-${Date.now()}.${ext}`;
+            const imgB64 = await fileToBase64(imgFile);
+            setProgress('news-progress-fill', 45);
+            let existSha; try { existSha = (await ghGet(imgPath)).sha; } catch {}
+            await ghPut(encodeURIComponent(imgPath), imgB64, `صورة خبر: ${title}`, existSha);
+            setProgress('news-progress-fill', 65);
+        } else if (isEdit) {
+            imgPath = allNews.find(n => n.id === parseInt(editId))?.image || '';
+        } else {
+            imgPath = '';
+        }
+
+        const newsData = { title, date, category: cat, image: imgPath, body };
+        if (isEdit) {
+            const idx = allNews.findIndex(n => n.id === parseInt(editId));
+            if (idx === -1) throw new Error('لم يُعثر على الخبر.');
+            allNews[idx] = { ...allNews[idx], ...newsData };
+        } else {
+            const maxId = Math.max(0, ...allNews.map(n => n.id));
+            allNews.push({ id: maxId + 1, ...newsData });
+        }
+        setProgress('news-progress-fill', 80);
+
+        const newJs = serializeNews(allNews);
+        await ghPut('js%2Fnews.js', utf8ToB64(newJs),
+            isEdit ? `تعديل خبر: ${title}` : `إضافة خبر: ${title}`, newsSha);
+        setProgress('news-progress-fill', 100);
+
+        showStatus('news-form-status',
+            isEdit ? `✅ تم تحديث الخبر بنجاح!` : `✅ تم نشر الخبر بنجاح!`, 'success');
+        resetNewsForm();
+        renderNewsList(allNews);
+
+    } catch (err) {
+        showStatus('news-form-status', `❌ حدث خطأ: ${err.message}`, 'error');
+    } finally {
+        btn.disabled = false;
+        setTimeout(() => { document.getElementById('news-progress').style.display = 'none'; setProgress('news-progress-fill',0); }, 2000);
+    }
+}
+
+function resetNewsForm() {
+    document.getElementById('news-edit-id').value = '';
+    ['nf-title','nf-body'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('nf-date').value = '';
+    document.getElementById('nf-cat').value  = 'مؤتمر';
+    document.getElementById('nf-img').value  = '';
+    document.getElementById('news-img-preview').innerHTML = '';
+    document.getElementById('news-img-current').style.display = 'none';
+    document.getElementById('news-img-hint').textContent = '*';
+    document.getElementById('news-form-title').textContent = '📰 إضافة خبر أو فعالية';
+    document.getElementById('news-submit-btn').textContent = '✅ نشر الخبر';
+    document.getElementById('news-cancel-btn').style.display = 'none';
+    document.getElementById('news-form-status').className = 'status';
+}
+function cancelNewsEdit() { resetNewsForm(); }
+
+function editNews(id) {
+    const n = allNews.find(x => x.id === id);
+    if (!n) return;
+    resetNewsForm();
+    document.getElementById('news-edit-id').value = id;
+    document.getElementById('nf-title').value     = n.title || '';
+    document.getElementById('nf-date').value      = n.date  || '';
+    document.getElementById('nf-cat').value       = n.category || 'مؤتمر';
+    document.getElementById('nf-body').value      = (n.body || '').replace(/\\n/g, '\n');
+    if (n.image) {
+        document.getElementById('news-img-current-name').textContent = n.image;
+        document.getElementById('news-img-current').style.display = 'block';
+        document.getElementById('news-img-hint').textContent = '(اختياري عند التعديل)';
+    }
+    document.getElementById('news-form-title').textContent = `✏️ تعديل: ${n.title}`;
+    document.getElementById('news-submit-btn').textContent = '💾 حفظ التغييرات';
+    document.getElementById('news-cancel-btn').style.display = '';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+async function deleteNews(id) {
+    const n = allNews.find(x => x.id === id);
+    if (!n) return;
+    if (!confirm(`هل أنت متأكد من حذف الخبر "${n.title}"؟`)) return;
+    showStatus('news-list-status','⏳ جارٍ الحذف...','loading');
+    try {
+        const { content: js, sha } = await ghGetRaw('js/news.js');
+        newsSha = sha;
+        allNews = parseNews(js).filter(x => x.id !== id);
+        await ghPut('js%2Fnews.js', utf8ToB64(serializeNews(allNews)), `حذف خبر: ${n.title}`, newsSha);
+        showStatus('news-list-status',`✅ تم حذف الخبر بنجاح.`,'success');
+        renderNewsList(allNews);
+    } catch (err) {
+        showStatus('news-list-status',`❌ فشل الحذف: ${err.message}`,'error');
+    }
+}
+
+async function loadNewsList() {
+    document.getElementById('news-list-loading').style.display = 'block';
+    document.getElementById('news-list-content').innerHTML = '';
+    document.getElementById('news-list-status').className = 'status';
+    try {
+        const { content: js, sha } = await ghGetRaw('js/news.js');
+        newsSha = sha;
+        allNews = parseNews(js);
+        renderNewsList(allNews);
+    } catch(err) {
+        document.getElementById('news-list-loading').innerHTML =
+            `<p style="color:#c0392b">❌ فشل التحميل: ${err.message}</p>`;
+    }
+}
+
+function renderNewsList(news) {
+    document.getElementById('news-list-loading').style.display = 'none';
+    if (!news.length) {
+        document.getElementById('news-list-content').innerHTML = '<p style="color:#999;text-align:center;padding:2rem">لا توجد أخبار منشورة حالياً.</p>';
+        return;
+    }
+    const sorted = [...news].sort((a,b) => (b.date||'').localeCompare(a.date||''));
+    document.getElementById('news-list-content').innerHTML =
+        `<p class="list-count">إجمالي الأخبار: <strong>${news.length}</strong></p>` +
+        sorted.map(n => `
+        <div class="list-item">
+            <div class="linfo">
+                <div class="ltitle">${escHtml(n.title)}</div>
+                <div class="lsub">${escHtml(n.date||'')} — ${escHtml(n.category||'')}</div>
+            </div>
+            <button class="btn-edit"   onclick="editNews(${n.id})">✏️ تعديل</button>
+            <button class="btn-delete" onclick="deleteNews(${n.id})">🗑️ حذف</button>
+        </div>`).join('');
+}
+
+// ════════════════════════════════════════════════
+//  ESSAYS
+// ════════════════════════════════════════════════
+
+function parseEssays(js) {
+    const match = js.match(/const\s+essaysData\s*=\s*(\[[\s\S]*?\]);/);
+    if (!match) throw new Error('تعذّر قراءة ملف المقالات.');
+    return eval(match[1]); // eslint-disable-line no-eval
+}
+function serializeEssays(essays) {
+    const entries = essays.map(e => {
+        const esc = s => String(s).replace(/\\/g,'\\\\').replace(/"/g,'\\"').replace(/\n/g,'\\n');
+        return `    {\n        id: ${e.id},\n        title: "${esc(e.title)}",\n        author: "${esc(e.author)}",\n        date: "${esc(e.date)}",\n        abstract: "${esc(e.abstract||'')}",\n        body: "${esc(e.body||'')}"\n    }`;
+    });
+    return `const essaysData = [\n${entries.join(',\n')}\n];\n`;
+}
+
+async function submitEssay() {
+    const editId   = document.getElementById('essay-edit-id').value;
+    const isEdit   = editId !== '';
+    const title    = document.getElementById('ef-title').value.trim();
+    const author   = document.getElementById('ef-author').value.trim();
+    const date     = document.getElementById('ef-date').value;
+    const abstract = document.getElementById('ef-abstract').value.trim();
+    const body     = document.getElementById('ef-body').value.trim();
+
+    if (!title)  return showStatus('essay-form-status','⚠️ الرجاء إدخال عنوان المقال.','error');
+    if (!author) return showStatus('essay-form-status','⚠️ الرجاء إدخال اسم الكاتب.','error');
+    if (!date)   return showStatus('essay-form-status','⚠️ الرجاء اختيار تاريخ.','error');
+    if (!body)   return showStatus('essay-form-status','⚠️ الرجاء كتابة نص المقال.','error');
+
+    const btn = document.getElementById('essay-submit-btn');
+    btn.disabled = true;
+    document.getElementById('essay-progress').style.display = 'block';
+    setProgress('essay-progress-fill', 10);
+    showStatus('essay-form-status','⏳ جارٍ النشر...','loading');
+
+    try {
+        const { content: js, sha } = await ghGetRaw('js/essays.js');
+        essaysSha = sha;
+        allEssays = parseEssays(js);
+        setProgress('essay-progress-fill', 40);
+
+        const essayData = { title, author, date, abstract, body };
+        if (isEdit) {
+            const idx = allEssays.findIndex(e => e.id === parseInt(editId));
+            if (idx === -1) throw new Error('لم يُعثر على المقال.');
+            allEssays[idx] = { ...allEssays[idx], ...essayData };
+        } else {
+            const maxId = Math.max(0, ...allEssays.map(e => e.id));
+            allEssays.push({ id: maxId + 1, ...essayData });
+        }
+        setProgress('essay-progress-fill', 70);
+
+        const newJs = serializeEssays(allEssays);
+        await ghPut('js%2Fessays.js', utf8ToB64(newJs),
+            isEdit ? `تعديل مقال: ${title}` : `إضافة مقال: ${title} — ${author}`, essaysSha);
+        setProgress('essay-progress-fill', 100);
+
+        showStatus('essay-form-status',
+            isEdit ? `✅ تم تحديث المقال بنجاح!` : `✅ تم نشر المقال بنجاح!`, 'success');
+        resetEssayForm();
+        renderEssayList(allEssays);
+
+    } catch (err) {
+        showStatus('essay-form-status', `❌ حدث خطأ: ${err.message}`, 'error');
+    } finally {
+        btn.disabled = false;
+        setTimeout(() => { document.getElementById('essay-progress').style.display = 'none'; setProgress('essay-progress-fill',0); }, 2000);
+    }
+}
+
+function resetEssayForm() {
+    document.getElementById('essay-edit-id').value = '';
+    ['ef-title','ef-author','ef-abstract','ef-body'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('ef-date').value = '';
+    document.getElementById('essay-form-title').textContent = '📝 إضافة مقال';
+    document.getElementById('essay-submit-btn').textContent = '✅ نشر المقال';
+    document.getElementById('essay-cancel-btn').style.display = 'none';
+    document.getElementById('essay-form-status').className = 'status';
+}
+function cancelEssayEdit() { resetEssayForm(); }
+
+function editEssay(id) {
+    const e = allEssays.find(x => x.id === id);
+    if (!e) return;
+    resetEssayForm();
+    document.getElementById('essay-edit-id').value = id;
+    document.getElementById('ef-title').value      = e.title    || '';
+    document.getElementById('ef-author').value     = e.author   || '';
+    document.getElementById('ef-date').value       = e.date     || '';
+    document.getElementById('ef-abstract').value   = (e.abstract|| '').replace(/\\n/g, '\n');
+    document.getElementById('ef-body').value       = (e.body    || '').replace(/\\n/g, '\n');
+    document.getElementById('essay-form-title').textContent  = `✏️ تعديل: ${e.title}`;
+    document.getElementById('essay-submit-btn').textContent  = '💾 حفظ التغييرات';
+    document.getElementById('essay-cancel-btn').style.display = '';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+async function deleteEssay(id) {
+    const e = allEssays.find(x => x.id === id);
+    if (!e) return;
+    if (!confirm(`هل أنت متأكد من حذف المقال "${e.title}"؟`)) return;
+    showStatus('essay-list-status','⏳ جارٍ الحذف...','loading');
+    try {
+        const { content: js, sha } = await ghGetRaw('js/essays.js');
+        essaysSha = sha;
+        allEssays = parseEssays(js).filter(x => x.id !== id);
+        await ghPut('js%2Fessays.js', utf8ToB64(serializeEssays(allEssays)), `حذف مقال: ${e.title}`, essaysSha);
+        showStatus('essay-list-status',`✅ تم حذف المقال بنجاح.`,'success');
+        renderEssayList(allEssays);
+    } catch (err) {
+        showStatus('essay-list-status',`❌ فشل الحذف: ${err.message}`,'error');
+    }
+}
+
+async function loadEssayList() {
+    document.getElementById('essay-list-loading').style.display = 'block';
+    document.getElementById('essay-list-content').innerHTML = '';
+    document.getElementById('essay-list-status').className = 'status';
+    try {
+        const { content: js, sha } = await ghGetRaw('js/essays.js');
+        essaysSha = sha;
+        allEssays = parseEssays(js);
+        renderEssayList(allEssays);
+    } catch(err) {
+        document.getElementById('essay-list-loading').innerHTML =
+            `<p style="color:#c0392b">❌ فشل التحميل: ${err.message}</p>`;
+    }
+}
+
+function renderEssayList(essays) {
+    document.getElementById('essay-list-loading').style.display = 'none';
+    if (!essays.length) {
+        document.getElementById('essay-list-content').innerHTML = '<p style="color:#999;text-align:center;padding:2rem">لا توجد مقالات منشورة حالياً.</p>';
+        return;
+    }
+    const sorted = [...essays].sort((a,b) => (b.date||'').localeCompare(a.date||''));
+    document.getElementById('essay-list-content').innerHTML =
+        `<p class="list-count">إجمالي المقالات: <strong>${essays.length}</strong></p>` +
+        sorted.map(e => `
+        <div class="list-item">
+            <div class="linfo">
+                <div class="ltitle">${escHtml(e.title)}</div>
+                <div class="lsub">✍️ ${escHtml(e.author)} — ${escHtml(e.date||'')}</div>
+            </div>
+            <button class="btn-edit"   onclick="editEssay(${e.id})">✏️ تعديل</button>
+            <button class="btn-delete" onclick="deleteEssay(${e.id})">🗑️ حذف</button>
+        </div>`).join('');
 }
 </script>
 </body>

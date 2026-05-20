@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مقالات الكتّاب | دار السرد</title>
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* ── ESSAYS GRID ── */
+        .essays-section { padding: 4rem 0 5rem; }
+        .essays-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2.5rem;
+        }
+        .essay-card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0,35,102,.08);
+            padding: 2rem;
+            cursor: pointer;
+            transition: transform .3s, box-shadow .3s;
+            display: flex; flex-direction: column; gap: .7rem;
+            border-right: 5px solid #002366;
+        }
+        .essay-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 32px rgba(0,35,102,.16);
+        }
+        .essay-title {
+            font-size: 1.1rem; font-weight: 800;
+            color: #002366; line-height: 1.5;
+        }
+        .essay-meta {
+            font-size: .85rem; color: #888;
+            display: flex; gap: 1rem; flex-wrap: wrap;
+        }
+        .essay-author { font-weight: 700; color: #555; }
+        .essay-abstract {
+            font-size: .92rem; color: #555;
+            line-height: 1.8;
+        }
+        .essay-read-more {
+            font-size: .88rem; font-weight: 700;
+            color: #002366; margin-top: .3rem;
+            align-self: flex-start;
+        }
+
+        .empty-state {
+            text-align: center; padding: 5rem 2rem; color: #aaa;
+            grid-column: 1 / -1;
+        }
+        .empty-state .icon { font-size: 4rem; margin-bottom: 1rem; }
+        .empty-state p { font-size: 1.1rem; }
+
+        /* ── MODAL ── */
+        .essay-modal-overlay {
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,.6);
+            z-index: 1000; display: flex;
+            align-items: center; justify-content: center;
+            padding: 1.5rem;
+            opacity: 0; pointer-events: none;
+            transition: opacity .25s;
+        }
+        .essay-modal-overlay.active { opacity: 1; pointer-events: all; }
+        .essay-modal {
+            background: #fff; border-radius: 20px;
+            max-width: 750px; width: 100%;
+            max-height: 90vh; overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,.3);
+            transform: translateY(20px);
+            transition: transform .25s;
+            padding: 2.5rem;
+        }
+        .essay-modal-overlay.active .essay-modal { transform: translateY(0); }
+        .em-label {
+            display: inline-block; background: #f0f4f8;
+            color: #002366; font-size: .8rem; font-weight: 700;
+            padding: .25rem .8rem; border-radius: 20px; margin-bottom: 1.2rem;
+        }
+        .em-title {
+            font-size: 1.5rem; font-weight: 800;
+            color: #002366; line-height: 1.4; margin-bottom: .6rem;
+        }
+        .em-meta { font-size: .88rem; color: #999; margin-bottom: 2rem; }
+        .em-abstract {
+            background: #f8f9fa; border-right: 4px solid #002366;
+            padding: 1rem 1.2rem; border-radius: 8px;
+            font-size: .95rem; color: #444; line-height: 1.9;
+            margin-bottom: 2rem; font-style: italic;
+        }
+        .em-divider {
+            border: none; border-top: 2px solid #f0f4f8;
+            margin-bottom: 2rem;
+        }
+        .em-body {
+            font-size: 1rem; color: #333;
+            line-height: 2.1; white-space: pre-wrap;
+        }
+        .em-close {
+            display: block; margin: 2.5rem auto 0;
+            padding: .7rem 2.5rem; background: #002366; color: #fff;
+            border: none; border-radius: 10px; font-family: inherit;
+            font-size: 1rem; font-weight: 700; cursor: pointer;
+        }
+        .em-close:hover { background: #1a438e; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="container nav-content">
+        <a href="index.html" class="brand">
+            <img src="assets/logo.png" alt="شعار دار السرد" class="logo-img" onerror="this.style.display='none'">
+            <span class="brand-text">دار السرد</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">الرئيسية</a></li>
+            <li><a href="index.html#books">الكتب</a></li>
+            <li><a href="news.html">الأخبار</a></li>
+            <li><a href="essays.html" class="active">المقالات</a></li>
+            <li><a href="index.html#contact">اتصل بنا</a></li>
+        </ul>
+    </div>
+</nav>
+
+<header class="hero" style="min-height:260px">
+    <div class="container hero-content">
+        <h1 class="hero-title">مقالات <span class="highlight">الكتّاب</span></h1>
+        <p class="hero-subtitle">مساحة للفكر والأدب — مقالات ودراسات يقدّمها كتّاب دار السرد.</p>
+    </div>
+    <div class="hero-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+    </div>
+</header>
+
+<section class="essays-section">
+    <div class="container">
+        <h2 class="section-title">المقالات المنشورة</h2>
+        <div class="essays-grid" id="essays-grid"></div>
+    </div>
+</section>
+
+<footer id="contact" class="footer">
+    <div class="container footer-content">
+        <div class="footer-info">
+            <img src="assets/logo.png" alt="شعار دار السرد" class="footer-logo" onerror="this.style.display='none'">
+            <h3>دار السرد</h3>
+            <p>وجهتك الأولى لاقتناء أفضل الكتب والمؤلفات.</p>
+        </div>
+        <div class="contact-info">
+            <h4>تواصل معنا</h4>
+            <ul>
+                <li><span class="icon">📞</span><a href="tel:07735926484" dir="ltr">07735926484</a></li>
+                <li><span class="icon">✉️</span><a href="mailto:alrtyu44@gmail.com" dir="ltr">alrtyu44@gmail.com</a></li>
+                <li><span class="icon">📍</span><span>شارع المتنبي, عمارة الوراقيين</span></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 دار السرد. جميع الحقوق محفوظة.</p>
+    </div>
+</footer>
+
+<!-- Modal -->
+<div class="essay-modal-overlay" id="essay-modal">
+    <div class="essay-modal">
+        <span class="em-label">مقال</span>
+        <h2 class="em-title" id="em-title"></h2>
+        <p class="em-meta" id="em-meta"></p>
+        <div class="em-abstract" id="em-abstract" style="display:none"></div>
+        <hr class="em-divider" id="em-divider" style="display:none">
+        <p class="em-body" id="em-body"></p>
+        <button class="em-close" onclick="closeEssayModal()">إغلاق</button>
+    </div>
+</div>
+
+<script src="js/essays.js"></script>
+<script>
+function renderEssays() {
+    const grid = document.getElementById('essays-grid');
+    if (!essaysData || !essaysData.length) {
+        grid.innerHTML = `<div class="empty-state"><div class="icon">📝</div><p>لا توجد مقالات منشورة حالياً.</p></div>`;
+        return;
+    }
+    const sorted = [...essaysData].sort((a,b) => (b.date||'').localeCompare(a.date||''));
+    grid.innerHTML = sorted.map(e => {
+        const abs = (e.abstract||'').substring(0, 150).trim() + ((e.abstract||'').length > 150 ? '...' : '');
+        return `
+        <div class="essay-card" onclick="openEssayModal(${e.id})">
+            <div class="essay-title">${e.title}</div>
+            <div class="essay-meta">
+                <span class="essay-author">✍️ ${e.author}</span>
+                <span>${formatDate(e.date)}</span>
+            </div>
+            ${abs ? `<div class="essay-abstract">${abs}</div>` : ''}
+            <span class="essay-read-more">اقرأ المقال كاملاً ←</span>
+        </div>`;
+    }).join('');
+}
+
+function formatDate(d) {
+    if (!d) return '';
+    try {
+        return new Date(d).toLocaleDateString('ar-IQ', { year:'numeric', month:'long', day:'numeric' });
+    } catch { return d; }
+}
+
+function openEssayModal(id) {
+    const e = essaysData.find(x => x.id === id);
+    if (!e) return;
+    document.getElementById('em-title').textContent = e.title || '';
+    document.getElementById('em-meta').textContent  = `${e.author || ''}  —  ${formatDate(e.date)}`;
+    const absEl = document.getElementById('em-abstract');
+    const divEl = document.getElementById('em-divider');
+    if (e.abstract) {
+        absEl.textContent = e.abstract;
+        absEl.style.display = 'block';
+        divEl.style.display = 'block';
+    } else {
+        absEl.style.display = 'none';
+        divEl.style.display = 'none';
+    }
+    document.getElementById('em-body').textContent = e.body || '';
+    document.getElementById('essay-modal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeEssayModal() {
+    document.getElementById('essay-modal').classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+document.getElementById('essay-modal').addEventListener('click', e => {
+    if (e.target === document.getElementById('essay-modal')) closeEssayModal();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeEssayModal(); });
+
+renderEssays();
+</script>
+</body>
+</html>
