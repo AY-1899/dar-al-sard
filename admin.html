@@ -1512,7 +1512,7 @@ async function renderIraqMap(regions, totalIq) {
 
     try {
         // Load Iraq ADM1 GeoJSON from geoBoundaries (CORS-friendly)
-        const resp = await fetch('https://raw.githubusercontent.com/wmgeolab/geoBoundaries/main/releaseData/gbOpen/IRQ/ADM1/geoBoundaries-IRQ-ADM1_simplified.geojson');
+        const resp = await fetch('https://raw.githubusercontent.com/wmgeolab/geoBoundaries/main/releaseData/gbOpen/IRQ/ADM1/geoBoundaries-IRQ-ADM1.geojson');
         const geojson = await resp.json();
 
         const layer = L.geoJSON(geojson, {
@@ -1581,10 +1581,7 @@ async function loadVisitorStats() {
         const totalVisits = data.totalHits || data.locations.reduce((s,c) => s + c.count, 0);
         const totalIq     = (data.locations.find(c => c.name === 'العراق') || {}).count || 0;
 
-        // Iraq map
-        renderIraqMap(data.regions, totalIq || totalVisits);
-
-        // Governorates: map only (GoatCounter stats API has no subdivision data)
+        // Governorates sidebar note
         document.getElementById('vs-regions').innerHTML =
             `<p class="gc-empty" style="font-size:.82rem">
                 بيانات المحافظات غير متاحة من واجهة GoatCounter البرمجية.
@@ -1607,13 +1604,11 @@ async function loadVisitorStats() {
         document.getElementById('vs-systems').innerHTML =
             vsList(data.systems,   'count', '#6f42c1', 'لا توجد بيانات بعد.');
 
-        // Downloads stat card (if present)
-        if (typeof data.downloads === 'number') {
-            const dlEl = document.getElementById('vs-downloads');
-            if (dlEl) { dlEl.textContent = data.downloads; dlEl.closest('.stat-card').style.display = ''; }
-        }
-
+        // Show content first so Leaflet can measure the container
         document.getElementById('visitor-stats-content').style.display = 'block';
+
+        // Iraq map — must run after container is visible
+        await renderIraqMap(data.regions, totalIq || totalVisits);
 
     } catch (err) {
         document.getElementById('visitor-stats-loading').innerHTML =
