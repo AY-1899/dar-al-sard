@@ -28,7 +28,7 @@ async function fetchStat(type, extra = '') {
     for (let attempt = 0; attempt < 3; attempt++) {
         try {
             const data = await gcFetch(url);
-            console.log(`  ✅ ${type}: ${JSON.stringify(data).slice(0, 150)}`);
+            console.log(`  ✅ ${type}: ${JSON.stringify(data).slice(0, 400)}`);
             return data;
         } catch (e) {
             if (e.message.startsWith('429') && attempt < 2) {
