@@ -379,6 +379,7 @@ function showTab(name) {
     document.getElementById('tab-btn-add').classList.toggle('active',  name === 'add');
     document.getElementById('tab-btn-list').classList.toggle('active', name === 'list');
     if (name === 'list') loadBookList();
+    if (name === 'add') resetForm();
 }
 
 // ── FILE UPLOAD ───────────────────────────────────
