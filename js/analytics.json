@@ -1,13 +1,33 @@
 {
-  "updated": "2026-05-20T14:55:13.451Z",
+  "updated": "2026-05-20T15:24:17.345Z",
   "period": {
     "start": "2026-04-20",
     "end": "2026-05-20"
   },
   "totalHits": 0,
-  "lastId": 0,
   "hits": [],
-  "locations": [],
+  "locations": [
+    {
+      "name": "العراق",
+      "count": 24
+    },
+    {
+      "name": "ألمانيا",
+      "count": 4
+    },
+    {
+      "name": "هولندا",
+      "count": 4
+    },
+    {
+      "name": "الولايات المتحدة",
+      "count": 2
+    },
+    {
+      "name": "سوريا",
+      "count": 1
+    }
+  ],
   "regions": [],
   "browsers": [],
   "systems": [],
