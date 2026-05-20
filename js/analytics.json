@@ -1,11 +1,15 @@
 {
-  "updated": null,
-  "period": { "start": null, "end": null },
+  "updated": "2026-05-20T14:44:07.313Z",
+  "period": {
+    "start": "2026-04-20",
+    "end": "2026-05-20"
+  },
+  "totalHits": 0,
+  "lastId": 0,
   "hits": [],
   "locations": [],
   "regions": [],
   "browsers": [],
   "systems": [],
-  "sizes": [],
   "refs": []
 }
