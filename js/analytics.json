@@ -1,16 +1,20 @@
 {
-  "updated": "2026-05-20T17:27:40.775Z",
+  "updated": "2026-05-20T19:38:05.054Z",
   "period": {
     "start": "2026-04-20",
     "end": "2026-05-20"
   },
-  "totalHits": 45,
+  "totalHits": 63,
   "downloads": 0,
   "hits": [],
   "locations": [
     {
       "name": "العراق",
-      "count": 33
+      "count": 46
+    },
+    {
+      "name": "الولايات المتحدة",
+      "count": 7
     },
     {
       "name": "هولندا",
@@ -21,10 +25,6 @@
       "count": 4
     },
     {
-      "name": "الولايات المتحدة",
-      "count": 2
-    },
-    {
       "name": "سوريا",
       "count": 1
     }
@@ -33,29 +33,29 @@
   "browsers": [
     {
       "name": "Chrome",
-      "count": 34
+      "count": 46
     },
     {
       "name": "Safari",
-      "count": 8
+      "count": 13
     },
     {
       "name": "Firefox",
-      "count": 3
+      "count": 4
     }
   ],
   "systems": [
     {
       "name": "Android",
-      "count": 27
+      "count": 33
     },
     {
       "name": "Windows",
-      "count": 9
+      "count": 16
     },
     {
       "name": "iOS",
-      "count": 8
+      "count": 13
     },
     {
       "name": "macOS",
@@ -66,15 +66,15 @@
   "languages": [
     {
       "name": "Arabic",
-      "count": 21
+      "count": 29
+    },
+    {
+      "name": "English",
+      "count": 17
     },
     {
       "name": "(unknown)",
       "count": 16
-    },
-    {
-      "name": "English",
-      "count": 7
     },
     {
       "name": "Dutch",
