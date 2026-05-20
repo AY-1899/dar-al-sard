@@ -178,6 +178,47 @@
         .list-search:focus { outline: none; border-color: #002366; }
         .list-count { color: #888; margin-bottom: 1rem; font-size: .9rem; }
         .list-count strong { color: #002366; }
+
+        /* ── STATS ── */
+        .stat-card {
+            background: white; border-radius: 14px;
+            box-shadow: 0 4px 16px rgba(0,35,102,.07);
+            padding: 1.4rem 1.2rem; text-align: center;
+        }
+        .stat-icon { font-size: 1.8rem; margin-bottom: .4rem; }
+        .stat-value { font-size: 2rem; font-weight: 800; color: #002366; line-height: 1.1; }
+        .stat-label { font-size: .82rem; color: #888; margin-top: .3rem; }
+        .stat-sub   { font-size: .78rem; color: #aaa; margin-top: .2rem; }
+
+        .year-bar-row {
+            display: flex; align-items: center; gap: .8rem;
+            margin-bottom: .7rem;
+        }
+        .year-label { font-size: .85rem; color: #555; min-width: 40px; }
+        .year-bar-wrap { flex: 1; background: #f0f4f8; border-radius: 6px; height: 20px; overflow: hidden; }
+        .year-bar-fill { height: 100%; background: #002366; border-radius: 6px; transition: width .6s; }
+        .year-count { font-size: .82rem; color: #888; min-width: 24px; text-align: left; }
+
+        .latest-item {
+            display: flex; gap: .7rem; align-items: flex-start;
+            padding: .65rem 0; border-bottom: 1px solid #f0f4f8;
+        }
+        .latest-item:last-child { border-bottom: none; }
+        .latest-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: .1rem; }
+        .latest-type { font-size: .75rem; color: #aaa; }
+        .latest-name { font-size: .9rem; font-weight: 700; color: #222; line-height: 1.4; }
+
+        .author-row {
+            display: flex; align-items: center; gap: .8rem;
+            margin-bottom: .6rem;
+        }
+        .author-name { font-size: .9rem; color: #333; flex: 1; }
+        .author-bar-wrap { flex: 1; background: #f0f4f8; border-radius: 6px; height: 16px; overflow: hidden; }
+        .author-bar-fill { height: 100%; background: #f7b733; border-radius: 6px; }
+        .author-count { font-size: .82rem; color: #888; min-width: 24px; text-align: left; }
+        @media (max-width: 600px) {
+            #stats-content > div { grid-template-columns: 1fr !important; }
+        }
     </style>
 </head>
 <body>
@@ -206,6 +247,7 @@
             <button class="tab"        id="tab-btn-list"    onclick="showTab('list')">📚 قائمة الكتب</button>
             <button class="tab"        id="tab-btn-news"    onclick="showTab('news')">📰 الأخبار والفعاليات</button>
             <button class="tab"        id="tab-btn-essays"  onclick="showTab('essays')">📝 مقالات الكتّاب</button>
+            <button class="tab"        id="tab-btn-stats"   onclick="showTab('stats')">📊 الإحصائيات</button>
         </div>
 
         <!-- ══════════════════════════════════════════
@@ -401,6 +443,40 @@
             </div>
         </div>
 
+        <!-- ══════════════════════════════════════════
+             TAB: STATS
+        ══════════════════════════════════════════ -->
+        <div id="tab-stats" style="display:none">
+
+            <div id="stats-loading" style="text-align:center;color:#666;padding:3rem">⏳ جارٍ تحميل الإحصائيات...</div>
+            <div id="stats-content" style="display:none">
+
+                <!-- Summary cards -->
+                <div id="stats-cards" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1rem;margin-bottom:1.5rem"></div>
+
+                <!-- Two-column detail section -->
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem">
+
+                    <div class="card" style="margin:0">
+                        <h2 class="card-title">📅 الكتب حسب سنة النشر</h2>
+                        <div id="stats-years"></div>
+                    </div>
+
+                    <div class="card" style="margin:0">
+                        <h2 class="card-title">🕐 آخر الإضافات</h2>
+                        <div id="stats-latest"></div>
+                    </div>
+                </div>
+
+                <!-- Top authors -->
+                <div class="card">
+                    <h2 class="card-title">✍️ أكثر المؤلفين حضوراً</h2>
+                    <div id="stats-authors"></div>
+                </div>
+
+            </div>
+        </div>
+
     </div><!-- /.main -->
 </div><!-- /#app -->
 
@@ -472,7 +548,7 @@ window.addEventListener('load', () => {
 
 // ── TABS ─────────────────────────────────────────
 function showTab(name) {
-    ['add','list','news','essays'].forEach(t => {
+    ['add','list','news','essays','stats'].forEach(t => {
         document.getElementById(`tab-${t}`).style.display      = t === name ? '' : 'none';
         document.getElementById(`tab-btn-${t}`).classList.toggle('active', t === name);
     });
@@ -480,6 +556,7 @@ function showTab(name) {
     if (name === 'list')   loadBookList();
     if (name === 'news')   { resetNewsForm(); loadNewsList(); }
     if (name === 'essays') { resetEssayForm(); loadEssayList(); }
+    if (name === 'stats')  loadStats();
 }
 
 // ── FILE HELPERS ──────────────────────────────────
@@ -708,12 +785,10 @@ function editBook(id) {
     document.getElementById('submit-btn').textContent = '💾 حفظ التغييرات';
     document.getElementById('cancel-edit-btn').style.display = '';
     // Switch to add tab WITHOUT resetting (bypass showTab's resetBookForm)
-    document.getElementById('tab-add').style.display  = '';
-    document.getElementById('tab-list').style.display = 'none';
-    document.getElementById('tab-news').style.display = 'none';
-    document.getElementById('tab-essays').style.display = 'none';
-    ['add','list','news','essays'].forEach(t =>
-        document.getElementById(`tab-btn-${t}`).classList.toggle('active', t === 'add'));
+    ['add','list','news','essays','stats'].forEach(t => {
+        document.getElementById(`tab-${t}`).style.display = t === 'add' ? '' : 'none';
+        document.getElementById(`tab-btn-${t}`).classList.toggle('active', t === 'add');
+    });
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -1083,6 +1158,111 @@ async function loadEssayList() {
         document.getElementById('essay-list-loading').innerHTML =
             `<p style="color:#c0392b">❌ فشل التحميل: ${err.message}</p>`;
     }
+}
+
+// ════════════════════════════════════════════════
+//  STATS
+// ════════════════════════════════════════════════
+
+async function loadStats() {
+    document.getElementById('stats-loading').style.display = 'block';
+    document.getElementById('stats-content').style.display = 'none';
+    try {
+        // Load all three data files in parallel
+        const [booksRes, newsRes, essaysRes] = await Promise.all([
+            ghGetRaw('js/data.js'),
+            ghGetRaw('js/news.js'),
+            ghGetRaw('js/essays.js'),
+        ]);
+        const books  = parseBooks(booksRes.content);
+        const news   = parseNews(newsRes.content);
+        const essays = parseEssays(essaysRes.content);
+
+        renderStats(books, news, essays);
+        document.getElementById('stats-loading').style.display = 'none';
+        document.getElementById('stats-content').style.display = 'block';
+    } catch(err) {
+        document.getElementById('stats-loading').innerHTML =
+            `<p style="color:#c0392b">❌ فشل تحميل الإحصائيات: ${err.message}</p>`;
+    }
+}
+
+function renderStats(books, news, essays) {
+    // ── Summary cards ──
+    const booksWithPdf  = books.filter(b => b.pdf && b.pdf.trim()).length;
+    const prices        = books.map(b => parseFloat(String(b.price).replace(/,/g,''))).filter(p => !isNaN(p) && p > 0);
+    const avgPrice      = prices.length ? Math.round(prices.reduce((a,b)=>a+b,0)/prices.length).toLocaleString('ar') : '—';
+    const uniqueAuthors = new Set(books.map(b => (b.author||'').trim())).size;
+
+    const cards = [
+        { icon: '📚', value: books.length,   label: 'إجمالي الكتب' },
+        { icon: '👤', value: uniqueAuthors,   label: 'مؤلف مختلف' },
+        { icon: '📄', value: booksWithPdf,    label: 'كتاب بـ PDF',   sub: `${books.length - booksWithPdf} بدون PDF` },
+        { icon: '📰', value: news.length,     label: 'خبر وفعالية' },
+        { icon: '📝', value: essays.length,   label: 'مقال منشور' },
+        { icon: '💰', value: avgPrice,        label: 'متوسط السعر', sub: 'دينار عراقي' },
+    ];
+    document.getElementById('stats-cards').innerHTML = cards.map(c => `
+        <div class="stat-card">
+            <div class="stat-icon">${c.icon}</div>
+            <div class="stat-value">${c.value}</div>
+            <div class="stat-label">${c.label}</div>
+            ${c.sub ? `<div class="stat-sub">${c.sub}</div>` : ''}
+        </div>`).join('');
+
+    // ── Books by year ──
+    const yearMap = {};
+    books.forEach(b => { const y = b.year||'غير محدد'; yearMap[y] = (yearMap[y]||0)+1; });
+    const years = Object.entries(yearMap).sort((a,b) => b[0].localeCompare(a[0]));
+    const maxYear = Math.max(...years.map(y=>y[1]));
+    document.getElementById('stats-years').innerHTML = years.map(([y, count]) => `
+        <div class="year-bar-row">
+            <span class="year-label">${y}</span>
+            <div class="year-bar-wrap">
+                <div class="year-bar-fill" style="width:${Math.round(count/maxYear*100)}%"></div>
+            </div>
+            <span class="year-count">${count}</span>
+        </div>`).join('') || '<p style="color:#aaa">لا توجد بيانات.</p>';
+
+    // ── Latest additions ──
+    const latestBook   = books.length  ? books[books.length-1]   : null;
+    const latestNews   = news.length   ? [...news].sort((a,b)=>(b.date||'').localeCompare(a.date||''))[0]  : null;
+    const latestEssay  = essays.length ? [...essays].sort((a,b)=>(b.date||'').localeCompare(a.date||''))[0]: null;
+    const latestItems  = [
+        latestBook  && { icon:'📚', type:'كتاب',    name: latestBook.title,  sub: latestBook.author },
+        latestNews  && { icon:'📰', type:'خبر',     name: latestNews.title,  sub: latestNews.date   },
+        latestEssay && { icon:'📝', type:'مقال',    name: latestEssay.title, sub: latestEssay.author},
+    ].filter(Boolean);
+    document.getElementById('stats-latest').innerHTML = latestItems.length
+        ? latestItems.map(i => `
+            <div class="latest-item">
+                <span class="latest-icon">${i.icon}</span>
+                <div>
+                    <div class="latest-type">${i.type}</div>
+                    <div class="latest-name">${escHtml(i.name)}</div>
+                    <div class="latest-type">${escHtml(i.sub||'')}</div>
+                </div>
+            </div>`).join('')
+        : '<p style="color:#aaa">لا توجد بيانات.</p>';
+
+    // ── Top authors ──
+    const authorMap = {};
+    books.forEach(b => {
+        const a = (b.author||'').trim();
+        if (a) authorMap[a] = (authorMap[a]||0)+1;
+    });
+    const topAuthors = Object.entries(authorMap).sort((a,b)=>b[1]-a[1]).slice(0,8);
+    const maxAuthor  = topAuthors.length ? topAuthors[0][1] : 1;
+    document.getElementById('stats-authors').innerHTML = topAuthors.length
+        ? topAuthors.map(([name, count]) => `
+            <div class="author-row">
+                <span class="author-name">${escHtml(name)}</span>
+                <div class="author-bar-wrap">
+                    <div class="author-bar-fill" style="width:${Math.round(count/maxAuthor*100)}%"></div>
+                </div>
+                <span class="author-count">${count} ${count===1?'كتاب':'كتب'}</span>
+            </div>`).join('')
+        : '<p style="color:#aaa">لا توجد بيانات.</p>';
 }
 
 function renderEssayList(essays) {
