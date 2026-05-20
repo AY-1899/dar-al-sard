@@ -244,6 +244,106 @@
         .gc-total-row strong { color: #002366; font-size: 1.1rem; }
         .gc-empty { color: #aaa; font-size: .88rem; padding: .5rem 0; }
 
+        /* ── DRAFT BANNER ── */
+        .draft-banner {
+            display: flex; align-items: center; justify-content: space-between;
+            background: #fff8e1; border: 1.5px solid #f7b733; border-radius: 10px;
+            padding: .75rem 1rem; margin-bottom: 1.2rem; gap: .8rem;
+        }
+        .draft-banner p { font-size: .9rem; color: #7a5500; flex: 1; }
+        .draft-banner-btns { display: flex; gap: .5rem; flex-shrink: 0; }
+        .btn-restore {
+            background: #002366; color: #fff; border: none; border-radius: 7px;
+            padding: .4rem .9rem; font-family: inherit; font-size: .85rem;
+            font-weight: 700; cursor: pointer;
+        }
+        .btn-restore:hover { background: #1a438e; }
+        .btn-dismiss {
+            background: #f0f4f8; color: #666; border: none; border-radius: 7px;
+            padding: .4rem .9rem; font-family: inherit; font-size: .85rem;
+            font-weight: 600; cursor: pointer;
+        }
+        .btn-dismiss:hover { background: #e0e7f0; }
+        .draft-saved-msg {
+            font-size: .8rem; color: #27ae60; font-weight: 600;
+            margin-top: .3rem; opacity: 0; transition: opacity .4s;
+        }
+        .draft-saved-msg.show { opacity: 1; }
+
+        /* ── PREVIEW BUTTON ── */
+        .btn-preview {
+            width: 100%; padding: .85rem; background: #e8eef8; color: #002366;
+            border: none; border-radius: 12px; font-family: inherit;
+            font-size: 1rem; font-weight: 700; cursor: pointer; margin-top: .6rem;
+        }
+        .btn-preview:hover { background: #d0daf0; }
+
+        /* ── PREVIEW MODAL ── */
+        #preview-modal {
+            position: fixed; inset: 0; background: rgba(0,0,0,.6);
+            z-index: 2000; display: flex; align-items: center; justify-content: center;
+            padding: 1.5rem; opacity: 0; pointer-events: none; transition: opacity .25s;
+        }
+        #preview-modal.active { opacity: 1; pointer-events: all; }
+        .preview-inner {
+            background: #fff; border-radius: 20px; max-width: 680px; width: 100%;
+            max-height: 92vh; overflow-y: auto; padding: 2rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,.3);
+            transform: translateY(20px); transition: transform .25s;
+        }
+        #preview-modal.active .preview-inner { transform: translateY(0); }
+        .preview-label {
+            font-size: .8rem; font-weight: 700; color: #aaa; letter-spacing: .04em;
+            text-transform: uppercase; margin-bottom: 1.2rem;
+        }
+        /* Book card clone */
+        .preview-book-wrap {
+            display: flex; gap: 1.5rem; align-items: flex-start;
+            background: #f8f9fc; border-radius: 14px; padding: 1.2rem;
+        }
+        .preview-cover {
+            width: 130px; min-width: 130px; height: 180px;
+            border-radius: 8px; overflow: hidden; background: #e0e7f0;
+            flex-shrink: 0; position: relative;
+        }
+        .preview-cover img {
+            position: absolute; height: 100%; width: 200%; object-fit: cover;
+        }
+        .preview-cover img.cover-left  { left: 0; }
+        .preview-cover img.cover-right { right: 0; }
+        .preview-cover img.cover-single { width: 100%; position: static; }
+        .preview-cover-placeholder {
+            display: flex; align-items: center; justify-content: center;
+            height: 100%; font-size: 2.5rem; color: #b0bdd0;
+        }
+        .preview-book-info { flex: 1; }
+        .preview-book-title { font-size: 1.1rem; font-weight: 800; color: #002366; margin-bottom: .4rem; line-height: 1.4; }
+        .preview-book-author { font-size: .9rem; color: #666; margin-bottom: .3rem; }
+        .preview-book-year   { font-size: .82rem; color: #aaa; margin-bottom: .8rem; }
+        .preview-book-desc   { font-size: .88rem; color: #444; line-height: 1.7; }
+        /* News card clone */
+        .preview-news-card {
+            border-radius: 14px; overflow: hidden; border: 1px solid #e8eef8;
+        }
+        .preview-news-img {
+            height: 180px; background: #e0e7f0; overflow: hidden;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .preview-news-img img { width: 100%; height: 100%; object-fit: cover; }
+        .preview-news-no-img { font-size: 3rem; color: #c0cce0; }
+        .preview-news-body { padding: 1.2rem 1.4rem; }
+        .preview-news-cat { display: inline-block; background: #002366; color: #fff; font-size: .78rem; font-weight: 700; padding: .2rem .7rem; border-radius: 20px; margin-bottom: .6rem; }
+        .preview-news-date { font-size: .82rem; color: #999; margin-bottom: .4rem; }
+        .preview-news-title { font-size: 1.05rem; font-weight: 700; color: #002366; line-height: 1.5; margin-bottom: .5rem; }
+        .preview-news-text { font-size: .9rem; color: #444; line-height: 1.8; white-space: pre-wrap; max-height: 260px; overflow-y: auto; }
+        .btn-close-preview {
+            display: block; margin: 1.5rem auto 0;
+            padding: .65rem 2.2rem; background: #002366; color: #fff;
+            border: none; border-radius: 10px; font-family: inherit;
+            font-size: .95rem; font-weight: 700; cursor: pointer;
+        }
+        .btn-close-preview:hover { background: #1a438e; }
+
         /* ── IRAQ MAP (Leaflet) ── */
         .iraq-map-section { display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:start; }
         .iraq-map-wrap { position:relative; }
@@ -269,6 +369,40 @@
     </style>
 </head>
 <body>
+
+<!-- PREVIEW MODAL -->
+<div id="preview-modal" onclick="if(event.target===this)closePreview()">
+    <div class="preview-inner">
+        <p class="preview-label">👁 معاينة — كيف سيظهر على الموقع</p>
+        <div id="preview-book" style="display:none">
+            <div class="preview-book-wrap">
+                <div class="preview-cover" id="pv-cover">
+                    <div class="preview-cover-placeholder">📚</div>
+                </div>
+                <div class="preview-book-info">
+                    <div class="preview-book-title"  id="pv-title">—</div>
+                    <div class="preview-book-author" id="pv-author">—</div>
+                    <div class="preview-book-year"   id="pv-year">—</div>
+                    <div class="preview-book-desc"   id="pv-desc"></div>
+                </div>
+            </div>
+        </div>
+        <div id="preview-news" style="display:none">
+            <div class="preview-news-card">
+                <div class="preview-news-img" id="pv-news-img">
+                    <div class="preview-news-no-img">📰</div>
+                </div>
+                <div class="preview-news-body">
+                    <span class="preview-news-cat"   id="pv-news-cat"></span>
+                    <div class="preview-news-date"   id="pv-news-date"></div>
+                    <div class="preview-news-title"  id="pv-news-title"></div>
+                    <div class="preview-news-text"   id="pv-news-text"></div>
+                </div>
+            </div>
+        </div>
+        <button class="btn-close-preview" onclick="closePreview()">إغلاق</button>
+    </div>
+</div>
 
 <!-- LOGIN -->
 <div id="login-screen">
@@ -304,6 +438,14 @@
             <div class="card">
                 <h2 class="card-title" id="book-form-title">➕ إضافة كتاب جديد</h2>
                 <input type="hidden" id="edit-id" value="">
+
+                <div class="draft-banner" id="book-draft-banner" style="display:none">
+                    <p>⚠️ يوجد مسودة كتاب محفوظة — هل تريد استعادتها؟</p>
+                    <div class="draft-banner-btns">
+                        <button class="btn-restore" onclick="restoreBookDraft()">استعادة</button>
+                        <button class="btn-dismiss" onclick="clearBookDraft()">تجاهل</button>
+                    </div>
+                </div>
 
                 <div class="form-row">
                     <label>عنوان الكتاب <span>*</span></label>
@@ -363,6 +505,8 @@
                     <textarea id="f-desc" placeholder="اكتب وصف الكتاب هنا..."></textarea>
                 </div>
 
+                <button class="btn-preview" onclick="previewBook()">👁 معاينة قبل النشر</button>
+                <div class="draft-saved-msg" id="book-draft-saved">💾 تم الحفظ تلقائياً</div>
                 <button class="btn-submit" id="submit-btn" onclick="submitBook()">✅ إضافة الكتاب إلى الموقع</button>
                 <button class="btn-cancel" id="cancel-edit-btn" style="display:none" onclick="cancelBookEdit()">إلغاء والعودة إلى القائمة</button>
                 <div class="progress-bar" id="book-progress" style="display:none"><div class="progress-fill" id="book-progress-fill"></div></div>
@@ -393,6 +537,14 @@
             <div class="card">
                 <h2 class="card-title" id="news-form-title">📰 إضافة خبر أو فعالية</h2>
                 <input type="hidden" id="news-edit-id" value="">
+
+                <div class="draft-banner" id="news-draft-banner" style="display:none">
+                    <p>⚠️ يوجد مسودة خبر محفوظة — هل تريد استعادتها؟</p>
+                    <div class="draft-banner-btns">
+                        <button class="btn-restore" onclick="restoreNewsDraft()">استعادة</button>
+                        <button class="btn-dismiss" onclick="clearNewsDraft()">تجاهل</button>
+                    </div>
+                </div>
 
                 <div class="form-row">
                     <label>العنوان <span>*</span></label>
@@ -431,6 +583,8 @@
                     <textarea id="nf-body" placeholder="اكتب تفاصيل الخبر أو الفعالية هنا..." style="min-height:150px"></textarea>
                 </div>
 
+                <button class="btn-preview" onclick="previewNews()">👁 معاينة قبل النشر</button>
+                <div class="draft-saved-msg" id="news-draft-saved">💾 تم الحفظ تلقائياً</div>
                 <button class="btn-submit" id="news-submit-btn" onclick="submitNews()">✅ نشر الخبر</button>
                 <button class="btn-cancel" id="news-cancel-btn" style="display:none" onclick="cancelNewsEdit()">إلغاء</button>
                 <div class="progress-bar" id="news-progress" style="display:none"><div class="progress-fill" id="news-progress-fill"></div></div>
@@ -837,6 +991,7 @@ async function submitBook() {
             isEdit ? `✅ تم حفظ التغييرات على كتاب "${title}" بنجاح!` : `✅ تمت إضافة كتاب "${title}" بنجاح!`,
             'success');
 
+        clearBookDraft();
         resetBookForm();
         if (isEdit) setTimeout(() => showTab('list'), 1500);
 
@@ -1086,6 +1241,7 @@ async function submitNews() {
 
         showStatus('news-form-status',
             isEdit ? `✅ تم تحديث الخبر بنجاح!` : `✅ تم نشر الخبر بنجاح!`, 'success');
+        clearNewsDraft();
         resetNewsForm();
         renderNewsList(allNews);
 
@@ -1615,6 +1771,204 @@ async function loadVisitorStats() {
             `<p style="color:#c0392b">❌ فشل تحميل بيانات الزوار: ${err.message}</p>`;
     }
 }
+
+// ════════════════════════════════════════════════
+//  DRAFT — BOOK
+// ════════════════════════════════════════════════
+
+const BOOK_DRAFT_KEY = 'dar_book_draft';
+let _bookDraftTimer = null;
+
+function bookDraftSave() {
+    clearTimeout(_bookDraftTimer);
+    _bookDraftTimer = setTimeout(() => {
+        const draft = {
+            title:  document.getElementById('f-title').value,
+            author: document.getElementById('f-author').value,
+            year:   document.getElementById('f-year').value,
+            price:  document.getElementById('f-price').value,
+            cover:  document.querySelector('input[name=cover]:checked')?.value || 'left',
+            desc:   document.getElementById('f-desc').value,
+        };
+        if (!draft.title && !draft.author && !draft.desc) return;
+        localStorage.setItem(BOOK_DRAFT_KEY, JSON.stringify(draft));
+        const msg = document.getElementById('book-draft-saved');
+        msg.classList.add('show');
+        setTimeout(() => msg.classList.remove('show'), 2000);
+    }, 800);
+}
+
+function clearBookDraft() {
+    localStorage.removeItem(BOOK_DRAFT_KEY);
+    document.getElementById('book-draft-banner').style.display = 'none';
+}
+
+function restoreBookDraft() {
+    try {
+        const d = JSON.parse(localStorage.getItem(BOOK_DRAFT_KEY) || 'null');
+        if (!d) return;
+        document.getElementById('f-title').value  = d.title  || '';
+        document.getElementById('f-author').value = d.author || '';
+        document.getElementById('f-year').value   = d.year   || '2026';
+        document.getElementById('f-price').value  = d.price  || '';
+        document.getElementById('f-desc').value   = d.desc   || '';
+        const coverEl = document.querySelector(`input[name=cover][value="${d.cover || 'left'}"]`);
+        if (coverEl) coverEl.checked = true;
+    } catch {}
+    document.getElementById('book-draft-banner').style.display = 'none';
+}
+
+function checkBookDraft() {
+    if (localStorage.getItem(BOOK_DRAFT_KEY))
+        document.getElementById('book-draft-banner').style.display = 'flex';
+}
+
+// ════════════════════════════════════════════════
+//  DRAFT — NEWS
+// ════════════════════════════════════════════════
+
+const NEWS_DRAFT_KEY = 'dar_news_draft';
+let _newsDraftTimer = null;
+
+function newsDraftSave() {
+    clearTimeout(_newsDraftTimer);
+    _newsDraftTimer = setTimeout(() => {
+        const draft = {
+            title: document.getElementById('nf-title').value,
+            date:  document.getElementById('nf-date').value,
+            cat:   document.getElementById('nf-cat').value,
+            body:  document.getElementById('nf-body').value,
+        };
+        if (!draft.title && !draft.body) return;
+        localStorage.setItem(NEWS_DRAFT_KEY, JSON.stringify(draft));
+        const msg = document.getElementById('news-draft-saved');
+        msg.classList.add('show');
+        setTimeout(() => msg.classList.remove('show'), 2000);
+    }, 800);
+}
+
+function clearNewsDraft() {
+    localStorage.removeItem(NEWS_DRAFT_KEY);
+    document.getElementById('news-draft-banner').style.display = 'none';
+}
+
+function restoreNewsDraft() {
+    try {
+        const d = JSON.parse(localStorage.getItem(NEWS_DRAFT_KEY) || 'null');
+        if (!d) return;
+        document.getElementById('nf-title').value = d.title || '';
+        document.getElementById('nf-date').value  = d.date  || '';
+        document.getElementById('nf-cat').value   = d.cat   || 'مؤتمر';
+        document.getElementById('nf-body').value  = d.body  || '';
+    } catch {}
+    document.getElementById('news-draft-banner').style.display = 'none';
+}
+
+function checkNewsDraft() {
+    if (localStorage.getItem(NEWS_DRAFT_KEY))
+        document.getElementById('news-draft-banner').style.display = 'flex';
+}
+
+// ════════════════════════════════════════════════
+//  PREVIEW
+// ════════════════════════════════════════════════
+
+function openPreview(section) {
+    document.getElementById('preview-book').style.display = section === 'book' ? '' : 'none';
+    document.getElementById('preview-news').style.display = section === 'news' ? '' : 'none';
+    document.getElementById('preview-modal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closePreview() {
+    document.getElementById('preview-modal').classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+function previewBook() {
+    const title  = document.getElementById('f-title').value.trim()  || '(بدون عنوان)';
+    const author = document.getElementById('f-author').value.trim() || '(بدون مؤلف)';
+    const year   = document.getElementById('f-year').value.trim()   || '';
+    const desc   = document.getElementById('f-desc').value.trim();
+    const cover  = document.querySelector('input[name=cover]:checked')?.value || 'left';
+    const imgFile = document.getElementById('img-input').files[0];
+
+    document.getElementById('pv-title').textContent  = title;
+    document.getElementById('pv-author').textContent = `المؤلف: ${author}`;
+    document.getElementById('pv-year').textContent   = year ? `سنة النشر: ${year}` : '';
+    document.getElementById('pv-desc').textContent   = desc;
+
+    const coverEl = document.getElementById('pv-cover');
+    if (imgFile) {
+        const reader = new FileReader();
+        reader.onload = e => {
+            const imgClass = cover === 'single' ? 'cover-single' : `cover-${cover}`;
+            coverEl.innerHTML = `<img src="${e.target.result}" class="${imgClass}" alt="">`;
+            openPreview('book');
+        };
+        reader.readAsDataURL(imgFile);
+    } else {
+        coverEl.innerHTML = '<div class="preview-cover-placeholder">📚</div>';
+        openPreview('book');
+    }
+}
+
+function previewNews() {
+    const title = document.getElementById('nf-title').value.trim() || '(بدون عنوان)';
+    const date  = document.getElementById('nf-date').value;
+    const cat   = document.getElementById('nf-cat').value;
+    const body  = document.getElementById('nf-body').value.trim();
+
+    document.getElementById('pv-news-cat').textContent   = cat;
+    document.getElementById('pv-news-title').textContent = title;
+    document.getElementById('pv-news-text').textContent  = body;
+    document.getElementById('pv-news-date').textContent  = date
+        ? new Date(date).toLocaleDateString('ar-IQ', { year:'numeric', month:'long', day:'numeric' })
+        : '';
+
+    const imgEl   = document.getElementById('pv-news-img');
+    const imgFile = newsNewFiles[0] || null;
+    if (imgFile) {
+        const reader = new FileReader();
+        reader.onload = e => {
+            imgEl.innerHTML = `<img src="${e.target.result}" alt="">`;
+            openPreview('news');
+        };
+        reader.readAsDataURL(imgFile);
+    } else if (newsKeepImages[0]) {
+        imgEl.innerHTML = `<img src="${newsKeepImages[0]}" alt="">`;
+        openPreview('news');
+    } else {
+        imgEl.innerHTML = '<div class="preview-news-no-img">📰</div>';
+        openPreview('news');
+    }
+}
+
+// ════════════════════════════════════════════════
+//  INIT — attach listeners + check drafts
+// ════════════════════════════════════════════════
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Book draft auto-save
+    ['f-title','f-author','f-year','f-price','f-desc'].forEach(id =>
+        document.getElementById(id).addEventListener('input', bookDraftSave));
+    document.querySelectorAll('input[name=cover]').forEach(r =>
+        r.addEventListener('change', bookDraftSave));
+
+    // News draft auto-save
+    ['nf-title','nf-date','nf-cat','nf-body'].forEach(id =>
+        document.getElementById(id).addEventListener('input', newsDraftSave));
+    document.getElementById('nf-cat').addEventListener('change', newsDraftSave);
+
+    // Escape closes preview
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') closePreview();
+    });
+
+    // Check for saved drafts on load
+    checkBookDraft();
+    checkNewsDraft();
+});
 </script>
 </body>
 </html>
