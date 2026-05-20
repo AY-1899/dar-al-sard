@@ -1211,7 +1211,6 @@ function renderStats(books, news, essays) {
         { icon: '📄', value: booksWithPdf,    label: 'كتاب بـ PDF',   sub: `${books.length - booksWithPdf} بدون PDF` },
         { icon: '📰', value: news.length,     label: 'خبر وفعالية' },
         { icon: '📝', value: essays.length,   label: 'مقال منشور' },
-        { icon: '💰', value: avgPrice,        label: 'متوسط السعر', sub: 'دينار عراقي' },
     ];
     document.getElementById('stats-cards').innerHTML = cards.map(c => `
         <div class="stat-card">
