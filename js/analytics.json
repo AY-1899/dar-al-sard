@@ -1,15 +1,16 @@
 {
-  "updated": "2026-05-20T15:36:55.378Z",
+  "updated": "2026-05-20T15:55:32.443Z",
   "period": {
     "start": "2026-04-20",
     "end": "2026-05-20"
   },
-  "totalHits": 35,
+  "totalHits": 39,
+  "downloads": 0,
   "hits": [],
   "locations": [
     {
       "name": "العراق",
-      "count": 24
+      "count": 28
     },
     {
       "name": "ألمانيا",
@@ -32,11 +33,11 @@
   "browsers": [
     {
       "name": "Chrome",
-      "count": 27
+      "count": 30
     },
     {
       "name": "Safari",
-      "count": 5
+      "count": 6
     },
     {
       "name": "Firefox",
@@ -46,7 +47,7 @@
   "systems": [
     {
       "name": "Android",
-      "count": 20
+      "count": 23
     },
     {
       "name": "Windows",
@@ -54,7 +55,7 @@
     },
     {
       "name": "iOS",
-      "count": 5
+      "count": 6
     },
     {
       "name": "macOS",
