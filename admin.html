@@ -205,7 +205,7 @@
         }
         .latest-item:last-child { border-bottom: none; }
         .latest-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: .1rem; }
-        .latest-type { font-size: .75rem; color: #aaa; }
+        .latest-type { font-size: .75rem; color: #222; }
         .latest-name { font-size: .9rem; font-weight: 700; color: #222; line-height: 1.4; }
 
         .author-row {
@@ -1530,7 +1530,7 @@ function renderStats(books, news, essays) {
                     <div class="latest-type">${escHtml(i.sub||'')}</div>
                 </div>
             </div>`).join('')
-        : '<p style="color:#aaa">لا توجد بيانات.</p>';
+        : '<p style="color:#222">لا توجد بيانات.</p>';
 
     // ── Top authors ──
     const authorMap = {};
@@ -1549,7 +1549,7 @@ function renderStats(books, news, essays) {
                 </div>
                 <span class="author-count">${count} ${count===1?'كتاب':'كتب'}</span>
             </div>`).join('')
-        : '<p style="color:#aaa">لا توجد بيانات.</p>';
+        : '<p style="color:#222">لا توجد بيانات.</p>';
 }
 
 function renderEssayList(essays) {
