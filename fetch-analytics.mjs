@@ -48,11 +48,12 @@ const me = await gcFetch('/me');
 console.log('✅ Token valid. User:', me.user?.email || '(ok)');
 
 // ── Fetch stats sequentially to avoid rate limiting ───────────────────────────
-const browsersData  = await fetchStat('browsers');  await sleep(600);
-const systemsData   = await fetchStat('systems');   await sleep(600);
-const locData       = await fetchStat('locations'); await sleep(600);
+const browsersData  = await fetchStat('browsers');              await sleep(600);
+const systemsData   = await fetchStat('systems');               await sleep(600);
+const locData       = await fetchStat('locations');             await sleep(600);
 const locIqData     = await fetchStat('locations', '&filter=IQ'); await sleep(600);
-const refData       = await fetchStat('toprefs');
+const refData       = await fetchStat('toprefs');               await sleep(600);
+const dlData        = await fetchStat('hits',      '&event=true&filter=%2Fpdf-download');
 
 // ── Arabic name maps ──────────────────────────────────────────────────────────
 const IQ_GOV = {
@@ -131,6 +132,11 @@ if (existsSync(CACHE)) {
     try { prevHits = JSON.parse(readFileSync(CACHE,'utf8')).hits || []; } catch {}
 }
 
+// Downloads: sum event counts for /pdf-download path
+const downloads = (dlData?.hits || dlData?.stats || [])
+    .reduce((s, r) => s + (r.count || 0), 0);
+console.log('Downloads (PDF events):', downloads);
+
 const analytics = {
     updated:   new Date().toISOString(),
     period:    {
@@ -138,7 +144,8 @@ const analytics = {
         end:   new Date().toISOString().split('T')[0],
     },
     totalHits,
-    hits:      prevHits,          // top-pages: no API endpoint, kept from previous
+    downloads,
+    hits:      prevHits,
     locations: countries,
     regions,
     browsers:  parseBrowsers(browsersData),

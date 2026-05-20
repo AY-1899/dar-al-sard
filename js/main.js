@@ -79,6 +79,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (book.pdf) {
             pdfBtn.href = book.pdf;
             pdfBtn.removeAttribute('hidden');
+            pdfBtn.onclick = () => {
+                if (window.goatcounter && window.goatcounter.count)
+                    window.goatcounter.count({ path: '/pdf-download', title: 'تحميل: ' + book.title, event: true });
+            };
         } else {
             pdfBtn.setAttribute('hidden', '');
         }

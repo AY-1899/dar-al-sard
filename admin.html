@@ -224,17 +224,15 @@
         .gc-loading { color: #aaa; font-size: .9rem; padding: 1rem 0; }
         .gc-error   { color: #c0392b; font-size: .9rem; padding: .5rem 0; }
         .gc-row {
-            display: flex; align-items: center; gap: .7rem;
+            display: flex; align-items: center; gap: .5rem;
             margin-bottom: .6rem;
         }
         .gc-label { font-size: .88rem; color: #333; flex: 1; min-width: 0;
             white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .gc-bar-wrap { flex: 1.2; background: #f0f4f8; border-radius: 5px; height: 14px; overflow: hidden; }
         .gc-bar-fill { height: 100%; border-radius: 5px; background: #002366; }
-        .gc-bar-fill.gold { background: #f7b733; }
-        .gc-bar-fill.teal { background: #17a2b8; }
-        .gc-bar-fill.green { background: #28a745; }
-        .gc-count { font-size: .8rem; color: #888; min-width: 28px; text-align: left; font-weight: 700; }
+        .gc-count { font-size: .8rem; color: #555; min-width: 28px; text-align: left; font-weight: 700; }
+        .gc-pct   { font-size: .75rem; color: #aaa; min-width: 38px; text-align: left; }
         .gc-total-row {
             display: flex; justify-content: space-between;
             background: #f0f4f8; border-radius: 8px;
@@ -243,6 +241,40 @@
         }
         .gc-total-row strong { color: #002366; font-size: 1.1rem; }
         .gc-empty { color: #aaa; font-size: .88rem; padding: .5rem 0; }
+
+        /* ── IRAQ SVG MAP ── */
+        .iraq-map-section { display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:start; }
+        .iraq-map-wrap { position:relative; }
+        .iraq-map-wrap svg { width:100%; height:auto; display:block; }
+        .iraq-gov {
+            fill: #dce7f5; stroke: #fff; stroke-width: 1.5;
+            cursor: pointer; transition: fill .15s, stroke-width .1s;
+        }
+        .iraq-gov:hover { stroke: #002366; stroke-width: 2.5; filter: brightness(.88); }
+        .iraq-gov-lbl {
+            font-family: 'Cairo', sans-serif; font-size: 8.5px;
+            fill: #334; pointer-events: none; text-anchor: middle;
+        }
+        .map-tooltip {
+            position: fixed; background: rgba(10,18,50,.88); color:#fff;
+            padding: 8px 14px; border-radius: 10px; font-size:.85rem;
+            line-height: 1.7; pointer-events: none; display: none;
+            z-index: 9999; white-space: nowrap; direction: rtl;
+            box-shadow: 0 4px 16px rgba(0,0,0,.3);
+        }
+        .map-legend {
+            display: flex; align-items: center; gap: .5rem;
+            font-size: .75rem; color: #999; margin-top: .5rem;
+            justify-content: center;
+        }
+        .legend-grad {
+            width: 90px; height: 9px; border-radius: 5px;
+            background: linear-gradient(to right, #dce7f5, #002366);
+        }
+        @media (max-width:620px) {
+            .iraq-map-section { grid-template-columns:1fr !important; }
+            #stats-content > div { grid-template-columns:1fr !important; }
+        }
     </style>
 </head>
 <body>
@@ -507,15 +539,63 @@
 
                         <div id="vs-updated" style="text-align:left;font-size:.8rem;color:#bbb;margin-bottom:1rem"></div>
 
-                        <!-- Pages + Locations row -->
-                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem">
-                            <div class="card" style="margin:0">
-                                <h2 class="card-title">📄 أكثر الصفحات زيارةً</h2>
-                                <div id="vs-pages"></div>
-                            </div>
-                            <div class="card" style="margin:0">
-                                <h2 class="card-title">🗺️ المحافظات العراقية</h2>
-                                <div id="vs-regions"></div>
+                        <!-- Iraq Map — full width -->
+                        <div class="card" style="margin-bottom:1.5rem">
+                            <h2 class="card-title">🗺️ المحافظات العراقية</h2>
+                            <div class="iraq-map-section">
+                                <!-- SVG Map -->
+                                <div class="iraq-map-wrap">
+                                    <div id="map-tooltip" class="map-tooltip"></div>
+                                    <svg id="iraq-svg" viewBox="0 0 420 500" xmlns="http://www.w3.org/2000/svg">
+                                      <polygon id="gov-IQ-DA" class="iraq-gov" data-id="IQ-DA" data-name="دهوك"         points="148,4 228,4 230,44 194,58 148,52"/>
+                                      <polygon id="gov-IQ-NI" class="iraq-gov" data-id="IQ-NI" data-name="نينوى"        points="0,14 100,4 148,4 148,52 194,58 230,44 226,128 186,144 104,148 64,108 0,170"/>
+                                      <polygon id="gov-IQ-AR" class="iraq-gov" data-id="IQ-AR" data-name="أربيل"        points="228,4 304,16 300,98 266,118 226,128 230,44"/>
+                                      <polygon id="gov-IQ-SU" class="iraq-gov" data-id="IQ-SU" data-name="السليمانية"   points="304,16 332,40 322,158 286,174 260,154 266,118 300,98"/>
+                                      <polygon id="gov-IQ-KI" class="iraq-gov" data-id="IQ-KI" data-name="كركوك"        points="186,144 226,128 260,154 254,196 214,206 192,182"/>
+                                      <polygon id="gov-IQ-SD" class="iraq-gov" data-id="IQ-SD" data-name="صلاح الدين"   points="104,148 186,144 192,182 214,206 206,226 144,230 100,188"/>
+                                      <polygon id="gov-IQ-AN" class="iraq-gov" data-id="IQ-AN" data-name="الأنبار"      points="0,170 100,188 144,230 140,296 138,380 96,398 0,490"/>
+                                      <polygon id="gov-IQ-DI" class="iraq-gov" data-id="IQ-DI" data-name="ديالى"        points="214,206 254,196 286,174 322,158 316,246 290,276 250,282 218,260"/>
+                                      <polygon id="gov-IQ-BG" class="iraq-gov" data-id="IQ-BG" data-name="بغداد"        points="206,226 214,206 218,260 250,282 244,298 212,298 202,270"/>
+                                      <polygon id="gov-IQ-BB" class="iraq-gov" data-id="IQ-BB" data-name="بابل"         points="202,270 244,298 258,316 234,330 194,328 185,304"/>
+                                      <polygon id="gov-IQ-KA" class="iraq-gov" data-id="IQ-KA" data-name="كربلاء"       points="144,230 206,226 202,270 185,304 155,306 136,268"/>
+                                      <polygon id="gov-IQ-WA" class="iraq-gov" data-id="IQ-WA" data-name="واسط"         points="250,282 290,276 316,246 332,306 315,347 277,354 258,328 244,298"/>
+                                      <polygon id="gov-IQ-QA" class="iraq-gov" data-id="IQ-QA" data-name="القادسية"     points="155,306 194,328 234,330 230,370 195,376 160,354"/>
+                                      <polygon id="gov-IQ-NA" class="iraq-gov" data-id="IQ-NA" data-name="النجف"        points="96,398 138,380 155,306 160,354 195,376 192,442 138,454 88,440"/>
+                                      <polygon id="gov-IQ-TS" class="iraq-gov" data-id="IQ-TS" data-name="ذي قار"       points="195,376 230,370 277,354 315,347 309,420 280,442 225,448 192,418"/>
+                                      <polygon id="gov-IQ-MA" class="iraq-gov" data-id="IQ-MA" data-name="ميسان"        points="277,354 315,347 332,306 366,315 358,405 326,420 280,442"/>
+                                      <polygon id="gov-IQ-MU" class="iraq-gov" data-id="IQ-MU" data-name="المثنى"       points="192,442 225,448 280,442 326,420 318,490 160,490"/>
+                                      <polygon id="gov-IQ-BA" class="iraq-gov" data-id="IQ-BA" data-name="البصرة"       points="280,442 326,420 358,405 396,424 384,490 340,490 318,490"/>
+                                      <!-- Labels -->
+                                      <text class="iraq-gov-lbl" x="188" y="33">دهوك</text>
+                                      <text class="iraq-gov-lbl" x="105" y="100">نينوى</text>
+                                      <text class="iraq-gov-lbl" x="255" y="72">أربيل</text>
+                                      <text class="iraq-gov-lbl" x="300" y="118">السليمانية</text>
+                                      <text class="iraq-gov-lbl" x="228" y="180">كركوك</text>
+                                      <text class="iraq-gov-lbl" x="155" y="200">صلاح الدين</text>
+                                      <text class="iraq-gov-lbl" x="52"  y="330">الأنبار</text>
+                                      <text class="iraq-gov-lbl" x="270" y="238">ديالى</text>
+                                      <text class="iraq-gov-lbl" x="228" y="264">بغداد</text>
+                                      <text class="iraq-gov-lbl" x="220" y="310">بابل</text>
+                                      <text class="iraq-gov-lbl" x="168" y="272">كربلاء</text>
+                                      <text class="iraq-gov-lbl" x="292" y="315">واسط</text>
+                                      <text class="iraq-gov-lbl" x="193" y="347">القادسية</text>
+                                      <text class="iraq-gov-lbl" x="130" y="405">النجف</text>
+                                      <text class="iraq-gov-lbl" x="253" y="408">ذي قار</text>
+                                      <text class="iraq-gov-lbl" x="323" y="388">ميسان</text>
+                                      <text class="iraq-gov-lbl" x="248" y="468">المثنى</text>
+                                      <text class="iraq-gov-lbl" x="342" y="466">البصرة</text>
+                                    </svg>
+                                    <div class="map-legend">
+                                        <span>أقل</span>
+                                        <div class="legend-grad"></div>
+                                        <span>أكثر</span>
+                                    </div>
+                                </div>
+                                <!-- Top 5 bar chart -->
+                                <div>
+                                    <p style="font-size:.85rem;color:#888;margin-bottom:1rem">أعلى 5 محافظات — نسبة من زيارات العراق</p>
+                                    <div id="vs-regions"></div>
+                                </div>
                             </div>
                         </div>
 
@@ -1327,6 +1407,7 @@ function renderStats(books, news, essays) {
         { icon: '📚', value: books.length,   label: 'إجمالي الكتب' },
         { icon: '👤', value: uniqueAuthors,   label: 'مؤلف مختلف' },
         { icon: '📄', value: booksWithPdf,    label: 'كتاب بـ PDF',   sub: `${books.length - booksWithPdf} بدون PDF` },
+        { icon: '⬇️', value: '<span id="vs-downloads">—</span>', label: 'تحميل PDF', sub: 'آخر 30 يوماً', id: 'dl-card' },
         { icon: '📰', value: news.length,     label: 'خبر وفعالية' },
         { icon: '📝', value: essays.length,   label: 'مقال منشور' },
     ];
@@ -1417,31 +1498,72 @@ function renderEssayList(essays) {
 //  VISITOR STATS (from analytics.json)
 // ════════════════════════════════════════════════
 
-function vsBar(label, count, max, color = '#002366') {
-    const pct = max ? Math.round(count / max * 100) : 0;
+function vsBar(label, count, total, barMax, color = '#002366', showPct = false) {
+    const barPct  = barMax ? Math.round(count / barMax * 100) : 0;
+    const pctDisp = total  ? Math.round(count / total * 100)  : 0;
     return `<div class="gc-row">
         <span class="gc-label" title="${escHtml(label)}">${escHtml(label)}</span>
-        <div class="gc-bar-wrap"><div class="gc-bar-fill" style="width:${pct}%;background:${color}"></div></div>
+        <div class="gc-bar-wrap"><div class="gc-bar-fill" style="width:${barPct}%;background:${color}"></div></div>
         <span class="gc-count">${count}</span>
+        ${showPct ? `<span class="gc-pct">${pctDisp}%</span>` : ''}
     </div>`;
 }
 
-function vsList(items, key, color, emptyMsg) {
+function vsList(items, key, color, emptyMsg, { limit = 10, showPct = false, total = 0 } = {}) {
     if (!items || !items.length) return `<p class="gc-empty">${emptyMsg}</p>`;
-    const max = items[0][key] || 1;
+    const shown  = items.slice(0, limit);
+    const barMax = shown[0][key] || 1;
+    const grand  = total || shown.reduce((s,i) => s + (i[key]||0), 0);
+    return shown.map(i => vsBar(i.name || i.id || '—', i[key] || 0, grand, barMax, color, showPct)).join('');
+}
 
-    const pageNames = {
-        '/':            'الرئيسية',
-        '/index.html':  'الرئيسية',
-        '/news.html':   'الأخبار',
-        '/essays.html': 'المقالات',
-    };
+// ── Iraq map color helper ─────────────────────────────────────────────────────
+function govColor(count, max) {
+    if (!count || !max) return '#dce7f5';
+    const t = Math.min(Math.sqrt(count / max), 1);  // sqrt for better contrast
+    const r = Math.round(220 * (1 - t));
+    const g = Math.round(231 - 196 * t);
+    const b = Math.round(245 - 143 * t);
+    return `rgb(${r},${g},${b})`;
+}
 
-    return items.map(i => {
-        const rawLabel = i.name || i.id || '—';
-        const label = pageNames[rawLabel] || rawLabel;
-        return vsBar(label, i[key] || 0, max, color);
-    }).join('');
+function renderIraqMap(regions, totalIq) {
+    if (!regions || !regions.length) return;
+    const govMap = {};
+    regions.forEach(r => {
+        // match by Arabic name → IQ-XX code
+        const CODE_BY_NAME = {
+            'دهوك':'IQ-DA','نينوى':'IQ-NI','أربيل':'IQ-AR','السليمانية':'IQ-SU',
+            'كركوك':'IQ-KI','صلاح الدين':'IQ-SD','الأنبار':'IQ-AN','ديالى':'IQ-DI',
+            'بغداد':'IQ-BG','بابل':'IQ-BB','كربلاء':'IQ-KA','واسط':'IQ-WA',
+            'القادسية':'IQ-QA','النجف':'IQ-NA','ذي قار':'IQ-TS','ميسان':'IQ-MA',
+            'المثنى':'IQ-MU','البصرة':'IQ-BA',
+        };
+        const code = CODE_BY_NAME[r.name];
+        if (code) govMap[code] = r.count;
+    });
+
+    const maxCount = Math.max(...Object.values(govMap), 1);
+    const tooltip  = document.getElementById('map-tooltip');
+
+    document.querySelectorAll('.iraq-gov').forEach(el => {
+        const id    = el.dataset.id;
+        const name  = el.dataset.name;
+        const count = govMap[id] || 0;
+        const pct   = totalIq ? Math.round(count / totalIq * 100) : 0;
+
+        el.style.fill = govColor(count, maxCount);
+
+        el.addEventListener('mouseenter', ev => {
+            tooltip.style.display = 'block';
+            tooltip.innerHTML = `<strong>${name}</strong><br>${count ? count + ' زيارة — ' + pct + '%' : 'لا توجد بيانات'}`;
+        });
+        el.addEventListener('mousemove', ev => {
+            tooltip.style.top  = (ev.clientY - 70) + 'px';
+            tooltip.style.left = (ev.clientX - tooltip.offsetWidth / 2) + 'px';
+        });
+        el.addEventListener('mouseleave', () => { tooltip.style.display = 'none'; });
+    });
 }
 
 async function loadVisitorStats() {
@@ -1453,10 +1575,7 @@ async function loadVisitorStats() {
         const { content } = await ghGetRaw('js/analytics.json');
         const data = JSON.parse(content);
 
-        const hasData = data.updated && (
-            (data.hits      && data.hits.length)      ||
-            (data.locations && data.locations.length)
-        );
+        const hasData = data.updated && (data.locations && data.locations.length);
 
         document.getElementById('visitor-stats-loading').style.display = 'none';
 
@@ -1467,17 +1586,42 @@ async function loadVisitorStats() {
 
         // Updated timestamp
         if (data.updated) {
-            const d = new Date(data.updated);
+            const d   = new Date(data.updated);
             const fmt = d.toLocaleString('ar-IQ', { dateStyle: 'medium', timeStyle: 'short' });
-            document.getElementById('vs-updated').textContent = `آخر تحديث: ${fmt}  —  الفترة: ${data.period?.start || ''} إلى ${data.period?.end || ''}`;
+            document.getElementById('vs-updated').textContent =
+                `آخر تحديث: ${fmt}  —  الفترة: ${data.period?.start || ''} إلى ${data.period?.end || ''}`;
         }
 
-        document.getElementById('vs-pages').innerHTML     = vsList(data.hits,      'count', '#002366', 'لا توجد بيانات بعد.');
-        document.getElementById('vs-regions').innerHTML   = vsList(data.regions,   'count', '#c0392b', 'لا توجد بيانات عن المحافظات بعد.');
-        document.getElementById('vs-locations').innerHTML = vsList(data.locations, 'count', '#f7b733', 'لا توجد بيانات بعد.');
-        document.getElementById('vs-refs').innerHTML      = vsList(data.refs,      'count', '#17a2b8', 'لا توجد بيانات بعد.');
-        document.getElementById('vs-browsers').innerHTML  = vsList(data.browsers,  'count', '#28a745', 'لا توجد بيانات بعد.');
-        document.getElementById('vs-systems').innerHTML   = vsList(data.systems,   'count', '#6f42c1', 'لا توجد بيانات بعد.');
+        // Totals for percentage
+        const totalVisits = data.totalHits || data.locations.reduce((s,c) => s + c.count, 0);
+        const totalIq     = (data.locations.find(c => c.name === 'العراق') || {}).count || 0;
+
+        // Iraq map
+        renderIraqMap(data.regions, totalIq || totalVisits);
+
+        // Governorates: top 5 with percentage of IQ visits (or total if no IQ data)
+        const govBase = totalIq || totalVisits;
+        document.getElementById('vs-regions').innerHTML =
+            vsList(data.regions, 'count', '#c0392b', 'لا توجد بيانات عن المحافظات بعد.',
+                   { limit: 5, showPct: true, total: govBase });
+
+        // Countries with % of all visits
+        document.getElementById('vs-locations').innerHTML =
+            vsList(data.locations, 'count', '#f7b733', 'لا توجد بيانات بعد.',
+                   { limit: 10, showPct: true, total: totalVisits });
+
+        document.getElementById('vs-refs').innerHTML =
+            vsList(data.refs,     'count', '#17a2b8', 'لا توجد بيانات بعد.');
+        document.getElementById('vs-browsers').innerHTML =
+            vsList(data.browsers, 'count', '#28a745', 'لا توجد بيانات بعد.');
+        document.getElementById('vs-systems').innerHTML =
+            vsList(data.systems,  'count', '#6f42c1', 'لا توجد بيانات بعد.');
+
+        // Downloads stat card (if present)
+        if (typeof data.downloads === 'number') {
+            const dlEl = document.getElementById('vs-downloads');
+            if (dlEl) { dlEl.textContent = data.downloads; dlEl.closest('.stat-card').style.display = ''; }
+        }
 
         document.getElementById('visitor-stats-content').style.display = 'block';
 
