@@ -4,8 +4,6 @@ const GC_BASE = 'https://daralsard.goatcounter.com/api/v0';
 const TOKEN   = process.env.GC_TOKEN;
 const HEADERS = {
     Authorization: `Bearer ${TOKEN}`,
-    'Content-Type': 'application/json',
-    'Accept-Encoding': 'identity',
 };
 
 if (!TOKEN) { console.error('GC_TOKEN not set'); process.exit(1); }

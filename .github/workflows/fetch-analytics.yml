@@ -20,15 +20,6 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Test GoatCounter token
-        env:
-          GC_TOKEN: ${{ secrets.GC_TOKEN }}
-        run: |
-          echo "Token length: ${#GC_TOKEN}"
-          curl -s -o /dev/null -w "HTTP status: %{http_code}\n" \
-            -H "Authorization: Bearer $GC_TOKEN" \
-            https://daralsard.goatcounter.com/api/v0/me
-
       - name: Fetch GoatCounter + GA4 stats
         env:
           GC_TOKEN:           ${{ secrets.GC_TOKEN }}
