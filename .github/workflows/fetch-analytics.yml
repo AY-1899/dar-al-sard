@@ -20,9 +20,13 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Fetch GoatCounter stats
+      - name: Fetch GoatCounter + GA4 stats
         env:
-          GC_TOKEN: ${{ secrets.GC_TOKEN }}
+          GC_TOKEN:           ${{ secrets.GC_TOKEN }}
+          GA4_CLIENT_ID:      ${{ secrets.GA4_CLIENT_ID }}
+          GA4_CLIENT_SECRET:  ${{ secrets.GA4_CLIENT_SECRET }}
+          GA4_REFRESH_TOKEN:  ${{ secrets.GA4_REFRESH_TOKEN }}
+          GA4_PROPERTY_ID:    ${{ secrets.GA4_PROPERTY_ID }}
         run: node fetch-analytics.mjs
 
       - name: Commit updated analytics
