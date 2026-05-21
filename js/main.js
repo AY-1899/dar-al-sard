@@ -30,9 +30,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Render book cards
     booksData.forEach(book => {
-        // New books have a dedicated front cover image — display as-is (object-fit:contain).
-        // Old books use a single combined image + frontCoverSide class for CSS cropping.
-        const imgClass = (!book.imageBack && book.frontCoverSide) ? ` class="cover-${book.frontCoverSide}"` : '';
+        // New books: separate front/back images — show front as-is (contain).
+        // Legacy books: combined scan + frontCoverSide for CSS half-cropping.
+        // Old books (no imageBack, no frontCoverSide): default cover (centered crop).
+        const imgClass = book.imageBack
+            ? ' class="cover-new"'
+            : (book.frontCoverSide ? ` class="cover-${book.frontCoverSide}"` : '');
         const card = document.createElement('div');
         card.className = 'book-card';
         card.innerHTML = `
@@ -68,8 +71,10 @@ document.addEventListener('DOMContentLoaded', () => {
         frontImg.src = book.image;
 
         if (book.imageBack) {
-            // Separate back cover image — show as-is
+            // Separate dedicated images — show each in full without cropping
+            frontImg.className = 'cover-new';
             backImg.src = book.imageBack;
+            backImg.className = 'cover-new';
             backCover.style.display = '';
         } else if (book.frontCoverSide && book.frontCoverSide !== 'single') {
             // Legacy: same image, opposite half shown via object-position
