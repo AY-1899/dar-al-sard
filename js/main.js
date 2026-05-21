@@ -28,13 +28,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('book-modal');
     const closeBtn = document.getElementById('close-modal');
 
-    // Render book cards — front cover only via CSS class (cover-left / cover-right)
+    // Render book cards — front cover image displayed with object-fit: contain
     booksData.forEach(book => {
         const card = document.createElement('div');
         card.className = 'book-card';
         card.innerHTML = `
             <div class="card-img-wrapper">
-                <img src="${book.image}" alt="${book.title}" class="cover-${book.frontCoverSide}">
+                <img src="${book.image}" alt="${book.title}">
                 <div class="hover-overlay">
                     <button class="btn-icon" data-id="${book.id}">متابعة</button>
                 </div>
@@ -55,19 +55,30 @@ document.addEventListener('DOMContentLoaded', () => {
         const book = booksData.find(b => b.id === bookId);
         if (!book) return;
 
-        const isSingle = book.frontCoverSide === 'single';
-        const frontClass = `cover-${book.frontCoverSide}`;
-        const backClass  = isSingle ? '' : (book.frontCoverSide === 'left' ? 'cover-right' : 'cover-left');
-
-        const frontImg = document.getElementById('modal-front-img');
-        const backImg  = document.getElementById('modal-back-img');
+        const frontImg  = document.getElementById('modal-front-img');
+        const backImg   = document.getElementById('modal-back-img');
         const backCover = backImg.closest('.modal-cover');
 
+        // New-style books have separate imageBack; old-style use frontCoverSide CSS cropping
+        frontImg.className = '';
+        backImg.className  = '';
         frontImg.src = book.image;
-        frontImg.className = frontClass;
-        backImg.src  = book.image;
-        backImg.className = backClass;
-        backCover.style.display = isSingle ? 'none' : '';
+
+        if (book.imageBack) {
+            // Separate back cover image — show as-is
+            backImg.src = book.imageBack;
+            backCover.style.display = '';
+        } else if (book.frontCoverSide && book.frontCoverSide !== 'single') {
+            // Legacy: same image, opposite half shown via object-position
+            const backClass = book.frontCoverSide === 'left' ? 'cover-right' : 'cover-left';
+            frontImg.className = `cover-${book.frontCoverSide}`;
+            backImg.src = book.image;
+            backImg.className = backClass;
+            backCover.style.display = '';
+        } else {
+            // Single cover or no back
+            backCover.style.display = 'none';
+        }
 
         document.getElementById('modal-title').textContent     = book.title;
         document.getElementById('modal-author').textContent    = `المؤلف: ${book.author}`;

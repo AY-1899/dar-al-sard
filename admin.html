@@ -446,24 +446,29 @@
                     </div>
                 </div>
                 <div class="form-row">
-                    <label>جهة الغلاف الأمامي <span>(في الصورة)</span></label>
-                    <div class="radio-group">
-                        <label class="radio-option"><input type="radio" name="cover" value="left" checked> يسار (الأكثر شيوعاً)</label>
-                        <label class="radio-option"><input type="radio" name="cover" value="right"> يمين</label>
-                        <label class="radio-option"><input type="radio" name="cover" value="single"> صورة واحدة فقط</label>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <label>صورة الغلاف <span id="img-label-hint">*</span></label>
+                    <label>صورة الغلاف الأمامي <span id="img-label-hint">*</span></label>
                     <div id="img-current" class="current-file" style="display:none">
                         الصورة الحالية: <span id="img-current-name"></span>
                         — اختر صورة جديدة أدناه فقط إذا أردت تغييرها
                     </div>
                     <div class="file-upload" id="img-drop" onclick="document.getElementById('img-input').click()">
-                        <p>📷 <strong>انقر هنا</strong> لاختيار صورة الغلاف</p>
+                        <p>📷 <strong>انقر هنا</strong> لاختيار صورة الغلاف الأمامي</p>
                         <p>أو اسحب الصورة وأفلتها هنا</p>
                         <input type="file" id="img-input" accept="image/*" onchange="previewFile(this,'img-preview')">
                         <div class="file-preview" id="img-preview"></div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label>صورة الغلاف الخلفي <span>(اختياري)</span></label>
+                    <div id="img-back-current" class="current-file" style="display:none">
+                        الصورة الحالية: <span id="img-back-current-name"></span>
+                        — اختر صورة جديدة أدناه فقط إذا أردت تغييرها
+                    </div>
+                    <div class="file-upload" id="img-back-drop" onclick="document.getElementById('img-back-input').click()">
+                        <p>📷 <strong>انقر هنا</strong> لاختيار صورة الغلاف الخلفي</p>
+                        <p>أو اسحب الصورة وأفلتها هنا</p>
+                        <input type="file" id="img-back-input" accept="image/*" onchange="previewFile(this,'img-back-preview')">
+                        <div class="file-preview" id="img-back-preview"></div>
                     </div>
                 </div>
                 <div class="form-row">
@@ -773,8 +778,9 @@ window.addEventListener('load', () => {
         document.getElementById('app').style.display = 'block';
     }
     document.getElementById('token-input').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
-    setupDrop('img-drop',       'img-input', 'img-preview');
-    setupDrop('pdf-drop',       'pdf-input', 'pdf-preview');
+    setupDrop('img-drop',       'img-input',      'img-preview');
+    setupDrop('img-back-drop',  'img-back-input', 'img-back-preview');
+    setupDrop('pdf-drop',       'pdf-input',      'pdf-preview');
     // news images use multi-select; drag-drop opens file picker via onclick
 });
 
@@ -876,7 +882,8 @@ function parseBooks(js) {
 function serializeBooks(books) {
     const entries = books.map(b => {
         const esc = s => String(s).replace(/\\/g,'\\\\').replace(/"/g,'\\"').replace(/\n/g,'\\n');
-        return `    {\n        id: ${b.id},\n        title: "${esc(b.title)}",\n        author: "${esc(b.author)}",\n        year: "${esc(b.year)}",\n        image: "${esc(b.image)}",\n        frontCoverSide: "${esc(b.frontCoverSide)}",\n        pdf: "${esc(b.pdf||'')}",\n        price: "${esc(b.price||'')}",\n        description: "${esc(b.description||'')}"\n    }`;
+        const backLine = b.imageBack !== undefined ? `,\n        imageBack: "${esc(b.imageBack||'')}"` : '';
+        return `    {\n        id: ${b.id},\n        title: "${esc(b.title)}",\n        author: "${esc(b.author)}",\n        year: "${esc(b.year)}",\n        image: "${esc(b.image)}"${backLine},\n        pdf: "${esc(b.pdf||'')}",\n        price: "${esc(b.price||'')}",\n        description: "${esc(b.description||'')}"\n    }`;
     });
     return `const booksData = [\n${entries.join(',\n')}\n];\n`;
 }
@@ -888,14 +895,14 @@ async function submitBook() {
     const author = document.getElementById('f-author').value.trim();
     const year   = document.getElementById('f-year').value.trim() || '2026';
     const price  = document.getElementById('f-price').value.trim();
-    const cover  = document.querySelector('input[name=cover]:checked')?.value || 'left';
-    const desc   = document.getElementById('f-desc').value.trim();
-    const imgFile = document.getElementById('img-input').files[0];
-    const pdfFile = document.getElementById('pdf-input').files[0];
+    const desc        = document.getElementById('f-desc').value.trim();
+    const imgFile     = document.getElementById('img-input').files[0];
+    const imgBackFile = document.getElementById('img-back-input').files[0];
+    const pdfFile     = document.getElementById('pdf-input').files[0];
 
     if (!title)              return showStatus('book-status','⚠️ الرجاء إدخال عنوان الكتاب.','error');
     if (!author)             return showStatus('book-status','⚠️ الرجاء إدخال اسم المؤلف.','error');
-    if (!isEdit && !imgFile) return showStatus('book-status','⚠️ الرجاء اختيار صورة الغلاف.','error');
+    if (!isEdit && !imgFile) return showStatus('book-status','⚠️ الرجاء اختيار صورة الغلاف الأمامي.','error');
 
     const btn = document.getElementById('submit-btn');
     btn.disabled = true;
@@ -912,16 +919,29 @@ async function submitBook() {
         let imgPath;
         if (imgFile) {
             const ext  = imgFile.name.split('.').pop().toLowerCase();
-            const name = `${title} - ${author}.${ext}`;
-            imgPath = `assets/${name}`;
-            showStatus('book-status','⏳ جارٍ رفع صورة الغلاف...','loading');
+            imgPath = `assets/${title} - ${author} - front.${ext}`;
+            showStatus('book-status','⏳ جارٍ رفع صورة الغلاف الأمامي...','loading');
             const imgB64 = await fileToBase64(imgFile);
-            setProgress('book-progress-fill', 35);
-            let existSha; try { existSha = (await ghGet(imgPath)).sha; } catch {}
-            await ghPut(encodeURIComponent(imgPath), imgB64, `غلاف: ${title}`, existSha);
-            setProgress('book-progress-fill', 55);
+            setProgress('book-progress-fill', 30);
+            let existSha; try { existSha = (await ghGet(encodeURIComponent(imgPath))).sha; } catch {}
+            await ghPut(encodeURIComponent(imgPath), imgB64, `غلاف أمامي: ${title}`, existSha);
+            setProgress('book-progress-fill', 50);
         } else if (isEdit) {
             imgPath = allBooks.find(b => b.id === parseInt(editId))?.image || '';
+        }
+
+        let imgBackPath;
+        if (imgBackFile) {
+            const ext  = imgBackFile.name.split('.').pop().toLowerCase();
+            imgBackPath = `assets/${title} - ${author} - back.${ext}`;
+            showStatus('book-status','⏳ جارٍ رفع صورة الغلاف الخلفي...','loading');
+            const imgBackB64 = await fileToBase64(imgBackFile);
+            setProgress('book-progress-fill', 65);
+            let existSha; try { existSha = (await ghGet(encodeURIComponent(imgBackPath))).sha; } catch {}
+            await ghPut(encodeURIComponent(imgBackPath), imgBackB64, `غلاف خلفي: ${title}`, existSha);
+            setProgress('book-progress-fill', 75);
+        } else if (isEdit) {
+            imgBackPath = allBooks.find(b => b.id === parseInt(editId))?.imageBack;
         }
 
         let pdfPath;
@@ -940,7 +960,7 @@ async function submitBook() {
         }
 
         showStatus('book-status','⏳ جارٍ تحديث قاعدة البيانات...','loading');
-        const bookData = { title, author, year, image: imgPath, frontCoverSide: cover, pdf: pdfPath, price, description: desc };
+        const bookData = { title, author, year, image: imgPath, imageBack: imgBackPath, pdf: pdfPath, price, description: desc };
 
         if (isEdit) {
             const idx = allBooks.findIndex(b => b.id === parseInt(editId));
@@ -978,13 +998,15 @@ function resetBookForm() {
     ['f-title','f-author','f-price','f-desc'].forEach(id => document.getElementById(id).value = '');
     document.getElementById('f-year').value = '2026';
     document.getElementById('img-input').value = '';
+    document.getElementById('img-back-input').value = '';
     document.getElementById('pdf-input').value = '';
     document.getElementById('img-preview').innerHTML = '';
+    document.getElementById('img-back-preview').innerHTML = '';
     document.getElementById('pdf-preview').innerHTML = '';
     document.getElementById('img-current').style.display = 'none';
+    document.getElementById('img-back-current').style.display = 'none';
     document.getElementById('pdf-current').style.display = 'none';
     document.getElementById('img-label-hint').textContent = '*';
-    document.querySelector('input[name=cover][value=left]').checked = true;
     document.getElementById('book-form-title').textContent = '➕ إضافة كتاب جديد';
     document.getElementById('submit-btn').textContent = '✅ إضافة الكتاب إلى الموقع';
     document.getElementById('cancel-edit-btn').style.display = 'none';
@@ -1003,12 +1025,14 @@ function editBook(id) {
     document.getElementById('f-year').value   = book.year   || '2026';
     document.getElementById('f-price').value  = book.price  || '';
     document.getElementById('f-desc').value   = (book.description || '').replace(/\\n/g, '\n');
-    const coverEl = document.querySelector(`input[name=cover][value="${book.frontCoverSide||'left'}"]`);
-    if (coverEl) coverEl.checked = true;
     if (book.image) {
         document.getElementById('img-current-name').textContent = book.image.replace('assets/','');
         document.getElementById('img-current').style.display = 'block';
         document.getElementById('img-label-hint').textContent = '(اختياري عند التعديل)';
+    }
+    if (book.imageBack) {
+        document.getElementById('img-back-current-name').textContent = book.imageBack.replace('assets/','');
+        document.getElementById('img-back-current').style.display = 'block';
     }
     if (book.pdf) {
         document.getElementById('pdf-current-name').textContent = book.pdf.replace('assets/','');
