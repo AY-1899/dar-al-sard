@@ -1,0 +1,7 @@
+# Local credentials — never commit these
+CREDENTIALS.md
+*.json.bak
+
+# Google credential files
+white-list-*.json
+client_secret_*.json
