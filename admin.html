@@ -617,6 +617,28 @@
                     <textarea id="ef-abstract" placeholder="فقرة موجزة تعرّف بالمقال..." style="min-height:90px"></textarea>
                 </div>
                 <div class="form-row">
+                    <label>صورة المقال (الغلاف) <span>(اختياري)</span></label>
+                    <div id="ef-img-current" class="current-file" style="display:none">
+                        الصورة الحالية: <a id="ef-img-current-link" href="#" target="_blank"></a>
+                    </div>
+                    <div class="file-upload" id="ef-img-drop" onclick="document.getElementById('ef-img').click()">
+                        <span>📷 انقر لرفع صورة الغلاف</span>
+                        <input type="file" id="ef-img" accept="image/*" onchange="previewFile(this,'ef-img-preview')">
+                        <div class="file-preview" id="ef-img-preview"></div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label>صورة الكاتب <span>(اختياري)</span></label>
+                    <div id="ef-author-img-current" class="current-file" style="display:none">
+                        الصورة الحالية: <a id="ef-author-img-current-link" href="#" target="_blank"></a>
+                    </div>
+                    <div class="file-upload" id="ef-author-img-drop" onclick="document.getElementById('ef-author-img').click()">
+                        <span>🙂 انقر لرفع صورة الكاتب</span>
+                        <input type="file" id="ef-author-img" accept="image/*" onchange="previewFile(this,'ef-author-img-preview')">
+                        <div class="file-preview" id="ef-author-img-preview"></div>
+                    </div>
+                </div>
+                <div class="form-row">
                     <label>نص المقال كاملاً <span>*</span></label>
                     <textarea id="ef-body" placeholder="الصق نص المقال هنا..." style="min-height:250px"></textarea>
                 </div>
@@ -784,9 +806,11 @@ window.addEventListener('load', () => {
         document.getElementById('app').style.display = 'block';
     }
     document.getElementById('token-input').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
-    setupDrop('img-drop',       'img-input',      'img-preview');
-    setupDrop('img-back-drop',  'img-back-input', 'img-back-preview');
-    setupDrop('pdf-drop',       'pdf-input',      'pdf-preview');
+    setupDrop('img-drop',           'img-input',          'img-preview');
+    setupDrop('img-back-drop',      'img-back-input',     'img-back-preview');
+    setupDrop('pdf-drop',           'pdf-input',          'pdf-preview');
+    setupDrop('ef-img-drop',        'ef-img',             'ef-img-preview');
+    setupDrop('ef-author-img-drop', 'ef-author-img',      'ef-author-img-preview');
     // news images use multi-select; drag-drop opens file picker via onclick
 });
 
@@ -1362,7 +1386,9 @@ function parseEssays(js) {
 function serializeEssays(essays) {
     const entries = essays.map(e => {
         const esc = s => String(s).replace(/\\/g,'\\\\').replace(/"/g,'\\"').replace(/\n/g,'\\n');
-        return `    {\n        id: ${e.id},\n        title: "${esc(e.title)}",\n        author: "${esc(e.author)}",\n        date: "${esc(e.date)}",\n        abstract: "${esc(e.abstract||'')}",\n        body: "${esc(e.body||'')}"\n    }`;
+        const imgLine        = e.image       ? `,\n        image: "${esc(e.image)}"` : '';
+        const authorImgLine  = e.authorImage ? `,\n        authorImage: "${esc(e.authorImage)}"` : '';
+        return `    {\n        id: ${e.id},\n        title: "${esc(e.title)}",\n        author: "${esc(e.author)}",\n        date: "${esc(e.date)}",\n        abstract: "${esc(e.abstract||'')}",\n        body: "${esc(e.body||'')}"${imgLine}${authorImgLine}\n    }`;
     });
     return `const essaysData = [\n${entries.join(',\n')}\n];\n`;
 }
@@ -1391,9 +1417,38 @@ async function submitEssay() {
         const { content: js, sha } = await ghGetRaw('js/essays.js');
         essaysSha = sha;
         allEssays = parseEssays(js);
-        setProgress('essay-progress-fill', 40);
+        setProgress('essay-progress-fill', 20);
+
+        // Upload cover image if selected
+        let imgPath = isEdit ? (allEssays.find(e => e.id === parseInt(editId))?.image || '') : '';
+        const imgFile = document.getElementById('ef-img').files[0];
+        if (imgFile) {
+            const imgExt = imgFile.name.split('.').pop().toLowerCase();
+            const safeTitle = title.replace(/[\\/:*?"<>|]/g, '').trim().substring(0, 40);
+            const imgName = `assets/essays/${safeTitle}-${date}.${imgExt}`;
+            const imgB64 = await fileToBase64(imgFile);
+            await ghPut(encodeURIComponent(imgName), imgB64, `رفع صورة مقال: ${title}`);
+            imgPath = imgName;
+        }
+        setProgress('essay-progress-fill', 45);
+
+        // Upload author image if selected
+        let authorImgPath = isEdit ? (allEssays.find(e => e.id === parseInt(editId))?.authorImage || '') : '';
+        const authorImgFile = document.getElementById('ef-author-img').files[0];
+        if (authorImgFile) {
+            const aExt = authorImgFile.name.split('.').pop().toLowerCase();
+            const safeAuthor = author.replace(/[\\/:*?"<>|]/g, '').trim().substring(0, 30);
+            const aName = `assets/essays/author-${safeAuthor}.${aExt}`;
+            const aB64 = await fileToBase64(authorImgFile);
+            await ghPut(encodeURIComponent(aName), aB64, `رفع صورة كاتب: ${author}`);
+            authorImgPath = aName;
+        }
+        setProgress('essay-progress-fill', 65);
 
         const essayData = { title, author, date, abstract, body };
+        if (imgPath)       essayData.image       = imgPath;
+        if (authorImgPath) essayData.authorImage = authorImgPath;
+
         if (isEdit) {
             const idx = allEssays.findIndex(e => e.id === parseInt(editId));
             if (idx === -1) throw new Error('لم يُعثر على المقال.');
@@ -1402,7 +1457,7 @@ async function submitEssay() {
             const maxId = Math.max(0, ...allEssays.map(e => e.id));
             allEssays.push({ id: maxId + 1, ...essayData });
         }
-        setProgress('essay-progress-fill', 70);
+        setProgress('essay-progress-fill', 80);
 
         const newJs = serializeEssays(allEssays);
         await ghPut('js%2Fessays.js', utf8ToB64(newJs),
@@ -1430,6 +1485,10 @@ function resetEssayForm() {
     document.getElementById('essay-submit-btn').textContent = '✅ نشر المقال';
     document.getElementById('essay-cancel-btn').style.display = 'none';
     document.getElementById('essay-form-status').className = 'status';
+    clearFile('ef-img', 'ef-img-preview');
+    clearFile('ef-author-img', 'ef-author-img-preview');
+    document.getElementById('ef-img-current').style.display = 'none';
+    document.getElementById('ef-author-img-current').style.display = 'none';
 }
 function cancelEssayEdit() { resetEssayForm(); }
 
@@ -1443,6 +1502,18 @@ function editEssay(id) {
     document.getElementById('ef-date').value       = e.date     || '';
     document.getElementById('ef-abstract').value   = (e.abstract|| '').replace(/\\n/g, '\n');
     document.getElementById('ef-body').value       = (e.body    || '').replace(/\\n/g, '\n');
+    if (e.image) {
+        const el = document.getElementById('ef-img-current');
+        const lk = document.getElementById('ef-img-current-link');
+        lk.href = e.image; lk.textContent = e.image;
+        el.style.display = 'block';
+    }
+    if (e.authorImage) {
+        const el = document.getElementById('ef-author-img-current');
+        const lk = document.getElementById('ef-author-img-current-link');
+        lk.href = e.authorImage; lk.textContent = e.authorImage;
+        el.style.display = 'block';
+    }
     document.getElementById('essay-form-title').textContent  = `✏️ تعديل: ${e.title}`;
     document.getElementById('essay-submit-btn').textContent  = '💾 حفظ التغييرات';
     document.getElementById('essay-cancel-btn').style.display = '';

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مقال | دار السرد</title>
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .essay-page { max-width: 780px; margin: 0 auto; padding: 3rem 1.5rem 5rem; }
+
+        .essay-back-link {
+            display: inline-flex; align-items: center; gap: .4rem;
+            color: #002366; font-weight: 700; font-size: .95rem;
+            margin-bottom: 2rem; text-decoration: none;
+        }
+        .essay-back-link:hover { text-decoration: underline; }
+
+        .essay-hero {
+            width: 100%; max-height: 420px;
+            object-fit: cover; border-radius: 14px;
+            margin-bottom: 2.2rem;
+            box-shadow: 0 8px 32px rgba(0,35,102,.12);
+        }
+
+        .em-label {
+            display: inline-block; background: #f0f4f8;
+            color: #002366; font-size: .8rem; font-weight: 700;
+            padding: .25rem .9rem; border-radius: 20px; margin-bottom: 1rem;
+        }
+
+        .em-title {
+            font-size: 1.8rem; font-weight: 800;
+            color: #002366; line-height: 1.45; margin-bottom: 1.2rem;
+        }
+
+        .em-author-row {
+            display: flex; align-items: center; gap: .7rem;
+            margin-bottom: 2rem; flex-wrap: wrap;
+        }
+        .author-avatar {
+            width: 48px; height: 48px; border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 2px 8px rgba(0,0,0,.15);
+            flex-shrink: 0;
+        }
+        .em-author-info { font-size: .9rem; color: #555; }
+        .em-author-name { font-weight: 800; color: #333; display: block; }
+        .em-date { color: #999; font-size: .85rem; }
+
+        .em-abstract {
+            background: #f8f9fa; border-right: 4px solid #002366;
+            padding: 1.1rem 1.3rem; border-radius: 8px;
+            font-size: .97rem; color: #444; line-height: 1.95;
+            margin-bottom: 2rem; font-style: italic;
+        }
+
+        .em-divider {
+            border: none; border-top: 2px solid #f0f4f8;
+            margin-bottom: 2rem;
+        }
+
+        .em-body {
+            font-size: 1.05rem; color: #2a2a2a;
+            line-height: 2.1; white-space: pre-wrap;
+        }
+
+        .essay-not-found {
+            text-align: center; padding: 6rem 2rem; color: #aaa;
+        }
+        .essay-not-found .icon { font-size: 4rem; margin-bottom: 1rem; }
+        .essay-not-found p { font-size: 1.1rem; }
+    </style>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6MT6EYWZMD"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-6MT6EYWZMD');
+    </script>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="container nav-content">
+        <a href="index.html" class="brand">
+            <img src="assets/logo.png" alt="شعار دار السرد" class="logo-img" onerror="this.style.display='none'">
+            <span class="brand-text">دار السرد</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">الرئيسية</a></li>
+            <li><a href="index.html#books">الكتب</a></li>
+            <li><a href="news.html">الأخبار</a></li>
+            <li><a href="essays.html" class="active">المقالات</a></li>
+            <li><a href="index.html#contact">اتصل بنا</a></li>
+        </ul>
+    </div>
+</nav>
+
+<main class="essay-page" id="essay-content">
+    <div class="essay-not-found">
+        <div class="icon">⏳</div>
+        <p>جارٍ التحميل...</p>
+    </div>
+</main>
+
+<footer id="contact" class="footer">
+    <div class="container footer-content">
+        <div class="footer-info">
+            <img src="assets/logo.png" alt="شعار دار السرد" class="footer-logo" onerror="this.style.display='none'">
+            <h3>دار السرد</h3>
+            <p>وجهتك الأولى لاقتناء أفضل الكتب والمؤلفات.</p>
+        </div>
+        <div class="contact-info">
+            <h4>تواصل معنا</h4>
+            <ul>
+                <li><span class="icon">📞</span><a href="tel:07735926484" dir="ltr">07735926484</a></li>
+                <li><span class="icon">✉️</span><a href="mailto:alrtyu44@gmail.com" dir="ltr">alrtyu44@gmail.com</a></li>
+                <li><span class="icon">📍</span><span>شارع المتنبي, عمارة الوراقيين</span></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 دار السرد. جميع الحقوق محفوظة.</p>
+    </div>
+</footer>
+
+<script src="js/essays.js"></script>
+<script>
+function formatDate(d) {
+    if (!d) return '';
+    try {
+        return new Date(d + 'T00:00:00').toLocaleDateString('ar-IQ', { year:'numeric', month:'long', day:'numeric' });
+    } catch { return d; }
+}
+
+function renderEssay() {
+    const params = new URLSearchParams(location.search);
+    const id = parseInt(params.get('id'), 10);
+    const container = document.getElementById('essay-content');
+
+    if (!id || !essaysData) {
+        container.innerHTML = notFound();
+        return;
+    }
+
+    const e = essaysData.find(x => x.id === id);
+    if (!e) {
+        container.innerHTML = notFound();
+        return;
+    }
+
+    // Update page title
+    document.title = `${e.title} | دار السرد`;
+
+    const heroHtml = e.image
+        ? `<img src="${e.image}" alt="${e.title}" class="essay-hero">`
+        : '';
+
+    const avatarHtml = e.authorImage
+        ? `<img src="${e.authorImage}" alt="${e.author}" class="author-avatar">`
+        : '';
+
+    const abstractHtml = e.abstract
+        ? `<div class="em-abstract">${e.abstract}</div><hr class="em-divider">`
+        : '';
+
+    container.innerHTML = `
+        <a href="essays.html" class="essay-back-link">← العودة إلى المقالات</a>
+        ${heroHtml}
+        <span class="em-label">مقال</span>
+        <h1 class="em-title">${e.title}</h1>
+        <div class="em-author-row">
+            ${avatarHtml}
+            <div class="em-author-info">
+                <span class="em-author-name">✍️ ${e.author}</span>
+                <span class="em-date">${formatDate(e.date)}</span>
+            </div>
+        </div>
+        ${abstractHtml}
+        <p class="em-body">${e.body || ''}</p>
+    `;
+}
+
+function notFound() {
+    return `
+        <a href="essays.html" class="essay-back-link">← العودة إلى المقالات</a>
+        <div class="essay-not-found">
+            <div class="icon">📄</div>
+            <p>المقال غير موجود.</p>
+        </div>`;
+}
+
+renderEssay();
+</script>
+<script data-goatcounter="https://daralsard.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
