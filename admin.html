@@ -110,6 +110,12 @@
         .file-upload input[type=file] { display: none; }
         .file-preview { margin-top: .8rem; font-size: .9rem; color: #333; }
         .file-preview img { max-height: 90px; border-radius: 6px; margin-top: .4rem; display: block; margin-inline: auto; }
+        .file-preview-clear {
+            display: inline-block; margin-right: .5rem; padding: .15rem .55rem;
+            font-size: .78rem; background: #fee; color: #c00; border: 1px solid #f5c0c0;
+            border-radius: 5px; cursor: pointer; vertical-align: middle;
+        }
+        .file-preview-clear:hover { background: #fdd; }
         .current-file {
             background: #f0f4f8; border-radius: 8px; padding: .6rem 1rem;
             font-size: .85rem; color: #555; margin-bottom: .6rem;
@@ -798,16 +804,21 @@ function showTab(name) {
 }
 
 // ── FILE HELPERS ──────────────────────────────────
+function clearFile(inputId, previewId) {
+    document.getElementById(inputId).value = '';
+    document.getElementById(previewId).innerHTML = '';
+}
 function previewFile(input, previewId) {
     const preview = document.getElementById(previewId);
     if (!input.files || !input.files[0]) return;
     const file = input.files[0];
+    const clearBtn = `<span class="file-preview-clear" onclick="clearFile('${input.id}','${previewId}')">✕ إلغاء</span>`;
     if (file.type.startsWith('image/')) {
         const reader = new FileReader();
-        reader.onload = e => { preview.innerHTML = `<p>✅ ${file.name}</p><img src="${e.target.result}">`; };
+        reader.onload = e => { preview.innerHTML = `<p>✅ ${file.name} ${clearBtn}</p><img src="${e.target.result}">`; };
         reader.readAsDataURL(file);
     } else {
-        preview.innerHTML = `<p>✅ ${file.name}</p>`;
+        preview.innerHTML = `<p>✅ ${file.name} ${clearBtn}</p>`;
     }
 }
 function setupDrop(zoneId, inputId, previewId) {
