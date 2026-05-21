@@ -12,6 +12,11 @@ if (!TOKEN) { console.error('GC_TOKEN not set'); process.exit(1); }
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
+// Date range (module-scope so fetchStat and direct gcFetch calls share the same window)
+const gcEnd   = new Date(Date.now() + 24 * 60 * 60 * 1000); // tomorrow — end is exclusive in GoatCounter
+const gcStart = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+const gcFmt   = d => d.toISOString().split('T')[0];
+
 async function gcFetch(path) {
     const r = await fetch(`${GC_BASE}${path}`, { headers: HEADERS });
     const text = await r.text();
@@ -20,11 +25,8 @@ async function gcFetch(path) {
 }
 
 // Fetch one stat type, with retry on 429
-async function fetchStat(type, extra = '') {
-    const end   = new Date(Date.now() + 24 * 60 * 60 * 1000); // tomorrow — end is exclusive in GoatCounter
-    const start = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
-    const fmt   = d => d.toISOString().split('T')[0];
-    const url   = `/stats/${type}?start=${fmt(start)}&end=${fmt(end)}&limit=20${extra}`;
+async function fetchStat(type, extra = '', limit = 20) {
+    const url   = `/stats/${type}?start=${gcFmt(gcStart)}&end=${gcFmt(gcEnd)}&limit=${limit}${extra}`;
     for (let attempt = 0; attempt < 3; attempt++) {
         try {
             const data = await gcFetch(url);
@@ -50,8 +52,7 @@ console.log('✅ Token valid. User:', me.user?.email || '(ok)');
 // ── Fetch stats sequentially to avoid rate limiting ───────────────────────────
 const browsersData  = await fetchStat('browsers');            await sleep(600);
 const systemsData   = await fetchStat('systems');             await sleep(600);
-const locData       = await fetchStat('locations');           await sleep(600);
-const locIqData     = await fetchStat('locations', '&country=IQ');        await sleep(600);
+const locData       = await fetchStat('locations', '', 100);  await sleep(600);
 const refData       = await fetchStat('toprefs');             await sleep(600);
 const campData      = await fetchStat('campaigns');           await sleep(600);
 const langData      = await fetchStat('languages');
@@ -218,10 +219,10 @@ async function fetchGA4Regions() {
 }
 
 // ── Build output ──────────────────────────────────────────────────────────────
-const countries   = parseCountries(locData);
-const gcRegions   = parseRegions(locIqData);
-const ga4Regions  = gcRegions.length ? [] : await fetchGA4Regions(); // skip GA4 if GC has data
-const regions     = gcRegions.length ? gcRegions : (ga4Regions.length ? ga4Regions : parseRegions(locData));
+const countries  = parseCountries(locData);
+const gcRegions  = parseRegions(locData);                              // IQ-* codes from limit=100 fetch
+const ga4Regions = gcRegions.length ? [] : await fetchGA4Regions();   // GA4 only if GC has nothing
+const regions    = gcRegions.length ? gcRegions : ga4Regions;
 const totalHits  = countries.reduce((s, c) => s + c.count, 0);
 
 // Keep existing hits + monthly history from previous run
