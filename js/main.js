@@ -30,12 +30,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Render book cards
     booksData.forEach(book => {
-        // New books: separate front/back images — show front as-is (contain).
-        // Legacy books: combined scan + frontCoverSide for CSS half-cropping.
-        // Old books (no imageBack, no frontCoverSide): default cover (centered crop).
-        const imgClass = book.imageBack
-            ? ' class="cover-new"'
-            : (book.frontCoverSide ? ` class="cover-${book.frontCoverSide}"` : '');
+        // All books now have separate front/back image files.
+        // Card always uses default object-fit:cover (no class needed).
+        const imgClass = '';
         const card = document.createElement('div');
         card.className = 'book-card';
         card.innerHTML = `
@@ -65,26 +62,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const backImg   = document.getElementById('modal-back-img');
         const backCover = backImg.closest('.modal-cover');
 
-        // New-style books have separate imageBack; old-style use frontCoverSide CSS cropping
+        // Reset classes, then apply cover-new (contain) so each panel shows its full image
         frontImg.className = '';
         backImg.className  = '';
         frontImg.src = book.image;
 
         if (book.imageBack) {
-            // Separate dedicated images — show each in full without cropping
             frontImg.className = 'cover-new';
             backImg.src = book.imageBack;
             backImg.className = 'cover-new';
             backCover.style.display = '';
-        } else if (book.frontCoverSide && book.frontCoverSide !== 'single') {
-            // Legacy: same image, opposite half shown via object-position
-            const backClass = book.frontCoverSide === 'left' ? 'cover-right' : 'cover-left';
-            frontImg.className = `cover-${book.frontCoverSide}`;
-            backImg.src = book.image;
-            backImg.className = backClass;
-            backCover.style.display = '';
         } else {
-            // Single cover or no back
+            // Single cover — no back panel
             backCover.style.display = 'none';
         }
 
