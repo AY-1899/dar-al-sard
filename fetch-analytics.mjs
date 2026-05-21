@@ -58,14 +58,6 @@ const campData      = await fetchStat('campaigns');           await sleep(600);
 const langData      = await fetchStat('languages');
 
 // ── Arabic name maps ──────────────────────────────────────────────────────────
-const IQ_GOV = {
-    'IQ-AN':'الأنبار','IQ-BA':'البصرة', 'IQ-MU':'المثنى',
-    'IQ-QA':'القادسية','IQ-NA':'النجف', 'IQ-SD':'صلاح الدين',
-    'IQ-TS':'ذي قار', 'IQ-WA':'واسط',  'IQ-AR':'أربيل',
-    'IQ-BB':'بابل',   'IQ-BG':'بغداد', 'IQ-DA':'دهوك',
-    'IQ-DI':'ديالى',  'IQ-KA':'كربلاء','IQ-KI':'كركوك',
-    'IQ-MA':'ميسان',  'IQ-NI':'نينوى', 'IQ-SU':'السليمانية',
-};
 const COUNTRIES = {
     'IQ':'العراق',   'SA':'السعودية',  'AE':'الإمارات',
     'KW':'الكويت',   'JO':'الأردن',    'SY':'سوريا',
@@ -84,17 +76,6 @@ function parseCountries(data) {
         name:  COUNTRIES[r.id] || r.name || r.id || '—',
         count: r.count || 0,
     })).sort((a,b) => b.count - a.count).slice(0, 10);
-}
-
-function parseRegions(data) {
-    if (!data) return [];
-    // When filtered to IQ, GoatCounter returns subdivisions like IQ-BG
-    return (data.stats || [])
-        .filter(r => r.id && r.id.startsWith('IQ-'))
-        .map(r => ({
-            name:  IQ_GOV[r.id] || r.name || r.id,
-            count: r.count || 0,
-        })).sort((a,b) => b.count - a.count).slice(0, 10);
 }
 
 function parseBrowsers(data) {
@@ -219,22 +200,25 @@ async function fetchGA4Regions() {
 }
 
 // ── Build output ──────────────────────────────────────────────────────────────
-const countries  = parseCountries(locData);
-const gcRegions  = parseRegions(locData);                              // IQ-* codes from limit=100 fetch
-const ga4Regions = gcRegions.length ? [] : await fetchGA4Regions();   // GA4 only if GC has nothing
-const regions    = gcRegions.length ? gcRegions : ga4Regions;
-const totalHits  = countries.reduce((s, c) => s + c.count, 0);
+const countries = parseCountries(locData);
+const totalHits = countries.reduce((s, c) => s + c.count, 0);
 
-// Keep existing hits + monthly history from previous run
+// Keep existing hits + monthly history + regions (seed) from previous run
 const CACHE = 'js/analytics.json';
-let prevHits = [], monthly = [];
+let prevHits = [], monthly = [], prevRegions = [];
 if (existsSync(CACHE)) {
     try {
         const prev = JSON.parse(readFileSync(CACHE,'utf8'));
-        prevHits = prev.hits    || [];
-        monthly  = prev.monthly || [];
+        prevHits    = prev.hits    || [];
+        monthly     = prev.monthly || [];
+        prevRegions = prev.regions || [];
     } catch {}
 }
+
+// GA4 is the only source for Iraqi governorates.
+// If GA4 has data, use it. Otherwise keep whatever was seeded/stored previously.
+const ga4Regions = await fetchGA4Regions();
+const regions    = ga4Regions.length ? ga4Regions : prevRegions;
 
 // ── Accumulate monthly history ────────────────────────────────────────────────
 const now      = new Date();
