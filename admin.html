@@ -1673,9 +1673,9 @@ async function loadVisitorStats() {
         const govItems = ALL_GOVS.map(name => ({ name, count: govMap[name] || 0 }))
             .sort((a, b) => b.count - a.count);
         const govMax   = govItems[0]?.count || 0;
-        const govTotal = totalIq || govItems.reduce((s, g) => s + g.count, 0);
+        const govTotal = govItems.reduce((s, g) => s + g.count, 0);
         document.getElementById('vs-regions').innerHTML = govMax
-            ? govItems.map(g => vsBar(g.name, g.count, govTotal, govMax, '#002366', true)).join('')
+            ? govItems.filter(g => g.count > 0).map(g => vsBar(g.name, g.count, govTotal, govMax, '#002366', true)).join('')
             : `<p class="gc-empty">ستظهر بيانات المحافظات بعد تفعيل Google Analytics.</p>`;
 
         document.getElementById('visitor-stats-content').style.display = 'block';
