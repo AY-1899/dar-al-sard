@@ -1,16 +1,16 @@
 {
-  "updated": "2026-05-21T09:54:38.370Z",
+  "updated": "2026-05-21T19:11:28.168Z",
   "period": {
     "start": "2026-04-21",
     "end": "2026-05-21"
   },
-  "totalHits": 93,
+  "totalHits": 120,
   "downloads": 0,
   "hits": [],
   "locations": [
     {
       "name": "العراق",
-      "count": 63
+      "count": 88
     },
     {
       "name": "الولايات المتحدة",
@@ -25,12 +25,12 @@
       "count": 5
     },
     {
-      "name": "فرنسا",
-      "count": 2
+      "name": "الإمارات",
+      "count": 3
     },
     {
-      "name": "الإمارات",
-      "count": 1
+      "name": "فرنسا",
+      "count": 2
     },
     {
       "name": "المملكة المتحدة",
@@ -42,20 +42,35 @@
     }
   ],
   "regions": [
-    { "name": "بغداد", "count": 2 },
-    { "name": "النجف", "count": 1 },
-    { "name": "أربيل", "count": 1 },
-    { "name": "كربلاء", "count": 1 },
-    { "name": "السليمانية", "count": 1 }
+    {
+      "name": "بغداد",
+      "count": 2
+    },
+    {
+      "name": "النجف",
+      "count": 1
+    },
+    {
+      "name": "أربيل",
+      "count": 1
+    },
+    {
+      "name": "كربلاء",
+      "count": 1
+    },
+    {
+      "name": "السليمانية",
+      "count": 1
+    }
   ],
   "browsers": [
     {
       "name": "Chrome",
-      "count": 68
+      "count": 94
     },
     {
       "name": "Safari",
-      "count": 21
+      "count": 22
     },
     {
       "name": "Firefox",
@@ -65,15 +80,15 @@
   "systems": [
     {
       "name": "Android",
-      "count": 45
+      "count": 66
     },
     {
       "name": "Windows",
-      "count": 23
+      "count": 28
     },
     {
       "name": "iOS",
-      "count": 21
+      "count": 22
     },
     {
       "name": "macOS",
@@ -87,7 +102,7 @@
   "refs": [
     {
       "name": "facebook.com",
-      "count": 43
+      "count": 52
     },
     {
       "name": "Google",
@@ -97,11 +112,11 @@
   "languages": [
     {
       "name": "Arabic",
-      "count": 43
+      "count": 63
     },
     {
       "name": "English",
-      "count": 27
+      "count": 34
     },
     {
       "name": "(unknown)",
