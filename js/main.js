@@ -28,13 +28,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('book-modal');
     const closeBtn = document.getElementById('close-modal');
 
-    // Render book cards — front cover image displayed with object-fit: contain
+    // Render book cards
     booksData.forEach(book => {
+        // New books have a dedicated front cover image — display as-is (object-fit:contain).
+        // Old books use a single combined image + frontCoverSide class for CSS cropping.
+        const imgClass = (!book.imageBack && book.frontCoverSide) ? ` class="cover-${book.frontCoverSide}"` : '';
         const card = document.createElement('div');
         card.className = 'book-card';
         card.innerHTML = `
             <div class="card-img-wrapper">
-                <img src="${book.image}" alt="${book.title}">
+                <img src="${book.image}" alt="${book.title}"${imgClass}>
                 <div class="hover-overlay">
                     <button class="btn-icon" data-id="${book.id}">متابعة</button>
                 </div>
