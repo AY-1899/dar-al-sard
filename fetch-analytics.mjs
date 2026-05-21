@@ -48,11 +48,12 @@ const me = await gcFetch('/me');
 console.log('✅ Token valid. User:', me.user?.email || '(ok)');
 
 // ── Fetch stats sequentially to avoid rate limiting ───────────────────────────
-const browsersData  = await fetchStat('browsers');   await sleep(600);
-const systemsData   = await fetchStat('systems');    await sleep(600);
-const locData       = await fetchStat('locations');  await sleep(600);
-const refData       = await fetchStat('toprefs');    await sleep(600);
-const campData      = await fetchStat('campaigns');  await sleep(600);
+const browsersData  = await fetchStat('browsers');            await sleep(600);
+const systemsData   = await fetchStat('systems');             await sleep(600);
+const locData       = await fetchStat('locations');           await sleep(600);
+const locIqData     = await fetchStat('locations', '&country=IQ');        await sleep(600);
+const refData       = await fetchStat('toprefs');             await sleep(600);
+const campData      = await fetchStat('campaigns');           await sleep(600);
 const langData      = await fetchStat('languages');
 
 // ── Arabic name maps ──────────────────────────────────────────────────────────
@@ -217,9 +218,10 @@ async function fetchGA4Regions() {
 }
 
 // ── Build output ──────────────────────────────────────────────────────────────
-const countries  = parseCountries(locData);
-const ga4Regions = await fetchGA4Regions();
-const regions    = ga4Regions.length ? ga4Regions : parseRegions(locData);
+const countries   = parseCountries(locData);
+const gcRegions   = parseRegions(locIqData);
+const ga4Regions  = gcRegions.length ? [] : await fetchGA4Regions(); // skip GA4 if GC has data
+const regions     = gcRegions.length ? gcRegions : (ga4Regions.length ? ga4Regions : parseRegions(locData));
 const totalHits  = countries.reduce((s, c) => s + c.count, 0);
 
 // Keep existing hits + monthly history from previous run
