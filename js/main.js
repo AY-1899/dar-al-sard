@@ -28,8 +28,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('book-modal');
     const closeBtn = document.getElementById('close-modal');
 
-    // Render book cards
-    booksData.forEach(book => {
+    // Render book cards — newest (highest ID) first
+    const sortedBooks = [...booksData].sort((a, b) => b.id - a.id);
+    sortedBooks.forEach(book => {
         // All books now have separate front/back image files.
         // Card always uses default object-fit:cover (no class needed).
         const imgClass = '';
@@ -130,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let visible = 0;
 
         allCards.forEach((card, i) => {
-            const book = booksData[i];
+            const book = sortedBooks[i];
             const match = !query ||
                 book.title.toLowerCase().includes(query) ||
                 book.author.toLowerCase().includes(query);
