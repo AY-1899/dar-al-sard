@@ -53,7 +53,8 @@ const systemsData   = await fetchStat('systems');             await sleep(600);
 const locData       = await fetchStat('locations', '', 100);  await sleep(600);
 const refData       = await fetchStat('toprefs');             await sleep(600);
 const campData      = await fetchStat('campaigns');           await sleep(600);
-const langData      = await fetchStat('languages');
+const langData      = await fetchStat('languages');           await sleep(600);
+const hitsData      = await fetchStat('hits', '', 100);
 
 // ── Arabic name maps ──────────────────────────────────────────────────────────
 const COUNTRIES = {
@@ -234,7 +235,7 @@ const analytics = {
         end:   new Date().toISOString().split('T')[0],
     },
     totalHits,
-    downloads: 0,   // GoatCounter event API not available; tracked client-side only
+    downloads: (hitsData?.hits || []).find(h => h.path === '/pdf-download')?.count || 0,
     hits:      prevHits,
     locations: countries,
     regions,
