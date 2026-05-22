@@ -121,16 +121,27 @@ function parseRefs(topData, campData) {
 }
 
 async function fetchCityRegions() {
+    const sbUrl  = process.env.SUPABASE_URL;
+    const sbKey  = process.env.SUPABASE_ANON_KEY;
+    if (!sbUrl || !sbKey) { console.warn('  ⚠️  SUPABASE_URL/ANON_KEY not set'); return []; }
     try {
-        const data = await gcFetch(`/stats/cities?start=${gcFmt(gcStart)}&end=${gcFmt(gcEnd)}&limit=100`);
-        // Store cities as-is — no mapping, no data loss
-        const rows = (data?.stats || [])
-            .map(r => ({ name: r.name || r.id || '—', count: r.count || 0 }))
+        const since = gcFmt(gcStart);
+        const url   = `${sbUrl}/rest/v1/city_visits?select=city,country_code&country_code=eq.IQ&ts=gte.${since}`;
+        const r     = await fetch(url, { headers: { apikey: sbKey, Authorization: `Bearer ${sbKey}` } });
+        if (!r.ok) throw new Error(`${r.status}: ${await r.text()}`);
+        const rows  = await r.json();
+        // Aggregate by city
+        const counts = {};
+        for (const row of rows) {
+            counts[row.city] = (counts[row.city] || 0) + 1;
+        }
+        const result = Object.entries(counts)
+            .map(([name, count]) => ({ name, count }))
             .sort((a, b) => b.count - a.count);
-        console.log(`  ✅ Cities: ${rows.length} entries`);
-        return rows;
+        console.log(`  ✅ Supabase cities: ${result.length} Iraqi cities`);
+        return result;
     } catch (e) {
-        console.warn('  ⚠️  City regions failed:', e.message);
+        console.warn('  ⚠️  Supabase city fetch failed:', e.message);
         return [];
     }
 }
