@@ -1970,7 +1970,7 @@ async function loadVisitorStats() {
         const govTotal = govItems.reduce((s, g) => s + g.count, 0);
         document.getElementById('vs-regions').innerHTML = govMax
             ? govItems.filter(g => g.count > 0).map(g => vsBar(g.name, g.count, govTotal, govMax, '#002366', true)).join('')
-            : `<p class="gc-empty">ستظهر بيانات المحافظات بعد تفعيل Google Analytics.</p>`;
+            : `<p class="gc-empty">لا توجد بيانات محافظات بعد.</p>`;
 
         document.getElementById('visitor-stats-content').style.display = 'block';
 

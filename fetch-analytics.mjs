@@ -122,6 +122,7 @@ function parseRefs(topData, campData) {
 
 // ── GoatCounter cities → Iraqi governorates ───────────────────────────────────
 const CITY_TO_GOV = {
+    // Standard English names
     'Baghdad':'بغداد',       'Basra':'البصرة',        'Mosul':'نينوى',
     'Erbil':'أربيل',         'Sulaymaniyah':'السليمانية', 'Kirkuk':'كركوك',
     'Fallujah':'الأنبار',    'Ramadi':'الأنبار',      'Baqubah':'ديالى',
@@ -129,6 +130,14 @@ const CITY_TO_GOV = {
     'Najaf':'النجف',         'Kut':'واسط',            'Amarah':'ميسان',
     'Samawah':'المثنى',      'Nasiriyah':'ذي قار',    'Diwaniyah':'القادسية',
     'Tikrit':'صلاح الدين',   'Duhok':'دهوك',          'Babil':'بابل',
+    // GoatCounter's actual city/region name variants
+    'An Najaf':'النجف',      'Muhafazat Karbala\'':'كربلاء',
+    'Al Basrah':'البصرة',    'Ninawa':'نينوى',        'Ninawá':'نينوى',
+    'Salah ad Din':'صلاح الدين', 'Dhi Qar':'ذي قار',  'Al Muthanna':'المثنى',
+    'Al Qadisiyyah':'القادسية',  'Wasit':'واسط',       'Maysan':'ميسان',
+    'Al Anbar':'الأنبار',    'Diyala':'ديالى',        'Babylon':'بابل',
+    'Arbil':'أربيل',         'As Sulaymaniyah':'السليمانية',
+    'Dahuk':'دهوك',          'At Ta\'mim':'كركوك',
 };
 
 async function fetchCityRegions() {
