@@ -257,8 +257,15 @@
         }
         .vs-tog-btn.active { background:#002366; color:#fff; }
         .vs-tog-btn:hover:not(.active) { background:#e8eef8; }
-        #vs-traffic-chart { width:100%; overflow:hidden; }
+        #vs-traffic-chart { width:100%; overflow:hidden; position:relative; }
         #vs-traffic-chart svg { display:block; width:100%; }
+        #vs-chart-tooltip {
+            position:fixed; background:#002366; color:#fff;
+            padding:.3rem .7rem; border-radius:7px; font-size:.82rem; font-weight:700;
+            pointer-events:none; white-space:nowrap; z-index:9999;
+            box-shadow:0 2px 8px rgba(0,0,0,.25);
+            display:none;
+        }
 
         /* ── DRAFT BANNER ── */
         .draft-banner {
@@ -723,6 +730,7 @@
                             </div>
                             <div id="vs-traffic-chart"></div>
                         </div>
+                        <div id="vs-chart-tooltip"></div>
 
                         <!-- Monthly chart — hidden until ≥ 2 months of data -->
                         <div class="card" id="vs-monthly-card" style="display:none;margin-bottom:1.5rem">
@@ -1737,8 +1745,8 @@ function setTrafficView(view) {
 
     let items = [];
     if (view === 'daily') {
-        items = (window._vsDaily || []).slice(-30).map(d => ({
-            label: d.date.slice(5), hits: d.hits }));
+        items = (window._vsDaily || []).map(d => ({
+            label: d.date, hits: d.hits }));
     } else if (view === 'weekly') {
         const wm = {};
         (window._vsDaily || []).forEach(d => {
@@ -1811,9 +1819,11 @@ function renderTrafficChart(items) {
         xHtml += `<text x="${xPos(i).toFixed(1)}" y="${H-pad.bottom+16}" text-anchor="middle" font-size="10" fill="#aaa">${escHtml(d.label)}</text>`;
     });
 
-    // Dots with tooltips
+    // Dots with hover tooltips
     const dotsHtml = items.map((d, i) =>
-        `<circle cx="${xPos(i).toFixed(1)}" cy="${yPos(d.hits).toFixed(1)}" r="3.5" fill="#002366" stroke="#fff" stroke-width="2"><title>${escHtml(d.label)}: ${d.hits}</title></circle>`
+        `<circle cx="${xPos(i).toFixed(1)}" cy="${yPos(d.hits).toFixed(1)}" r="4" fill="#002366" stroke="#fff" stroke-width="2" style="cursor:pointer"
+            onmouseenter="showChartTip(event,'${escHtml(d.label)}: ${d.hits}')"
+            onmouseleave="hideChartTip()"/>`
     ).join('');
 
     el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">
@@ -1831,6 +1841,17 @@ function renderTrafficChart(items) {
         ${dotsHtml}
         ${xHtml}
     </svg>`;
+}
+
+function showChartTip(e, text) {
+    const tip = document.getElementById('vs-chart-tooltip');
+    tip.textContent = text;
+    tip.style.display = 'block';
+    tip.style.left = (e.clientX + 12) + 'px';
+    tip.style.top  = (e.clientY - 32) + 'px';
+}
+function hideChartTip() {
+    document.getElementById('vs-chart-tooltip').style.display = 'none';
 }
 
 // ── Iraqi governorate names (all 18) ─────────────────────────────────────────
