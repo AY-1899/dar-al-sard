@@ -45,28 +45,7 @@
       "count": 1
     }
   ],
-  "regions": [
-    {
-      "name": "بغداد",
-      "count": 2
-    },
-    {
-      "name": "النجف",
-      "count": 1
-    },
-    {
-      "name": "أربيل",
-      "count": 1
-    },
-    {
-      "name": "كربلاء",
-      "count": 1
-    },
-    {
-      "name": "السليمانية",
-      "count": 1
-    }
-  ],
+  "regions": [],
   "browsers": [
     {
       "name": "Chrome",

@@ -119,80 +119,32 @@ function parseRefs(topData, campData) {
         .slice(0, 10);
 }
 
-// ── GA4: fetch Iraqi governorate data ────────────────────────────────────────
-const GA4_CLIENT_ID     = process.env.GA4_CLIENT_ID;
-const GA4_CLIENT_SECRET = process.env.GA4_CLIENT_SECRET;
-const GA4_REFRESH_TOKEN = process.env.GA4_REFRESH_TOKEN;
-const GA4_PROPERTY_ID   = process.env.GA4_PROPERTY_ID;
-
-const GOV_AR = {
-    'Baghdad':'بغداد',         'Basra':'البصرة',          'Nineveh':'نينوى',
-    'Erbil':'أربيل',           'Sulaymaniyah':'السليمانية','Kirkuk':'كركوك',
-    'Anbar':'الأنبار',         'Diyala':'ديالى',           'Babylon':'بابل',
-    'Karbala':'كربلاء',        'Najaf':'النجف',            'Wasit':'واسط',
-    'Maysan':'ميسان',          'Muthanna':'المثنى',        'Dhi Qar':'ذي قار',
-    'Qadisiyyah':'القادسية',   'Saladin':'صلاح الدين',     'Duhok':'دهوك',
-    'Al Anbar':'الأنبار',      'Dhī Qār':'ذي قار',
+// ── GoatCounter cities → Iraqi governorates ───────────────────────────────────
+const CITY_TO_GOV = {
+    'Baghdad':'بغداد',       'Basra':'البصرة',        'Mosul':'نينوى',
+    'Erbil':'أربيل',         'Sulaymaniyah':'السليمانية', 'Kirkuk':'كركوك',
+    'Fallujah':'الأنبار',    'Ramadi':'الأنبار',      'Baqubah':'ديالى',
+    'Hillah':'بابل',         'Al Hillah':'بابل',      'Karbala':'كربلاء',
+    'Najaf':'النجف',         'Kut':'واسط',            'Amarah':'ميسان',
+    'Samawah':'المثنى',      'Nasiriyah':'ذي قار',    'Diwaniyah':'القادسية',
+    'Tikrit':'صلاح الدين',   'Duhok':'دهوك',          'Babil':'بابل',
 };
 
-async function fetchGA4Regions() {
-    if (!GA4_CLIENT_ID || !GA4_CLIENT_SECRET || !GA4_REFRESH_TOKEN || !GA4_PROPERTY_ID) {
-        console.log('  ℹ️  GA4 secrets not set — skipping governorate fetch');
-        return [];
-    }
+async function fetchCityRegions() {
     try {
-        // Exchange refresh token for access token
-        const tokRes = await fetch('https://oauth2.googleapis.com/token', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: new URLSearchParams({
-                client_id:     GA4_CLIENT_ID,
-                client_secret: GA4_CLIENT_SECRET,
-                refresh_token: GA4_REFRESH_TOKEN,
-                grant_type:    'refresh_token',
-            }),
-        });
-        const { access_token } = await tokRes.json();
-        if (!access_token) throw new Error('No access token returned');
-
-        // Query GA4 Data API for regions within Iraq
-        const body = {
-            dateRanges: [{ startDate: '30daysAgo', endDate: 'today' }],
-            dimensions: [{ name: 'region' }],
-            metrics:    [{ name: 'sessions' }],
-            dimensionFilter: {
-                filter: {
-                    fieldName: 'country',
-                    stringFilter: { matchType: 'EXACT', value: 'Iraq' },
-                },
-            },
-            limit: 20,
-        };
-        const repRes = await fetch(
-            `https://analyticsdata.googleapis.com/v1beta/properties/${GA4_PROPERTY_ID}:runReport`,
-            {
-                method: 'POST',
-                headers: {
-                    Authorization:  `Bearer ${access_token}`,
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(body),
-            }
-        );
-        const report = await repRes.json();
-        if (!repRes.ok) throw new Error(JSON.stringify(report).slice(0, 200));
-
-        const rows = (report.rows || []).map(row => {
-            const raw   = row.dimensionValues?.[0]?.value || '';
-            const name  = GOV_AR[raw] || raw;
-            const count = parseInt(row.metricValues?.[0]?.value || '0', 10);
-            return { name, count };
-        }).filter(r => r.count > 0).sort((a,b) => b.count - a.count);
-
-        console.log(`  ✅ GA4 regions: ${rows.length} governorates`);
+        const data = await gcFetch(`/stats/cities?start=${gcFmt(gcStart)}&end=${gcFmt(gcEnd)}&limit=100`);
+        const govMap = {};
+        for (const r of (data?.stats || [])) {
+            const gov = CITY_TO_GOV[r.name];
+            if (gov) govMap[gov] = (govMap[gov] || 0) + (r.count || 0);
+        }
+        const rows = Object.entries(govMap)
+            .map(([name, count]) => ({ name, count }))
+            .sort((a, b) => b.count - a.count);
+        console.log(`  ✅ City→Gov regions: ${rows.length} governorates`);
         return rows;
     } catch (e) {
-        console.warn('  ⚠️  GA4 regions failed:', e.message);
+        console.warn('  ⚠️  City regions failed:', e.message);
         return [];
     }
 }
@@ -213,10 +165,9 @@ if (existsSync(CACHE)) {
     } catch {}
 }
 
-// GA4 is the only source for Iraqi governorates.
-// If GA4 has data, use it. Otherwise keep whatever was seeded/stored previously.
-const ga4Regions = await fetchGA4Regions();
-const regions    = ga4Regions.length ? ga4Regions : prevRegions;
+// GoatCounter cities → governorates. Fall back to previous data if fetch fails.
+const cityRegions = await fetchCityRegions();
+const regions     = cityRegions.length ? cityRegions : prevRegions;
 
 // ── Accumulate monthly history ────────────────────────────────────────────────
 const now      = new Date();
