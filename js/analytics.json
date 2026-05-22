@@ -1,16 +1,16 @@
 {
-  "updated": "2026-05-22T10:40:27.539Z",
+  "updated": "2026-05-22T11:08:04.440Z",
   "period": {
     "start": "2026-04-22",
     "end": "2026-05-22"
   },
-  "totalHits": 140,
-  "downloads": 1,
+  "totalHits": 142,
+  "downloads": 2,
   "hits": [],
   "locations": [
     {
       "name": "العراق",
-      "count": 98
+      "count": 100
     },
     {
       "name": "الولايات المتحدة",
@@ -90,6 +90,10 @@
     {
       "name": "Google",
       "count": 6
+    },
+    {
+      "name": "bing.com",
+      "count": 2
     }
   ],
   "languages": [
@@ -99,7 +103,7 @@
     },
     {
       "name": "English",
-      "count": 39
+      "count": 41
     },
     {
       "name": "(unknown)",
