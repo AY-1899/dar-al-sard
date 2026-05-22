@@ -248,6 +248,18 @@
         .gc-total-row strong { color: #002366; font-size: 1.1rem; }
         .gc-empty { color: #aaa; font-size: .88rem; padding: .5rem 0; }
 
+        /* ── TRAFFIC GRAPH ── */
+        .vs-toggle { display:flex; gap:.4rem; }
+        .vs-tog-btn {
+            padding:.35rem .9rem; border-radius:8px; border:1.5px solid #002366;
+            background:#fff; color:#002366; font-family:inherit; font-size:.85rem;
+            font-weight:700; cursor:pointer; transition:background .2s,color .2s;
+        }
+        .vs-tog-btn.active { background:#002366; color:#fff; }
+        .vs-tog-btn:hover:not(.active) { background:#e8eef8; }
+        #vs-traffic-chart { width:100%; overflow:hidden; }
+        #vs-traffic-chart svg { display:block; width:100%; }
+
         /* ── DRAFT BANNER ── */
         .draft-banner {
             display: flex; align-items: center; justify-content: space-between;
@@ -695,6 +707,22 @@
                     <div id="visitor-stats-content" style="display:none">
 
                         <div id="vs-updated" style="text-align:left;font-size:.95rem;color:#222;margin-bottom:1rem"></div>
+
+                        <!-- Traffic graph — daily / weekly / monthly -->
+                        <div class="card" id="vs-traffic-card" style="margin-bottom:1.5rem">
+                            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.8rem;margin-bottom:1.2rem">
+                                <div>
+                                    <h2 class="card-title" style="margin:0">📊 إجمالي الزيارات</h2>
+                                    <div id="vs-total-label" style="font-size:2rem;font-weight:800;color:#002366;margin-top:.3rem">0</div>
+                                </div>
+                                <div class="vs-toggle">
+                                    <button class="vs-tog-btn active" onclick="setTrafficView('daily')">يومي</button>
+                                    <button class="vs-tog-btn" onclick="setTrafficView('weekly')">أسبوعي</button>
+                                    <button class="vs-tog-btn" onclick="setTrafficView('monthly')">شهري</button>
+                                </div>
+                            </div>
+                            <div id="vs-traffic-chart"></div>
+                        </div>
 
                         <!-- Monthly chart — hidden until ≥ 2 months of data -->
                         <div class="card" id="vs-monthly-card" style="display:none;margin-bottom:1.5rem">
@@ -1701,6 +1729,103 @@ function vsList(items, key, color, emptyMsg, { limit = 10, showPct = false, tota
     return shown.map(i => vsBar(i.name || i.id || '—', i[key] || 0, grand, barMax, color, showPct)).join('');
 }
 
+// ── Traffic graph ─────────────────────────────────────────────────────────────
+function setTrafficView(view) {
+    document.querySelectorAll('.vs-tog-btn').forEach(b =>
+        b.classList.toggle('active',
+            b.textContent.trim() === {daily:'يومي', weekly:'أسبوعي', monthly:'شهري'}[view]));
+
+    let items = [];
+    if (view === 'daily') {
+        items = (window._vsDaily || []).slice(-30).map(d => ({
+            label: d.date.slice(5), hits: d.hits }));
+    } else if (view === 'weekly') {
+        const wm = {};
+        (window._vsDaily || []).forEach(d => {
+            const dt = new Date(d.date + 'T00:00:00');
+            const ws = new Date(dt);
+            ws.setDate(dt.getDate() - dt.getDay());
+            const k = ws.toISOString().slice(0, 10);
+            wm[k] = (wm[k] || 0) + d.hits;
+        });
+        items = Object.entries(wm).sort().slice(-12)
+            .map(([k, v]) => ({ label: k.slice(5), hits: v }));
+    } else {
+        items = (window._vsMonthly || []).map(m => ({
+            label: new Date(m.month + '-02')
+                .toLocaleDateString('ar-IQ', { month: 'short', year: '2-digit' }),
+            hits: m.hits }));
+    }
+    renderTrafficChart(items);
+}
+
+function renderTrafficChart(items) {
+    const el = document.getElementById('vs-traffic-chart');
+    if (!items || !items.length) {
+        el.innerHTML = '<p class="gc-empty">لا توجد بيانات كافية بعد.</p>';
+        return;
+    }
+
+    const W = 600, H = 220;
+    const pad = { top: 16, right: 16, bottom: 40, left: 44 };
+    const cW = W - pad.left - pad.right;
+    const cH = H - pad.top  - pad.bottom;
+
+    const maxVal = Math.max(...items.map(i => i.hits), 1);
+    const yMax   = Math.ceil(maxVal / 5) * 5 || 5;
+    const yTicks = 4;
+
+    const xPos = i => pad.left + (items.length < 2 ? cW / 2 : i / (items.length - 1) * cW);
+    const yPos = v => pad.top + cH - (v / yMax * cH);
+
+    // Area fill path
+    const linePts = items.map((d, i) => `${xPos(i).toFixed(1)},${yPos(d.hits).toFixed(1)}`).join(' ');
+    const areaPath =
+        `M${xPos(0).toFixed(1)},${yPos(items[0].hits).toFixed(1)} ` +
+        items.slice(1).map((d, i) => `L${xPos(i+1).toFixed(1)},${yPos(d.hits).toFixed(1)}`).join(' ') +
+        ` L${xPos(items.length-1).toFixed(1)},${(pad.top+cH).toFixed(1)}` +
+        ` L${xPos(0).toFixed(1)},${(pad.top+cH).toFixed(1)} Z`;
+
+    // Y-axis gridlines + labels
+    let yHtml = '';
+    for (let t = 0; t <= yTicks; t++) {
+        const v = Math.round(yMax / yTicks * t);
+        const y = yPos(v).toFixed(1);
+        yHtml += `<line x1="${pad.left}" y1="${y}" x2="${W - pad.right}" y2="${y}" stroke="#f0f4f8" stroke-width="1"/>`;
+        yHtml += `<text x="${pad.left - 6}" y="${y}" text-anchor="end" dominant-baseline="middle" font-size="10" fill="#999">${v}</text>`;
+    }
+
+    // X-axis labels (auto-thin to avoid overlap)
+    const maxLabels = Math.floor(cW / 42);
+    const step = Math.max(1, Math.ceil(items.length / maxLabels));
+    let xHtml = '';
+    items.forEach((d, i) => {
+        if (i % step !== 0 && i !== items.length - 1) return;
+        xHtml += `<text x="${xPos(i).toFixed(1)}" y="${H - pad.bottom + 14}" text-anchor="middle" font-size="10" fill="#888">${escHtml(d.label)}</text>`;
+    });
+
+    // Dots with tooltips
+    const dotsHtml = items.map((d, i) =>
+        `<circle cx="${xPos(i).toFixed(1)}" cy="${yPos(d.hits).toFixed(1)}" r="3" fill="#002366" stroke="#fff" stroke-width="1.5"><title>${escHtml(d.label)}: ${d.hits}</title></circle>`
+    ).join('');
+
+    el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#002366" stop-opacity=".2"/>
+                <stop offset="100%" stop-color="#002366" stop-opacity=".02"/>
+            </linearGradient>
+        </defs>
+        ${yHtml}
+        <line x1="${pad.left}" y1="${pad.top}" x2="${pad.left}" y2="${pad.top+cH}" stroke="#ddd" stroke-width="1"/>
+        <line x1="${pad.left}" y1="${pad.top+cH}" x2="${W-pad.right}" y2="${pad.top+cH}" stroke="#ddd" stroke-width="1"/>
+        <path d="${areaPath}" fill="url(#areaGrad)"/>
+        <polyline points="${linePts}" fill="none" stroke="#002366" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+        ${dotsHtml}
+        ${xHtml}
+    </svg>`;
+}
+
 // ── Iraqi governorate names (all 18) ─────────────────────────────────────────
 const ALL_GOVS = [
     'بغداد','البصرة','نينوى','أربيل','السليمانية','كركوك',
@@ -1733,6 +1858,13 @@ async function loadVisitorStats() {
             document.getElementById('vs-updated').textContent =
                 `آخر تحديث: ${fmt}  —  الفترة: ${data.period?.start || ''} إلى ${data.period?.end || ''}`;
         }
+
+        // Traffic graph
+        window._vsDaily   = data.daily   || [];
+        window._vsMonthly = data.monthly || [];
+        document.getElementById('vs-total-label').textContent =
+            (data.totalHits || 0).toLocaleString('ar-IQ');
+        setTrafficView('daily');
 
         // Totals for percentage
         const totalVisits = data.totalHits || data.locations.reduce((s,c) => s + c.count, 0);

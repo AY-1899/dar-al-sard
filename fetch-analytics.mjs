@@ -153,15 +153,16 @@ async function fetchCityRegions() {
 const countries = parseCountries(locData);
 const totalHits = countries.reduce((s, c) => s + c.count, 0);
 
-// Keep existing hits + monthly history + regions (seed) from previous run
+// Keep existing history from previous run
 const CACHE = 'js/analytics.json';
-let prevHits = [], monthly = [], prevRegions = [];
+let prevHits = [], monthly = [], prevRegions = [], prevDaily = [];
 if (existsSync(CACHE)) {
     try {
         const prev = JSON.parse(readFileSync(CACHE,'utf8'));
         prevHits    = prev.hits    || [];
         monthly     = prev.monthly || [];
         prevRegions = prev.regions || [];
+        prevDaily   = prev.daily   || [];
     } catch {}
 }
 
@@ -191,6 +192,34 @@ if (!monthly.find(m => m.month === prevKey)) {
     }
 }
 
+// ── Accumulate daily history (last 90 days) ───────────────────────────────────
+const today    = gcFmt(new Date());
+const day90Ago = gcFmt(new Date(Date.now() - 90 * 24 * 60 * 60 * 1000));
+
+let daily = prevDaily.filter(d => d.date >= day90Ago);
+
+const existingDays = new Set(daily.map(d => d.date));
+const toFetch = [];
+for (let i = 29; i >= 1; i--) {
+    const d = gcFmt(new Date(Date.now() - i * 24 * 60 * 60 * 1000));
+    if (!existingDays.has(d)) toFetch.push(d);
+}
+
+for (const date of toFetch) {
+    const nextDay = gcFmt(new Date(new Date(date + 'T00:00:00Z').getTime() + 24 * 60 * 60 * 1000));
+    try {
+        const d    = await gcFetch(`/stats/locations?start=${date}&end=${nextDay}&limit=100`);
+        const hits = (d?.stats || []).reduce((s, r) => s + (r.count || 0), 0);
+        daily.push({ date, hits });
+        console.log(`  📅 ${date}: ${hits} hits`);
+        await sleep(400);
+    } catch (e) {
+        console.warn(`  ⚠️  Daily fetch failed for ${date}:`, e.message);
+    }
+}
+daily.sort((a, b) => a.date.localeCompare(b.date));
+console.log(`  📅 Daily entries total: ${daily.length}`);
+
 // Languages
 function parseLangs(data) {
     if (!data) return [];
@@ -214,6 +243,7 @@ const analytics = {
     refs:      parseRefs(refData, campData),
     languages: parseLangs(langData),
     monthly,
+    daily,
 };
 
 writeFileSync(CACHE, JSON.stringify(analytics, null, 2), 'utf8');
