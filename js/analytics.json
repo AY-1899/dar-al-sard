@@ -1,20 +1,20 @@
 {
-  "updated": "2026-05-22T11:08:04.440Z",
+  "updated": "2026-05-22T14:17:34.227Z",
   "period": {
     "start": "2026-04-22",
     "end": "2026-05-22"
   },
-  "totalHits": 142,
+  "totalHits": 144,
   "downloads": 2,
   "hits": [],
   "locations": [
     {
       "name": "العراق",
-      "count": 100
+      "count": 101
     },
     {
       "name": "الولايات المتحدة",
-      "count": 15
+      "count": 16
     },
     {
       "name": "هولندا",
@@ -45,15 +45,20 @@
       "count": 1
     }
   ],
-  "regions": [],
+  "regions": [
+    {
+      "name": "As Sulaymaniyah",
+      "count": 1
+    }
+  ],
   "browsers": [
     {
       "name": "Chrome",
-      "count": 108
+      "count": 110
     },
     {
       "name": "Safari",
-      "count": 28
+      "count": 30
     },
     {
       "name": "Firefox",
@@ -67,11 +72,11 @@
     },
     {
       "name": "Windows",
-      "count": 32
+      "count": 34
     },
     {
       "name": "iOS",
-      "count": 28
+      "count": 30
     },
     {
       "name": "macOS",
@@ -85,7 +90,7 @@
   "refs": [
     {
       "name": "facebook.com",
-      "count": 59
+      "count": 60
     },
     {
       "name": "Google",
@@ -99,7 +104,7 @@
   "languages": [
     {
       "name": "Arabic",
-      "count": 73
+      "count": 74
     },
     {
       "name": "English",
@@ -107,7 +112,7 @@
     },
     {
       "name": "(unknown)",
-      "count": 21
+      "count": 22
     },
     {
       "name": "Dutch",
