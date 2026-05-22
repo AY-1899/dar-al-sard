@@ -235,7 +235,7 @@ const analytics = {
         end:   new Date().toISOString().split('T')[0],
     },
     totalHits,
-    downloads: (hitsData?.hits || []).find(h => h.path === '/pdf-download')?.count || 0,
+    downloads: (hitsData?.hits || []).find(h => h.path === 'pdf-download' || h.path === '/pdf-download')?.count || 0,
     hits:      prevHits,
     locations: countries,
     regions,
