@@ -1756,6 +1756,12 @@ function setTrafficView(view) {
                 .toLocaleDateString('ar-IQ', { month: 'short', year: '2-digit' }),
             hits: m.hits }));
     }
+
+    // Update the displayed total to match the selected period
+    const periodTotal = items.reduce((s, i) => s + i.hits, 0);
+    document.getElementById('vs-total-label').textContent =
+        periodTotal.toLocaleString('ar-IQ');
+
     renderTrafficChart(items);
 }
 
@@ -1766,23 +1772,41 @@ function renderTrafficChart(items) {
         return;
     }
 
-    const W = 600, H = 220;
-    const pad = { top: 16, right: 16, bottom: 40, left: 44 };
+    const W = 620, H = 240;
+    const pad = { top: 20, right: 20, bottom: 44, left: 48 };
     const cW = W - pad.left - pad.right;
     const cH = H - pad.top  - pad.bottom;
 
     const maxVal = Math.max(...items.map(i => i.hits), 1);
-    const yMax   = Math.ceil(maxVal / 5) * 5 || 5;
+    // Nice Y ceiling
+    const mag  = Math.pow(10, Math.floor(Math.log10(maxVal)));
+    const yMax = Math.ceil(maxVal / mag) * mag || 5;
     const yTicks = 4;
 
     const xPos = i => pad.left + (items.length < 2 ? cW / 2 : i / (items.length - 1) * cW);
     const yPos = v => pad.top + cH - (v / yMax * cH);
 
-    // Area fill path
-    const linePts = items.map((d, i) => `${xPos(i).toFixed(1)},${yPos(d.hits).toFixed(1)}`).join(' ');
-    const areaPath =
-        `M${xPos(0).toFixed(1)},${yPos(items[0].hits).toFixed(1)} ` +
-        items.slice(1).map((d, i) => `L${xPos(i+1).toFixed(1)},${yPos(d.hits).toFixed(1)}`).join(' ') +
+    // Smooth bezier curve (Catmull-Rom → cubic bezier conversion)
+    function smoothPath(pts) {
+        if (pts.length < 2) return `M${pts[0][0]},${pts[0][1]}`;
+        let d = `M${pts[0][0].toFixed(1)},${pts[0][1].toFixed(1)}`;
+        for (let i = 0; i < pts.length - 1; i++) {
+            const p0 = pts[Math.max(0, i - 1)];
+            const p1 = pts[i];
+            const p2 = pts[i + 1];
+            const p3 = pts[Math.min(pts.length - 1, i + 2)];
+            const cp1x = p1[0] + (p2[0] - p0[0]) / 6;
+            const cp1y = p1[1] + (p2[1] - p0[1]) / 6;
+            const cp2x = p2[0] - (p3[0] - p1[0]) / 6;
+            const cp2y = p2[1] - (p3[1] - p1[1]) / 6;
+            d += ` C${cp1x.toFixed(1)},${cp1y.toFixed(1)} ${cp2x.toFixed(1)},${cp2y.toFixed(1)} ${p2[0].toFixed(1)},${p2[1].toFixed(1)}`;
+        }
+        return d;
+    }
+
+    const pts = items.map((d, i) => [xPos(i), yPos(d.hits)]);
+    const linePath  = smoothPath(pts);
+    const areaPath  = linePath +
         ` L${xPos(items.length-1).toFixed(1)},${(pad.top+cH).toFixed(1)}` +
         ` L${xPos(0).toFixed(1)},${(pad.top+cH).toFixed(1)} Z`;
 
@@ -1791,36 +1815,37 @@ function renderTrafficChart(items) {
     for (let t = 0; t <= yTicks; t++) {
         const v = Math.round(yMax / yTicks * t);
         const y = yPos(v).toFixed(1);
-        yHtml += `<line x1="${pad.left}" y1="${y}" x2="${W - pad.right}" y2="${y}" stroke="#f0f4f8" stroke-width="1"/>`;
-        yHtml += `<text x="${pad.left - 6}" y="${y}" text-anchor="end" dominant-baseline="middle" font-size="10" fill="#999">${v}</text>`;
+        const label = v >= 1000 ? (v/1000).toFixed(v%1000===0?0:1)+'K' : v;
+        yHtml += `<line x1="${pad.left}" y1="${y}" x2="${W-pad.right}" y2="${y}" stroke="#eef1f6" stroke-width="1"/>`;
+        yHtml += `<text x="${pad.left-8}" y="${y}" text-anchor="end" dominant-baseline="middle" font-size="10" fill="#aaa">${label}</text>`;
     }
 
-    // X-axis labels (auto-thin to avoid overlap)
-    const maxLabels = Math.floor(cW / 42);
+    // X-axis labels (auto-thin)
+    const maxLabels = Math.floor(cW / 48);
     const step = Math.max(1, Math.ceil(items.length / maxLabels));
     let xHtml = '';
     items.forEach((d, i) => {
         if (i % step !== 0 && i !== items.length - 1) return;
-        xHtml += `<text x="${xPos(i).toFixed(1)}" y="${H - pad.bottom + 14}" text-anchor="middle" font-size="10" fill="#888">${escHtml(d.label)}</text>`;
+        xHtml += `<text x="${xPos(i).toFixed(1)}" y="${H-pad.bottom+16}" text-anchor="middle" font-size="10" fill="#aaa">${escHtml(d.label)}</text>`;
     });
 
     // Dots with tooltips
     const dotsHtml = items.map((d, i) =>
-        `<circle cx="${xPos(i).toFixed(1)}" cy="${yPos(d.hits).toFixed(1)}" r="3" fill="#002366" stroke="#fff" stroke-width="1.5"><title>${escHtml(d.label)}: ${d.hits}</title></circle>`
+        `<circle cx="${xPos(i).toFixed(1)}" cy="${yPos(d.hits).toFixed(1)}" r="3.5" fill="#002366" stroke="#fff" stroke-width="2"><title>${escHtml(d.label)}: ${d.hits}</title></circle>`
     ).join('');
 
-    el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">
+    el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="overflow:visible">
         <defs>
             <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#002366" stop-opacity=".2"/>
-                <stop offset="100%" stop-color="#002366" stop-opacity=".02"/>
+                <stop offset="0%" stop-color="#002366" stop-opacity=".18"/>
+                <stop offset="85%" stop-color="#002366" stop-opacity=".03"/>
+                <stop offset="100%" stop-color="#002366" stop-opacity="0"/>
             </linearGradient>
         </defs>
         ${yHtml}
-        <line x1="${pad.left}" y1="${pad.top}" x2="${pad.left}" y2="${pad.top+cH}" stroke="#ddd" stroke-width="1"/>
-        <line x1="${pad.left}" y1="${pad.top+cH}" x2="${W-pad.right}" y2="${pad.top+cH}" stroke="#ddd" stroke-width="1"/>
+        <line x1="${pad.left}" y1="${pad.top+cH}" x2="${W-pad.right}" y2="${pad.top+cH}" stroke="#dde" stroke-width="1"/>
         <path d="${areaPath}" fill="url(#areaGrad)"/>
-        <polyline points="${linePts}" fill="none" stroke="#002366" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+        <path d="${linePath}" fill="none" stroke="#002366" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
         ${dotsHtml}
         ${xHtml}
     </svg>`;
