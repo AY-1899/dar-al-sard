@@ -1768,7 +1768,7 @@ function setTrafficView(view) {
 function renderTrafficChart(items) {
     const el = document.getElementById('vs-traffic-chart');
     if (!items || !items.length) {
-        el.innerHTML = '<p class="gc-empty">لا توجد بيانات كافية بعد.</p>';
+        el.innerHTML = '<p class="gc-empty">شغّل سكريبت جلب الإحصائيات مرة واحدة لتعبئة البيانات التاريخية.</p>';
         return;
     }
 
@@ -1778,7 +1778,6 @@ function renderTrafficChart(items) {
     const cH = H - pad.top  - pad.bottom;
 
     const maxVal = Math.max(...items.map(i => i.hits), 1);
-    // Nice Y ceiling
     const mag  = Math.pow(10, Math.floor(Math.log10(maxVal)));
     const yMax = Math.ceil(maxVal / mag) * mag || 5;
     const yTicks = 4;
@@ -1786,27 +1785,10 @@ function renderTrafficChart(items) {
     const xPos = i => pad.left + (items.length < 2 ? cW / 2 : i / (items.length - 1) * cW);
     const yPos = v => pad.top + cH - (v / yMax * cH);
 
-    // Smooth bezier curve (Catmull-Rom → cubic bezier conversion)
-    function smoothPath(pts) {
-        if (pts.length < 2) return `M${pts[0][0]},${pts[0][1]}`;
-        let d = `M${pts[0][0].toFixed(1)},${pts[0][1].toFixed(1)}`;
-        for (let i = 0; i < pts.length - 1; i++) {
-            const p0 = pts[Math.max(0, i - 1)];
-            const p1 = pts[i];
-            const p2 = pts[i + 1];
-            const p3 = pts[Math.min(pts.length - 1, i + 2)];
-            const cp1x = p1[0] + (p2[0] - p0[0]) / 6;
-            const cp1y = p1[1] + (p2[1] - p0[1]) / 6;
-            const cp2x = p2[0] - (p3[0] - p1[0]) / 6;
-            const cp2y = p2[1] - (p3[1] - p1[1]) / 6;
-            d += ` C${cp1x.toFixed(1)},${cp1y.toFixed(1)} ${cp2x.toFixed(1)},${cp2y.toFixed(1)} ${p2[0].toFixed(1)},${p2[1].toFixed(1)}`;
-        }
-        return d;
-    }
-
-    const pts = items.map((d, i) => [xPos(i), yPos(d.hits)]);
-    const linePath  = smoothPath(pts);
-    const areaPath  = linePath +
+    const linePts  = items.map((d, i) => `${xPos(i).toFixed(1)},${yPos(d.hits).toFixed(1)}`).join(' ');
+    const areaPath =
+        `M${xPos(0).toFixed(1)},${yPos(items[0].hits).toFixed(1)} ` +
+        items.slice(1).map((d, i) => `L${xPos(i+1).toFixed(1)},${yPos(d.hits).toFixed(1)}`).join(' ') +
         ` L${xPos(items.length-1).toFixed(1)},${(pad.top+cH).toFixed(1)}` +
         ` L${xPos(0).toFixed(1)},${(pad.top+cH).toFixed(1)} Z`;
 
@@ -1834,7 +1816,7 @@ function renderTrafficChart(items) {
         `<circle cx="${xPos(i).toFixed(1)}" cy="${yPos(d.hits).toFixed(1)}" r="3.5" fill="#002366" stroke="#fff" stroke-width="2"><title>${escHtml(d.label)}: ${d.hits}</title></circle>`
     ).join('');
 
-    el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="overflow:visible">
+    el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">
         <defs>
             <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stop-color="#002366" stop-opacity=".18"/>
@@ -1845,7 +1827,7 @@ function renderTrafficChart(items) {
         ${yHtml}
         <line x1="${pad.left}" y1="${pad.top+cH}" x2="${W-pad.right}" y2="${pad.top+cH}" stroke="#dde" stroke-width="1"/>
         <path d="${areaPath}" fill="url(#areaGrad)"/>
-        <path d="${linePath}" fill="none" stroke="#002366" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+        <polyline points="${linePts}" fill="none" stroke="#002366" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
         ${dotsHtml}
         ${xHtml}
     </svg>`;
