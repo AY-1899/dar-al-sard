@@ -120,38 +120,14 @@ function parseRefs(topData, campData) {
         .slice(0, 10);
 }
 
-// ── GoatCounter cities → Iraqi governorates ───────────────────────────────────
-const CITY_TO_GOV = {
-    // Standard English names
-    'Baghdad':'بغداد',       'Basra':'البصرة',        'Mosul':'نينوى',
-    'Erbil':'أربيل',         'Sulaymaniyah':'السليمانية', 'Kirkuk':'كركوك',
-    'Fallujah':'الأنبار',    'Ramadi':'الأنبار',      'Baqubah':'ديالى',
-    'Hillah':'بابل',         'Al Hillah':'بابل',      'Karbala':'كربلاء',
-    'Najaf':'النجف',         'Kut':'واسط',            'Amarah':'ميسان',
-    'Samawah':'المثنى',      'Nasiriyah':'ذي قار',    'Diwaniyah':'القادسية',
-    'Tikrit':'صلاح الدين',   'Duhok':'دهوك',          'Babil':'بابل',
-    // GoatCounter's actual city/region name variants
-    'An Najaf':'النجف',      'Muhafazat Karbala\'':'كربلاء',
-    'Al Basrah':'البصرة',    'Ninawa':'نينوى',        'Ninawá':'نينوى',
-    'Salah ad Din':'صلاح الدين', 'Dhi Qar':'ذي قار',  'Al Muthanna':'المثنى',
-    'Al Qadisiyyah':'القادسية',  'Wasit':'واسط',       'Maysan':'ميسان',
-    'Al Anbar':'الأنبار',    'Diyala':'ديالى',        'Babylon':'بابل',
-    'Arbil':'أربيل',         'As Sulaymaniyah':'السليمانية',
-    'Dahuk':'دهوك',          'At Ta\'mim':'كركوك',
-};
-
 async function fetchCityRegions() {
     try {
         const data = await gcFetch(`/stats/cities?start=${gcFmt(gcStart)}&end=${gcFmt(gcEnd)}&limit=100`);
-        const govMap = {};
-        for (const r of (data?.stats || [])) {
-            const gov = CITY_TO_GOV[r.name];
-            if (gov) govMap[gov] = (govMap[gov] || 0) + (r.count || 0);
-        }
-        const rows = Object.entries(govMap)
-            .map(([name, count]) => ({ name, count }))
+        // Store cities as-is — no mapping, no data loss
+        const rows = (data?.stats || [])
+            .map(r => ({ name: r.name || r.id || '—', count: r.count || 0 }))
             .sort((a, b) => b.count - a.count);
-        console.log(`  ✅ City→Gov regions: ${rows.length} governorates`);
+        console.log(`  ✅ Cities: ${rows.length} entries`);
         return rows;
     } catch (e) {
         console.warn('  ⚠️  City regions failed:', e.message);
