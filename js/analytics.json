@@ -1,10 +1,10 @@
 {
-  "updated": "2026-05-22T09:40:06.383Z",
+  "updated": "2026-05-22T10:00:24.789Z",
   "period": {
     "start": "2026-04-22",
     "end": "2026-05-22"
   },
-  "totalHits": 139,
+  "totalHits": 140,
   "downloads": 0,
   "hits": [],
   "locations": [
@@ -21,12 +21,12 @@
       "count": 11
     },
     {
-      "name": "ألمانيا",
+      "name": "الإمارات",
       "count": 5
     },
     {
-      "name": "الإمارات",
-      "count": 4
+      "name": "ألمانيا",
+      "count": 5
     },
     {
       "name": "فرنسا",
@@ -53,7 +53,7 @@
     },
     {
       "name": "Safari",
-      "count": 27
+      "count": 28
     },
     {
       "name": "Firefox",
@@ -71,7 +71,7 @@
     },
     {
       "name": "iOS",
-      "count": 27
+      "count": 28
     },
     {
       "name": "macOS",
@@ -89,7 +89,7 @@
     },
     {
       "name": "Google",
-      "count": 5
+      "count": 6
     }
   ],
   "languages": [
@@ -99,7 +99,7 @@
     },
     {
       "name": "English",
-      "count": 38
+      "count": 39
     },
     {
       "name": "(unknown)",
