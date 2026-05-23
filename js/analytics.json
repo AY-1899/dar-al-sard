@@ -1,11 +1,12 @@
 {
-  "updated": "2026-05-23T11:36:37.749Z",
+  "updated": "2026-05-23T11:45:46.177Z",
   "period": {
     "start": "2026-04-23",
     "end": "2026-05-23"
   },
   "totalHits": 148,
-  "downloads": 2,
+  "downloads": 0,
+  "pdfDownloads": [],
   "hits": [],
   "locations": [
     {
@@ -49,24 +50,7 @@
       "count": 1
     }
   ],
-  "regions": [
-    {
-      "name": "As Sulaymaniyah",
-      "count": 1
-    },
-    {
-      "name": "Baghdad",
-      "count": 1
-    },
-    {
-      "name": "Erbil",
-      "count": 1
-    },
-    {
-      "name": "Sulaymaniyah",
-      "count": 1
-    }
-  ],
+  "regions": [],
   "browsers": [
     {
       "name": "Chrome",
