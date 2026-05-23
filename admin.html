@@ -1771,7 +1771,7 @@ function setTrafficView(view) {
     if (view === 'daily') {
         items = trimLeadingZeros(
             (window._vsDaily || []).map(d => ({ label: d.date, hits: d.hits }))
-        );
+        ).slice(-7);
     } else if (view === 'weekly') {
         const wm = {};
         (window._vsDaily || []).forEach(d => {
