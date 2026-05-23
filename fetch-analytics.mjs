@@ -124,7 +124,7 @@ function parseRefs(topData, campData) {
 function parsePdfDownloads(data) {
     if (!data) return { total: 0, books: [] };
     const books = (data.hits || [])
-        .filter(h => /^pdf\/\d+$/.test(h.path))
+        .filter(h => /^\/?pdf\/\d+$/.test(h.path))
         .map(h => ({ title: h.title || h.path, count: h.count || 0 }))
         .sort((a, b) => b.count - a.count);
     const total = books.reduce((s, b) => s + b.count, 0);

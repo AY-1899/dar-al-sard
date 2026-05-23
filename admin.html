@@ -1921,12 +1921,11 @@ async function loadVisitorStats() {
 
         // PDF downloads ranking
         const pdfBooks = data.pdfDownloads || [];
-        if (pdfBooks.length) {
-            const maxPdf = pdfBooks[0].count;
-            document.getElementById('vs-pdf-rank').innerHTML =
-                pdfBooks.map(b => vsBar(b.title, b.count, 0, maxPdf, '#002366', false)).join('');
-            document.getElementById('vs-pdf-card').style.display = 'block';
-        }
+        const maxPdf = pdfBooks.length ? pdfBooks[0].count : 0;
+        document.getElementById('vs-pdf-rank').innerHTML = pdfBooks.length
+            ? pdfBooks.map(b => vsBar(b.title, b.count, 0, maxPdf, '#002366', false)).join('')
+            : `<p class="gc-empty">لا توجد تحميلات مسجّلة بعد.</p>`;
+        document.getElementById('vs-pdf-card').style.display = 'block';
 
         // Traffic graph
         window._vsDaily   = data.daily   || [];
