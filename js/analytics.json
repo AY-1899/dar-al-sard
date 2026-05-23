@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-23T12:14:03.081Z",
+  "updated": "2026-05-23T13:02:10.640Z",
   "period": {
     "start": "2026-04-23",
     "end": "2026-05-23"
@@ -7,8 +7,10 @@
   "totalHits": 150,
   "downloads": 3,
   "pdfDownloads": [
-    { "title": "زهور الدمن", "count": 2 },
-    { "title": "الحمائم البيض", "count": 1 }
+    {
+      "title": "الحمائم البيض",
+      "count": 1
+    }
   ],
   "hits": [],
   "locations": [
