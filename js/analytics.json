@@ -7,10 +7,8 @@
   "totalHits": 150,
   "downloads": 3,
   "pdfDownloads": [
-    {
-      "title": "الحمائم البيض",
-      "count": 1
-    }
+    { "title": "زهور الدمن", "count": 2 },
+    { "title": "الحمائم البيض", "count": 1 }
   ],
   "hits": [],
   "locations": [
@@ -47,7 +45,7 @@
       "count": 1
     },
     {
-      "name": "Liechtenstein",
+      "name": "ليختنشتاين",
       "count": 1
     },
     {
