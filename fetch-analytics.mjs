@@ -54,7 +54,7 @@ const locData       = await fetchStat('locations', '', 100);  await sleep(600);
 const refData       = await fetchStat('toprefs');             await sleep(600);
 const campData      = await fetchStat('campaigns');           await sleep(600);
 const langData      = await fetchStat('languages');           await sleep(600);
-const hitsData      = await fetchStat('hits', '', 100);
+const hitsData      = await fetchStat('hits', '', 200);
 
 // ── Arabic name maps ──────────────────────────────────────────────────────────
 const COUNTRIES = {
@@ -120,30 +120,16 @@ function parseRefs(topData, campData) {
         .slice(0, 10);
 }
 
-async function fetchCityRegions() {
-    const sbUrl  = process.env.SUPABASE_URL;
-    const sbKey  = process.env.SUPABASE_ANON_KEY;
-    if (!sbUrl || !sbKey) { console.warn('  ⚠️  SUPABASE_URL/ANON_KEY not set'); return []; }
-    try {
-        const since = gcFmt(gcStart);
-        const url   = `${sbUrl}/rest/v1/city_visits?select=city,country_code&country_code=eq.IQ&ts=gte.${since}`;
-        const r     = await fetch(url, { headers: { apikey: sbKey, Authorization: `Bearer ${sbKey}` } });
-        if (!r.ok) throw new Error(`${r.status}: ${await r.text()}`);
-        const rows  = await r.json();
-        // Aggregate by city
-        const counts = {};
-        for (const row of rows) {
-            counts[row.city] = (counts[row.city] || 0) + 1;
-        }
-        const result = Object.entries(counts)
-            .map(([name, count]) => ({ name, count }))
-            .sort((a, b) => b.count - a.count);
-        console.log(`  ✅ Supabase cities: ${result.length} Iraqi cities`);
-        return result;
-    } catch (e) {
-        console.warn('  ⚠️  Supabase city fetch failed:', e.message);
-        return [];
-    }
+// ── PDF downloads per book ────────────────────────────────────────────────────
+function parsePdfDownloads(data) {
+    if (!data) return { total: 0, books: [] };
+    const books = (data.hits || [])
+        .filter(h => /^pdf\/\d+$/.test(h.path))
+        .map(h => ({ title: h.title || h.path, count: h.count || 0 }))
+        .sort((a, b) => b.count - a.count);
+    const total = books.reduce((s, b) => s + b.count, 0);
+    console.log(`  ✅ PDF downloads: ${total} total across ${books.length} books`);
+    return { total, books };
 }
 
 // ── Build output ──────────────────────────────────────────────────────────────
@@ -231,10 +217,11 @@ const analytics = {
         end:   new Date().toISOString().split('T')[0],
     },
     totalHits,
-    downloads: (hitsData?.hits || []).find(h => h.path === 'pdf-download' || h.path === '/pdf-download')?.count || 0,
-    hits:      prevHits,
-    locations: countries,
-    regions,
+    downloads:    parsePdfDownloads(hitsData).total,
+    pdfDownloads: parsePdfDownloads(hitsData).books,
+    hits:         prevHits,
+    locations:    countries,
+    regions:      [],
     browsers:  parseBrowsers(browsersData),
     systems:   parseSystems(systemsData),
     refs:      parseRefs(refData, campData),

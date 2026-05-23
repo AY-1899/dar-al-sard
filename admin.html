@@ -756,6 +756,12 @@
                             <div id="vs-monthly-chart"></div>
                         </div>
 
+                        <!-- PDF Downloads ranking -->
+                        <div class="card" id="vs-pdf-card" style="display:none;margin-bottom:1.5rem">
+                            <h2 class="card-title">⬇️ أكثر الكتب تحميلاً</h2>
+                            <div id="vs-pdf-rank"></div>
+                        </div>
+
                         <!-- Countries + Referrers row -->
                         <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem">
                             <div class="card" style="margin:0">
@@ -1912,6 +1918,15 @@ async function loadVisitorStats() {
         // PDF downloads
         document.getElementById('vs-downloads').textContent =
             (data.downloads || 0).toLocaleString('ar-IQ');
+
+        // PDF downloads ranking
+        const pdfBooks = data.pdfDownloads || [];
+        if (pdfBooks.length) {
+            const maxPdf = pdfBooks[0].count;
+            document.getElementById('vs-pdf-rank').innerHTML =
+                pdfBooks.map(b => vsBar(b.title, b.count, 0, maxPdf, '#002366', false)).join('');
+            document.getElementById('vs-pdf-card').style.display = 'block';
+        }
 
         // Traffic graph
         window._vsDaily   = data.daily   || [];

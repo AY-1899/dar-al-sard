@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
             pdfBtn.removeAttribute('hidden');
             pdfBtn.onclick = () => {
                 if (window.goatcounter && window.goatcounter.count)
-                    window.goatcounter.count({ path: '/pdf-download', title: 'تحميل: ' + book.title, event: true });
+                    window.goatcounter.count({ path: 'pdf/' + book.id, title: book.title });
             };
         } else {
             pdfBtn.setAttribute('hidden', '');

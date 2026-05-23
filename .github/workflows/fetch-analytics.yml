@@ -22,9 +22,7 @@ jobs:
 
       - name: Fetch GoatCounter stats
         env:
-          GC_TOKEN:          ${{ secrets.GC_TOKEN }}
-          SUPABASE_URL:      ${{ secrets.SUPABASE_URL }}
-          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          GC_TOKEN: ${{ secrets.GC_TOKEN }}
         run: node fetch-analytics.mjs
 
       - name: Commit updated analytics
