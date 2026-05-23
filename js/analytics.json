@@ -1,16 +1,16 @@
 {
-  "updated": "2026-05-22T14:17:34.227Z",
+  "updated": "2026-05-23T02:07:17.637Z",
   "period": {
-    "start": "2026-04-22",
-    "end": "2026-05-22"
+    "start": "2026-04-23",
+    "end": "2026-05-23"
   },
-  "totalHits": 144,
+  "totalHits": 147,
   "downloads": 2,
   "hits": [],
   "locations": [
     {
       "name": "العراق",
-      "count": 101
+      "count": 104
     },
     {
       "name": "الولايات المتحدة",
@@ -49,16 +49,28 @@
     {
       "name": "As Sulaymaniyah",
       "count": 1
+    },
+    {
+      "name": "Baghdad",
+      "count": 1
+    },
+    {
+      "name": "Erbil",
+      "count": 1
+    },
+    {
+      "name": "Sulaymaniyah",
+      "count": 1
     }
   ],
   "browsers": [
     {
       "name": "Chrome",
-      "count": 110
+      "count": 112
     },
     {
       "name": "Safari",
-      "count": 30
+      "count": 31
     },
     {
       "name": "Firefox",
@@ -68,7 +80,7 @@
   "systems": [
     {
       "name": "Android",
-      "count": 74
+      "count": 76
     },
     {
       "name": "Windows",
@@ -76,7 +88,7 @@
     },
     {
       "name": "iOS",
-      "count": 30
+      "count": 31
     },
     {
       "name": "macOS",
@@ -90,7 +102,7 @@
   "refs": [
     {
       "name": "facebook.com",
-      "count": 60
+      "count": 63
     },
     {
       "name": "Google",
@@ -104,11 +116,11 @@
   "languages": [
     {
       "name": "Arabic",
-      "count": 74
+      "count": 75
     },
     {
       "name": "English",
-      "count": 41
+      "count": 43
     },
     {
       "name": "(unknown)",
@@ -236,6 +248,10 @@
     {
       "date": "2026-05-21",
       "hits": 56
+    },
+    {
+      "date": "2026-05-22",
+      "hits": 14
     }
   ]
 }
