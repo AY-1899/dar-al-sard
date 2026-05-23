@@ -1924,12 +1924,6 @@ async function loadVisitorStats() {
         const totalVisits = data.totalHits || data.locations.reduce((s,c) => s + c.count, 0);
         const totalIq     = (data.locations.find(c => c.name === 'العراق') || {}).count || 0;
 
-        // Governorates sidebar note
-        document.getElementById('vs-regions').innerHTML =
-            `<p class="gc-empty" style="font-size:.82rem">
-                بيانات المحافظات غير متاحة من واجهة GoatCounter البرمجية.
-                الخريطة تعمل وستُلوَّن فور توفّر البيانات.
-             </p>`;
 
         // Countries with % of all visits
         document.getElementById('vs-locations').innerHTML =
