@@ -1,17 +1,22 @@
 {
-  "updated": "2026-05-23T12:05:58.712Z",
+  "updated": "2026-05-23T12:14:03.081Z",
   "period": {
     "start": "2026-04-23",
     "end": "2026-05-23"
   },
-  "totalHits": 148,
-  "downloads": 2,
-  "pdfDownloads": [],
+  "totalHits": 150,
+  "downloads": 3,
+  "pdfDownloads": [
+    {
+      "title": "الحمائم البيض",
+      "count": 1
+    }
+  ],
   "hits": [],
   "locations": [
     {
       "name": "العراق",
-      "count": 104
+      "count": 106
     },
     {
       "name": "الولايات المتحدة",
@@ -54,7 +59,7 @@
   "browsers": [
     {
       "name": "Chrome",
-      "count": 113
+      "count": 115
     },
     {
       "name": "Safari",
@@ -72,7 +77,7 @@
     },
     {
       "name": "Windows",
-      "count": 35
+      "count": 37
     },
     {
       "name": "iOS",
@@ -108,7 +113,7 @@
     },
     {
       "name": "English",
-      "count": 44
+      "count": 46
     },
     {
       "name": "(unknown)",
