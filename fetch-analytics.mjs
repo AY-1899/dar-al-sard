@@ -123,12 +123,18 @@ function parseRefs(topData, campData) {
 // ── PDF downloads per book ────────────────────────────────────────────────────
 function parsePdfDownloads(data) {
     if (!data) return { total: 0, books: [] };
-    const books = (data.hits || [])
+    const hits = data.hits || [];
+    // Per-book entries: path is pdf/{id} (new-style event tracking)
+    const books = hits
         .filter(h => /^\/?pdf\/\d+$/.test(h.path))
         .map(h => ({ title: h.title || h.path, count: h.count || 0 }))
         .sort((a, b) => b.count - a.count);
-    const total = books.reduce((s, b) => s + b.count, 0);
-    console.log(`  ✅ PDF downloads: ${total} total across ${books.length} books`);
+    // Also count old-style pdf-download events (single bucket, no per-book breakdown)
+    const oldTotal = hits
+        .filter(h => /^\/?pdf-download$/.test(h.path))
+        .reduce((s, h) => s + (h.count || 0), 0);
+    const total = books.reduce((s, b) => s + b.count, 0) + oldTotal;
+    console.log(`  ✅ PDF downloads: ${total} total (${books.length} books + ${oldTotal} legacy events)`);
     return { total, books };
 }
 
