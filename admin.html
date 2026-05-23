@@ -1770,7 +1770,7 @@ function setTrafficView(view) {
     let items = [];
     if (view === 'daily') {
         items = trimLeadingZeros(
-            (window._vsDaily || []).map(d => ({ label: d.date, hits: d.hits }))
+            (window._vsDaily || []).map(d => ({ label: d.date.slice(5), hits: d.hits }))
         ).slice(-7);
     } else if (view === 'weekly') {
         const wm = {};
