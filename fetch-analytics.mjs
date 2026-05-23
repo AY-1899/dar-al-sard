@@ -149,9 +149,6 @@ if (existsSync(CACHE)) {
     } catch {}
 }
 
-// GoatCounter cities → governorates. Fall back to previous data if fetch fails.
-const cityRegions = await fetchCityRegions();
-const regions     = cityRegions.length ? cityRegions : prevRegions;
 
 // ── Accumulate monthly history ────────────────────────────────────────────────
 const now      = new Date();
