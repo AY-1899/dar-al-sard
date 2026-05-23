@@ -1,10 +1,10 @@
 {
-  "updated": "2026-05-23T02:07:17.637Z",
+  "updated": "2026-05-23T08:06:35.479Z",
   "period": {
     "start": "2026-04-23",
     "end": "2026-05-23"
   },
-  "totalHits": 147,
+  "totalHits": 148,
   "downloads": 2,
   "hits": [],
   "locations": [
@@ -41,6 +41,10 @@
       "count": 1
     },
     {
+      "name": "Liechtenstein",
+      "count": 1
+    },
+    {
       "name": "سوريا",
       "count": 1
     }
@@ -66,7 +70,7 @@
   "browsers": [
     {
       "name": "Chrome",
-      "count": 112
+      "count": 113
     },
     {
       "name": "Safari",
@@ -84,7 +88,7 @@
     },
     {
       "name": "Windows",
-      "count": 34
+      "count": 35
     },
     {
       "name": "iOS",
@@ -120,7 +124,7 @@
     },
     {
       "name": "English",
-      "count": 43
+      "count": 44
     },
     {
       "name": "(unknown)",
