@@ -1909,6 +1909,10 @@ async function loadVisitorStats() {
                 `آخر تحديث: ${fmt}  —  الفترة: ${data.period?.start || ''} إلى ${data.period?.end || ''}`;
         }
 
+        // PDF downloads
+        document.getElementById('vs-downloads').textContent =
+            (data.downloads || 0).toLocaleString('ar-IQ');
+
         // Traffic graph
         window._vsDaily   = data.daily   || [];
         window._vsMonthly = data.monthly || [];
