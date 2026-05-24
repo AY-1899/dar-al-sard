@@ -147,6 +147,18 @@
 
 <script src="js/essays.js"></script>
 <script>
+// Redirect ?id=X to essay-X.html so the URL in the browser bar
+// becomes the canonical static page (which has proper OG image tags).
+(function () {
+    const id = new URLSearchParams(location.search).get('id');
+    if (id) {
+        const target = 'essay-' + id + '.html';
+        // Replace so the back button works correctly
+        history.replaceState(null, '', target);
+    }
+})();
+</script>
+<script>
 function formatDate(d) {
     if (!d) return '';
     try {
