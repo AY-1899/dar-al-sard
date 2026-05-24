@@ -152,6 +152,12 @@
 
 <script src="js/news.js"></script>
 <script>
+(function () {
+    const id = new URLSearchParams(location.search).get('id');
+    if (id) history.replaceState(null, '', 'news-' + id + '.html');
+})();
+</script>
+<script>
 function getImages(n) {
     if (Array.isArray(n.images) && n.images.length) return n.images;
     if (n.image) return [n.image];
