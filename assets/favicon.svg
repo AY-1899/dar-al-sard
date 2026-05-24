@@ -1,12 +1,4 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <!-- Dark blue background -->
-  <rect width="64" height="64" rx="8" fill="#002366"/>
-  <!-- Cyan arc -->
-  <path d="M10 42 Q32 58 54 42" stroke="#00bcd4" stroke-width="5" fill="none" stroke-linecap="round"/>
-  <!-- Yellow diamond top half (bright) -->
-  <polygon points="32,8 54,34 32,44 10,34" fill="#f7c948"/>
-  <!-- Yellow diamond bottom shading -->
-  <polygon points="32,44 54,34 32,38" fill="#b8860b"/>
-  <!-- Highlight on diamond -->
-  <polygon points="32,8 54,34 42,26" fill="#ffe680" opacity="0.5"/>
+  <rect width="64" height="64" rx="10" fill="#002366"/>
+  <text x="32" y="46" text-anchor="middle" font-family="Arial, sans-serif" font-size="42" font-weight="bold" fill="#f7c948">س</text>
 </svg>
