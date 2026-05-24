@@ -199,6 +199,11 @@ function renderArticle() {
     if (!n) { container.innerHTML = notFound(); return; }
 
     document.title = `${n.title} | دار السرد`;
+    document.querySelector('meta[name="description"]')?.setAttribute('content', (n.body || n.title || '').substring(0, 200));
+    document.querySelector('meta[property="og:title"]')?.setAttribute('content', `${n.title} | دار السرد`);
+    document.querySelector('meta[property="og:description"]')?.setAttribute('content', (n.body || '').substring(0, 200));
+    const _img = (Array.isArray(n.images) ? n.images[0] : n.image) || '';
+    if (_img) document.querySelector('meta[property="og:image"]')?.setAttribute('content', _img.startsWith('http') ? _img : `https://daralsard.com/${_img}`);
 
     _imgs = getImages(n);
     _idx  = 0;

@@ -175,8 +175,12 @@ function renderEssay() {
         return;
     }
 
-    // Update page title
+    // Update page title + meta for crawlers that execute JS
     document.title = `${e.title} | دار السرد`;
+    document.querySelector('meta[name="description"]')?.setAttribute('content', (e.abstract || e.title || '').substring(0, 200));
+    document.querySelector('meta[property="og:title"]')?.setAttribute('content', `${e.title} | دار السرد`);
+    document.querySelector('meta[property="og:description"]')?.setAttribute('content', (e.abstract || '').substring(0, 200));
+    if (e.image) document.querySelector('meta[property="og:image"]')?.setAttribute('content', e.image.startsWith('http') ? e.image : `https://daralsard.com/${e.image}`);
 
     const heroHtml = e.image
         ? `<img src="${e.image}" alt="${e.title}" class="essay-hero">`
