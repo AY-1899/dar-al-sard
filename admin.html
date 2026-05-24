@@ -546,8 +546,17 @@
         <div id="tab-list" style="display:none">
             <div class="card">
                 <h2 class="card-title">📚 قائمة الكتب المنشورة</h2>
-                <input class="list-search" type="text" id="book-list-search"
-                    placeholder="🔍 ابحث باسم الكتاب أو المؤلف..." oninput="filterBookList()">
+                <div style="display:flex;gap:.7rem;flex-wrap:wrap;margin-bottom:.5rem">
+                    <input class="list-search" style="flex:1;min-width:180px;margin-bottom:0" type="text" id="book-list-search"
+                        placeholder="🔍 ابحث باسم الكتاب أو المؤلف..." oninput="filterBookList()">
+                    <select id="book-list-sort" onchange="filterBookList()"
+                        style="padding:.55rem .9rem;border-radius:8px;border:1.5px solid #dde3f0;font-family:inherit;font-size:.9rem;color:#333;background:#fff;cursor:pointer">
+                        <option value="newest">⬇️ الأحدث أولاً</option>
+                        <option value="oldest">⬆️ الأقدم أولاً</option>
+                        <option value="alpha">🔤 أبجدي (أ–ي)</option>
+                        <option value="alpha-desc">🔤 أبجدي (ي–أ)</option>
+                    </select>
+                </div>
                 <div id="book-list-loading" style="text-align:center;color:#666;padding:2rem">⏳ جارٍ تحميل القائمة...</div>
                 <div id="book-list-content"></div>
                 <div class="status" id="book-list-status"></div>
@@ -1155,7 +1164,7 @@ async function deleteBook(id) {
         const newJs = serializeBooks(allBooks);
         await ghPut('js%2Fdata.js', utf8ToB64(newJs), `حذف كتاب: ${book.title}`, booksSha);
         showStatus('book-list-status', `✅ تم حذف كتاب "${book.title}" بنجاح.`, 'success');
-        renderBookList(allBooks);
+        filterBookList();
     } catch (err) {
         showStatus('book-list-status', `❌ فشل الحذف: ${err.message}`, 'error');
     }
@@ -1170,7 +1179,7 @@ async function loadBookList() {
         const { content: js, sha } = await ghGetRaw('js/data.js');
         booksSha = sha;
         allBooks = parseBooks(js);
-        renderBookList(allBooks);
+        filterBookList();
     } catch(err) {
         document.getElementById('book-list-loading').innerHTML =
             `<p style="color:#c0392b">❌ فشل تحميل القائمة: ${err.message}</p>`;
@@ -1199,9 +1208,16 @@ function renderBookList(books) {
 }
 
 function filterBookList() {
-    const q = document.getElementById('book-list-search').value.trim().toLowerCase();
-    renderBookList(q ? allBooks.filter(b =>
-        b.title.toLowerCase().includes(q) || b.author.toLowerCase().includes(q)) : allBooks);
+    const q    = document.getElementById('book-list-search').value.trim().toLowerCase();
+    const sort = document.getElementById('book-list-sort').value;
+    let books  = q ? allBooks.filter(b =>
+        b.title.toLowerCase().includes(q) || b.author.toLowerCase().includes(q))
+        : [...allBooks];
+    if (sort === 'newest')     books.sort((a, b) => b.id - a.id);
+    else if (sort === 'oldest') books.sort((a, b) => a.id - b.id);
+    else if (sort === 'alpha')  books.sort((a, b) => a.title.localeCompare(b.title, 'ar'));
+    else if (sort === 'alpha-desc') books.sort((a, b) => b.title.localeCompare(a.title, 'ar'));
+    renderBookList(books);
 }
 
 // ════════════════════════════════════════════════
