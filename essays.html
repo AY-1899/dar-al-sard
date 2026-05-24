@@ -164,7 +164,7 @@ function renderEssays() {
         const thumbHtml = e.image ? `<img src="${e.image}" alt="${e.title}" class="essay-card-img">` : '';
         const avatarHtml = e.authorImage ? `<img src="${e.authorImage}" alt="${e.author}" class="essay-author-avatar">` : '';
         return `
-        <a href="essay.html?id=${e.id}" class="essay-card">
+        <a href="essay-${e.id}.html" class="essay-card">
             ${thumbHtml}
             <div class="essay-card-body">
                 <div class="essay-title">${e.title}</div>
