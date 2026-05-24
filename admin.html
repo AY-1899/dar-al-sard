@@ -656,7 +656,9 @@
                     <label>صورة المقال (الغلاف) <span>(اختياري)</span></label>
                     <div id="ef-img-current" class="current-file" style="display:none">
                         الصورة الحالية: <a id="ef-img-current-link" href="#" target="_blank"></a>
+                        <span class="file-preview-clear" onclick="clearEssayImg()">✕ إزالة</span>
                     </div>
+                    <input type="hidden" id="ef-img-cleared" value="0">
                     <div class="file-upload" id="ef-img-drop" onclick="document.getElementById('ef-img').click()">
                         <span>📷 انقر لرفع صورة الغلاف</span>
                         <input type="file" id="ef-img" accept="image/*" onchange="previewFile(this,'ef-img-preview')">
@@ -667,7 +669,9 @@
                     <label>صورة الكاتب <span>(اختياري)</span></label>
                     <div id="ef-author-img-current" class="current-file" style="display:none">
                         الصورة الحالية: <a id="ef-author-img-current-link" href="#" target="_blank"></a>
+                        <span class="file-preview-clear" onclick="clearEssayAuthorImg()">✕ إزالة</span>
                     </div>
+                    <input type="hidden" id="ef-author-img-cleared" value="0">
                     <div class="file-upload" id="ef-author-img-drop" onclick="document.getElementById('ef-author-img').click()">
                         <span>🙂 انقر لرفع صورة الكاتب</span>
                         <input type="file" id="ef-author-img" accept="image/*" onchange="previewFile(this,'ef-author-img-preview')">
@@ -1474,7 +1478,8 @@ async function submitEssay() {
         setProgress('essay-progress-fill', 20);
 
         // Upload cover image if selected
-        let imgPath = isEdit ? (allEssays.find(e => e.id === parseInt(editId))?.image || '') : '';
+        const imgCleared = document.getElementById('ef-img-cleared').value === '1';
+        let imgPath = isEdit ? (imgCleared ? '' : (allEssays.find(e => e.id === parseInt(editId))?.image || '')) : '';
         const imgFile = document.getElementById('ef-img').files[0];
         if (imgFile) {
             const imgExt = imgFile.name.split('.').pop().toLowerCase();
@@ -1487,7 +1492,8 @@ async function submitEssay() {
         setProgress('essay-progress-fill', 45);
 
         // Upload author image if selected
-        let authorImgPath = isEdit ? (allEssays.find(e => e.id === parseInt(editId))?.authorImage || '') : '';
+        const authorImgCleared = document.getElementById('ef-author-img-cleared').value === '1';
+        let authorImgPath = isEdit ? (authorImgCleared ? '' : (allEssays.find(e => e.id === parseInt(editId))?.authorImage || '')) : '';
         const authorImgFile = document.getElementById('ef-author-img').files[0];
         if (authorImgFile) {
             const aExt = authorImgFile.name.split('.').pop().toLowerCase();
@@ -1543,8 +1549,21 @@ function resetEssayForm() {
     clearFile('ef-author-img', 'ef-author-img-preview');
     document.getElementById('ef-img-current').style.display = 'none';
     document.getElementById('ef-author-img-current').style.display = 'none';
+    document.getElementById('ef-img-cleared').value = '0';
+    document.getElementById('ef-author-img-cleared').value = '0';
 }
 function cancelEssayEdit() { resetEssayForm(); }
+
+function clearEssayImg() {
+    document.getElementById('ef-img-current').style.display = 'none';
+    document.getElementById('ef-img-cleared').value = '1';
+    clearFile('ef-img', 'ef-img-preview');
+}
+function clearEssayAuthorImg() {
+    document.getElementById('ef-author-img-current').style.display = 'none';
+    document.getElementById('ef-author-img-cleared').value = '1';
+    clearFile('ef-author-img', 'ef-author-img-preview');
+}
 
 function editEssay(id) {
     const e = allEssays.find(x => x.id === id);
