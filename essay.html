@@ -147,16 +147,10 @@
 
 <script src="js/essays.js"></script>
 <script>
-// Redirect ?id=X to essay-X.html so the URL in the browser bar
-// becomes the canonical static page (which has proper OG image tags).
-(function () {
-    const id = new URLSearchParams(location.search).get('id');
-    if (id) {
-        const target = 'essay-' + id + '.html';
-        // Replace so the back button works correctly
-        history.replaceState(null, '', target);
-    }
-})();
+// Rewrite URL to essay-{id}.html so copy-pasted links have proper OG tags.
+// Store the id globally BEFORE replaceState wipes the query string.
+window._essayId = new URLSearchParams(location.search).get('id');
+if (window._essayId) history.replaceState(null, '', 'essay-' + window._essayId + '.html');
 </script>
 <script>
 function formatDate(d) {
@@ -167,8 +161,7 @@ function formatDate(d) {
 }
 
 function renderEssay() {
-    const params = new URLSearchParams(location.search);
-    const id = parseInt(params.get('id'), 10);
+    const id = parseInt(window._essayId || new URLSearchParams(location.search).get('id'), 10);
     const container = document.getElementById('essay-content');
 
     if (!id || !essaysData) {
