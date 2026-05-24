@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Dark blue background -->
+  <rect width="64" height="64" rx="10" fill="#002366"/>
+  <!-- Cyan arc -->
+  <path d="M14 38 Q32 52 50 38" stroke="#00bcd4" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <!-- Yellow diamond / book shape -->
+  <polygon points="32,14 46,32 32,42 18,32" fill="#f7c948"/>
+  <!-- Shadow on diamond -->
+  <polygon points="32,42 46,32 32,38" fill="#c8971a" opacity="0.6"/>
+</svg>
