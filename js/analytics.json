@@ -1,10 +1,10 @@
 {
-  "updated": "2026-05-24T19:02:36.874Z",
+  "updated": "2026-05-25T09:49:45.073Z",
   "period": {
-    "start": "2026-04-24",
-    "end": "2026-05-24"
+    "start": "2026-04-25",
+    "end": "2026-05-25"
   },
-  "totalHits": 167,
+  "totalHits": 170,
   "downloads": 4,
   "pdfDownloads": [
     {
@@ -20,11 +20,11 @@
   "locations": [
     {
       "name": "العراق",
-      "count": 119
+      "count": 120
     },
     {
       "name": "الولايات المتحدة",
-      "count": 17
+      "count": 18
     },
     {
       "name": "هولندا",
@@ -39,15 +39,15 @@
       "count": 5
     },
     {
+      "name": "المملكة المتحدة",
+      "count": 3
+    },
+    {
       "name": "كندا",
       "count": 2
     },
     {
       "name": "فرنسا",
-      "count": 2
-    },
-    {
-      "name": "المملكة المتحدة",
       "count": 2
     },
     {
@@ -71,11 +71,11 @@
   "browsers": [
     {
       "name": "Chrome",
-      "count": 130
+      "count": 132
     },
     {
       "name": "Safari",
-      "count": 33
+      "count": 34
     },
     {
       "name": "Firefox",
@@ -85,15 +85,15 @@
   "systems": [
     {
       "name": "Android",
-      "count": 88
+      "count": 89
     },
     {
       "name": "Windows",
-      "count": 37
+      "count": 38
     },
     {
       "name": "iOS",
-      "count": 33
+      "count": 34
     },
     {
       "name": "Linux",
@@ -107,7 +107,7 @@
   "refs": [
     {
       "name": "facebook.com",
-      "count": 68
+      "count": 69
     },
     {
       "name": "Google",
@@ -121,15 +121,15 @@
   "languages": [
     {
       "name": "Arabic",
-      "count": 85
+      "count": 86
     },
     {
       "name": "English",
-      "count": 51
+      "count": 52
     },
     {
       "name": "(unknown)",
-      "count": 23
+      "count": 24
     },
     {
       "name": "Dutch",
@@ -264,6 +264,10 @@
     },
     {
       "date": "2026-05-23",
+      "hits": 12
+    },
+    {
+      "date": "2026-05-24",
       "hits": 12
     }
   ]
