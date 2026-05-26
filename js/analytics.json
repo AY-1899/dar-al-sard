@@ -1,10 +1,10 @@
 {
-  "updated": "2026-05-26T02:14:10.657Z",
+  "updated": "2026-05-26T14:46:18.210Z",
   "period": {
     "start": "2026-04-26",
     "end": "2026-05-26"
   },
-  "totalHits": 189,
+  "totalHits": 195,
   "downloads": 4,
   "pdfDownloads": [
     {
@@ -24,7 +24,7 @@
     },
     {
       "name": "الولايات المتحدة",
-      "count": 20
+      "count": 25
     },
     {
       "name": "هولندا",
@@ -51,15 +51,15 @@
       "count": 2
     },
     {
+      "name": "بولندا",
+      "count": 2
+    },
+    {
       "name": "ليختنشتاين",
       "count": 1
     },
     {
       "name": "المغرب",
-      "count": 1
-    },
-    {
-      "name": "بولندا",
       "count": 1
     },
     {
@@ -71,11 +71,11 @@
   "browsers": [
     {
       "name": "Chrome",
-      "count": 151
+      "count": 156
     },
     {
       "name": "Safari",
-      "count": 34
+      "count": 35
     },
     {
       "name": "Firefox",
@@ -89,15 +89,15 @@
     },
     {
       "name": "Windows",
-      "count": 40
+      "count": 41
     },
     {
       "name": "iOS",
-      "count": 34
+      "count": 35
     },
     {
       "name": "Linux",
-      "count": 7
+      "count": 11
     },
     {
       "name": "macOS",
@@ -125,11 +125,11 @@
     },
     {
       "name": "English",
-      "count": 57
+      "count": 60
     },
     {
       "name": "(unknown)",
-      "count": 24
+      "count": 27
     },
     {
       "name": "Dutch",
