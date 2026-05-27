@@ -1,10 +1,10 @@
 {
-  "updated": "2026-05-26T19:57:18.672Z",
+  "updated": "2026-05-27T02:33:42.757Z",
   "period": {
-    "start": "2026-04-26",
-    "end": "2026-05-26"
+    "start": "2026-04-27",
+    "end": "2026-05-27"
   },
-  "totalHits": 197,
+  "totalHits": 198,
   "downloads": 4,
   "pdfDownloads": [
     {
@@ -24,7 +24,7 @@
     },
     {
       "name": "الولايات المتحدة",
-      "count": 26
+      "count": 27
     },
     {
       "name": "هولندا",
@@ -71,7 +71,7 @@
   "browsers": [
     {
       "name": "Chrome",
-      "count": 157
+      "count": 158
     },
     {
       "name": "Safari",
@@ -89,7 +89,7 @@
     },
     {
       "name": "Windows",
-      "count": 41
+      "count": 42
     },
     {
       "name": "iOS",
@@ -125,7 +125,7 @@
     },
     {
       "name": "English",
-      "count": 60
+      "count": 61
     },
     {
       "name": "(unknown)",
@@ -273,6 +273,10 @@
     {
       "date": "2026-05-25",
       "hits": 20
+    },
+    {
+      "date": "2026-05-26",
+      "hits": 9
     }
   ]
 }
