@@ -1,10 +1,10 @@
 {
-  "updated": "2026-05-28T09:46:15.522Z",
+  "updated": "2026-05-28T20:06:49.021Z",
   "period": {
     "start": "2026-04-28",
     "end": "2026-05-28"
   },
-  "totalHits": 240,
+  "totalHits": 275,
   "downloads": 4,
   "pdfDownloads": [
     {
@@ -20,7 +20,7 @@
   "locations": [
     {
       "name": "العراق",
-      "count": 172
+      "count": 203
     },
     {
       "name": "الولايات المتحدة",
@@ -47,6 +47,10 @@
       "count": 3
     },
     {
+      "name": "المغرب",
+      "count": 3
+    },
+    {
       "name": "فرنسا",
       "count": 2
     },
@@ -55,7 +59,15 @@
       "count": 2
     },
     {
+      "name": "تونس",
+      "count": 2
+    },
+    {
       "name": "أيرلندا",
+      "count": 1
+    },
+    {
+      "name": "الأردن",
       "count": 1
     },
     {
@@ -63,15 +75,7 @@
       "count": 1
     },
     {
-      "name": "المغرب",
-      "count": 1
-    },
-    {
       "name": "صربيا",
-      "count": 1
-    },
-    {
-      "name": "سوريا",
       "count": 1
     }
   ],
@@ -79,11 +83,11 @@
   "browsers": [
     {
       "name": "Chrome",
-      "count": 195
+      "count": 223
     },
     {
       "name": "Safari",
-      "count": 41
+      "count": 49
     },
     {
       "name": "Firefox",
@@ -93,15 +97,15 @@
   "systems": [
     {
       "name": "Android",
-      "count": 134
+      "count": 156
     },
     {
       "name": "Windows",
-      "count": 50
+      "count": 56
     },
     {
       "name": "iOS",
-      "count": 41
+      "count": 49
     },
     {
       "name": "Linux",
@@ -115,7 +119,7 @@
   "refs": [
     {
       "name": "facebook.com",
-      "count": 89
+      "count": 102
     },
     {
       "name": "Google",
@@ -129,11 +133,11 @@
   "languages": [
     {
       "name": "Arabic",
-      "count": 133
+      "count": 152
     },
     {
       "name": "English",
-      "count": 69
+      "count": 82
     },
     {
       "name": "(unknown)",
@@ -145,7 +149,7 @@
     },
     {
       "name": "French",
-      "count": 1
+      "count": 5
     }
   ],
   "monthly": [],
