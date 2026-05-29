@@ -1,10 +1,10 @@
 {
-  "updated": "2026-05-29T09:36:21.302Z",
+  "updated": "2026-05-29T14:40:34.305Z",
   "period": {
     "start": "2026-04-29",
     "end": "2026-05-29"
   },
-  "totalHits": 285,
+  "totalHits": 292,
   "downloads": 4,
   "pdfDownloads": [
     {
@@ -20,7 +20,7 @@
   "locations": [
     {
       "name": "العراق",
-      "count": 213
+      "count": 217
     },
     {
       "name": "الولايات المتحدة",
@@ -29,6 +29,10 @@
     {
       "name": "هولندا",
       "count": 13
+    },
+    {
+      "name": "المملكة المتحدة",
+      "count": 6
     },
     {
       "name": "الإمارات",
@@ -41,10 +45,6 @@
     {
       "name": "كندا",
       "count": 4
-    },
-    {
-      "name": "المملكة المتحدة",
-      "count": 3
     },
     {
       "name": "المغرب",
@@ -83,7 +83,7 @@
   "browsers": [
     {
       "name": "Chrome",
-      "count": 232
+      "count": 239
     },
     {
       "name": "Safari",
@@ -101,11 +101,11 @@
   "systems": [
     {
       "name": "Android",
-      "count": 163
+      "count": 167
     },
     {
       "name": "Windows",
-      "count": 58
+      "count": 61
     },
     {
       "name": "iOS",
@@ -123,7 +123,7 @@
   "refs": [
     {
       "name": "facebook.com",
-      "count": 103
+      "count": 106
     },
     {
       "name": "Google",
@@ -137,11 +137,11 @@
   "languages": [
     {
       "name": "Arabic",
-      "count": 160
+      "count": 163
     },
     {
       "name": "English",
-      "count": 86
+      "count": 87
     },
     {
       "name": "(unknown)",
@@ -154,6 +154,10 @@
     {
       "name": "French",
       "count": 5
+    },
+    {
+      "name": "Modern Greek (1453-)",
+      "count": 3
     }
   ],
   "monthly": [],
