@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-29T02:13:34.502Z",
+  "updated": "2026-05-29T09:36:21.302Z",
   "period": {
     "start": "2026-04-29",
     "end": "2026-05-29"
@@ -63,19 +63,19 @@
       "count": 2
     },
     {
+      "name": "أندورا",
+      "count": 1
+    },
+    {
+      "name": "الجزائر",
+      "count": 1
+    },
+    {
       "name": "أيرلندا",
       "count": 1
     },
     {
       "name": "الأردن",
-      "count": 1
-    },
-    {
-      "name": "ليختنشتاين",
-      "count": 1
-    },
-    {
-      "name": "صربيا",
       "count": 1
     }
   ],
@@ -83,7 +83,7 @@
   "browsers": [
     {
       "name": "Chrome",
-      "count": 230
+      "count": 232
     },
     {
       "name": "Safari",
@@ -105,7 +105,7 @@
     },
     {
       "name": "Windows",
-      "count": 56
+      "count": 58
     },
     {
       "name": "iOS",
@@ -141,7 +141,7 @@
     },
     {
       "name": "English",
-      "count": 84
+      "count": 86
     },
     {
       "name": "(unknown)",
