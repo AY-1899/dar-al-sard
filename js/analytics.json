@@ -1,10 +1,10 @@
 {
-  "updated": "2026-05-30T13:04:26.810Z",
+  "updated": "2026-05-30T18:59:33.214Z",
   "period": {
     "start": "2026-04-30",
     "end": "2026-05-30"
   },
-  "totalHits": 300,
+  "totalHits": 301,
   "downloads": 4,
   "pdfDownloads": [
     {
@@ -20,7 +20,7 @@
   "locations": [
     {
       "name": "العراق",
-      "count": 224
+      "count": 225
     },
     {
       "name": "الولايات المتحدة",
@@ -83,7 +83,7 @@
   "browsers": [
     {
       "name": "Chrome",
-      "count": 247
+      "count": 248
     },
     {
       "name": "Safari",
@@ -101,7 +101,7 @@
   "systems": [
     {
       "name": "Android",
-      "count": 171
+      "count": 172
     },
     {
       "name": "Windows",
@@ -123,7 +123,7 @@
   "refs": [
     {
       "name": "facebook.com",
-      "count": 109
+      "count": 110
     },
     {
       "name": "Google",
@@ -137,7 +137,7 @@
   "languages": [
     {
       "name": "Arabic",
-      "count": 166
+      "count": 167
     },
     {
       "name": "English",
