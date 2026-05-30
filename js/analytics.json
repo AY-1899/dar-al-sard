@@ -1,10 +1,10 @@
 {
-  "updated": "2026-05-29T14:40:34.305Z",
+  "updated": "2026-05-30T02:09:01.829Z",
   "period": {
-    "start": "2026-04-29",
-    "end": "2026-05-29"
+    "start": "2026-04-30",
+    "end": "2026-05-30"
   },
-  "totalHits": 292,
+  "totalHits": 299,
   "downloads": 4,
   "pdfDownloads": [
     {
@@ -20,7 +20,7 @@
   "locations": [
     {
       "name": "العراق",
-      "count": 217
+      "count": 223
     },
     {
       "name": "الولايات المتحدة",
@@ -48,7 +48,7 @@
     },
     {
       "name": "المغرب",
-      "count": 3
+      "count": 4
     },
     {
       "name": "فرنسا",
@@ -83,7 +83,7 @@
   "browsers": [
     {
       "name": "Chrome",
-      "count": 239
+      "count": 246
     },
     {
       "name": "Safari",
@@ -101,11 +101,11 @@
   "systems": [
     {
       "name": "Android",
-      "count": 167
+      "count": 171
     },
     {
       "name": "Windows",
-      "count": 61
+      "count": 64
     },
     {
       "name": "iOS",
@@ -123,7 +123,7 @@
   "refs": [
     {
       "name": "facebook.com",
-      "count": 106
+      "count": 109
     },
     {
       "name": "Google",
@@ -137,11 +137,11 @@
   "languages": [
     {
       "name": "Arabic",
-      "count": 163
+      "count": 166
     },
     {
       "name": "English",
-      "count": 87
+      "count": 90
     },
     {
       "name": "(unknown)",
@@ -153,7 +153,7 @@
     },
     {
       "name": "French",
-      "count": 5
+      "count": 6
     },
     {
       "name": "Modern Greek (1453-)",
@@ -305,6 +305,10 @@
     {
       "date": "2026-05-28",
       "hits": 85
+    },
+    {
+      "date": "2026-05-29",
+      "hits": 17
     }
   ]
 }
