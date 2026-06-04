@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-04T02:45:37.911Z",
+  "updated": "2026-06-04T09:44:00.156Z",
   "period": {
     "start": "2026-05-05",
     "end": "2026-06-04"
@@ -75,7 +75,7 @@
       "count": 1
     },
     {
-      "name": "الأردن",
+      "name": "Isle of Man",
       "count": 1
     }
   ],
@@ -83,7 +83,7 @@
   "browsers": [
     {
       "name": "Chrome",
-      "count": 259
+      "count": 260
     },
     {
       "name": "Safari",
@@ -113,7 +113,7 @@
     },
     {
       "name": "Linux",
-      "count": 17
+      "count": 18
     },
     {
       "name": "macOS",
@@ -141,7 +141,7 @@
     },
     {
       "name": "English",
-      "count": 96
+      "count": 97
     },
     {
       "name": "(unknown)",
