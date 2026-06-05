@@ -1,12 +1,20 @@
 {
-  "updated": "2026-06-05T09:31:24.971Z",
+  "updated": "2026-06-05T14:26:11.499Z",
   "period": {
     "start": "2026-05-06",
     "end": "2026-06-05"
   },
-  "totalHits": 315,
-  "downloads": 4,
+  "totalHits": 318,
+  "downloads": 6,
   "pdfDownloads": [
+    {
+      "title": "ذاكرة الخراب: قصص قصيرة",
+      "count": 1
+    },
+    {
+      "title": "نديمات جلنار",
+      "count": 1
+    },
     {
       "title": "الضوء والطين",
       "count": 1
@@ -20,7 +28,7 @@
   "locations": [
     {
       "name": "العراق",
-      "count": 231
+      "count": 234
     },
     {
       "name": "الولايات المتحدة",
@@ -83,7 +91,7 @@
   "browsers": [
     {
       "name": "Chrome",
-      "count": 263
+      "count": 266
     },
     {
       "name": "Safari",
@@ -101,7 +109,7 @@
   "systems": [
     {
       "name": "Android",
-      "count": 176
+      "count": 179
     },
     {
       "name": "Windows",
@@ -127,7 +135,7 @@
     },
     {
       "name": "Google",
-      "count": 8
+      "count": 11
     },
     {
       "name": "bing.com",
@@ -137,7 +145,7 @@
   "languages": [
     {
       "name": "Arabic",
-      "count": 170
+      "count": 173
     },
     {
       "name": "English",
