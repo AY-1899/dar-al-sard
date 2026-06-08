@@ -920,5 +920,16 @@ const booksData = [
         pdf: "",
         price: "",
         description: "رواية إجتماعية، تتميز بعنصر التشويق، والوصف الدقيق"
+    },
+    {
+        id: 85,
+        title: "سفينة نوح",
+        author: "صادق الجمل",
+        year: "2026",
+        image: "assets/سفينة نوح - صادق الجمل - front.jpg",
+        imageBack: "assets/سفينة نوح - صادق الجمل - back.jpg",
+        pdf: "",
+        price: "",
+        description: "رواية خيال علمي"
     }
 ];
