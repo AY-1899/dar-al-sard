@@ -931,5 +931,16 @@ const booksData = [
         pdf: "",
         price: "",
         description: "رواية خيال علمي"
+    },
+    {
+        id: 86,
+        title: "ورد السماء",
+        author: "أسماء محمد مصطفى",
+        year: "2026",
+        image: "assets/ورد السماء - أسماء محمد مصطفى - front.jpg",
+        imageBack: "assets/ورد السماء - أسماء محمد مصطفى - back.jpg",
+        pdf: "",
+        price: "",
+        description: "مجموعة قصصية وجدانية"
     }
 ];
