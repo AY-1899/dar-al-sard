@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-08T10:18:05.101Z",
+  "updated": "2026-06-08T15:30:32.451Z",
   "period": {
     "start": "2026-05-09",
     "end": "2026-06-08"
@@ -91,7 +91,7 @@
   "browsers": [
     {
       "name": "Chrome",
-      "count": 294
+      "count": 296
     },
     {
       "name": "Safari",
@@ -121,7 +121,7 @@
     },
     {
       "name": "Linux",
-      "count": 25
+      "count": 27
     },
     {
       "name": "macOS",
@@ -149,7 +149,7 @@
     },
     {
       "name": "English",
-      "count": 110
+      "count": 112
     },
     {
       "name": "(unknown)",
