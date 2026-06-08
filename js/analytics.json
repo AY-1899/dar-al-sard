@@ -1,10 +1,10 @@
 {
-  "updated": "2026-06-07T19:07:01.859Z",
+  "updated": "2026-06-08T10:18:05.101Z",
   "period": {
-    "start": "2026-05-08",
-    "end": "2026-06-07"
+    "start": "2026-05-09",
+    "end": "2026-06-08"
   },
-  "totalHits": 341,
+  "totalHits": 349,
   "downloads": 6,
   "pdfDownloads": [
     {
@@ -28,15 +28,19 @@
   "locations": [
     {
       "name": "العراق",
-      "count": 251
+      "count": 253
     },
     {
       "name": "الولايات المتحدة",
-      "count": 38
+      "count": 39
     },
     {
       "name": "هولندا",
       "count": 13
+    },
+    {
+      "name": "المغرب",
+      "count": 9
     },
     {
       "name": "المملكة المتحدة",
@@ -53,10 +57,6 @@
     {
       "name": "ألمانيا",
       "count": 5
-    },
-    {
-      "name": "المغرب",
-      "count": 4
     },
     {
       "name": "بولندا",
@@ -91,11 +91,11 @@
   "browsers": [
     {
       "name": "Chrome",
-      "count": 287
+      "count": 294
     },
     {
       "name": "Safari",
-      "count": 56
+      "count": 57
     },
     {
       "name": "Firefox",
@@ -109,19 +109,19 @@
   "systems": [
     {
       "name": "Android",
-      "count": 187
+      "count": 188
     },
     {
       "name": "Windows",
-      "count": 77
+      "count": 82
     },
     {
       "name": "iOS",
-      "count": 57
+      "count": 58
     },
     {
       "name": "Linux",
-      "count": 24
+      "count": 25
     },
     {
       "name": "macOS",
@@ -145,7 +145,7 @@
   "languages": [
     {
       "name": "Arabic",
-      "count": 184
+      "count": 186
     },
     {
       "name": "English",
@@ -153,15 +153,15 @@
     },
     {
       "name": "(unknown)",
-      "count": 36
+      "count": 37
+    },
+    {
+      "name": "French",
+      "count": 11
     },
     {
       "name": "Dutch",
       "count": 9
-    },
-    {
-      "name": "French",
-      "count": 6
     },
     {
       "name": "Modern Greek (1453-)",
@@ -354,6 +354,10 @@
     {
       "date": "2026-06-06",
       "hits": 2
+    },
+    {
+      "date": "2026-06-07",
+      "hits": 23
     }
   ]
 }
