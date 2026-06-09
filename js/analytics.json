@@ -1,12 +1,16 @@
 {
-  "updated": "2026-06-09T02:08:45.906Z",
+  "updated": "2026-06-09T14:27:16.311Z",
   "period": {
     "start": "2026-05-10",
     "end": "2026-06-09"
   },
-  "totalHits": 354,
-  "downloads": 6,
+  "totalHits": 359,
+  "downloads": 7,
   "pdfDownloads": [
+    {
+      "title": "كشكول الربيعي",
+      "count": 1
+    },
     {
       "title": "ذاكرة الخراب: قصص قصيرة",
       "count": 1
@@ -39,6 +43,10 @@
       "count": 13
     },
     {
+      "name": "ألمانيا",
+      "count": 10
+    },
+    {
       "name": "المغرب",
       "count": 9
     },
@@ -52,10 +60,6 @@
     },
     {
       "name": "كندا",
-      "count": 5
-    },
-    {
-      "name": "ألمانيا",
       "count": 5
     },
     {
@@ -91,7 +95,7 @@
   "browsers": [
     {
       "name": "Chrome",
-      "count": 300
+      "count": 305
     },
     {
       "name": "Safari",
@@ -113,7 +117,7 @@
     },
     {
       "name": "Windows",
-      "count": 84
+      "count": 89
     },
     {
       "name": "iOS",
@@ -135,7 +139,7 @@
     },
     {
       "name": "Google",
-      "count": 11
+      "count": 13
     },
     {
       "name": "bing.com",
@@ -145,7 +149,7 @@
   "languages": [
     {
       "name": "Arabic",
-      "count": 189
+      "count": 194
     },
     {
       "name": "English",
