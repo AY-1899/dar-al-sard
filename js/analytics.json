@@ -1,10 +1,10 @@
 {
-  "updated": "2026-06-17T14:52:13.094Z",
+  "updated": "2026-06-17T20:00:33.884Z",
   "period": {
     "start": "2026-05-18",
     "end": "2026-06-17"
   },
-  "totalHits": 374,
+  "totalHits": 375,
   "downloads": 7,
   "pdfDownloads": [
     {
@@ -79,15 +79,15 @@
       "count": 2
     },
     {
+      "name": "سوريا",
+      "count": 2
+    },
+    {
       "name": "تونس",
       "count": 2
     },
     {
       "name": "أندورا",
-      "count": 1
-    },
-    {
-      "name": "الجزائر",
       "count": 1
     }
   ],
@@ -95,7 +95,7 @@
   "browsers": [
     {
       "name": "Chrome",
-      "count": 320
+      "count": 321
     },
     {
       "name": "Safari",
@@ -117,7 +117,7 @@
   "systems": [
     {
       "name": "Android",
-      "count": 196
+      "count": 197
     },
     {
       "name": "Windows",
@@ -153,7 +153,7 @@
   "languages": [
     {
       "name": "Arabic",
-      "count": 202
+      "count": 203
     },
     {
       "name": "English",
