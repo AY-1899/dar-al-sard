@@ -1,8 +1,8 @@
 {
-  "updated": "2026-06-16T20:39:33.473Z",
+  "updated": "2026-06-17T10:26:21.326Z",
   "period": {
-    "start": "2026-05-17",
-    "end": "2026-06-16"
+    "start": "2026-05-18",
+    "end": "2026-06-17"
   },
   "totalHits": 374,
   "downloads": 7,
@@ -95,7 +95,7 @@
   "browsers": [
     {
       "name": "Chrome",
-      "count": 319
+      "count": 320
     },
     {
       "name": "Safari",
@@ -121,7 +121,7 @@
     },
     {
       "name": "Windows",
-      "count": 96
+      "count": 97
     },
     {
       "name": "iOS",
@@ -161,7 +161,7 @@
     },
     {
       "name": "(unknown)",
-      "count": 40
+      "count": 41
     },
     {
       "name": "French",
@@ -398,6 +398,10 @@
     {
       "date": "2026-06-15",
       "hits": 3
+    },
+    {
+      "date": "2026-06-16",
+      "hits": 1
     }
   ]
 }
