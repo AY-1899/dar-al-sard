@@ -1,11 +1,11 @@
 {
-  "updated": "2026-06-19T19:26:12.299Z",
+  "updated": "2026-06-20T02:31:21.145Z",
   "period": {
-    "start": "2026-05-20",
-    "end": "2026-06-19"
+    "start": "2026-05-21",
+    "end": "2026-06-20"
   },
-  "totalHits": 378,
-  "downloads": 7,
+  "totalHits": 300,
+  "downloads": 6,
   "pdfDownloads": [
     {
       "title": "كشكول الربيعي",
@@ -32,27 +32,23 @@
   "locations": [
     {
       "name": "العراق",
-      "count": 268
+      "count": 213
     },
     {
       "name": "الولايات المتحدة",
-      "count": 45
-    },
-    {
-      "name": "هولندا",
-      "count": 13
-    },
-    {
-      "name": "ألمانيا",
-      "count": 10
+      "count": 37
     },
     {
       "name": "المغرب",
       "count": 9
     },
     {
+      "name": "ألمانيا",
+      "count": 6
+    },
+    {
       "name": "المملكة المتحدة",
-      "count": 7
+      "count": 6
     },
     {
       "name": "الإمارات",
@@ -60,6 +56,10 @@
     },
     {
       "name": "كندا",
+      "count": 5
+    },
+    {
+      "name": "هولندا",
       "count": 5
     },
     {
@@ -71,15 +71,7 @@
       "count": 3
     },
     {
-      "name": "فرنسا",
-      "count": 2
-    },
-    {
       "name": "ليختنشتاين",
-      "count": 2
-    },
-    {
-      "name": "سوريا",
       "count": 2
     },
     {
@@ -89,21 +81,25 @@
     {
       "name": "أندورا",
       "count": 1
+    },
+    {
+      "name": "الجزائر",
+      "count": 1
+    },
+    {
+      "name": "مصر",
+      "count": 1
     }
   ],
   "regions": [],
   "browsers": [
     {
       "name": "Chrome",
-      "count": 324
+      "count": 267
     },
     {
       "name": "Safari",
-      "count": 59
-    },
-    {
-      "name": "Firefox",
-      "count": 4
+      "count": 41
     },
     {
       "name": "أخرى",
@@ -117,33 +113,33 @@
   "systems": [
     {
       "name": "Android",
-      "count": 199
+      "count": 158
     },
     {
       "name": "Windows",
-      "count": 98
+      "count": 80
     },
     {
       "name": "iOS",
-      "count": 60
+      "count": 42
     },
     {
       "name": "Linux",
-      "count": 29
+      "count": 28
     },
     {
       "name": "macOS",
-      "count": 3
+      "count": 2
     }
   ],
   "refs": [
     {
       "name": "facebook.com",
-      "count": 120
+      "count": 80
     },
     {
       "name": "Google",
-      "count": 14
+      "count": 11
     },
     {
       "name": "bing.com",
@@ -153,15 +149,15 @@
   "languages": [
     {
       "name": "Arabic",
-      "count": 205
+      "count": 169
     },
     {
       "name": "English",
-      "count": 119
+      "count": 97
     },
     {
       "name": "(unknown)",
-      "count": 42
+      "count": 25
     },
     {
       "name": "French",
@@ -169,7 +165,7 @@
     },
     {
       "name": "Dutch",
-      "count": 9
+      "count": 5
     },
     {
       "name": "Modern Greek (1453-)",
@@ -410,6 +406,10 @@
     {
       "date": "2026-06-18",
       "hits": 2
+    },
+    {
+      "date": "2026-06-19",
+      "hits": 6
     }
   ]
 }
