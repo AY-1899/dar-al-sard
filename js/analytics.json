@@ -1,10 +1,10 @@
 {
-  "updated": "2026-06-20T19:09:58.738Z",
+  "updated": "2026-06-21T02:46:42.739Z",
   "period": {
-    "start": "2026-05-21",
-    "end": "2026-06-20"
+    "start": "2026-05-22",
+    "end": "2026-06-21"
   },
-  "totalHits": 305,
+  "totalHits": 255,
   "downloads": 6,
   "pdfDownloads": [
     {
@@ -32,30 +32,26 @@
   "locations": [
     {
       "name": "العراق",
-      "count": 213
+      "count": 173
     },
     {
       "name": "الولايات المتحدة",
-      "count": 42
+      "count": 38
     },
     {
       "name": "المغرب",
       "count": 9
     },
     {
-      "name": "ألمانيا",
-      "count": 6
-    },
-    {
-      "name": "المملكة المتحدة",
-      "count": 6
-    },
-    {
-      "name": "الإمارات",
+      "name": "كندا",
       "count": 5
     },
     {
-      "name": "كندا",
+      "name": "ألمانيا",
+      "count": 5
+    },
+    {
+      "name": "المملكة المتحدة",
       "count": 5
     },
     {
@@ -83,6 +79,10 @@
       "count": 1
     },
     {
+      "name": "الإمارات",
+      "count": 1
+    },
+    {
       "name": "الجزائر",
       "count": 1
     },
@@ -95,11 +95,11 @@
   "browsers": [
     {
       "name": "Chrome",
-      "count": 270
+      "count": 225
     },
     {
       "name": "Safari",
-      "count": 42
+      "count": 37
     },
     {
       "name": "Edge",
@@ -113,33 +113,29 @@
   "systems": [
     {
       "name": "Android",
-      "count": 158
+      "count": 128
     },
     {
       "name": "Windows",
-      "count": 82
+      "count": 69
     },
     {
       "name": "iOS",
-      "count": 43
+      "count": 38
     },
     {
       "name": "Linux",
       "count": 30
-    },
-    {
-      "name": "macOS",
-      "count": 2
     }
   ],
   "refs": [
     {
       "name": "facebook.com",
-      "count": 80
+      "count": 62
     },
     {
       "name": "Google",
-      "count": 11
+      "count": 9
     },
     {
       "name": "bing.com",
@@ -149,15 +145,15 @@
   "languages": [
     {
       "name": "Arabic",
-      "count": 169
+      "count": 135
     },
     {
       "name": "English",
-      "count": 97
+      "count": 82
     },
     {
       "name": "(unknown)",
-      "count": 30
+      "count": 29
     },
     {
       "name": "French",
@@ -410,6 +406,10 @@
     {
       "date": "2026-06-19",
       "hits": 6
+    },
+    {
+      "date": "2026-06-20",
+      "hits": 5
     }
   ]
 }
