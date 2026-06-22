@@ -1,11 +1,11 @@
 {
-  "updated": "2026-06-21T19:15:46.299Z",
+  "updated": "2026-06-22T02:49:02.266Z",
   "period": {
-    "start": "2026-05-22",
-    "end": "2026-06-21"
+    "start": "2026-05-23",
+    "end": "2026-06-22"
   },
-  "totalHits": 255,
-  "downloads": 6,
+  "totalHits": 243,
+  "downloads": 5,
   "pdfDownloads": [
     {
       "title": "كشكول الربيعي",
@@ -32,19 +32,15 @@
   "locations": [
     {
       "name": "العراق",
-      "count": 173
+      "count": 167
     },
     {
       "name": "الولايات المتحدة",
-      "count": 38
+      "count": 36
     },
     {
       "name": "المغرب",
       "count": 9
-    },
-    {
-      "name": "كندا",
-      "count": 5
     },
     {
       "name": "ألمانيا",
@@ -55,8 +51,8 @@
       "count": 5
     },
     {
-      "name": "هولندا",
-      "count": 5
+      "name": "كندا",
+      "count": 4
     },
     {
       "name": "بولندا",
@@ -71,15 +67,15 @@
       "count": 2
     },
     {
+      "name": "هولندا",
+      "count": 2
+    },
+    {
       "name": "تونس",
       "count": 2
     },
     {
       "name": "أندورا",
-      "count": 1
-    },
-    {
-      "name": "الإمارات",
       "count": 1
     },
     {
@@ -89,17 +85,21 @@
     {
       "name": "مصر",
       "count": 1
+    },
+    {
+      "name": "اليونان",
+      "count": 1
     }
   ],
   "regions": [],
   "browsers": [
     {
       "name": "Chrome",
-      "count": 225
+      "count": 218
     },
     {
       "name": "Safari",
-      "count": 37
+      "count": 31
     },
     {
       "name": "Edge",
@@ -113,59 +113,55 @@
   "systems": [
     {
       "name": "Android",
-      "count": 128
+      "count": 126
     },
     {
       "name": "Windows",
-      "count": 69
+      "count": 66
     },
     {
       "name": "iOS",
-      "count": 38
+      "count": 32
     },
     {
       "name": "Linux",
-      "count": 30
+      "count": 28
     }
   ],
   "refs": [
     {
       "name": "facebook.com",
-      "count": 62
+      "count": 57
     },
     {
       "name": "Google",
-      "count": 9
-    },
-    {
-      "name": "bing.com",
-      "count": 2
+      "count": 8
     }
   ],
   "languages": [
     {
       "name": "Arabic",
-      "count": 135
+      "count": 133
     },
     {
       "name": "English",
-      "count": 82
+      "count": 76
     },
     {
       "name": "(unknown)",
-      "count": 29
+      "count": 27
     },
     {
       "name": "French",
       "count": 11
     },
     {
-      "name": "Dutch",
-      "count": 5
-    },
-    {
       "name": "Modern Greek (1453-)",
       "count": 3
+    },
+    {
+      "name": "Dutch",
+      "count": 2
     }
   ],
   "monthly": [
@@ -410,6 +406,10 @@
     {
       "date": "2026-06-20",
       "hits": 5
+    },
+    {
+      "date": "2026-06-21",
+      "hits": 1
     }
   ]
 }
