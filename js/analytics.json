@@ -1,11 +1,11 @@
 {
-  "updated": "2026-06-22T20:34:30.077Z",
+  "updated": "2026-06-23T02:14:51.258Z",
   "period": {
-    "start": "2026-05-23",
-    "end": "2026-06-22"
+    "start": "2026-05-24",
+    "end": "2026-06-23"
   },
-  "totalHits": 243,
-  "downloads": 5,
+  "totalHits": 233,
+  "downloads": 3,
   "pdfDownloads": [
     {
       "title": "كشكول الربيعي",
@@ -18,29 +18,21 @@
     {
       "title": "نديمات جلنار",
       "count": 1
-    },
-    {
-      "title": "الضوء والطين",
-      "count": 1
-    },
-    {
-      "title": "الحمائم البيض",
-      "count": 1
     }
   ],
   "hits": [],
   "locations": [
     {
       "name": "العراق",
-      "count": 167
+      "count": 159
     },
     {
       "name": "الولايات المتحدة",
-      "count": 36
+      "count": 37
     },
     {
       "name": "المغرب",
-      "count": 9
+      "count": 8
     },
     {
       "name": "ألمانيا",
@@ -51,20 +43,16 @@
       "count": 5
     },
     {
-      "name": "كندا",
-      "count": 4
-    },
-    {
       "name": "بولندا",
       "count": 4
     },
     {
-      "name": "السويد",
+      "name": "كندا",
       "count": 3
     },
     {
-      "name": "ليختنشتاين",
-      "count": 2
+      "name": "السويد",
+      "count": 3
     },
     {
       "name": "هولندا",
@@ -89,17 +77,21 @@
     {
       "name": "اليونان",
       "count": 1
+    },
+    {
+      "name": "أيرلندا",
+      "count": 1
     }
   ],
   "regions": [],
   "browsers": [
     {
       "name": "Chrome",
-      "count": 218
+      "count": 207
     },
     {
       "name": "Safari",
-      "count": 31
+      "count": 32
     },
     {
       "name": "Edge",
@@ -113,47 +105,47 @@
   "systems": [
     {
       "name": "Android",
-      "count": 126
+      "count": 119
     },
     {
       "name": "Windows",
-      "count": 66
+      "count": 63
     },
     {
       "name": "iOS",
-      "count": 32
+      "count": 33
     },
     {
       "name": "Linux",
-      "count": 28
+      "count": 27
     }
   ],
   "refs": [
     {
       "name": "facebook.com",
-      "count": 57
+      "count": 53
     },
     {
       "name": "Google",
-      "count": 8
+      "count": 7
     }
   ],
   "languages": [
     {
       "name": "Arabic",
-      "count": 133
+      "count": 127
     },
     {
       "name": "English",
-      "count": 76
+      "count": 72
     },
     {
       "name": "(unknown)",
-      "count": 27
+      "count": 28
     },
     {
       "name": "French",
-      "count": 11
+      "count": 10
     },
     {
       "name": "Modern Greek (1453-)",
@@ -409,6 +401,10 @@
     },
     {
       "date": "2026-06-21",
+      "hits": 1
+    },
+    {
+      "date": "2026-06-22",
       "hits": 1
     }
   ]
