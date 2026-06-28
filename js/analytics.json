@@ -1,10 +1,10 @@
 {
-  "updated": "2026-06-27T19:04:29.502Z",
+  "updated": "2026-06-28T02:35:19.263Z",
   "period": {
-    "start": "2026-05-28",
-    "end": "2026-06-27"
+    "start": "2026-05-29",
+    "end": "2026-06-28"
   },
-  "totalHits": 203,
+  "totalHits": 124,
   "downloads": 3,
   "pdfDownloads": [
     {
@@ -24,15 +24,15 @@
   "locations": [
     {
       "name": "العراق",
-      "count": 137
+      "count": 64
     },
     {
       "name": "الولايات المتحدة",
-      "count": 34
+      "count": 32
     },
     {
       "name": "المغرب",
-      "count": 8
+      "count": 6
     },
     {
       "name": "ألمانيا",
@@ -47,15 +47,7 @@
       "count": 3
     },
     {
-      "name": "هولندا",
-      "count": 2
-    },
-    {
       "name": "بولندا",
-      "count": 2
-    },
-    {
-      "name": "تونس",
       "count": 2
     },
     {
@@ -79,7 +71,15 @@
       "count": 1
     },
     {
-      "name": "أيرلندا",
+      "name": "Isle of Man",
+      "count": 1
+    },
+    {
+      "name": "آيسلندا",
+      "count": 1
+    },
+    {
+      "name": "ليختنشتاين",
       "count": 1
     }
   ],
@@ -87,11 +87,11 @@
   "browsers": [
     {
       "name": "Chrome",
-      "count": 177
+      "count": 108
     },
     {
       "name": "Safari",
-      "count": 31
+      "count": 16
     },
     {
       "name": "Edge",
@@ -104,26 +104,26 @@
   ],
   "systems": [
     {
-      "name": "Android",
-      "count": 95
-    },
-    {
       "name": "Windows",
-      "count": 65
+      "count": 52
     },
     {
-      "name": "iOS",
-      "count": 32
+      "name": "Android",
+      "count": 39
     },
     {
       "name": "Linux",
       "count": 20
+    },
+    {
+      "name": "iOS",
+      "count": 17
     }
   ],
   "refs": [
     {
       "name": "facebook.com",
-      "count": 46
+      "count": 18
     },
     {
       "name": "Google",
@@ -133,11 +133,11 @@
   "languages": [
     {
       "name": "Arabic",
-      "count": 107
+      "count": 51
     },
     {
       "name": "English",
-      "count": 61
+      "count": 39
     },
     {
       "name": "(unknown)",
@@ -145,15 +145,11 @@
     },
     {
       "name": "French",
-      "count": 10
+      "count": 6
     },
     {
       "name": "Modern Greek (1453-)",
       "count": 3
-    },
-    {
-      "name": "Dutch",
-      "count": 2
     }
   ],
   "monthly": [
@@ -422,6 +418,10 @@
     {
       "date": "2026-06-26",
       "hits": 5
+    },
+    {
+      "date": "2026-06-27",
+      "hits": 2
     }
   ]
 }
