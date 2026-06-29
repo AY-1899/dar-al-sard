@@ -1,10 +1,10 @@
 {
-  "updated": "2026-06-28T19:02:58.421Z",
+  "updated": "2026-06-29T02:35:35.425Z",
   "period": {
-    "start": "2026-05-29",
-    "end": "2026-06-28"
+    "start": "2026-05-30",
+    "end": "2026-06-29"
   },
-  "totalHits": 125,
+  "totalHits": 110,
   "downloads": 3,
   "pdfDownloads": [
     {
@@ -24,23 +24,19 @@
   "locations": [
     {
       "name": "العراق",
-      "count": 64
+      "count": 53
     },
     {
       "name": "الولايات المتحدة",
       "count": 32
     },
     {
-      "name": "المغرب",
-      "count": 6
-    },
-    {
       "name": "ألمانيا",
       "count": 5
     },
     {
-      "name": "المملكة المتحدة",
-      "count": 4
+      "name": "المغرب",
+      "count": 5
     },
     {
       "name": "السويد",
@@ -55,19 +51,15 @@
       "count": 2
     },
     {
-      "name": "أندورا",
-      "count": 1
-    },
-    {
       "name": "كندا",
       "count": 1
     },
     {
-      "name": "الجزائر",
+      "name": "مصر",
       "count": 1
     },
     {
-      "name": "مصر",
+      "name": "المملكة المتحدة",
       "count": 1
     },
     {
@@ -81,13 +73,21 @@
     {
       "name": "آيسلندا",
       "count": 1
+    },
+    {
+      "name": "ليختنشتاين",
+      "count": 1
+    },
+    {
+      "name": "لوكسمبورغ",
+      "count": 1
     }
   ],
   "regions": [],
   "browsers": [
     {
       "name": "Chrome",
-      "count": 110
+      "count": 94
     },
     {
       "name": "Safari",
@@ -96,20 +96,16 @@
     {
       "name": "Edge",
       "count": 3
-    },
-    {
-      "name": "أخرى",
-      "count": 1
     }
   ],
   "systems": [
     {
       "name": "Windows",
-      "count": 52
+      "count": 44
     },
     {
       "name": "Android",
-      "count": 41
+      "count": 33
     },
     {
       "name": "Linux",
@@ -117,13 +113,13 @@
     },
     {
       "name": "iOS",
-      "count": 17
+      "count": 16
     }
   ],
   "refs": [
     {
       "name": "facebook.com",
-      "count": 18
+      "count": 11
     },
     {
       "name": "Google",
@@ -133,11 +129,11 @@
   "languages": [
     {
       "name": "Arabic",
-      "count": 53
+      "count": 46
     },
     {
       "name": "English",
-      "count": 39
+      "count": 33
     },
     {
       "name": "(unknown)",
@@ -145,11 +141,7 @@
     },
     {
       "name": "French",
-      "count": 6
-    },
-    {
-      "name": "Modern Greek (1453-)",
-      "count": 3
+      "count": 5
     }
   ],
   "monthly": [
@@ -421,6 +413,10 @@
     },
     {
       "date": "2026-06-27",
+      "hits": 2
+    },
+    {
+      "date": "2026-06-28",
       "hits": 2
     }
   ]
