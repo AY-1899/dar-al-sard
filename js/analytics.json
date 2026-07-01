@@ -1,10 +1,10 @@
 {
-  "updated": "2026-06-30T19:42:55.513Z",
+  "updated": "2026-07-01T02:36:10.822Z",
   "period": {
-    "start": "2026-05-31",
-    "end": "2026-06-30"
+    "start": "2026-06-01",
+    "end": "2026-07-01"
   },
-  "totalHits": 112,
+  "totalHits": 106,
   "downloads": 3,
   "pdfDownloads": [
     {
@@ -24,11 +24,11 @@
   "locations": [
     {
       "name": "العراق",
-      "count": 53
+      "count": 50
     },
     {
       "name": "الولايات المتحدة",
-      "count": 32
+      "count": 30
     },
     {
       "name": "ألمانيا",
@@ -48,10 +48,6 @@
     },
     {
       "name": "الأردن",
-      "count": 2
-    },
-    {
-      "name": "بولندا",
       "count": 2
     },
     {
@@ -81,17 +77,21 @@
     {
       "name": "لوكسمبورغ",
       "count": 1
+    },
+    {
+      "name": "الفلبين",
+      "count": 1
     }
   ],
   "regions": [],
   "browsers": [
     {
       "name": "Chrome",
-      "count": 96
+      "count": 91
     },
     {
       "name": "Safari",
-      "count": 16
+      "count": 15
     },
     {
       "name": "Edge",
@@ -101,19 +101,19 @@
   "systems": [
     {
       "name": "Windows",
-      "count": 45
+      "count": 44
     },
     {
       "name": "Android",
-      "count": 33
+      "count": 31
     },
     {
       "name": "Linux",
-      "count": 19
+      "count": 17
     },
     {
       "name": "iOS",
-      "count": 16
+      "count": 15
     },
     {
       "name": "macOS",
@@ -123,7 +123,7 @@
   "refs": [
     {
       "name": "facebook.com",
-      "count": 12
+      "count": 10
     },
     {
       "name": "Google",
@@ -133,15 +133,15 @@
   "languages": [
     {
       "name": "Arabic",
-      "count": 49
+      "count": 48
     },
     {
       "name": "English",
-      "count": 32
+      "count": 30
     },
     {
       "name": "(unknown)",
-      "count": 29
+      "count": 26
     },
     {
       "name": "French",
@@ -152,6 +152,10 @@
     {
       "month": "2026-05",
       "hits": 312
+    },
+    {
+      "month": "2026-06",
+      "hits": 109
     }
   ],
   "daily": [
@@ -426,6 +430,10 @@
     {
       "date": "2026-06-29",
       "hits": 3
+    },
+    {
+      "date": "2026-06-30",
+      "hits": 2
     }
   ]
 }
