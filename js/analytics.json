@@ -1,22 +1,14 @@
 {
-  "updated": "2026-07-05T19:02:10.535Z",
+  "updated": "2026-07-06T09:56:25.987Z",
   "period": {
-    "start": "2026-06-05",
-    "end": "2026-07-05"
+    "start": "2026-06-06",
+    "end": "2026-07-06"
   },
-  "totalHits": 110,
-  "downloads": 3,
+  "totalHits": 100,
+  "downloads": 1,
   "pdfDownloads": [
     {
       "title": "كشكول الربيعي",
-      "count": 1
-    },
-    {
-      "title": "ذاكرة الخراب: قصص قصيرة",
-      "count": 1
-    },
-    {
-      "title": "نديمات جلنار",
       "count": 1
     }
   ],
@@ -24,11 +16,11 @@
   "locations": [
     {
       "name": "العراق",
-      "count": 52
+      "count": 44
     },
     {
       "name": "الولايات المتحدة",
-      "count": 27
+      "count": 25
     },
     {
       "name": "ألمانيا",
@@ -75,11 +67,11 @@
       "count": 1
     },
     {
-      "name": "بولندا",
+      "name": "سنغافورة",
       "count": 1
     },
     {
-      "name": "سنغافورة",
+      "name": "سوريا",
       "count": 1
     }
   ],
@@ -87,11 +79,11 @@
   "browsers": [
     {
       "name": "Chrome",
-      "count": 91
+      "count": 81
     },
     {
       "name": "Safari",
-      "count": 15
+      "count": 14
     },
     {
       "name": "Edge",
@@ -105,19 +97,19 @@
   "systems": [
     {
       "name": "Windows",
-      "count": 47
+      "count": 42
     },
     {
       "name": "Android",
-      "count": 35
+      "count": 32
     },
     {
       "name": "iOS",
-      "count": 15
+      "count": 14
     },
     {
       "name": "Linux",
-      "count": 12
+      "count": 10
     },
     {
       "name": "macOS",
@@ -127,25 +119,25 @@
   "refs": [
     {
       "name": "Google",
-      "count": 12
+      "count": 9
     },
     {
       "name": "facebook.com",
-      "count": 9
+      "count": 8
     }
   ],
   "languages": [
     {
       "name": "Arabic",
-      "count": 51
+      "count": 48
     },
     {
       "name": "English",
-      "count": 31
+      "count": 26
     },
     {
       "name": "(unknown)",
-      "count": 24
+      "count": 21
     },
     {
       "name": "French",
@@ -453,6 +445,10 @@
     },
     {
       "date": "2026-07-04",
+      "hits": 3
+    },
+    {
+      "date": "2026-07-05",
       "hits": 3
     }
   ]
