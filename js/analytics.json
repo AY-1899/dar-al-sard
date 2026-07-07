@@ -1,10 +1,10 @@
 {
-  "updated": "2026-07-06T19:43:12.449Z",
+  "updated": "2026-07-07T02:07:39.225Z",
   "period": {
-    "start": "2026-06-06",
-    "end": "2026-07-06"
+    "start": "2026-06-07",
+    "end": "2026-07-07"
   },
-  "totalHits": 100,
+  "totalHits": 98,
   "downloads": 1,
   "pdfDownloads": [
     {
@@ -51,15 +51,7 @@
       "count": 1
     },
     {
-      "name": "اليونان",
-      "count": 1
-    },
-    {
       "name": "آيسلندا",
-      "count": 1
-    },
-    {
-      "name": "ليختنشتاين",
       "count": 1
     },
     {
@@ -79,7 +71,7 @@
   "browsers": [
     {
       "name": "Chrome",
-      "count": 81
+      "count": 79
     },
     {
       "name": "Safari",
@@ -109,7 +101,7 @@
     },
     {
       "name": "Linux",
-      "count": 10
+      "count": 8
     },
     {
       "name": "macOS",
@@ -133,7 +125,7 @@
     },
     {
       "name": "English",
-      "count": 26
+      "count": 24
     },
     {
       "name": "(unknown)",
@@ -450,6 +442,10 @@
     {
       "date": "2026-07-05",
       "hits": 3
+    },
+    {
+      "date": "2026-07-06",
+      "hits": 0
     }
   ]
 }
