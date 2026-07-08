@@ -1,10 +1,10 @@
 {
-  "updated": "2026-07-08T08:08:33.516Z",
+  "updated": "2026-07-08T19:08:13.300Z",
   "period": {
     "start": "2026-06-08",
     "end": "2026-07-08"
   },
-  "totalHits": 77,
+  "totalHits": 78,
   "downloads": 1,
   "pdfDownloads": [
     {
@@ -43,6 +43,10 @@
       "count": 2
     },
     {
+      "name": "سوريا",
+      "count": 2
+    },
+    {
       "name": "مصر",
       "count": 1
     },
@@ -57,17 +61,13 @@
     {
       "name": "سنغافورة",
       "count": 1
-    },
-    {
-      "name": "سوريا",
-      "count": 1
     }
   ],
   "regions": [],
   "browsers": [
     {
       "name": "Chrome",
-      "count": 62
+      "count": 63
     },
     {
       "name": "Safari",
@@ -97,7 +97,7 @@
     },
     {
       "name": "Linux",
-      "count": 8
+      "count": 9
     },
     {
       "name": "macOS",
@@ -107,7 +107,7 @@
   "refs": [
     {
       "name": "Google",
-      "count": 9
+      "count": 10
     },
     {
       "name": "facebook.com",
@@ -125,7 +125,7 @@
     },
     {
       "name": "English",
-      "count": 20
+      "count": 21
     }
   ],
   "monthly": [
