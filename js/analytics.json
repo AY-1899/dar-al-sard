@@ -1,17 +1,12 @@
 {
-  "updated": "2026-07-09T19:22:48.606Z",
+  "updated": "2026-07-10T01:58:56.283Z",
   "period": {
-    "start": "2026-06-09",
-    "end": "2026-07-09"
+    "start": "2026-06-10",
+    "end": "2026-07-10"
   },
-  "totalHits": 69,
-  "downloads": 1,
-  "pdfDownloads": [
-    {
-      "title": "كشكول الربيعي",
-      "count": 1
-    }
-  ],
+  "totalHits": 64,
+  "downloads": 0,
+  "pdfDownloads": [],
   "hits": [],
   "locations": [
     {
@@ -21,10 +16,6 @@
     {
       "name": "الولايات المتحدة",
       "count": 20
-    },
-    {
-      "name": "ألمانيا",
-      "count": 5
     },
     {
       "name": "الأردن",
@@ -59,7 +50,7 @@
   "browsers": [
     {
       "name": "Chrome",
-      "count": 55
+      "count": 50
     },
     {
       "name": "Safari",
@@ -77,7 +68,7 @@
   "systems": [
     {
       "name": "Windows",
-      "count": 31
+      "count": 26
     },
     {
       "name": "Android",
@@ -99,7 +90,7 @@
   "refs": [
     {
       "name": "Google",
-      "count": 10
+      "count": 8
     },
     {
       "name": "facebook.com",
@@ -109,7 +100,7 @@
   "languages": [
     {
       "name": "Arabic",
-      "count": 32
+      "count": 27
     },
     {
       "name": "English",
@@ -438,6 +429,10 @@
     {
       "date": "2026-07-08",
       "hits": 1
+    },
+    {
+      "date": "2026-07-09",
+      "hits": 0
     }
   ]
 }
