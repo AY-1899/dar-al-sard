@@ -1,8 +1,8 @@
 {
-  "updated": "2026-07-14T19:02:36.594Z",
+  "updated": "2026-07-15T01:25:18.131Z",
   "period": {
-    "start": "2026-06-14",
-    "end": "2026-07-14"
+    "start": "2026-06-15",
+    "end": "2026-07-15"
   },
   "totalHits": 54,
   "downloads": 0,
@@ -15,18 +15,18 @@
     },
     {
       "name": "الولايات المتحدة",
-      "count": 18
+      "count": 17
     },
     {
       "name": "الأردن",
       "count": 5
     },
     {
-      "name": "فرنسا",
-      "count": 3
+      "name": "السعودية",
+      "count": 4
     },
     {
-      "name": "السعودية",
+      "name": "فرنسا",
       "count": 3
     },
     {
@@ -90,7 +90,7 @@
   "refs": [
     {
       "name": "Google",
-      "count": 9
+      "count": 10
     },
     {
       "name": "facebook.com",
@@ -104,11 +104,11 @@
     },
     {
       "name": "(unknown)",
-      "count": 18
+      "count": 17
     },
     {
       "name": "English",
-      "count": 14
+      "count": 15
     }
   ],
   "monthly": [
@@ -449,6 +449,10 @@
     {
       "date": "2026-07-13",
       "hits": 0
+    },
+    {
+      "date": "2026-07-14",
+      "hits": 2
     }
   ]
 }
