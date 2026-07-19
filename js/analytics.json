@@ -1,10 +1,10 @@
 {
-  "updated": "2026-07-18T12:52:44.569Z",
+  "updated": "2026-07-19T01:47:08.222Z",
   "period": {
-    "start": "2026-06-18",
-    "end": "2026-07-18"
+    "start": "2026-06-19",
+    "end": "2026-07-19"
   },
-  "totalHits": 71,
+  "totalHits": 70,
   "downloads": 0,
   "pdfDownloads": [],
   "hits": [],
@@ -34,10 +34,6 @@
       "count": 1
     },
     {
-      "name": "مصر",
-      "count": 1
-    },
-    {
       "name": "سوريا",
       "count": 1
     }
@@ -46,7 +42,7 @@
   "browsers": [
     {
       "name": "Chrome",
-      "count": 52
+      "count": 51
     },
     {
       "name": "Safari",
@@ -68,7 +64,7 @@
     },
     {
       "name": "Android",
-      "count": 21
+      "count": 20
     },
     {
       "name": "iOS",
@@ -86,11 +82,11 @@
   "refs": [
     {
       "name": "Google",
-      "count": 11
+      "count": 10
     },
     {
       "name": "facebook.com",
-      "count": 4
+      "count": 3
     }
   ],
   "languages": [
@@ -104,7 +100,7 @@
     },
     {
       "name": "Arabic",
-      "count": 21
+      "count": 20
     }
   ],
   "monthly": [
@@ -461,6 +457,10 @@
     {
       "date": "2026-07-17",
       "hits": 15
+    },
+    {
+      "date": "2026-07-18",
+      "hits": 5
     }
   ]
 }
