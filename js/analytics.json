@@ -1,17 +1,17 @@
 {
-  "updated": "2026-07-21T01:47:18.321Z",
+  "updated": "2026-07-21T08:08:03.446Z",
   "period": {
     "start": "2026-06-21",
     "end": "2026-07-21"
   },
-  "totalHits": 66,
+  "totalHits": 67,
   "downloads": 0,
   "pdfDownloads": [],
   "hits": [],
   "locations": [
     {
       "name": "الولايات المتحدة",
-      "count": 35
+      "count": 36
     },
     {
       "name": "العراق",
@@ -50,7 +50,7 @@
     },
     {
       "name": "Safari",
-      "count": 14
+      "count": 15
     },
     {
       "name": "Edge",
@@ -72,7 +72,7 @@
     },
     {
       "name": "iOS",
-      "count": 14
+      "count": 15
     },
     {
       "name": "Linux",
@@ -100,7 +100,7 @@
     },
     {
       "name": "(unknown)",
-      "count": 21
+      "count": 22
     },
     {
       "name": "Arabic",
