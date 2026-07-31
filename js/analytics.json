@@ -1,10 +1,10 @@
 {
-  "updated": "2026-07-31T01:54:12.972Z",
+  "updated": "2026-07-31T13:41:00.675Z",
   "period": {
     "start": "2026-07-01",
     "end": "2026-07-31"
   },
-  "totalHits": 96,
+  "totalHits": 97,
   "downloads": 0,
   "pdfDownloads": [],
   "hits": [],
@@ -15,7 +15,7 @@
     },
     {
       "name": "العراق",
-      "count": 31
+      "count": 32
     },
     {
       "name": "ألمانيا",
@@ -74,7 +74,7 @@
     },
     {
       "name": "Safari",
-      "count": 22
+      "count": 23
     },
     {
       "name": "Firefox",
@@ -96,7 +96,7 @@
     },
     {
       "name": "iOS",
-      "count": 22
+      "count": 23
     },
     {
       "name": "Linux",
@@ -120,7 +120,7 @@
     },
     {
       "name": "English",
-      "count": 32
+      "count": 33
     },
     {
       "name": "(unknown)",
