@@ -1,21 +1,21 @@
 {
-  "updated": "2026-07-31T19:08:39.418Z",
+  "updated": "2026-08-01T01:55:18.962Z",
   "period": {
-    "start": "2026-07-01",
-    "end": "2026-07-31"
+    "start": "2026-07-02",
+    "end": "2026-08-01"
   },
-  "totalHits": 106,
+  "totalHits": 104,
   "downloads": 0,
   "pdfDownloads": [],
   "hits": [],
   "locations": [
     {
-      "name": "العراق",
-      "count": 41
-    },
-    {
       "name": "الولايات المتحدة",
       "count": 39
+    },
+    {
+      "name": "العراق",
+      "count": 38
     },
     {
       "name": "ألمانيا",
@@ -39,6 +39,10 @@
     },
     {
       "name": "كندا",
+      "count": 1
+    },
+    {
+      "name": "المملكة المتحدة",
       "count": 1
     },
     {
@@ -70,15 +74,15 @@
   "browsers": [
     {
       "name": "Chrome",
-      "count": 70
+      "count": 69
     },
     {
       "name": "Safari",
-      "count": 27
+      "count": 28
     },
     {
       "name": "Firefox",
-      "count": 7
+      "count": 5
     },
     {
       "name": "Edge",
@@ -88,15 +92,15 @@
   "systems": [
     {
       "name": "Android",
-      "count": 42
+      "count": 43
     },
     {
       "name": "Windows",
-      "count": 35
+      "count": 31
     },
     {
       "name": "iOS",
-      "count": 27
+      "count": 28
     },
     {
       "name": "Linux",
@@ -106,21 +110,21 @@
   "refs": [
     {
       "name": "Google",
-      "count": 13
+      "count": 10
     },
     {
       "name": "facebook.com",
-      "count": 7
+      "count": 9
     }
   ],
   "languages": [
     {
       "name": "Arabic",
-      "count": 42
+      "count": 41
     },
     {
       "name": "English",
-      "count": 34
+      "count": 33
     },
     {
       "name": "(unknown)",
@@ -135,13 +139,13 @@
     {
       "month": "2026-06",
       "hits": 109
+    },
+    {
+      "month": "2026-07",
+      "hits": 108
     }
   ],
   "daily": [
-    {
-      "date": "2026-05-02",
-      "hits": 0
-    },
     {
       "date": "2026-05-03",
       "hits": 0
@@ -497,6 +501,10 @@
     {
       "date": "2026-07-30",
       "hits": 8
+    },
+    {
+      "date": "2026-07-31",
+      "hits": 12
     }
   ]
 }
