@@ -1,12 +1,17 @@
 {
-  "updated": "2026-08-08T00:55:10.031Z",
+  "updated": "2026-08-08T12:27:15.806Z",
   "period": {
     "start": "2026-07-09",
     "end": "2026-08-08"
   },
-  "totalHits": 103,
-  "downloads": 0,
-  "pdfDownloads": [],
+  "totalHits": 107,
+  "downloads": 1,
+  "pdfDownloads": [
+    {
+      "title": "الحمائم البيض",
+      "count": 1
+    }
+  ],
   "hits": [],
   "locations": [
     {
@@ -26,15 +31,15 @@
       "count": 5
     },
     {
+      "name": "المملكة المتحدة",
+      "count": 5
+    },
+    {
       "name": "الإمارات",
       "count": 1
     },
     {
       "name": "كندا",
-      "count": 1
-    },
-    {
-      "name": "المملكة المتحدة",
       "count": 1
     },
     {
@@ -66,7 +71,7 @@
   "browsers": [
     {
       "name": "Chrome",
-      "count": 67
+      "count": 71
     },
     {
       "name": "Safari",
@@ -88,7 +93,7 @@
     },
     {
       "name": "Windows",
-      "count": 30
+      "count": 34
     },
     {
       "name": "iOS",
@@ -119,12 +124,12 @@
       "count": 45
     },
     {
-      "name": "(unknown)",
-      "count": 30
+      "name": "English",
+      "count": 32
     },
     {
-      "name": "English",
-      "count": 28
+      "name": "(unknown)",
+      "count": 30
     }
   ],
   "monthly": [
