@@ -1,10 +1,10 @@
 {
-  "updated": "2026-08-07T18:40:00.264Z",
+  "updated": "2026-08-08T00:55:10.031Z",
   "period": {
-    "start": "2026-07-08",
-    "end": "2026-08-07"
+    "start": "2026-07-09",
+    "end": "2026-08-08"
   },
-  "totalHits": 104,
+  "totalHits": 103,
   "downloads": 0,
   "pdfDownloads": [],
   "hits": [],
@@ -60,17 +60,13 @@
     {
       "name": "السويد",
       "count": 1
-    },
-    {
-      "name": "سوريا",
-      "count": 1
     }
   ],
   "regions": [],
   "browsers": [
     {
       "name": "Chrome",
-      "count": 68
+      "count": 67
     },
     {
       "name": "Safari",
@@ -100,17 +96,17 @@
     },
     {
       "name": "Linux",
-      "count": 2
+      "count": 1
     }
   ],
   "refs": [
     {
-      "name": "Google",
+      "name": "facebook.com",
       "count": 10
     },
     {
-      "name": "facebook.com",
-      "count": 10
+      "name": "Google",
+      "count": 9
     },
     {
       "name": "chatgpt.com",
@@ -128,7 +124,7 @@
     },
     {
       "name": "English",
-      "count": 29
+      "count": 28
     }
   ],
   "monthly": [
@@ -146,10 +142,6 @@
     }
   ],
   "daily": [
-    {
-      "date": "2026-05-09",
-      "hits": 0
-    },
     {
       "date": "2026-05-10",
       "hits": 0
@@ -504,6 +496,10 @@
     },
     {
       "date": "2026-08-06",
+      "hits": 0
+    },
+    {
+      "date": "2026-08-07",
       "hits": 0
     }
   ]
