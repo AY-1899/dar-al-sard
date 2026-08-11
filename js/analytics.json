@@ -1,10 +1,10 @@
 {
-  "updated": "2026-08-11T06:48:57.794Z",
+  "updated": "2026-08-11T18:47:36.642Z",
   "period": {
     "start": "2026-07-12",
     "end": "2026-08-11"
   },
-  "totalHits": 110,
+  "totalHits": 111,
   "downloads": 1,
   "pdfDownloads": [
     {
@@ -35,15 +35,15 @@
       "count": 5
     },
     {
+      "name": "مصر",
+      "count": 2
+    },
+    {
       "name": "الإمارات",
       "count": 1
     },
     {
       "name": "كندا",
-      "count": 1
-    },
-    {
-      "name": "مصر",
       "count": 1
     },
     {
@@ -75,7 +75,7 @@
   "browsers": [
     {
       "name": "Chrome",
-      "count": 73
+      "count": 74
     },
     {
       "name": "Safari",
@@ -97,7 +97,7 @@
     },
     {
       "name": "Windows",
-      "count": 36
+      "count": 37
     },
     {
       "name": "iOS",
@@ -111,7 +111,7 @@
   "refs": [
     {
       "name": "Google",
-      "count": 11
+      "count": 12
     },
     {
       "name": "facebook.com",
@@ -129,7 +129,7 @@
     },
     {
       "name": "English",
-      "count": 34
+      "count": 35
     },
     {
       "name": "(unknown)",
