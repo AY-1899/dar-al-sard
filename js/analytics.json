@@ -1,10 +1,10 @@
 {
-  "updated": "2026-08-18T00:39:53.045Z",
+  "updated": "2026-08-18T06:25:42.591Z",
   "period": {
     "start": "2026-07-19",
     "end": "2026-08-18"
   },
-  "totalHits": 93,
+  "totalHits": 97,
   "downloads": 1,
   "pdfDownloads": [
     {
@@ -27,6 +27,10 @@
       "count": 6
     },
     {
+      "name": "كندا",
+      "count": 5
+    },
+    {
       "name": "فرنسا",
       "count": 5
     },
@@ -37,10 +41,6 @@
     {
       "name": "مصر",
       "count": 3
-    },
-    {
-      "name": "كندا",
-      "count": 1
     },
     {
       "name": "أيرلندا",
@@ -71,7 +71,7 @@
     },
     {
       "name": "Safari",
-      "count": 29
+      "count": 33
     },
     {
       "name": "Firefox",
@@ -85,7 +85,7 @@
     },
     {
       "name": "iOS",
-      "count": 29
+      "count": 33
     },
     {
       "name": "Windows",
@@ -95,7 +95,7 @@
   "refs": [
     {
       "name": "Google",
-      "count": 14
+      "count": 15
     },
     {
       "name": "facebook.com",
@@ -112,12 +112,12 @@
       "count": 48
     },
     {
-      "name": "(unknown)",
-      "count": 24
+      "name": "English",
+      "count": 25
     },
     {
-      "name": "English",
-      "count": 21
+      "name": "(unknown)",
+      "count": 24
     }
   ],
   "monthly": [
