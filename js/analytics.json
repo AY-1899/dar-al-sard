@@ -1,10 +1,10 @@
 {
-  "updated": "2026-08-25T18:24:11.583Z",
+  "updated": "2026-08-26T00:42:09.132Z",
   "period": {
-    "start": "2026-07-26",
-    "end": "2026-08-25"
+    "start": "2026-07-27",
+    "end": "2026-08-26"
   },
-  "totalHits": 97,
+  "totalHits": 83,
   "downloads": 1,
   "pdfDownloads": [
     {
@@ -16,11 +16,11 @@
   "locations": [
     {
       "name": "العراق",
-      "count": 51
+      "count": 40
     },
     {
       "name": "الولايات المتحدة",
-      "count": 23
+      "count": 22
     },
     {
       "name": "فرنسا",
@@ -43,15 +43,7 @@
       "count": 1
     },
     {
-      "name": "أيرلندا",
-      "count": 1
-    },
-    {
       "name": "المغرب",
-      "count": 1
-    },
-    {
-      "name": "هولندا",
       "count": 1
     },
     {
@@ -59,7 +51,7 @@
       "count": 1
     },
     {
-      "name": "السويد",
+      "name": "السعودية",
       "count": 1
     }
   ],
@@ -67,29 +59,25 @@
   "browsers": [
     {
       "name": "Chrome",
-      "count": 60
+      "count": 46
     },
     {
       "name": "Safari",
-      "count": 36
-    },
-    {
-      "name": "Firefox",
-      "count": 1
+      "count": 37
     }
   ],
   "systems": [
     {
-      "name": "Android",
-      "count": 41
+      "name": "iOS",
+      "count": 37
     },
     {
-      "name": "iOS",
-      "count": 36
+      "name": "Android",
+      "count": 29
     },
     {
       "name": "Windows",
-      "count": 20
+      "count": 17
     }
   ],
   "refs": [
@@ -108,12 +96,12 @@
   ],
   "languages": [
     {
-      "name": "Arabic",
-      "count": 48
+      "name": "English",
+      "count": 38
     },
     {
-      "name": "English",
-      "count": 41
+      "name": "Arabic",
+      "count": 37
     },
     {
       "name": "(unknown)",
@@ -139,10 +127,6 @@
     }
   ],
   "daily": [
-    {
-      "date": "2026-05-27",
-      "hits": 4
-    },
     {
       "date": "2026-05-28",
       "hits": 85
@@ -498,6 +482,10 @@
     {
       "date": "2026-08-24",
       "hits": 3
+    },
+    {
+      "date": "2026-08-25",
+      "hits": 2
     }
   ]
 }
