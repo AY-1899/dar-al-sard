@@ -1,10 +1,10 @@
 {
-  "updated": "2026-08-31T12:10:08.982Z",
+  "updated": "2026-09-01T02:40:05.420Z",
   "period": {
-    "start": "2026-08-01",
-    "end": "2026-08-31"
+    "start": "2026-08-02",
+    "end": "2026-09-01"
   },
-  "totalHits": 63,
+  "totalHits": 65,
   "downloads": 1,
   "pdfDownloads": [
     {
@@ -35,6 +35,10 @@
       "count": 3
     },
     {
+      "name": "ألمانيا",
+      "count": 2
+    },
+    {
       "name": "أستراليا",
       "count": 1
     },
@@ -59,13 +63,13 @@
     },
     {
       "name": "Safari",
-      "count": 29
+      "count": 31
     }
   ],
   "systems": [
     {
       "name": "iOS",
-      "count": 29
+      "count": 31
     },
     {
       "name": "Android",
@@ -87,7 +91,7 @@
   "refs": [
     {
       "name": "Google",
-      "count": 20
+      "count": 22
     },
     {
       "name": "facebook.com",
@@ -105,7 +109,7 @@
     },
     {
       "name": "Arabic",
-      "count": 25
+      "count": 27
     },
     {
       "name": "French",
@@ -124,13 +128,13 @@
     {
       "month": "2026-07",
       "hits": 108
+    },
+    {
+      "month": "2026-08",
+      "hits": 65
     }
   ],
   "daily": [
-    {
-      "date": "2026-06-02",
-      "hits": 2
-    },
     {
       "date": "2026-06-03",
       "hits": 2
@@ -486,6 +490,10 @@
     {
       "date": "2026-08-30",
       "hits": 1
+    },
+    {
+      "date": "2026-08-31",
+      "hits": 3
     }
   ]
 }
