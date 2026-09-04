@@ -1,10 +1,10 @@
 {
-  "updated": "2026-09-04T15:26:54.713Z",
+  "updated": "2026-09-04T20:02:05.735Z",
   "period": {
     "start": "2026-08-05",
     "end": "2026-09-04"
   },
-  "totalHits": 78,
+  "totalHits": 79,
   "downloads": 3,
   "pdfDownloads": [
     {
@@ -43,11 +43,11 @@
       "count": 4
     },
     {
-      "name": "ألمانيا",
-      "count": 2
+      "name": "المغرب",
+      "count": 3
     },
     {
-      "name": "المغرب",
+      "name": "ألمانيا",
       "count": 2
     },
     {
@@ -67,7 +67,7 @@
   "browsers": [
     {
       "name": "Chrome",
-      "count": 43
+      "count": 44
     },
     {
       "name": "Safari",
@@ -85,7 +85,7 @@
     },
     {
       "name": "Windows",
-      "count": 19
+      "count": 20
     },
     {
       "name": "Linux",
@@ -99,7 +99,7 @@
   "refs": [
     {
       "name": "Google",
-      "count": 28
+      "count": 29
     },
     {
       "name": "facebook.com",
@@ -121,7 +121,7 @@
     },
     {
       "name": "French",
-      "count": 2
+      "count": 3
     }
   ],
   "monthly": [
