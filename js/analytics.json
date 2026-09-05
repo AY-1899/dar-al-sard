@@ -1,12 +1,20 @@
 {
-  "updated": "2026-09-05T09:39:46.758Z",
+  "updated": "2026-09-05T19:43:14.446Z",
   "period": {
     "start": "2026-08-06",
     "end": "2026-09-05"
   },
-  "totalHits": 77,
-  "downloads": 3,
+  "totalHits": 81,
+  "downloads": 5,
   "pdfDownloads": [
+    {
+      "title": "قصاصات",
+      "count": 1
+    },
+    {
+      "title": "عرضحال بغدادي",
+      "count": 1
+    },
     {
       "title": "حلم مسافر",
       "count": 1
@@ -24,7 +32,7 @@
   "locations": [
     {
       "name": "العراق",
-      "count": 27
+      "count": 31
     },
     {
       "name": "الولايات المتحدة",
@@ -71,7 +79,7 @@
   "browsers": [
     {
       "name": "Chrome",
-      "count": 41
+      "count": 45
     },
     {
       "name": "Safari",
@@ -88,12 +96,12 @@
       "count": 35
     },
     {
-      "name": "Windows",
-      "count": 21
+      "name": "Android",
+      "count": 23
     },
     {
-      "name": "Android",
-      "count": 19
+      "name": "Windows",
+      "count": 21
     },
     {
       "name": "Linux",
@@ -107,7 +115,7 @@
   "refs": [
     {
       "name": "Google",
-      "count": 30
+      "count": 31
     },
     {
       "name": "facebook.com",
@@ -115,7 +123,7 @@
     },
     {
       "name": "chatgpt.com",
-      "count": 1
+      "count": 2
     }
   ],
   "languages": [
@@ -125,7 +133,7 @@
     },
     {
       "name": "Arabic",
-      "count": 22
+      "count": 26
     },
     {
       "name": "French",
