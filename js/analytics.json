@@ -1,15 +1,19 @@
 {
-  "updated": "2026-09-07T01:55:39.114Z",
+  "updated": "2026-09-07T11:02:56.121Z",
   "period": {
     "start": "2026-08-08",
     "end": "2026-09-07"
   },
-  "totalHits": 84,
-  "downloads": 6,
+  "totalHits": 87,
+  "downloads": 7,
   "pdfDownloads": [
     {
       "title": "كشكول الربيعي",
       "count": 2
+    },
+    {
+      "title": "أساليب الخطاب الشعري في شعر رشيد سليم الخوري",
+      "count": 1
     },
     {
       "title": "قصاصات",
@@ -32,7 +36,7 @@
   "locations": [
     {
       "name": "العراق",
-      "count": 33
+      "count": 36
     },
     {
       "name": "الولايات المتحدة",
@@ -79,7 +83,7 @@
   "browsers": [
     {
       "name": "Chrome",
-      "count": 47
+      "count": 50
     },
     {
       "name": "Safari",
@@ -97,7 +101,7 @@
     },
     {
       "name": "Android",
-      "count": 25
+      "count": 28
     },
     {
       "name": "Windows",
@@ -115,7 +119,7 @@
   "refs": [
     {
       "name": "Google",
-      "count": 34
+      "count": 35
     },
     {
       "name": "facebook.com",
@@ -133,7 +137,7 @@
     },
     {
       "name": "Arabic",
-      "count": 29
+      "count": 32
     },
     {
       "name": "French",
