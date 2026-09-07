@@ -1,10 +1,10 @@
 {
-  "updated": "2026-09-07T11:02:56.121Z",
+  "updated": "2026-09-07T20:55:01.009Z",
   "period": {
     "start": "2026-08-08",
     "end": "2026-09-07"
   },
-  "totalHits": 87,
+  "totalHits": 88,
   "downloads": 7,
   "pdfDownloads": [
     {
@@ -77,13 +77,17 @@
     {
       "name": "بلجيكا",
       "count": 1
+    },
+    {
+      "name": "الجزائر",
+      "count": 1
     }
   ],
   "regions": [],
   "browsers": [
     {
       "name": "Chrome",
-      "count": 50
+      "count": 51
     },
     {
       "name": "Safari",
@@ -105,7 +109,7 @@
     },
     {
       "name": "Windows",
-      "count": 21
+      "count": 22
     },
     {
       "name": "Linux",
@@ -119,7 +123,7 @@
   "refs": [
     {
       "name": "Google",
-      "count": 35
+      "count": 36
     },
     {
       "name": "facebook.com",
@@ -141,7 +145,7 @@
     },
     {
       "name": "French",
-      "count": 3
+      "count": 4
     }
   ],
   "monthly": [
