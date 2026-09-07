@@ -1,12 +1,16 @@
 {
-  "updated": "2026-09-06T19:46:18.312Z",
+  "updated": "2026-09-07T01:55:39.114Z",
   "period": {
-    "start": "2026-08-07",
-    "end": "2026-09-06"
+    "start": "2026-08-08",
+    "end": "2026-09-07"
   },
-  "totalHits": 81,
-  "downloads": 5,
+  "totalHits": 84,
+  "downloads": 6,
   "pdfDownloads": [
+    {
+      "title": "كشكول الربيعي",
+      "count": 2
+    },
     {
       "title": "قصاصات",
       "count": 1
@@ -20,10 +24,6 @@
       "count": 1
     },
     {
-      "title": "كشكول الربيعي",
-      "count": 1
-    },
-    {
       "title": "الحمائم البيض",
       "count": 1
     }
@@ -32,7 +32,7 @@
   "locations": [
     {
       "name": "العراق",
-      "count": 31
+      "count": 33
     },
     {
       "name": "الولايات المتحدة",
@@ -59,6 +59,10 @@
       "count": 2
     },
     {
+      "name": "السعودية",
+      "count": 2
+    },
+    {
       "name": "الإمارات",
       "count": 1
     },
@@ -69,21 +73,17 @@
     {
       "name": "بلجيكا",
       "count": 1
-    },
-    {
-      "name": "السعودية",
-      "count": 1
     }
   ],
   "regions": [],
   "browsers": [
     {
       "name": "Chrome",
-      "count": 45
+      "count": 47
     },
     {
       "name": "Safari",
-      "count": 35
+      "count": 36
     },
     {
       "name": "Firefox",
@@ -93,11 +93,11 @@
   "systems": [
     {
       "name": "iOS",
-      "count": 35
+      "count": 36
     },
     {
       "name": "Android",
-      "count": 23
+      "count": 25
     },
     {
       "name": "Windows",
@@ -115,7 +115,7 @@
   "refs": [
     {
       "name": "Google",
-      "count": 31
+      "count": 34
     },
     {
       "name": "facebook.com",
@@ -133,7 +133,7 @@
     },
     {
       "name": "Arabic",
-      "count": 26
+      "count": 29
     },
     {
       "name": "French",
@@ -159,10 +159,6 @@
     }
   ],
   "daily": [
-    {
-      "date": "2026-06-08",
-      "hits": 9
-    },
     {
       "date": "2026-06-09",
       "hits": 5
@@ -518,6 +514,10 @@
     {
       "date": "2026-09-05",
       "hits": 5
+    },
+    {
+      "date": "2026-09-06",
+      "hits": 3
     }
   ]
 }
