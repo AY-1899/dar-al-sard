@@ -1,10 +1,10 @@
 {
-  "updated": "2026-09-07T20:55:01.009Z",
+  "updated": "2026-09-08T02:06:30.925Z",
   "period": {
-    "start": "2026-08-08",
-    "end": "2026-09-07"
+    "start": "2026-08-09",
+    "end": "2026-09-08"
   },
-  "totalHits": 88,
+  "totalHits": 86,
   "downloads": 7,
   "pdfDownloads": [
     {
@@ -28,7 +28,7 @@
       "count": 1
     },
     {
-      "title": "الحمائم البيض",
+      "title": "ذاكرة الخراب: قصص قصيرة",
       "count": 1
     }
   ],
@@ -36,19 +36,19 @@
   "locations": [
     {
       "name": "العراق",
-      "count": 36
+      "count": 38
     },
     {
       "name": "الولايات المتحدة",
       "count": 22
     },
     {
-      "name": "المملكة المتحدة",
-      "count": 9
-    },
-    {
       "name": "مصر",
       "count": 6
+    },
+    {
+      "name": "المملكة المتحدة",
+      "count": 5
     },
     {
       "name": "كندا",
@@ -87,7 +87,7 @@
   "browsers": [
     {
       "name": "Chrome",
-      "count": 51
+      "count": 49
     },
     {
       "name": "Safari",
@@ -105,11 +105,11 @@
     },
     {
       "name": "Android",
-      "count": 28
+      "count": 30
     },
     {
       "name": "Windows",
-      "count": 22
+      "count": 18
     },
     {
       "name": "Linux",
@@ -123,7 +123,7 @@
   "refs": [
     {
       "name": "Google",
-      "count": 36
+      "count": 38
     },
     {
       "name": "facebook.com",
@@ -137,11 +137,11 @@
   "languages": [
     {
       "name": "English",
-      "count": 52
+      "count": 48
     },
     {
       "name": "Arabic",
-      "count": 32
+      "count": 34
     },
     {
       "name": "French",
@@ -167,10 +167,6 @@
     }
   ],
   "daily": [
-    {
-      "date": "2026-06-09",
-      "hits": 5
-    },
     {
       "date": "2026-06-10",
       "hits": 6
@@ -526,6 +522,10 @@
     {
       "date": "2026-09-06",
       "hits": 3
+    },
+    {
+      "date": "2026-09-07",
+      "hits": 9
     }
   ]
 }
