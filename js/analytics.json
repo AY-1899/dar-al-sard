@@ -1,10 +1,10 @@
 {
-  "updated": "2026-09-28T02:37:10.695Z",
+  "updated": "2026-09-28T22:46:11.746Z",
   "period": {
     "start": "2026-08-29",
     "end": "2026-09-28"
   },
-  "totalHits": 84,
+  "totalHits": 86,
   "downloads": 8,
   "pdfDownloads": [
     {
@@ -36,7 +36,7 @@
   "locations": [
     {
       "name": "العراق",
-      "count": 37
+      "count": 38
     },
     {
       "name": "الولايات المتحدة",
@@ -55,6 +55,10 @@
       "count": 4
     },
     {
+      "name": "سوريا",
+      "count": 3
+    },
+    {
       "name": "البحرين",
       "count": 2
     },
@@ -64,10 +68,6 @@
     },
     {
       "name": "المغرب",
-      "count": 2
-    },
-    {
-      "name": "سوريا",
       "count": 2
     },
     {
@@ -87,7 +87,7 @@
   "browsers": [
     {
       "name": "Chrome",
-      "count": 42
+      "count": 44
     },
     {
       "name": "Safari",
@@ -105,11 +105,11 @@
     },
     {
       "name": "Android",
-      "count": 27
+      "count": 28
     },
     {
       "name": "Windows",
-      "count": 13
+      "count": 14
     },
     {
       "name": "macOS",
@@ -123,7 +123,7 @@
   "refs": [
     {
       "name": "Google",
-      "count": 34
+      "count": 36
     },
     {
       "name": "facebook.com",
@@ -137,11 +137,11 @@
   "languages": [
     {
       "name": "English",
-      "count": 46
+      "count": 47
     },
     {
       "name": "Arabic",
-      "count": 34
+      "count": 35
     },
     {
       "name": "French",
