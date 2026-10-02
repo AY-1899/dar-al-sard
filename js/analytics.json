@@ -1,10 +1,10 @@
 {
-  "updated": "2026-10-01T12:04:12.376Z",
+  "updated": "2026-10-02T03:10:42.068Z",
   "period": {
-    "start": "2026-09-01",
-    "end": "2026-10-01"
+    "start": "2026-09-02",
+    "end": "2026-10-02"
   },
-  "totalHits": 81,
+  "totalHits": 74,
   "downloads": 8,
   "pdfDownloads": [
     {
@@ -36,19 +36,15 @@
   "locations": [
     {
       "name": "العراق",
-      "count": 37
+      "count": 36
     },
     {
       "name": "الولايات المتحدة",
       "count": 19
     },
     {
-      "name": "المملكة المتحدة",
-      "count": 7
-    },
-    {
       "name": "مصر",
-      "count": 4
+      "count": 3
     },
     {
       "name": "سوريا",
@@ -64,6 +60,10 @@
     },
     {
       "name": "الجزائر",
+      "count": 2
+    },
+    {
+      "name": "المملكة المتحدة",
       "count": 2
     },
     {
@@ -86,12 +86,12 @@
   "regions": [],
   "browsers": [
     {
-      "name": "Chrome",
-      "count": 41
+      "name": "Safari",
+      "count": 37
     },
     {
-      "name": "Safari",
-      "count": 38
+      "name": "Chrome",
+      "count": 35
     },
     {
       "name": "Firefox",
@@ -101,7 +101,7 @@
   "systems": [
     {
       "name": "iOS",
-      "count": 37
+      "count": 36
     },
     {
       "name": "Android",
@@ -109,7 +109,7 @@
     },
     {
       "name": "Windows",
-      "count": 14
+      "count": 8
     },
     {
       "name": "macOS",
@@ -123,7 +123,7 @@
   "refs": [
     {
       "name": "Google",
-      "count": 33
+      "count": 31
     },
     {
       "name": "facebook.com",
@@ -137,11 +137,11 @@
   "languages": [
     {
       "name": "English",
-      "count": 45
+      "count": 39
     },
     {
       "name": "Arabic",
-      "count": 32
+      "count": 31
     },
     {
       "name": "French",
@@ -175,10 +175,6 @@
     }
   ],
   "daily": [
-    {
-      "date": "2026-07-03",
-      "hits": 1
-    },
     {
       "date": "2026-07-04",
       "hits": 3
@@ -533,6 +529,10 @@
     },
     {
       "date": "2026-09-30",
+      "hits": 0
+    },
+    {
+      "date": "2026-10-01",
       "hits": 0
     }
   ]
