@@ -1,15 +1,15 @@
 {
-  "updated": "2026-10-03T20:21:31.544Z",
+  "updated": "2026-10-04T11:31:40.082Z",
   "period": {
-    "start": "2026-09-03",
-    "end": "2026-10-03"
+    "start": "2026-09-04",
+    "end": "2026-10-04"
   },
-  "totalHits": 74,
-  "downloads": 8,
+  "totalHits": 66,
+  "downloads": 6,
   "pdfDownloads": [
     {
       "title": "كشكول الربيعي",
-      "count": 3
+      "count": 2
     },
     {
       "title": "أساليب الخطاب الشعري في شعر رشيد سليم الخوري",
@@ -24,10 +24,6 @@
       "count": 1
     },
     {
-      "title": "حلم مسافر",
-      "count": 1
-    },
-    {
       "title": "ذاكرة الخراب: قصص قصيرة",
       "count": 1
     }
@@ -36,15 +32,11 @@
   "locations": [
     {
       "name": "العراق",
-      "count": 36
+      "count": 31
     },
     {
       "name": "الولايات المتحدة",
       "count": 19
-    },
-    {
-      "name": "مصر",
-      "count": 3
     },
     {
       "name": "سوريا",
@@ -67,15 +59,19 @@
       "count": 2
     },
     {
-      "name": "المغرب",
-      "count": 2
-    },
-    {
       "name": "الإمارات",
       "count": 1
     },
     {
       "name": "كندا",
+      "count": 1
+    },
+    {
+      "name": "مصر",
+      "count": 1
+    },
+    {
+      "name": "المغرب",
       "count": 1
     },
     {
@@ -87,11 +83,11 @@
   "browsers": [
     {
       "name": "Safari",
-      "count": 37
+      "count": 34
     },
     {
       "name": "Chrome",
-      "count": 35
+      "count": 30
     },
     {
       "name": "Firefox",
@@ -101,15 +97,15 @@
   "systems": [
     {
       "name": "iOS",
-      "count": 36
+      "count": 33
     },
     {
       "name": "Android",
-      "count": 27
+      "count": 23
     },
     {
       "name": "Windows",
-      "count": 8
+      "count": 7
     },
     {
       "name": "macOS",
@@ -123,21 +119,21 @@
   "refs": [
     {
       "name": "Google",
-      "count": 31
-    },
-    {
-      "name": "facebook.com",
-      "count": 4
+      "count": 28
     },
     {
       "name": "chatgpt.com",
       "count": 3
+    },
+    {
+      "name": "facebook.com",
+      "count": 1
     }
   ],
   "languages": [
     {
       "name": "English",
-      "count": 39
+      "count": 32
     },
     {
       "name": "Arabic",
@@ -145,7 +141,7 @@
     },
     {
       "name": "French",
-      "count": 3
+      "count": 2
     },
     {
       "name": "(unknown)",
@@ -175,10 +171,6 @@
     }
   ],
   "daily": [
-    {
-      "date": "2026-07-05",
-      "hits": 3
-    },
     {
       "date": "2026-07-06",
       "hits": 0
@@ -534,6 +526,10 @@
     {
       "date": "2026-10-02",
       "hits": 0
+    },
+    {
+      "date": "2026-10-03",
+      "hits": 1
     }
   ]
 }
