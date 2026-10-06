@@ -1,11 +1,11 @@
 {
-  "updated": "2026-10-05T23:28:56.094Z",
+  "updated": "2026-10-06T03:53:27.757Z",
   "period": {
-    "start": "2026-09-05",
-    "end": "2026-10-05"
+    "start": "2026-09-06",
+    "end": "2026-10-06"
   },
-  "totalHits": 65,
-  "downloads": 6,
+  "totalHits": 60,
+  "downloads": 4,
   "pdfDownloads": [
     {
       "title": "كشكول الربيعي",
@@ -13,14 +13,6 @@
     },
     {
       "title": "أساليب الخطاب الشعري في شعر رشيد سليم الخوري",
-      "count": 1
-    },
-    {
-      "title": "قصاصات",
-      "count": 1
-    },
-    {
-      "title": "عرضحال بغدادي",
       "count": 1
     },
     {
@@ -32,7 +24,7 @@
   "locations": [
     {
       "name": "العراق",
-      "count": 31
+      "count": 27
     },
     {
       "name": "الولايات المتحدة",
@@ -59,10 +51,6 @@
       "count": 2
     },
     {
-      "name": "الإمارات",
-      "count": 1
-    },
-    {
       "name": "كندا",
       "count": 1
     },
@@ -83,11 +71,11 @@
     },
     {
       "name": "Chrome",
-      "count": 28
+      "count": 24
     },
     {
       "name": "Firefox",
-      "count": 2
+      "count": 1
     }
   ],
   "systems": [
@@ -97,11 +85,11 @@
     },
     {
       "name": "Android",
-      "count": 23
+      "count": 19
     },
     {
       "name": "Windows",
-      "count": 5
+      "count": 4
     },
     {
       "name": "macOS",
@@ -115,11 +103,11 @@
   "refs": [
     {
       "name": "Google",
-      "count": 27
+      "count": 25
     },
     {
       "name": "chatgpt.com",
-      "count": 3
+      "count": 2
     },
     {
       "name": "facebook.com",
@@ -128,12 +116,12 @@
   ],
   "languages": [
     {
-      "name": "Arabic",
-      "count": 32
+      "name": "English",
+      "count": 30
     },
     {
-      "name": "English",
-      "count": 31
+      "name": "Arabic",
+      "count": 28
     },
     {
       "name": "(unknown)",
@@ -167,10 +155,6 @@
     }
   ],
   "daily": [
-    {
-      "date": "2026-07-07",
-      "hits": 0
-    },
     {
       "date": "2026-07-08",
       "hits": 1
@@ -526,6 +510,10 @@
     {
       "date": "2026-10-04",
       "hits": 1
+    },
+    {
+      "date": "2026-10-05",
+      "hits": 0
     }
   ]
 }
