@@ -1,22 +1,14 @@
 {
-  "updated": "2026-10-07T12:19:07.774Z",
+  "updated": "2026-10-08T03:36:33.383Z",
   "period": {
-    "start": "2026-09-07",
-    "end": "2026-10-07"
+    "start": "2026-09-08",
+    "end": "2026-10-08"
   },
-  "totalHits": 62,
-  "downloads": 4,
+  "totalHits": 53,
+  "downloads": 1,
   "pdfDownloads": [
     {
       "title": "كشكول الربيعي",
-      "count": 2
-    },
-    {
-      "title": "أساليب الخطاب الشعري في شعر رشيد سليم الخوري",
-      "count": 1
-    },
-    {
-      "title": "ذاكرة الخراب: قصص قصيرة",
       "count": 1
     }
   ],
@@ -24,7 +16,7 @@
   "locations": [
     {
       "name": "العراق",
-      "count": 28
+      "count": 21
     },
     {
       "name": "الولايات المتحدة",
@@ -47,19 +39,15 @@
       "count": 2
     },
     {
-      "name": "الجزائر",
-      "count": 2
-    },
-    {
       "name": "المملكة المتحدة",
       "count": 2
     },
     {
-      "name": "مصر",
+      "name": "الجزائر",
       "count": 1
     },
     {
-      "name": "السعودية",
+      "name": "مصر",
       "count": 1
     }
   ],
@@ -67,11 +55,11 @@
   "browsers": [
     {
       "name": "Safari",
-      "count": 35
+      "count": 34
     },
     {
       "name": "Chrome",
-      "count": 26
+      "count": 18
     },
     {
       "name": "Firefox",
@@ -81,15 +69,15 @@
   "systems": [
     {
       "name": "iOS",
-      "count": 34
+      "count": 33
     },
     {
       "name": "Android",
-      "count": 20
+      "count": 13
     },
     {
       "name": "Windows",
-      "count": 4
+      "count": 3
     },
     {
       "name": "Linux",
@@ -103,7 +91,7 @@
   "refs": [
     {
       "name": "Google",
-      "count": 26
+      "count": 19
     },
     {
       "name": "chatgpt.com",
@@ -121,14 +109,10 @@
     },
     {
       "name": "Arabic",
-      "count": 29
+      "count": 21
     },
     {
       "name": "(unknown)",
-      "count": 1
-    },
-    {
-      "name": "French",
       "count": 1
     }
   ],
@@ -155,10 +139,6 @@
     }
   ],
   "daily": [
-    {
-      "date": "2026-07-09",
-      "hits": 0
-    },
     {
       "date": "2026-07-10",
       "hits": 0
@@ -514,6 +494,10 @@
     {
       "date": "2026-10-06",
       "hits": 2
+    },
+    {
+      "date": "2026-10-07",
+      "hits": 0
     }
   ]
 }
