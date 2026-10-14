@@ -1,17 +1,12 @@
 {
-  "updated": "2026-10-13T13:11:19.758Z",
+  "updated": "2026-10-14T02:44:30.203Z",
   "period": {
-    "start": "2026-09-13",
-    "end": "2026-10-13"
+    "start": "2026-09-14",
+    "end": "2026-10-14"
   },
-  "totalHits": 42,
-  "downloads": 1,
-  "pdfDownloads": [
-    {
-      "title": "كشكول الربيعي",
-      "count": 1
-    }
-  ],
+  "totalHits": 41,
+  "downloads": 0,
+  "pdfDownloads": [],
   "hits": [],
   "locations": [
     {
@@ -20,14 +15,14 @@
     },
     {
       "name": "العراق",
-      "count": 14
+      "count": 12
     },
     {
       "name": "سوريا",
       "count": 3
     },
     {
-      "name": "كندا",
+      "name": "الجزائر",
       "count": 2
     },
     {
@@ -35,11 +30,15 @@
       "count": 2
     },
     {
+      "name": "كندا",
+      "count": 1
+    },
+    {
       "name": "ألمانيا",
       "count": 1
     },
     {
-      "name": "الجزائر",
+      "name": "الأردن",
       "count": 1
     }
   ],
@@ -47,11 +46,11 @@
   "browsers": [
     {
       "name": "Safari",
-      "count": 25
+      "count": 23
     },
     {
       "name": "Chrome",
-      "count": 16
+      "count": 17
     },
     {
       "name": "Firefox",
@@ -61,29 +60,29 @@
   "systems": [
     {
       "name": "iOS",
-      "count": 24
+      "count": 22
     },
     {
       "name": "Android",
-      "count": 11
+      "count": 12
     },
     {
       "name": "Windows",
-      "count": 3
-    },
-    {
-      "name": "Linux",
-      "count": 2
+      "count": 4
     },
     {
       "name": "macOS",
       "count": 2
+    },
+    {
+      "name": "Linux",
+      "count": 1
     }
   ],
   "refs": [
     {
       "name": "Google",
-      "count": 13
+      "count": 14
     },
     {
       "name": "chatgpt.com",
@@ -97,7 +96,7 @@
     },
     {
       "name": "Arabic",
-      "count": 15
+      "count": 14
     },
     {
       "name": "(unknown)",
@@ -127,10 +126,6 @@
     }
   ],
   "daily": [
-    {
-      "date": "2026-07-15",
-      "hits": 3
-    },
     {
       "date": "2026-07-16",
       "hits": 3
@@ -486,6 +481,10 @@
     {
       "date": "2026-10-12",
       "hits": 0
+    },
+    {
+      "date": "2026-10-13",
+      "hits": 2
     }
   ]
 }
