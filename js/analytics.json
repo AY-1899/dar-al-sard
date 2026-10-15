@@ -1,8 +1,8 @@
 {
-  "updated": "2026-10-14T21:06:36.006Z",
+  "updated": "2026-10-15T15:58:38.752Z",
   "period": {
-    "start": "2026-09-14",
-    "end": "2026-10-14"
+    "start": "2026-09-15",
+    "end": "2026-10-15"
   },
   "totalHits": 42,
   "downloads": 0,
@@ -15,7 +15,7 @@
     },
     {
       "name": "العراق",
-      "count": 13
+      "count": 14
     },
     {
       "name": "سوريا",
@@ -34,10 +34,6 @@
       "count": 1
     },
     {
-      "name": "ألمانيا",
-      "count": 1
-    },
-    {
       "name": "الأردن",
       "count": 1
     }
@@ -46,21 +42,17 @@
   "browsers": [
     {
       "name": "Safari",
-      "count": 23
+      "count": 24
     },
     {
       "name": "Chrome",
       "count": 18
-    },
-    {
-      "name": "Firefox",
-      "count": 1
     }
   ],
   "systems": [
     {
       "name": "iOS",
-      "count": 22
+      "count": 23
     },
     {
       "name": "Android",
@@ -68,7 +60,7 @@
     },
     {
       "name": "Windows",
-      "count": 4
+      "count": 3
     },
     {
       "name": "macOS",
@@ -82,7 +74,7 @@
   "refs": [
     {
       "name": "Google",
-      "count": 15
+      "count": 14
     },
     {
       "name": "chatgpt.com",
@@ -126,10 +118,6 @@
     }
   ],
   "daily": [
-    {
-      "date": "2026-07-16",
-      "hits": 3
-    },
     {
       "date": "2026-07-17",
       "hits": 15
@@ -484,6 +472,10 @@
     },
     {
       "date": "2026-10-13",
+      "hits": 2
+    },
+    {
+      "date": "2026-10-14",
       "hits": 2
     }
   ]
