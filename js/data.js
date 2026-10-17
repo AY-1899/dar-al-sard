@@ -942,5 +942,16 @@ const booksData = [
         pdf: "",
         price: "",
         description: "مجموعة قصصية وجدانية"
+    },
+    {
+        id: 87,
+        title: "لكي تعود من القبو",
+        author: "د. صافي العمال",
+        year: "2026",
+        image: "assets/لكي تعود من القبو - د. صافي العمال - front.jpg",
+        imageBack: "assets/لكي تعود من القبو - د. صافي العمال - back.jpg",
+        pdf: "",
+        price: "",
+        description: ""
     }
 ];
