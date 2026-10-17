@@ -953,5 +953,16 @@ const booksData = [
         pdf: "",
         price: "",
         description: ""
+    },
+    {
+        id: 88,
+        title: "الدنمارك",
+        author: "حكمة أقبال",
+        year: "2026",
+        image: "assets/الدنمارك - حكمة أقبال - front.jpg",
+        imageBack: "assets/الدنمارك - حكمة أقبال - back.jpg",
+        pdf: "assets/الدنمارك.pdf",
+        price: "",
+        description: "أدب رحلات"
     }
 ];
