@@ -1,17 +1,17 @@
 {
-  "updated": "2026-10-19T02:26:16.545Z",
+  "updated": "2026-10-19T11:34:56.634Z",
   "period": {
     "start": "2026-09-19",
     "end": "2026-10-19"
   },
-  "totalHits": 62,
+  "totalHits": 65,
   "downloads": 0,
   "pdfDownloads": [],
   "hits": [],
   "locations": [
     {
       "name": "الولايات المتحدة",
-      "count": 30
+      "count": 33
     },
     {
       "name": "العراق",
@@ -42,7 +42,7 @@
   "browsers": [
     {
       "name": "Safari",
-      "count": 34
+      "count": 37
     },
     {
       "name": "Chrome",
@@ -52,7 +52,7 @@
   "systems": [
     {
       "name": "iOS",
-      "count": 33
+      "count": 36
     },
     {
       "name": "Android",
@@ -84,7 +84,7 @@
   "languages": [
     {
       "name": "English",
-      "count": 35
+      "count": 38
     },
     {
       "name": "Arabic",
