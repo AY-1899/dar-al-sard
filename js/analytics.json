@@ -1,21 +1,26 @@
 {
-  "updated": "2026-10-24T15:04:00.223Z",
+  "updated": "2026-10-25T02:20:46.012Z",
   "period": {
-    "start": "2026-09-24",
-    "end": "2026-10-24"
+    "start": "2026-09-25",
+    "end": "2026-10-25"
   },
-  "totalHits": 92,
-  "downloads": 0,
-  "pdfDownloads": [],
+  "totalHits": 93,
+  "downloads": 1,
+  "pdfDownloads": [
+    {
+      "title": "الضوء والطين",
+      "count": 1
+    }
+  ],
   "hits": [],
   "locations": [
     {
       "name": "الولايات المتحدة",
-      "count": 49
+      "count": 48
     },
     {
       "name": "العراق",
-      "count": 34
+      "count": 36
     },
     {
       "name": "بولندا",
@@ -50,21 +55,21 @@
   "browsers": [
     {
       "name": "Safari",
-      "count": 49
+      "count": 48
     },
     {
       "name": "Chrome",
-      "count": 43
+      "count": 45
     }
   ],
   "systems": [
     {
       "name": "iOS",
-      "count": 48
+      "count": 47
     },
     {
       "name": "Android",
-      "count": 30
+      "count": 32
     },
     {
       "name": "Windows",
@@ -82,7 +87,7 @@
   "refs": [
     {
       "name": "Google",
-      "count": 19
+      "count": 21
     },
     {
       "name": "chatgpt.com",
@@ -92,11 +97,11 @@
   "languages": [
     {
       "name": "English",
-      "count": 54
+      "count": 53
     },
     {
       "name": "Arabic",
-      "count": 34
+      "count": 36
     },
     {
       "name": "(unknown)",
@@ -130,10 +135,6 @@
     }
   ],
   "daily": [
-    {
-      "date": "2026-07-26",
-      "hits": 15
-    },
     {
       "date": "2026-07-27",
       "hits": 3
@@ -489,6 +490,10 @@
     {
       "date": "2026-10-23",
       "hits": 4
+    },
+    {
+      "date": "2026-10-24",
+      "hits": 2
     }
   ]
 }
