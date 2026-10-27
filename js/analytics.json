@@ -1,10 +1,10 @@
 {
-  "updated": "2026-10-27T11:16:23.056Z",
+  "updated": "2026-10-27T17:02:04.273Z",
   "period": {
     "start": "2026-09-27",
     "end": "2026-10-27"
   },
-  "totalHits": 99,
+  "totalHits": 100,
   "downloads": 1,
   "pdfDownloads": [
     {
@@ -20,7 +20,7 @@
     },
     {
       "name": "العراق",
-      "count": 39
+      "count": 40
     },
     {
       "name": "بولندا",
@@ -67,7 +67,7 @@
   "browsers": [
     {
       "name": "Safari",
-      "count": 51
+      "count": 52
     },
     {
       "name": "Chrome",
@@ -77,7 +77,7 @@
   "systems": [
     {
       "name": "iOS",
-      "count": 50
+      "count": 51
     },
     {
       "name": "Android",
@@ -109,7 +109,7 @@
   "languages": [
     {
       "name": "English",
-      "count": 55
+      "count": 56
     },
     {
       "name": "Arabic",
