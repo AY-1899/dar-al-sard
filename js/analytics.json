@@ -1,10 +1,10 @@
 {
-  "updated": "2026-10-28T11:50:33.606Z",
+  "updated": "2026-10-28T17:39:41.037Z",
   "period": {
     "start": "2026-09-28",
     "end": "2026-10-28"
   },
-  "totalHits": 99,
+  "totalHits": 105,
   "downloads": 1,
   "pdfDownloads": [
     {
@@ -20,7 +20,7 @@
     },
     {
       "name": "العراق",
-      "count": 40
+      "count": 46
     },
     {
       "name": "بولندا",
@@ -66,12 +66,12 @@
   "regions": [],
   "browsers": [
     {
-      "name": "Safari",
-      "count": 51
+      "name": "Chrome",
+      "count": 54
     },
     {
-      "name": "Chrome",
-      "count": 48
+      "name": "Safari",
+      "count": 51
     }
   ],
   "systems": [
@@ -81,7 +81,7 @@
     },
     {
       "name": "Android",
-      "count": 34
+      "count": 40
     },
     {
       "name": "Windows",
@@ -99,7 +99,7 @@
   "refs": [
     {
       "name": "Google",
-      "count": 23
+      "count": 24
     },
     {
       "name": "chatgpt.com",
@@ -113,7 +113,7 @@
     },
     {
       "name": "Arabic",
-      "count": 39
+      "count": 45
     },
     {
       "name": "(unknown)",
