@@ -1,10 +1,10 @@
 {
-  "updated": "2026-11-08T21:28:54.575Z",
+  "updated": "2026-11-09T03:42:47.788Z",
   "period": {
-    "start": "2026-10-09",
-    "end": "2026-11-08"
+    "start": "2026-10-10",
+    "end": "2026-11-09"
   },
-  "totalHits": 109,
+  "totalHits": 108,
   "downloads": 1,
   "pdfDownloads": [
     {
@@ -20,7 +20,7 @@
     },
     {
       "name": "العراق",
-      "count": 45
+      "count": 44
     },
     {
       "name": "ألمانيا",
@@ -67,7 +67,7 @@
   "browsers": [
     {
       "name": "Chrome",
-      "count": 56
+      "count": 55
     },
     {
       "name": "Safari",
@@ -81,7 +81,7 @@
     },
     {
       "name": "Android",
-      "count": 41
+      "count": 40
     },
     {
       "name": "Windows",
@@ -109,7 +109,7 @@
     },
     {
       "name": "Arabic",
-      "count": 49
+      "count": 48
     },
     {
       "name": "French",
@@ -151,10 +151,6 @@
     }
   ],
   "daily": [
-    {
-      "date": "2026-08-10",
-      "hits": 1
-    },
     {
       "date": "2026-08-11",
       "hits": 1
@@ -510,6 +506,10 @@
     {
       "date": "2026-11-07",
       "hits": 0
+    },
+    {
+      "date": "2026-11-08",
+      "hits": 2
     }
   ]
 }
