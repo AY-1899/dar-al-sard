@@ -1,10 +1,10 @@
 {
-  "updated": "2026-11-11T13:12:49.697Z",
+  "updated": "2026-11-12T04:56:22.377Z",
   "period": {
-    "start": "2026-10-12",
-    "end": "2026-11-11"
+    "start": "2026-10-13",
+    "end": "2026-11-12"
   },
-  "totalHits": 114,
+  "totalHits": 116,
   "downloads": 1,
   "pdfDownloads": [
     {
@@ -24,7 +24,7 @@
     },
     {
       "name": "ألمانيا",
-      "count": 4
+      "count": 5
     },
     {
       "name": "الجزائر",
@@ -44,6 +44,10 @@
     },
     {
       "name": "لبنان",
+      "count": 1
+    },
+    {
+      "name": "المغرب",
       "count": 1
     },
     {
@@ -75,17 +79,17 @@
   "browsers": [
     {
       "name": "Chrome",
-      "count": 60
+      "count": 61
     },
     {
       "name": "Safari",
-      "count": 54
+      "count": 55
     }
   ],
   "systems": [
     {
       "name": "iOS",
-      "count": 54
+      "count": 55
     },
     {
       "name": "Android",
@@ -93,7 +97,7 @@
     },
     {
       "name": "Windows",
-      "count": 13
+      "count": 14
     },
     {
       "name": "macOS",
@@ -103,7 +107,7 @@
   "refs": [
     {
       "name": "Google",
-      "count": 27
+      "count": 29
     },
     {
       "name": "chatgpt.com",
@@ -113,7 +117,7 @@
   "languages": [
     {
       "name": "Arabic",
-      "count": 54
+      "count": 55
     },
     {
       "name": "English",
@@ -121,7 +125,7 @@
     },
     {
       "name": "French",
-      "count": 3
+      "count": 4
     },
     {
       "name": "(unknown)",
@@ -159,10 +163,6 @@
     }
   ],
   "daily": [
-    {
-      "date": "2026-08-13",
-      "hits": 2
-    },
     {
       "date": "2026-08-14",
       "hits": 0
@@ -518,6 +518,10 @@
     {
       "date": "2026-11-10",
       "hits": 1
+    },
+    {
+      "date": "2026-11-11",
+      "hits": 3
     }
   ]
 }
