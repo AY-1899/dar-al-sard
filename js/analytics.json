@@ -1,10 +1,10 @@
 {
-  "updated": "2026-11-13T13:38:51.773Z",
+  "updated": "2026-11-13T23:01:09.785Z",
   "period": {
     "start": "2026-10-14",
     "end": "2026-11-13"
   },
-  "totalHits": 120,
+  "totalHits": 121,
   "downloads": 1,
   "pdfDownloads": [
     {
@@ -28,7 +28,7 @@
     },
     {
       "name": "الجزائر",
-      "count": 4
+      "count": 5
     },
     {
       "name": "بولندا",
@@ -75,7 +75,7 @@
   "browsers": [
     {
       "name": "Chrome",
-      "count": 63
+      "count": 64
     },
     {
       "name": "Safari",
@@ -89,7 +89,7 @@
     },
     {
       "name": "Android",
-      "count": 48
+      "count": 49
     },
     {
       "name": "Windows",
@@ -103,7 +103,7 @@
   "refs": [
     {
       "name": "Google",
-      "count": 32
+      "count": 33
     },
     {
       "name": "chatgpt.com",
@@ -121,7 +121,7 @@
     },
     {
       "name": "French",
-      "count": 6
+      "count": 7
     },
     {
       "name": "(unknown)",
