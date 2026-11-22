@@ -1,10 +1,10 @@
 {
-  "updated": "2026-11-21T22:35:18.100Z",
+  "updated": "2026-11-22T04:05:16.371Z",
   "period": {
-    "start": "2026-10-22",
-    "end": "2026-11-21"
+    "start": "2026-10-23",
+    "end": "2026-11-22"
   },
-  "totalHits": 88,
+  "totalHits": 79,
   "downloads": 1,
   "pdfDownloads": [
     {
@@ -16,11 +16,11 @@
   "locations": [
     {
       "name": "العراق",
-      "count": 40
+      "count": 30
     },
     {
       "name": "الولايات المتحدة",
-      "count": 23
+      "count": 25
     },
     {
       "name": "الجزائر",
@@ -59,10 +59,6 @@
       "count": 1
     },
     {
-      "name": "السويد",
-      "count": 1
-    },
-    {
       "name": "تونس",
       "count": 1
     },
@@ -74,26 +70,26 @@
   "regions": [],
   "browsers": [
     {
-      "name": "Chrome",
-      "count": 53
+      "name": "Safari",
+      "count": 40
     },
     {
-      "name": "Safari",
-      "count": 35
+      "name": "Chrome",
+      "count": 39
     }
   ],
   "systems": [
     {
-      "name": "Android",
-      "count": 36
+      "name": "iOS",
+      "count": 40
     },
     {
-      "name": "iOS",
-      "count": 35
+      "name": "Android",
+      "count": 28
     },
     {
       "name": "Windows",
-      "count": 15
+      "count": 9
     },
     {
       "name": "macOS",
@@ -107,7 +103,7 @@
   "refs": [
     {
       "name": "Google",
-      "count": 30
+      "count": 29
     },
     {
       "name": "chatgpt.com",
@@ -116,12 +112,12 @@
   ],
   "languages": [
     {
-      "name": "Arabic",
-      "count": 44
+      "name": "English",
+      "count": 36
     },
     {
-      "name": "English",
-      "count": 35
+      "name": "Arabic",
+      "count": 34
     },
     {
       "name": "French",
@@ -159,10 +155,6 @@
     }
   ],
   "daily": [
-    {
-      "date": "2026-08-23",
-      "hits": 5
-    },
     {
       "date": "2026-08-24",
       "hits": 3
@@ -518,6 +510,10 @@
     {
       "date": "2026-11-20",
       "hits": 6
+    },
+    {
+      "date": "2026-11-21",
+      "hits": 10
     }
   ]
 }
