@@ -1,8 +1,8 @@
 {
-  "updated": "2026-11-22T22:58:19.841Z",
+  "updated": "2026-11-23T04:46:52.289Z",
   "period": {
-    "start": "2026-10-23",
-    "end": "2026-11-22"
+    "start": "2026-10-24",
+    "end": "2026-11-23"
   },
   "totalHits": 81,
   "downloads": 1,
@@ -15,12 +15,12 @@
   "hits": [],
   "locations": [
     {
-      "name": "العراق",
-      "count": 30
+      "name": "الولايات المتحدة",
+      "count": 29
     },
     {
-      "name": "الولايات المتحدة",
-      "count": 25
+      "name": "العراق",
+      "count": 27
     },
     {
       "name": "الجزائر",
@@ -65,35 +65,31 @@
     {
       "name": "تونس",
       "count": 1
-    },
-    {
-      "name": "تركيا",
-      "count": 1
     }
   ],
   "regions": [],
   "browsers": [
     {
       "name": "Safari",
-      "count": 42
+      "count": 45
     },
     {
       "name": "Chrome",
-      "count": 39
+      "count": 36
     }
   ],
   "systems": [
     {
       "name": "iOS",
-      "count": 42
+      "count": 45
     },
     {
       "name": "Android",
-      "count": 28
+      "count": 26
     },
     {
       "name": "Windows",
-      "count": 9
+      "count": 8
     },
     {
       "name": "macOS",
@@ -107,7 +103,7 @@
   "refs": [
     {
       "name": "Google",
-      "count": 29
+      "count": 26
     },
     {
       "name": "chatgpt.com",
@@ -117,11 +113,11 @@
   "languages": [
     {
       "name": "English",
-      "count": 38
+      "count": 40
     },
     {
       "name": "Arabic",
-      "count": 34
+      "count": 32
     },
     {
       "name": "French",
@@ -159,10 +155,6 @@
     }
   ],
   "daily": [
-    {
-      "date": "2026-08-24",
-      "hits": 3
-    },
     {
       "date": "2026-08-25",
       "hits": 2
@@ -518,6 +510,10 @@
     {
       "date": "2026-11-21",
       "hits": 10
+    },
+    {
+      "date": "2026-11-22",
+      "hits": 6
     }
   ]
 }
