@@ -1,26 +1,21 @@
 {
-  "updated": "2026-11-23T04:46:52.289Z",
+  "updated": "2026-11-24T03:37:23.940Z",
   "period": {
-    "start": "2026-10-24",
-    "end": "2026-11-23"
+    "start": "2026-10-25",
+    "end": "2026-11-24"
   },
-  "totalHits": 81,
-  "downloads": 1,
-  "pdfDownloads": [
-    {
-      "title": "الضوء والطين",
-      "count": 1
-    }
-  ],
+  "totalHits": 83,
+  "downloads": 0,
+  "pdfDownloads": [],
   "hits": [],
   "locations": [
     {
       "name": "الولايات المتحدة",
-      "count": 29
+      "count": 31
     },
     {
       "name": "العراق",
-      "count": 27
+      "count": 26
     },
     {
       "name": "الجزائر",
@@ -32,7 +27,7 @@
     },
     {
       "name": "الإمارات",
-      "count": 2
+      "count": 3
     },
     {
       "name": "المغرب",
@@ -71,21 +66,21 @@
   "browsers": [
     {
       "name": "Safari",
-      "count": 45
+      "count": 48
     },
     {
       "name": "Chrome",
-      "count": 36
+      "count": 35
     }
   ],
   "systems": [
     {
       "name": "iOS",
-      "count": 45
+      "count": 48
     },
     {
       "name": "Android",
-      "count": 26
+      "count": 25
     },
     {
       "name": "Windows",
@@ -113,11 +108,11 @@
   "languages": [
     {
       "name": "English",
-      "count": 40
+      "count": 43
     },
     {
       "name": "Arabic",
-      "count": 32
+      "count": 31
     },
     {
       "name": "French",
@@ -155,10 +150,6 @@
     }
   ],
   "daily": [
-    {
-      "date": "2026-08-25",
-      "hits": 2
-    },
     {
       "date": "2026-08-26",
       "hits": 0
@@ -514,6 +505,10 @@
     {
       "date": "2026-11-22",
       "hits": 6
+    },
+    {
+      "date": "2026-11-23",
+      "hits": 4
     }
   ]
 }
