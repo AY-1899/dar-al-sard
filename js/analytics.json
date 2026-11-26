@@ -1,10 +1,10 @@
 {
-  "updated": "2026-11-25T16:28:04.252Z",
+  "updated": "2026-11-26T01:19:06.520Z",
   "period": {
-    "start": "2026-10-26",
-    "end": "2026-11-25"
+    "start": "2026-10-27",
+    "end": "2026-11-26"
   },
-  "totalHits": 84,
+  "totalHits": 81,
   "downloads": 0,
   "pdfDownloads": [],
   "hits": [],
@@ -15,7 +15,7 @@
     },
     {
       "name": "العراق",
-      "count": 25
+      "count": 23
     },
     {
       "name": "الجزائر",
@@ -30,19 +30,15 @@
       "count": 4
     },
     {
+      "name": "مصر",
+      "count": 2
+    },
+    {
       "name": "المغرب",
       "count": 2
     },
     {
-      "name": "السعودية",
-      "count": 2
-    },
-    {
       "name": "كندا",
-      "count": 1
-    },
-    {
-      "name": "مصر",
       "count": 1
     },
     {
@@ -58,7 +54,7 @@
       "count": 1
     },
     {
-      "name": "تونس",
+      "name": "السعودية",
       "count": 1
     }
   ],
@@ -66,25 +62,25 @@
   "browsers": [
     {
       "name": "Safari",
-      "count": 50
+      "count": 48
     },
     {
       "name": "Chrome",
-      "count": 34
+      "count": 33
     }
   ],
   "systems": [
     {
       "name": "iOS",
-      "count": 50
+      "count": 48
     },
     {
       "name": "Android",
-      "count": 24
+      "count": 25
     },
     {
       "name": "Windows",
-      "count": 8
+      "count": 6
     },
     {
       "name": "macOS",
@@ -98,7 +94,7 @@
   "refs": [
     {
       "name": "Google",
-      "count": 26
+      "count": 25
     },
     {
       "name": "chatgpt.com",
@@ -108,15 +104,15 @@
   "languages": [
     {
       "name": "English",
-      "count": 46
+      "count": 45
     },
     {
       "name": "Arabic",
-      "count": 29
+      "count": 28
     },
     {
       "name": "French",
-      "count": 8
+      "count": 7
     },
     {
       "name": "(unknown)",
@@ -150,10 +146,6 @@
     }
   ],
   "daily": [
-    {
-      "date": "2026-08-27",
-      "hits": 3
-    },
     {
       "date": "2026-08-28",
       "hits": 1
@@ -509,6 +501,10 @@
     {
       "date": "2026-11-24",
       "hits": 4
+    },
+    {
+      "date": "2026-11-25",
+      "hits": 1
     }
   ]
 }
